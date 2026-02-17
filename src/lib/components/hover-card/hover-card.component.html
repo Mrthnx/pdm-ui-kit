@@ -1,0 +1,24 @@
+<div
+  class="relative inline-flex"
+  [ngClass]="className"
+  (mouseenter)="open = true"
+  (mouseleave)="open = false"
+  (focusin)="open = true"
+  (focusout)="open = false"
+>
+  <div>
+    <ng-content select="[pdmHoverTrigger]"></ng-content>
+  </div>
+
+  <section
+    *ngIf="open"
+    [style.width.px]="panelWidth"
+    [ngClass]="[
+      'absolute z-30 rounded-[10px] border border-[hsl(var(--border))] bg-[hsl(var(--popover))] p-4 text-[hsl(var(--popover-foreground))] shadow-xl',
+      positionClass,
+      panelClassName
+    ]"
+  >
+    <ng-content select="[pdmHoverContent]"></ng-content>
+  </section>
+</div>

@@ -1,0 +1,86 @@
+<section [ngClass]="[className]">
+  <div *ngIf="variant !== 'orientation'" class="flex items-center gap-4">
+    <button
+      type="button"
+      class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[hsl(var(--border))] bg-[hsl(var(--background))] p-[10px]"
+      [ngClass]="!canPrev ? 'opacity-50' : ''"
+      [disabled]="!canPrev"
+      (click)="onPrev()"
+      aria-label="Previous slide"
+    >
+      <svg viewBox="0 0 24 24" class="h-4 w-4 text-[hsl(var(--foreground))]" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+
+    <ng-container [ngSwitch]="variant">
+      <div *ngSwitchCase="'sizes'" class="flex items-center">
+        <div *ngFor="let slide of visibleSlides; let i = index" class="flex items-center" [ngClass]="i > 0 ? 'pl-4' : ''">
+          <div class="flex h-[165px] w-[125px] items-center p-1">
+            <div class="flex h-full w-full items-center justify-center rounded-[14px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] py-6 shadow-sm">
+              <div class="text-center text-[30px] font-semibold leading-9 text-[hsl(var(--foreground))]">{{ slide }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngSwitchDefault class="flex flex-col items-center justify-center">
+        <div class="flex h-[360px] w-[318px] items-center p-1">
+          <div class="flex h-full w-full items-center justify-center rounded-[14px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] py-6 shadow-sm">
+            <div class="text-center text-[36px] font-semibold leading-10 text-[hsl(var(--foreground))]">{{ visibleSlides[0] }}</div>
+          </div>
+        </div>
+        <p *ngIf="variant === 'api'" class="m-0 pt-2 text-[14px] font-medium leading-5 text-[hsl(var(--muted-foreground))]">Slide {{ index + 1 }} of {{ slides.length }}</p>
+      </div>
+    </ng-container>
+
+    <button
+      type="button"
+      class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[hsl(var(--border))] bg-[hsl(var(--background))] p-[10px]"
+      [ngClass]="!canNext ? 'opacity-50' : ''"
+      [disabled]="!canNext"
+      (click)="onNext()"
+      aria-label="Next slide"
+    >
+      <svg viewBox="0 0 24 24" class="h-4 w-4 text-[hsl(var(--foreground))]" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div *ngIf="variant === 'orientation'" class="flex flex-col items-center gap-4">
+    <button
+      type="button"
+      class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[hsl(var(--border))] bg-[hsl(var(--background))] p-[10px]"
+      [ngClass]="!canPrev ? 'opacity-50' : ''"
+      [disabled]="!canPrev"
+      (click)="onPrev()"
+      aria-label="Previous slide"
+    >
+      <svg viewBox="0 0 24 24" class="h-4 w-4 text-[hsl(var(--foreground))]" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 15L12 9L6 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+
+    <div class="flex w-[320px] flex-col">
+      <div *ngFor="let slide of visibleSlides; let i = index" class="flex h-[142px] w-full items-center p-1" [ngClass]="i > 0 ? 'pt-1' : ''">
+        <div class="flex h-full w-full items-center justify-center rounded-[14px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] py-6 shadow-sm">
+          <div class="text-center text-[30px] font-semibold leading-9 text-[hsl(var(--foreground))]">{{ slide }}</div>
+        </div>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[hsl(var(--border))] bg-[hsl(var(--background))] p-[10px]"
+      [ngClass]="!canNext ? 'opacity-50' : ''"
+      [disabled]="!canNext"
+      (click)="onNext()"
+      aria-label="Next slide"
+    >
+      <svg viewBox="0 0 24 24" class="h-4 w-4 text-[hsl(var(--foreground))]" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+  </div>
+</section>

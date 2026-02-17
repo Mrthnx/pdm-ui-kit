@@ -1,0 +1,11 @@
+<div class="relative w-full" [ngClass]="className" [style.paddingTop]="paddingTop">
+  <div class="absolute inset-0 overflow-hidden rounded-[10px]">
+    <img
+      *ngIf="imageSrc"
+      [src]="imageSrc"
+      [alt]="imageAlt"
+      class="pointer-events-none h-full w-full rounded-[10px] object-cover"
+    />
+    <ng-content></ng-content>
+  </div>
+</div>

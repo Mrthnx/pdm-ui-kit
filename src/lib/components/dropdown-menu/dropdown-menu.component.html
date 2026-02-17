@@ -1,0 +1,56 @@
+<div class="relative inline-block" [ngClass]="className">
+  <button
+    type="button"
+    class="inline-flex h-9 items-center justify-center rounded-[10px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 text-[14px] font-medium text-[hsl(var(--foreground))] shadow-sm"
+    [attr.aria-expanded]="open"
+    (click)="toggle()"
+  >
+    {{ triggerText }}
+  </button>
+
+  <div
+    *ngIf="open"
+    [ngClass]="[
+      'absolute left-0 top-full z-50 mt-2 min-w-[224px] overflow-hidden rounded-[8px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] p-1 text-[hsl(var(--foreground))] shadow-md',
+      panelClassName
+    ]"
+  >
+    <ng-container *ngFor="let item of resolvedItems">
+      <div *ngIf="item.type === 'separator'" class="my-[5px] h-px bg-[hsl(var(--muted))]"></div>
+
+      <div
+        *ngIf="item.type === 'label'"
+        [ngClass]="['px-2 py-1.5 text-[14px] font-semibold leading-5 text-[hsl(var(--foreground))]', item.inset ? 'pl-8' : '']"
+      >
+        {{ item.label }}
+      </div>
+
+      <button
+        *ngIf="!item.type || item.type === 'item'"
+        type="button"
+        [disabled]="item.disabled"
+        [ngClass]="[
+          'relative flex w-full items-center gap-2 rounded-[6px] px-2 py-1.5 text-left text-[14px] leading-5 text-[hsl(var(--foreground))] transition-colors hover:bg-[hsl(var(--muted))] disabled:pointer-events-none disabled:opacity-50',
+          item.inset ? 'pl-8' : ''
+        ]"
+        (click)="select(item)"
+      >
+        <span class="inline-flex h-4 w-4 shrink-0 items-center justify-center">
+          <svg
+            *ngIf="item.checked"
+            viewBox="0 0 24 24"
+            class="h-3.5 w-3.5 text-[hsl(var(--foreground))]"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M5 12.5L9.2 16.7L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <span *ngIf="item.radioSelected" class="h-2 w-2 rounded-full bg-[hsl(var(--foreground))]"></span>
+        </span>
+        <span class="min-w-0 flex-1 truncate">{{ item.label }}</span>
+        <span *ngIf="item.shortcut" class="text-[12px] leading-5 text-[hsl(var(--muted-foreground))]">{{ item.shortcut }}</span>
+        <span *ngIf="item.showChevron" class="text-[16px] leading-none text-[hsl(var(--muted-foreground))]">›</span>
+      </button>
+    </ng-container>
+  </div>
+</div>

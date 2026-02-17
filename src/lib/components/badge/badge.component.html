@@ -1,0 +1,28 @@
+<span
+  [ngClass]="[
+    'inline-flex items-center justify-center text-center align-middle',
+    variant === 'default' ? 'h-[22px] rounded-[10px] bg-[hsl(var(--foreground))] px-[10px] py-[2px] text-[12px] font-medium leading-4 text-[hsl(var(--background))]' : '',
+    variant === 'secondary' ? 'h-[22px] rounded-[10px] bg-[hsl(var(--muted))] px-[10px] py-[2px] text-[12px] font-medium leading-4 text-[hsl(var(--foreground))]' : '',
+    variant === 'destructive' ? 'h-[22px] rounded-[10px] bg-[hsl(var(--destructive))] px-[10px] py-[2px] text-[12px] font-medium leading-4 text-[hsl(var(--background))]' : '',
+    variant === 'outline' ? 'h-[22px] rounded-[10px] border border-[hsl(var(--border))] px-[10px] py-[2px] text-[12px] font-medium leading-4 text-[hsl(var(--foreground))]' : '',
+    variant === 'icon' ? 'h-[22px] gap-1 rounded-[10px] bg-[hsl(var(--foreground))] px-[10px] py-[2px] text-[12px] font-medium leading-4 text-[hsl(var(--background))]' : '',
+    variant === 'number' ? 'h-5 min-w-[20px] rounded-full bg-[hsl(var(--foreground))] px-[6px] py-[2px] text-[12px] font-medium leading-4 text-[hsl(var(--background))]' : '',
+    variant === 'destructive-number' ? 'h-5 min-w-[20px] rounded-full bg-[hsl(var(--destructive))] px-[6px] py-[2px] text-[12px] font-medium leading-4 text-[hsl(var(--background))]' : '',
+    variant === 'secondary-number' ? 'h-5 min-w-[20px] rounded-full border border-[hsl(var(--border))] px-1 py-[2px] text-[12px] font-medium leading-4 text-[hsl(var(--foreground))]' : '',
+    className
+  ]"
+>
+  <svg
+    *ngIf="variant === 'icon'"
+    viewBox="0 0 24 24"
+    class="h-4 w-4"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+    <path d="M8.5 12.5L10.8 14.8L15.8 9.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+  </svg>
+  <span [ngClass]="[variant === 'secondary-number' ? 'font-mono' : '']">{{ text }}</span>
+</span>
+

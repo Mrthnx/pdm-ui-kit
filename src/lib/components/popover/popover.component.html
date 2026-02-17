@@ -1,0 +1,6 @@
+<div class="relative inline-block" [ngClass]="className">
+  <button *ngIf="showTrigger" type="button" class="inline-flex h-8 items-center justify-center rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-3 text-sm font-medium leading-5 text-[hsl(var(--foreground))] shadow-sm" [attr.aria-expanded]="open" (click)="toggle()">{{ triggerText }}</button>
+  <div *ngIf="open || !showTrigger" [ngClass]="['absolute left-0 top-full z-30 mt-2 min-w-[320px] rounded-md border border-[hsl(var(--border))] bg-[hsl(var(--popover))] p-4 text-[hsl(var(--popover-foreground))] shadow-md', panelClassName]">
+    <ng-content></ng-content>
+  </div>
+</div>

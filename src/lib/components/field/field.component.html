@@ -1,0 +1,26 @@
+<div [ngClass]="[rootClass, className]">
+  <div [ngClass]="[isHorizontal ? 'grid gap-1.5' : 'grid gap-0']">
+    <label
+      *ngIf="label"
+      [attr.for]="id"
+      [ngClass]="['text-sm font-medium leading-5 text-[hsl(var(--foreground))]', disabled ? 'opacity-70' : '', labelClassName]"
+    >
+      {{ label }}
+      <span *ngIf="required" class="text-[hsl(var(--destructive))]">*</span>
+    </label>
+
+    <p *ngIf="isHorizontal && description && !invalid" class="text-sm leading-5 text-[hsl(var(--muted-foreground))]">{{ description }}</p>
+    <p *ngIf="isHorizontal && invalid && error" class="text-sm leading-5 text-[hsl(var(--destructive))]">{{ error }}</p>
+  </div>
+
+  <div [ngClass]="['grid gap-3', controlClassName]">
+    <p *ngIf="showDescriptionBeforeControl" class="text-sm leading-5 text-[hsl(var(--muted-foreground))]">{{ description }}</p>
+
+    <ng-content></ng-content>
+    <ng-content select="[pdmFieldControl]"></ng-content>
+
+    <p *ngIf="showDescriptionAfterControl" class="text-sm leading-5 text-[hsl(var(--muted-foreground))]">{{ description }}</p>
+    <p *ngIf="!isHorizontal && invalid && error" class="text-sm leading-5 text-[hsl(var(--destructive))]">{{ error }}</p>
+    <ng-content select="[pdmFieldDescription]"></ng-content>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div [ngClass]="['inline-flex items-center rounded-md border border-[hsl(var(--border))] p-1', className]" role="group">
+  <button
+    *ngFor="let item of items"
+    type="button"
+    [disabled]="item.disabled"
+    [attr.aria-pressed]="item.value === value"
+    [ngClass]="[
+      'inline-flex h-8 items-center justify-center rounded-sm px-2.5 text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50',
+      item.value === value
+        ? 'bg-[hsl(var(--accent))] text-[hsl(var(--accent-foreground))]'
+        : 'text-[hsl(var(--foreground))] hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--accent-foreground))]'
+    ]"
+    (click)="onSelect(item.value, item.disabled)"
+  >
+    {{ item.label }}
+  </button>
+</div>

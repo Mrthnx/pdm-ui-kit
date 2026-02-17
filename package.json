@@ -1,0 +1,39 @@
+{
+  "name": "pdm-ui-kit",
+  "version": "0.1.5",
+  "description": "PDM UI Kit Angular components",
+  "author": "Corelusa",
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "ui",
+    "components",
+    "design-system"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/corelusa/pdm-ui-kit.git"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "build": "ng-packagr -p ng-package.json",
+    "pack:dist": "npm pack ./dist/pdm-ui-kit",
+    "publish:dist": "npm publish ./dist/pdm-ui-kit",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "@angular/common": ">=14.0.0 <16.0.0",
+    "@angular/core": ">=14.0.0 <16.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/common": "^14.2.0",
+    "@angular/compiler": "^14.2.0",
+    "@angular/compiler-cli": "^14.2.0",
+    "@angular/core": "^14.2.0",
+    "ng-packagr": "^14.2.2",
+    "typescript": "~4.7.4"
+  }
+}

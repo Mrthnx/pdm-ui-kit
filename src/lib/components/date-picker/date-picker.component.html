@@ -1,0 +1,38 @@
+<section [ngClass]="['flex flex-col gap-3', className]" class="w-[250px]">
+  <label class="text-[14px] font-medium leading-5 text-[hsl(var(--foreground))]">{{ label }}</label>
+
+  <div class="flex items-center gap-2" *ngIf="variant === 'date-time'">
+    <button type="button" class="flex h-9 w-[150px] items-center justify-between rounded-[8px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-3 py-1 shadow-sm" (click)="toggle()">
+      <span class="truncate text-[12px] leading-4 text-[hsl(var(--foreground))]">{{ value }}</span>
+      <svg viewBox="0 0 24 24" class="h-4 w-4 text-[hsl(var(--foreground))]" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    </button>
+    <div class="flex h-9 w-[92px] items-center rounded-[8px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-3 py-1 text-[12px] leading-4 text-[hsl(var(--foreground))] shadow-sm">{{ time }}</div>
+  </div>
+
+  <div *ngIf="variant !== 'date-time'" class="flex flex-col gap-2">
+    <button type="button" class="flex h-9 w-[192px] items-center justify-between rounded-[8px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-3 py-1 shadow-sm" (click)="toggle()">
+      <span class="truncate text-[16px] leading-6 text-[hsl(var(--foreground))]">{{ variant === 'natural-language' ? naturalLanguageValue : value }}</span>
+      <svg viewBox="0 0 24 24" class="h-4 w-4 text-[hsl(var(--foreground))]" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    </button>
+
+    <p *ngIf="variant === 'natural-language'" class="max-w-[192px] text-[12px] leading-4 text-[hsl(var(--muted-foreground))]">{{ naturalLanguageHint }}</p>
+  </div>
+
+  <div *ngIf="open" class="w-[250px] rounded-[10px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] p-3 shadow-sm">
+    <div class="mb-4 flex items-center justify-between">
+      <button type="button" class="h-8 w-8 rounded-[6px] text-[hsl(var(--foreground))]">‹</button>
+      <div class="flex items-center gap-1.5">
+        <button type="button" class="inline-flex h-8 items-center gap-1 rounded-[6px] border border-[hsl(var(--border))] px-2 text-[14px] font-medium text-[hsl(var(--foreground))] shadow-sm">{{ monthLabel }} <span>˅</span></button>
+        <button type="button" class="inline-flex h-8 items-center gap-1 rounded-[6px] border border-[hsl(var(--border))] px-2 text-[14px] font-medium text-[hsl(var(--foreground))] shadow-sm">{{ year }} <span>˅</span></button>
+      </div>
+      <button type="button" class="h-8 w-8 rounded-[6px] text-[hsl(var(--foreground))]">›</button>
+    </div>
+
+    <pdm-calendar [month]="month" [year]="year" [selectedDay]="selectedDay" mode="single"></pdm-calendar>
+
+    <div *ngIf="variant === 'with-input' || variant === 'natural-language'" class="mt-3 flex gap-2">
+      <button type="button" class="h-8 rounded-[8px] border border-[hsl(var(--border))] px-3 text-[12px] text-[hsl(var(--foreground))]" (click)="selectPreset('Today')">Today</button>
+      <button type="button" class="h-8 rounded-[8px] border border-[hsl(var(--border))] px-3 text-[12px] text-[hsl(var(--foreground))]" (click)="selectPreset('Tomorrow')">Tomorrow</button>
+    </div>
+  </div>
+</section>

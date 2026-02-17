@@ -1,0 +1,39 @@
+<nav
+  aria-label="breadcrumb"
+  [ngClass]="['inline-flex items-center gap-[6px] text-[14px] leading-5', className]"
+>
+  <ng-container *ngFor="let item of renderedItems; let i = index; let last = last">
+    <span [ngClass]="[last ? 'text-[hsl(var(--foreground))]' : 'text-[hsl(var(--muted-foreground))]']">{{ item }}</span>
+
+    <ng-container *ngIf="!last">
+      <span class="inline-flex h-6 w-6 items-center justify-center text-[hsl(var(--muted-foreground))]" aria-hidden="true">
+        <svg
+          *ngIf="mode === 'custom-separator' && item !== '...'"
+          viewBox="0 0 24 24"
+          class="h-4 w-4"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M8 20L16 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+        <svg
+          *ngIf="(mode !== 'custom-separator' && item !== '...') || item === '...'"
+          viewBox="0 0 24 24"
+          class="h-4 w-4"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </span>
+    </ng-container>
+
+    <ng-container *ngIf="mode === 'dropdown' && i === 1 && item !== '...' && !last">
+      <span class="-ml-2 inline-flex h-6 w-6 items-center justify-center text-[hsl(var(--muted-foreground))]" aria-hidden="true">
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </span>
+    </ng-container>
+  </ng-container>
+</nav>

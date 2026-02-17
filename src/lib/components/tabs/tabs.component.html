@@ -1,0 +1,21 @@
+<div [ngClass]="['w-full', className]">
+  <div role="tablist" class="inline-flex items-start rounded-[6px] bg-[hsl(var(--muted))] p-[5px]">
+    <button
+      *ngFor="let item of items"
+      role="tab"
+      [attr.aria-selected]="value === item.value"
+      [disabled]="item.disabled"
+      [ngClass]="[
+        'inline-flex items-center justify-center whitespace-nowrap rounded-[3px] px-3 py-1.5 text-sm font-medium leading-5 ring-offset-[hsl(var(--background))] transition-all focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(var(--foreground))] disabled:pointer-events-none disabled:opacity-50',
+        value === item.value ? 'bg-[hsl(var(--background))] text-[hsl(var(--foreground))] shadow-sm' : 'text-[hsl(var(--muted-foreground))]'
+      ]"
+      (click)="select(item)"
+      type="button"
+    >
+      {{ item.label }}
+    </button>
+  </div>
+  <div class="mt-4">
+    <ng-content></ng-content>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div [ngClass]="['grid w-full gap-3', className]">
+  <label *ngIf="label" [attr.for]="id" class="text-sm font-medium leading-5 text-[hsl(var(--foreground))]">{{ label }}</label>
+  <input
+    [id]="id"
+    [type]="type"
+    [value]="value"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    [readonly]="readonly"
+    [required]="required"
+    [attr.aria-invalid]="invalid"
+    [ngClass]="[
+      'border-[hsl(var(--input))] focus-visible:border-[hsl(var(--ring))] focus-visible:ring-[hsl(var(--ring)/0.5)] aria-invalid:ring-[hsl(var(--destructive)/0.2)] dark:aria-invalid:ring-[hsl(var(--destructive)/0.4)] aria-invalid:border-[hsl(var(--destructive))] dark:aria-invalid:border-[hsl(var(--destructive)/0.5)] disabled:bg-[hsl(var(--input)/0.5)] dark:bg-[hsl(var(--input)/0.3)] dark:disabled:bg-[hsl(var(--input)/0.8)] file:text-[hsl(var(--foreground))] placeholder:text-[hsl(var(--muted-foreground))] w-full min-w-0 border bg-transparent transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:ring-3 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:ring-3',
+      size === 'large' ? 'h-10 px-3 py-1.5 text-base' : '',
+      size === 'regular' ? 'h-8 px-2.5 py-1 text-base md:text-sm' : '',
+      size === 'small' ? 'h-7 px-2 py-1 text-sm' : '',
+      size === 'mini' ? 'h-6 px-2 py-0.5 text-xs' : '',
+      roundness === 'round' ? 'rounded-[999px]' : 'rounded-lg',
+      type === 'file' ? 'text-sm' : 'text-[hsl(var(--foreground))]',
+      inputClassName
+    ]"
+    (input)="onInput($event)"
+    (blur)="onBlur($event)"
+  />
+  <p *ngIf="!invalid && helperText" class="text-sm leading-5 text-[hsl(var(--muted-foreground))]">{{ helperText }}</p>
+  <p *ngIf="invalid && errorText" class="text-sm leading-5 text-[hsl(var(--destructive))]">{{ errorText }}</p>
+</div>

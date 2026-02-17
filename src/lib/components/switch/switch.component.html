@@ -1,0 +1,14 @@
+<label [attr.for]="id" [ngClass]="['inline-flex items-center gap-2', className]">
+  <input
+    [id]="id"
+    type="checkbox"
+    class="peer sr-only"
+    [checked]="checked"
+    [disabled]="disabled"
+    (change)="onToggle($event)"
+  />
+  <span class="relative inline-flex h-6 w-11 items-center rounded-full border border-transparent bg-[hsl(var(--muted))] transition-colors peer-focus-visible:ring-1 peer-focus-visible:ring-[hsl(var(--foreground))] peer-disabled:opacity-50 peer-checked:bg-[hsl(var(--foreground))]">
+    <span class="h-5 w-5 translate-x-0.5 rounded-full bg-[hsl(var(--background))] shadow-sm transition-transform peer-checked:translate-x-5"></span>
+  </span>
+  <span *ngIf="label" class="text-sm leading-5 text-[hsl(var(--foreground))]">{{ label }}</span>
+</label>

@@ -1,0 +1,21 @@
+<div *ngIf="!isGroup" [ngClass]="['relative flex shrink-0 overflow-hidden', radiusClass, sizeClasses[size], className]">
+  <img *ngIf="src" [src]="src" [alt]="alt" [ngClass]="['aspect-square h-full w-full object-cover', radiusClass]" />
+  <div
+    *ngIf="!src"
+    [ngClass]="['flex h-full w-full items-center justify-center bg-[hsl(var(--muted))] text-xs text-[hsl(var(--muted-foreground))]', radiusClass]"
+  >
+    {{ fallback }}
+  </div>
+</div>
+
+<div *ngIf="isGroup" [ngClass]="['inline-flex items-center pr-2', className]">
+  <div
+    *ngFor="let groupSrc of groupSources; let i = index"
+    [ngClass]="[
+      'relative h-8 w-8 shrink-0 overflow-hidden rounded-full',
+      i > 0 ? '-mr-2 border border-[hsl(var(--border))]' : '-mr-2'
+    ]"
+  >
+    <img [src]="groupSrc" [alt]="alt + ' ' + (i + 1)" class="h-full w-full rounded-full object-cover" />
+  </div>
+</div>

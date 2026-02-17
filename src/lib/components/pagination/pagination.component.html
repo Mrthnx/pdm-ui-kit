@@ -1,0 +1,30 @@
+<nav aria-label="Pagination" [ngClass]="['mx-auto flex w-full justify-center', className]">
+  <ul class="flex items-center gap-1">
+    <li>
+      <button type="button" class="inline-flex h-8 items-center justify-center gap-1 rounded-md px-2 text-sm text-[hsl(var(--foreground))] hover:bg-[hsl(var(--accent))] disabled:opacity-50" [disabled]="page <= 1" (click)="setPage(page - 1)">
+        <pdm-icon name="chevron-left" [size]="14"></pdm-icon>
+        Previous
+      </button>
+    </li>
+    <li *ngFor="let pageNumber of visiblePages">
+      <button
+        type="button"
+        [ngClass]="[
+          'inline-flex h-6 min-w-[24px] items-center justify-center rounded-md px-2 text-sm',
+          pageNumber === page
+            ? 'border border-[hsl(var(--border))] bg-[hsl(var(--muted))] text-[hsl(var(--foreground))] shadow-sm'
+            : 'text-[hsl(var(--foreground))] hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--accent-foreground))]'
+        ]"
+        (click)="setPage(pageNumber)"
+      >
+        {{ pageNumber }}
+      </button>
+    </li>
+    <li>
+      <button type="button" class="inline-flex h-8 items-center justify-center gap-1 rounded-md px-2 text-sm text-[hsl(var(--foreground))] hover:bg-[hsl(var(--accent))] disabled:opacity-50" [disabled]="page >= pageCount" (click)="setPage(page + 1)">
+        Next
+        <pdm-icon name="chevron-right" [size]="14"></pdm-icon>
+      </button>
+    </li>
+  </ul>
+</nav>

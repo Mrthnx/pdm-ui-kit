@@ -1,0 +1,15 @@
+<nav [ngClass]="['relative z-10 flex max-w-max flex-1 items-center justify-center', className]">
+  <ul class="group flex flex-1 list-none items-center justify-center space-x-1">
+    <li *ngFor="let item of items">
+      <a
+        [href]="item.href || '#'"
+        [ngClass]="[
+          'group inline-flex h-9 w-max items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--accent-foreground))]',
+          item.active ? 'bg-[hsl(var(--accent))] text-[hsl(var(--accent-foreground))]' : 'text-[hsl(var(--foreground))]'
+        ]"
+      >
+        {{ item.label }}
+      </a>
+    </li>
+  </ul>
+</nav>

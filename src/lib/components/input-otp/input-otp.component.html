@@ -1,0 +1,25 @@
+<div [ngClass]="['inline-flex items-center justify-center', className]" (paste)="onPaste($event)">
+  <ng-container *ngFor="let value of values; let index = index; trackBy: trackByIndex">
+    <input
+      #otpInput
+      [class]="getInputClasses(index)"
+      [value]="value"
+      [disabled]="disabled"
+      inputmode="numeric"
+      maxlength="1"
+      [attr.name]="'otp-digit-' + index"
+      autocomplete="off"
+      autocapitalize="off"
+      spellcheck="false"
+      [attr.aria-invalid]="invalid"
+      [attr.aria-label]="'OTP digit ' + (index + 1)"
+      (input)="onInput(index, $event)"
+      (keydown)="onKeyDown(index, $event)"
+    />
+    <span
+      *ngIf="shouldShowSeparator(index)"
+      class="mx-2 mt-[-1px] h-px w-6 bg-foreground opacity-80"
+      aria-hidden="true"
+    ></span>
+  </ng-container>
+</div>
