@@ -1,39 +1,39 @@
 <section
   [ngClass]="[
-    'rounded-[10px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] p-3 shadow-sm',
-    mode === 'range' ? 'w-[488px]' : 'w-[250px]',
+    'rounded-lg border border-border bg-background p-3 shadow-sm',
+    mode === 'range' ? 'w-full max-w-2xl' : 'w-full max-w-sm',
     className
   ]"
 >
   <div [ngClass]="['grid gap-4', mode === 'range' ? 'grid-cols-2' : 'grid-cols-1']">
     <div class="space-y-4">
       <header class="flex items-center justify-between">
-        <button type="button" class="inline-flex h-8 w-8 items-center justify-center rounded-[6px] text-[hsl(var(--foreground))]">‹</button>
-        <div [ngClass]="['flex items-center justify-center gap-1', mode === 'range' ? 'w-full' : 'w-[160px]']">
+        <button type="button" class="inline-flex h-8 w-8 items-center justify-center rounded-md text-foreground hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">‹</button>
+        <div [ngClass]="['flex items-center justify-center gap-1', mode === 'range' ? 'w-full' : 'w-full']">
           <ng-container *ngIf="mode === 'single'; else monthText">
-            <span class="inline-flex h-8 items-center rounded-[8px] border border-[hsl(var(--border))] px-2 text-[14px] font-medium leading-5 text-[hsl(var(--foreground))] shadow-sm">Jun</span>
-            <span class="inline-flex h-8 items-center rounded-[8px] border border-[hsl(var(--border))] px-2 text-[14px] font-medium leading-5 text-[hsl(var(--foreground))] shadow-sm">2025</span>
+            <span class="inline-flex h-8 items-center rounded-md border border-border px-2 text-sm font-medium text-foreground shadow-sm">Jun</span>
+            <span class="inline-flex h-8 items-center rounded-md border border-border px-2 text-sm font-medium text-foreground shadow-sm">2025</span>
           </ng-container>
           <ng-template #monthText>
-            <span class="text-[28px] text-[14px] font-medium leading-5 text-[hsl(var(--foreground))]">{{ leftMonthName }} {{ year }}</span>
+            <span class="text-sm font-medium text-foreground">{{ leftMonthName }} {{ year }}</span>
           </ng-template>
         </div>
-        <button type="button" class="inline-flex h-8 w-8 items-center justify-center rounded-[6px] text-[hsl(var(--foreground))]">{{ mode === 'range' ? '' : '›' }}</button>
+        <button type="button" class="inline-flex h-8 w-8 items-center justify-center rounded-md text-foreground hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">{{ mode === 'range' ? '' : '›' }}</button>
       </header>
 
       <div>
         <div class="grid grid-cols-7">
-          <span *ngFor="let day of weekdays" class="inline-flex h-[21px] items-center justify-center text-[12px] font-normal leading-4 text-[hsl(var(--muted-foreground))]">{{ day }}</span>
+          <span *ngFor="let day of weekdays" class="inline-flex h-5 items-center justify-center text-xs font-normal text-muted-foreground">{{ day }}</span>
         </div>
         <div class="mt-2 grid grid-cols-7 gap-y-2">
           <button
             *ngFor="let cell of leftCells"
             type="button"
             [ngClass]="[
-              'inline-flex h-8 w-8 items-center justify-center rounded-[8px] text-[14px] font-normal leading-5',
-              cell.outside ? 'text-[hsl(var(--foreground))] opacity-50' : 'text-[hsl(var(--foreground))]',
-              cell.inRange ? 'bg-[hsl(var(--muted))]' : '',
-              cell.selected ? 'bg-[hsl(var(--foreground))] text-[hsl(var(--background))]' : ''
+              'inline-flex h-8 w-8 items-center justify-center rounded-md text-sm font-normal transition-colors hover:bg-accent hover:text-accent-foreground',
+              cell.outside ? 'text-muted-foreground opacity-50' : 'text-foreground',
+              cell.inRange ? 'bg-accent text-accent-foreground' : '',
+              cell.selected ? 'bg-primary text-primary-foreground' : ''
             ]"
           >
             {{ cell.day }}
@@ -44,23 +44,23 @@
 
     <div *ngIf="mode === 'range'" class="space-y-4">
       <header class="flex items-center justify-between">
-        <span class="text-[14px] font-medium leading-5 text-[hsl(var(--foreground))]">{{ rightMonthName }} {{ month === 12 ? year + 1 : year }}</span>
-        <button type="button" class="inline-flex h-8 w-8 items-center justify-center rounded-[6px] text-[hsl(var(--foreground))]">›</button>
+        <span class="text-sm font-medium text-foreground">{{ rightMonthName }} {{ month === 12 ? year + 1 : year }}</span>
+        <button type="button" class="inline-flex h-8 w-8 items-center justify-center rounded-md text-foreground hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">›</button>
       </header>
 
       <div>
         <div class="grid grid-cols-7">
-          <span *ngFor="let day of weekdays" class="inline-flex h-[21px] items-center justify-center text-[12px] font-normal leading-4 text-[hsl(var(--muted-foreground))]">{{ day }}</span>
+          <span *ngFor="let day of weekdays" class="inline-flex h-5 items-center justify-center text-xs font-normal text-muted-foreground">{{ day }}</span>
         </div>
         <div class="mt-2 grid grid-cols-7 gap-y-2">
           <button
             *ngFor="let cell of rightCells"
             type="button"
             [ngClass]="[
-              'inline-flex h-8 w-8 items-center justify-center rounded-[8px] text-[14px] font-normal leading-5',
-              cell.outside ? 'text-[hsl(var(--foreground))] opacity-50' : 'text-[hsl(var(--foreground))]',
-              cell.inRange ? 'bg-[hsl(var(--muted))]' : '',
-              cell.selected ? 'bg-[hsl(var(--foreground))] text-[hsl(var(--background))]' : ''
+              'inline-flex h-8 w-8 items-center justify-center rounded-md text-sm font-normal transition-colors hover:bg-accent hover:text-accent-foreground',
+              cell.outside ? 'text-muted-foreground opacity-50' : 'text-foreground',
+              cell.inRange ? 'bg-accent text-accent-foreground' : '',
+              cell.selected ? 'bg-primary text-primary-foreground' : ''
             ]"
           >
             {{ cell.day }}
@@ -70,4 +70,3 @@
     </div>
   </div>
 </section>
-

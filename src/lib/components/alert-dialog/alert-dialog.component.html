@@ -1,37 +1,37 @@
 <button
   *ngIf="showTrigger && !open"
   type="button"
-  class="inline-flex h-9 items-center justify-center rounded-[8px] border border-[hsl(var(--border))] bg-[hsl(var(--muted))] px-4 py-2 text-[14px] font-medium leading-5 text-[hsl(var(--foreground))] shadow-sm"
+  class="inline-flex h-9 items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm"
   (click)="onTriggerClick()"
 >
   {{ triggerText }}
 </button>
 
 <div *ngIf="open" class="fixed inset-0 z-50 flex items-center justify-center p-5">
-  <div class="absolute inset-0 bg-[hsl(var(--foreground)/0.3)]" (click)="onCancel()"></div>
+  <div class="absolute inset-0 bg-foreground/30" (click)="onCancel()"></div>
   <section
     role="alertdialog"
     aria-modal="true"
     [ngClass]="[
-      'relative z-10 w-full max-w-[552px] rounded-[10px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] p-6 text-[hsl(var(--foreground))] shadow-lg',
+      'relative z-10 w-full max-w-lg rounded-lg border border-border bg-background p-6 text-foreground shadow-lg',
       className
     ]"
   >
     <div class="flex flex-col gap-2">
-      <h2 class="text-[18px] font-semibold leading-7 tracking-normal">{{ title }}</h2>
-      <p *ngIf="description" class="text-[14px] font-normal leading-5 text-[hsl(var(--muted-foreground))]">{{ description }}</p>
+      <h2 class="text-lg font-semibold leading-none tracking-tight">{{ title }}</h2>
+      <p *ngIf="description" class="text-sm text-muted-foreground">{{ description }}</p>
     </div>
     <div class="mt-4 flex items-center justify-end gap-2">
       <button
         type="button"
-        class="inline-flex h-9 items-center justify-center rounded-[10px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-2 text-[14px] font-medium leading-5 text-[hsl(var(--foreground))] shadow-sm"
+        class="inline-flex h-9 items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm"
         (click)="onCancel()"
       >
         {{ cancelText }}
       </button>
       <button
         type="button"
-        class="inline-flex h-9 items-center justify-center rounded-[10px] bg-[hsl(var(--foreground))] px-4 py-2 text-[14px] font-medium leading-5 text-[hsl(var(--background))] shadow-sm"
+        class="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm"
         (click)="onConfirm()"
       >
         {{ confirmText }}

@@ -1,5 +1,5 @@
 <div [ngClass]="['grid w-full gap-2', className]">
-  <label *ngIf="label" [attr.for]="id" class="text-sm font-medium leading-5 text-[hsl(var(--foreground))]">{{ label }}</label>
+  <label *ngIf="label" [attr.for]="id" class="text-sm font-medium leading-none text-foreground">{{ label }}</label>
   <textarea
     [id]="id"
     [rows]="rows"
@@ -10,12 +10,11 @@
     [required]="required"
     [attr.aria-invalid]="invalid"
     [ngClass]="[
-      'flex min-h-[65px] w-full rounded-[8px] border bg-[hsl(var(--background))] px-3 py-2 text-sm leading-5 shadow-sm ring-offset-[hsl(var(--background))] placeholder:text-[hsl(var(--muted-foreground))] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(var(--foreground))] disabled:cursor-not-allowed disabled:opacity-50',
-      invalid ? 'border-[hsl(var(--destructive))]' : 'border-[hsl(var(--input))]',
+      'border-input focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 aria-invalid:ring-2 aria-invalid:ring-destructive aria-invalid:border-destructive aria-invalid:placeholder:text-destructive/70 placeholder:text-muted-foreground flex min-h-20 w-full rounded-md border bg-transparent px-3 py-2 text-sm shadow-sm outline-none disabled:cursor-not-allowed disabled:opacity-50',
       textareaClassName
     ]"
     (input)="onInput($event)"
   ></textarea>
-  <p *ngIf="!invalid && helperText" class="text-sm leading-5 text-[hsl(var(--muted-foreground))]">{{ helperText }}</p>
-  <p *ngIf="invalid && errorText" class="text-sm leading-5 text-[hsl(var(--destructive))]">{{ errorText }}</p>
+  <p *ngIf="!invalid && helperText" class="text-sm text-muted-foreground">{{ helperText }}</p>
+  <p *ngIf="invalid && errorText" class="text-sm text-destructive">{{ errorText }}</p>
 </div>

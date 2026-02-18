@@ -1,41 +1,41 @@
-<section [ngClass]="['w-full rounded-[14px] border border-[hsl(var(--border))] bg-[hsl(var(--card))] text-[hsl(var(--card-foreground))]', className]">
-  <div class="flex w-full items-stretch border-b border-[hsl(var(--border))]">
+<section [ngClass]="['w-full rounded-lg border border-border bg-card text-card-foreground', className]">
+  <div class="flex w-full items-stretch border-b border-border">
     <div class="flex min-w-0 flex-1 flex-col gap-1 px-6 pb-3 pt-4">
-      <h3 class="m-0 text-sm font-semibold leading-5">{{ title }}</h3>
-      <p class="m-0 text-sm leading-5 text-[hsl(var(--muted-foreground))]">{{ description }}</p>
+      <h3 class="m-0 text-sm font-semibold leading-none tracking-tight">{{ title }}</h3>
+      <p class="m-0 text-sm text-muted-foreground">{{ description }}</p>
     </div>
 
-    <div class="flex h-[92px]">
-      <div class="flex h-full w-[171px] flex-col justify-center border-l border-[hsl(var(--border))] bg-[hsl(var(--muted))] px-6 py-4">
-        <span class="text-xs leading-4 text-[hsl(var(--muted-foreground))]">{{ desktopLabel }}</span>
-        <span class="mt-1 text-[28px] font-semibold leading-8">{{ desktopValue }}</span>
+    <div class="flex h-24">
+      <div class="flex h-full w-44 flex-col justify-center border-l border-border bg-muted px-6 py-4">
+        <span class="text-xs text-muted-foreground">{{ desktopLabel }}</span>
+        <span class="mt-1 text-2xl font-semibold">{{ desktopValue }}</span>
       </div>
-      <div class="flex h-full w-[171px] flex-col justify-center px-6 py-4">
-        <span class="text-xs leading-4 text-[hsl(var(--muted-foreground))]">{{ mobileLabel }}</span>
-        <span class="mt-1 text-[28px] font-semibold leading-8">{{ mobileValue }}</span>
+      <div class="flex h-full w-44 flex-col justify-center px-6 py-4">
+        <span class="text-xs text-muted-foreground">{{ mobileLabel }}</span>
+        <span class="mt-1 text-2xl font-semibold">{{ mobileValue }}</span>
       </div>
     </div>
   </div>
 
   <div class="w-full p-6">
     <ng-container [ngSwitch]="type">
-      <div *ngSwitchCase="'bar'" class="flex h-[236px] w-full flex-col justify-end gap-2">
-        <div class="relative h-[183px] w-full overflow-hidden">
-          <div class="absolute bottom-0 left-0 right-0 border-t border-[hsl(var(--border))] opacity-50"></div>
-          <div class="absolute left-0 right-0 top-[54px] border-t border-[hsl(var(--border))] opacity-50"></div>
-          <div class="absolute left-0 right-0 top-[108px] border-t border-[hsl(var(--border))] opacity-50"></div>
-          <div class="absolute left-0 right-0 top-[162px] border-t border-[hsl(var(--border))] opacity-50"></div>
-          <div class="absolute inset-x-0 bottom-0 flex h-[183px] items-end gap-[2px] px-0.5">
-            <div *ngFor="let bar of normalizedBars" class="w-[5px] rounded-[2px] bg-[hsl(var(--primary))]" [style.height.px]="bar"></div>
+      <div *ngSwitchCase="'bar'" class="flex h-60 w-full flex-col justify-end gap-2">
+        <div class="relative h-48 w-full overflow-hidden">
+          <div class="absolute bottom-0 left-0 right-0 border-t border-border opacity-50"></div>
+          <div class="absolute left-0 right-0 top-1/4 border-t border-border opacity-50"></div>
+          <div class="absolute left-0 right-0 top-1/2 border-t border-border opacity-50"></div>
+          <div class="absolute left-0 right-0 top-3/4 border-t border-border opacity-50"></div>
+          <div class="absolute inset-x-0 bottom-0 flex h-48 items-end gap-0.5 px-0.5">
+            <div *ngFor="let bar of normalizedBars" class="w-1.5 rounded-sm bg-primary" [style.height.px]="bar"></div>
           </div>
         </div>
         <div class="flex h-4 w-full items-center justify-between gap-2">
-          <span *ngFor="let label of labels" class="truncate text-xs leading-4 text-[hsl(var(--muted-foreground))]">{{ label }}</span>
+          <span *ngFor="let label of labels" class="truncate text-xs text-muted-foreground">{{ label }}</span>
         </div>
       </div>
 
-      <div *ngSwitchCase="'line'" class="flex h-[236px] w-full flex-col gap-2">
-        <svg viewBox="0 0 320 180" class="h-[183px] w-full">
+      <div *ngSwitchCase="'line'" class="flex h-60 w-full flex-col gap-2">
+        <svg viewBox="0 0 320 180" class="h-48 w-full">
           <line x1="0" y1="180" x2="320" y2="180" stroke="hsl(var(--border))" stroke-width="1"></line>
           <line x1="0" y1="135" x2="320" y2="135" stroke="hsl(var(--border))" stroke-width="1" opacity="0.5"></line>
           <line x1="0" y1="90" x2="320" y2="90" stroke="hsl(var(--border))" stroke-width="1" opacity="0.5"></line>
@@ -43,12 +43,12 @@
           <path [attr.d]="linePath" fill="none" stroke="hsl(var(--primary))" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
         <div class="flex h-4 w-full items-center justify-between gap-2">
-          <span *ngFor="let label of labels" class="truncate text-xs leading-4 text-[hsl(var(--muted-foreground))]">{{ label }}</span>
+          <span *ngFor="let label of labels" class="truncate text-xs text-muted-foreground">{{ label }}</span>
         </div>
       </div>
 
-      <div *ngSwitchCase="'area'" class="flex h-[236px] w-full flex-col gap-2">
-        <svg viewBox="0 0 320 180" class="h-[183px] w-full">
+      <div *ngSwitchCase="'area'" class="flex h-60 w-full flex-col gap-2">
+        <svg viewBox="0 0 320 180" class="h-48 w-full">
           <defs>
             <linearGradient id="pdm-chart-area-gradient" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stop-color="hsl(var(--primary))" stop-opacity="0.35"></stop>
@@ -63,21 +63,21 @@
           <path [attr.d]="linePath" fill="none" stroke="hsl(var(--primary))" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
         <div class="flex h-4 w-full items-center justify-between gap-2">
-          <span *ngFor="let label of labels" class="truncate text-xs leading-4 text-[hsl(var(--muted-foreground))]">{{ label }}</span>
+          <span *ngFor="let label of labels" class="truncate text-xs text-muted-foreground">{{ label }}</span>
         </div>
       </div>
 
       <div *ngSwitchCase="'pie'" class="flex items-center gap-6">
         <div class="relative h-40 w-40 rounded-full" [style.background]="pieGradient">
-          <div class="absolute inset-7 rounded-full bg-[hsl(var(--card))]"></div>
+          <div class="absolute inset-7 rounded-full bg-card"></div>
         </div>
         <div class="grid flex-1 gap-2">
-          <div *ngFor="let segment of pieSegments" class="flex items-center justify-between rounded-md border border-[hsl(var(--border))] px-3 py-2">
+          <div *ngFor="let segment of pieSegments" class="flex items-center justify-between rounded-md border border-border px-3 py-2">
             <div class="flex items-center gap-2">
               <span class="size-2.5 rounded-full" [style.background]="segment.color"></span>
-              <span class="text-sm leading-5">{{ segment.label }}</span>
+              <span class="text-sm">{{ segment.label }}</span>
             </div>
-            <span class="text-sm font-medium leading-5">{{ segment.size | number: '1.0-0' }}%</span>
+            <span class="text-sm font-medium">{{ segment.size | number: '1.0-0' }}%</span>
           </div>
         </div>
       </div>
@@ -90,8 +90,8 @@
           <polygon [attr.points]="radarPoints" fill="hsl(var(--primary))" fill-opacity="0.22" stroke="hsl(var(--primary))" stroke-width="2"></polygon>
         </svg>
         <div class="grid flex-1 gap-2">
-          <div *ngFor="let item of radar; index as i" class="flex items-center justify-between rounded-md border border-[hsl(var(--border))] px-3 py-2 text-sm">
-            <span class="text-[hsl(var(--muted-foreground))]">Metric {{ i + 1 }}</span>
+          <div *ngFor="let item of radar; index as i" class="flex items-center justify-between rounded-md border border-border px-3 py-2 text-sm">
+            <span class="text-muted-foreground">Metric {{ i + 1 }}</span>
             <span class="font-medium">{{ item }}</span>
           </div>
         </div>
@@ -114,19 +114,19 @@
             ></circle>
           </svg>
           <div class="absolute text-center">
-            <div class="text-[30px] font-semibold leading-9">{{ radialValue }}%</div>
-            <div class="text-xs text-[hsl(var(--muted-foreground))]">{{ radialLabel }}</div>
+            <div class="text-2xl font-semibold">{{ radialValue }}%</div>
+            <div class="text-xs text-muted-foreground">{{ radialLabel }}</div>
           </div>
         </div>
         <div class="flex-1">
-          <p class="m-0 text-sm font-medium leading-5">{{ radialLabel }}</p>
-          <p class="m-0 mt-1 text-sm leading-5 text-[hsl(var(--muted-foreground))]">{{ radialDescription }}</p>
+          <p class="m-0 text-sm font-medium">{{ radialLabel }}</p>
+          <p class="m-0 mt-1 text-sm text-muted-foreground">{{ radialDescription }}</p>
         </div>
       </div>
 
       <div *ngSwitchCase="'tooltips'" class="grid gap-3">
-        <div class="inline-flex w-fit min-w-[220px] flex-col gap-2 rounded-lg border border-[hsl(var(--border))] bg-[hsl(var(--card))] p-3 shadow-sm">
-          <p class="m-0 text-xs font-medium leading-4 text-[hsl(var(--muted-foreground))]">{{ tooltipTitle }}</p>
+        <div class="inline-flex w-fit min-w-56 flex-col gap-2 rounded-lg border border-border bg-card p-3 shadow-sm">
+          <p class="m-0 text-xs font-medium text-muted-foreground">{{ tooltipTitle }}</p>
           <div class="flex items-center justify-between text-sm">
             <span>{{ tooltipPrimaryLabel }}</span>
             <span class="font-semibold">{{ tooltipPrimaryValue }}</span>
@@ -136,7 +136,7 @@
             <span class="font-semibold">{{ tooltipSecondaryValue }}</span>
           </div>
         </div>
-        <p class="m-0 text-xs text-[hsl(var(--muted-foreground))]">Tooltip style preparado para charts de línea, área y barras.</p>
+        <p class="m-0 text-xs text-muted-foreground">Tooltip style preparado para charts de línea, área y barras.</p>
       </div>
     </ng-container>
   </div>

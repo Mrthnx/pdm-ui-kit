@@ -23,11 +23,11 @@ export class PdmEmptyComponent {
 
   get containerClass(): string {
     if (this.variant === 'outline') {
-      return 'border border-dashed border-[hsl(var(--border))] rounded-[12px]';
+      return 'border border-dashed border-border rounded-[12px]';
     }
 
     if (this.variant === 'background') {
-      return 'rounded-[12px] bg-[hsl(var(--muted))]';
+      return 'rounded-[12px] bg-muted';
     }
 
     return '';

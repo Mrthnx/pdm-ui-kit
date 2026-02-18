@@ -1,6 +1,6 @@
 <span class="relative inline-flex" [ngClass]="className" (mouseenter)="open = true" (mouseleave)="open = false" (focusin)="open = true" (focusout)="open = false">
   <ng-content></ng-content>
-  <span *ngIf="open" [ngClass]="['pointer-events-none absolute z-50 overflow-hidden rounded-md bg-[hsl(var(--foreground))] px-3 py-1.5 text-xs text-[hsl(var(--background))] animate-in fade-in-0 zoom-in-95', positionClass]">
+  <span *ngIf="open" [ngClass]="['pointer-events-none absolute z-50 overflow-hidden rounded-md bg-foreground px-3 py-1.5 text-xs text-background animate-in fade-in-0 zoom-in-95', positionClass]">
     {{ text }}
   </span>
 </span>

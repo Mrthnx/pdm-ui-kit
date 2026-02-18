@@ -3,7 +3,7 @@
   [attr.aria-valuemin]="0"
   [attr.aria-valuemax]="max"
   [attr.aria-valuenow]="indeterminate ? null : value"
-  [ngClass]="['relative h-1.5 w-full overflow-hidden rounded-full bg-[hsl(var(--muted))]', className]"
+  [ngClass]="['relative h-1.5 w-full overflow-hidden rounded-full bg-muted', className]"
 >
-  <div [ngClass]="['h-full bg-[hsl(var(--foreground))] transition-all', indeterminate ? 'animate-pulse' : '']" [style.width]="width"></div>
+  <div [ngClass]="['h-full bg-foreground transition-all', indeterminate ? 'animate-pulse' : '']" [style.width]="width"></div>
 </div>

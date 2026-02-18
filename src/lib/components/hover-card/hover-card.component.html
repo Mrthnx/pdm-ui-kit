@@ -14,7 +14,7 @@
     *ngIf="open"
     [style.width.px]="panelWidth"
     [ngClass]="[
-      'absolute z-30 rounded-[10px] border border-[hsl(var(--border))] bg-[hsl(var(--popover))] p-4 text-[hsl(var(--popover-foreground))] shadow-xl',
+      'absolute z-30 rounded-md border border-border bg-popover p-4 text-popover-foreground shadow-md',
       positionClass,
       panelClassName
     ]"

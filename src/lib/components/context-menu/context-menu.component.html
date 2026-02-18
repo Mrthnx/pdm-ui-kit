@@ -1,23 +1,23 @@
 <div class="relative" [ngClass]="className" (contextmenu)="onContextMenu($event)">
   <div
-    class="flex items-center justify-center rounded-[8px] border border-dashed border-[hsl(var(--border))]"
+    class="flex items-center justify-center rounded-md border border-dashed border-border"
     [style.width.px]="width"
     [style.height.px]="height"
   >
-    <span class="text-[14px] font-medium leading-5 text-[hsl(var(--foreground))]">{{ triggerLabel }}</span>
+    <span class="text-sm font-medium text-foreground">{{ triggerLabel }}</span>
   </div>
 
   <div
     *ngIf="open"
-    class="fixed z-50 w-[208px] rounded-[8px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] shadow-md"
+    class="fixed z-50 w-52 rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md"
     [style.left.px]="x + 4"
     [style.top.px]="y + 2"
   >
-    <div class="px-1 pt-1">
+    <div>
       <ng-container *ngFor="let item of items">
-        <div *ngIf="item.type === 'separator'" class="my-1 border-t border-[hsl(var(--border))]"></div>
+        <div *ngIf="item.type === 'separator'" class="-mx-1 my-1 h-px bg-muted"></div>
 
-        <div *ngIf="item.type === 'label'" class="h-8 px-8 py-[6px] text-[14px] font-semibold leading-5 text-[hsl(var(--foreground))]">
+        <div *ngIf="item.type === 'label'" class="px-2 py-1.5 text-sm font-semibold text-foreground">
           {{ item.label }}
         </div>
 
@@ -25,19 +25,19 @@
           *ngIf="!item.type || item.type === 'item'"
           type="button"
           [disabled]="item.disabled"
-          class="flex h-8 w-full items-center rounded-[6px] py-[6px] pr-2 text-left disabled:opacity-50"
+          class="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pr-2 text-left text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground disabled:pointer-events-none disabled:opacity-50"
           [ngClass]="item.inset ? 'pl-8' : 'px-2'"
           (click)="select(item)"
         >
-          <span class="mr-2 inline-flex w-4 shrink-0 items-center justify-center text-[hsl(var(--foreground))]">
+          <span class="mr-2 inline-flex w-4 shrink-0 items-center justify-center text-foreground">
             <svg *ngIf="item.checked" viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M5 12.5L9.2 16.7L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
-            <span *ngIf="item.selectedDot" class="h-2 w-2 rounded-full bg-[hsl(var(--foreground))]"></span>
+            <span *ngIf="item.selectedDot" class="h-2 w-2 rounded-full bg-foreground"></span>
           </span>
-          <span class="min-w-0 flex-1 truncate text-[14px] leading-5 text-[hsl(var(--foreground))]">{{ item.label }}</span>
-          <span *ngIf="item.shortcut" class="text-[12px] leading-4 text-[hsl(var(--muted-foreground))]">{{ item.shortcut }}</span>
-          <svg *ngIf="item.showChevron" viewBox="0 0 24 24" class="h-3.5 w-3.5 text-[hsl(var(--foreground))]" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <span class="min-w-0 flex-1 truncate text-foreground">{{ item.label }}</span>
+          <span *ngIf="item.shortcut" class="text-xs text-muted-foreground">{{ item.shortcut }}</span>
+          <svg *ngIf="item.showChevron" viewBox="0 0 24 24" class="h-3.5 w-3.5 text-muted-foreground" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
         </button>

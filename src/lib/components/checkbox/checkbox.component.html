@@ -6,11 +6,11 @@
   [attr.aria-disabled]="disabled"
   [disabled]="disabled"
   [ngClass]="[
-    'w-full border-0 bg-transparent p-0 text-left outline-none focus:outline-none focus-visible:outline-none',
+    'w-full border-0 bg-transparent p-0 text-left outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
     variant === 'card'
       ? checked
-        ? 'flex items-start gap-3 rounded-[10px] border border-foreground bg-muted p-3'
-        : 'flex items-start gap-3 rounded-[10px] border border-border bg-background p-3'
+        ? 'flex items-start gap-3 rounded-lg border border-primary bg-muted p-4'
+        : 'flex items-start gap-3 rounded-lg border border-border bg-background p-4'
       : hasDescription
         ? 'flex items-start gap-3'
         : 'flex items-center gap-3',
@@ -21,8 +21,8 @@
 >
   <span
     [ngClass]="[
-      'mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-[6px] border shadow-sm',
-      checked ? 'border-foreground bg-foreground text-background' : 'border-input bg-background text-transparent'
+      'mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-sm border shadow-sm',
+      checked ? 'border-primary bg-primary text-primary-foreground' : 'border-input bg-background text-transparent'
     ]"
     aria-hidden="true"
   >
@@ -32,7 +32,7 @@
   </span>
 
   <span [ngClass]="['min-w-0 flex-1', hasDescription ? 'flex flex-col gap-2' : 'flex items-center']">
-    <span class="text-[14px] font-medium leading-5 text-foreground">{{ label }}</span>
-    <span *ngIf="hasDescription" class="text-[14px] leading-5 text-muted-foreground">{{ description }}</span>
+    <span class="text-sm font-medium text-foreground">{{ label }}</span>
+    <span *ngIf="hasDescription" class="text-sm text-muted-foreground">{{ description }}</span>
   </span>
 </button>

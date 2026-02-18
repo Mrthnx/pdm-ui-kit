@@ -1,7 +1,7 @@
 <div
   role="radiogroup"
   [ngClass]="[
-    'gap-2',
+    'gap-2 text-sm',
     direction === 'horizontal' ? 'inline-flex items-center' : 'grid',
     className
   ]"
@@ -17,9 +17,9 @@
       class="peer sr-only"
       (change)="onChange($event)"
     />
-    <span class="relative block h-4 w-4 rounded-full border border-[hsl(var(--input))] bg-[hsl(var(--background))] peer-checked:border-[hsl(var(--foreground))] peer-focus-visible:ring-1 peer-focus-visible:ring-[hsl(var(--foreground))]">
-      <span class="absolute left-1/2 top-1/2 hidden h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[hsl(var(--foreground))] peer-checked:block"></span>
+    <span class="relative block h-4 w-4 rounded-full border border-input bg-background peer-checked:border-primary peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background">
+      <span class="absolute left-1/2 top-1/2 hidden h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary peer-checked:block"></span>
     </span>
-    <span class="text-sm leading-5 text-[hsl(var(--foreground))]">{{ option.label }}</span>
+    <span class="text-foreground">{{ option.label }}</span>
   </label>
 </div>

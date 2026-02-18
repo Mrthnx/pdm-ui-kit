@@ -1,14 +1,14 @@
 <span
   [ngClass]="[
-    'inline-flex items-center justify-center text-center align-middle',
-    variant === 'default' ? 'h-[22px] rounded-[10px] bg-[hsl(var(--foreground))] px-[10px] py-[2px] text-[12px] font-medium leading-4 text-[hsl(var(--background))]' : '',
-    variant === 'secondary' ? 'h-[22px] rounded-[10px] bg-[hsl(var(--muted))] px-[10px] py-[2px] text-[12px] font-medium leading-4 text-[hsl(var(--foreground))]' : '',
-    variant === 'destructive' ? 'h-[22px] rounded-[10px] bg-[hsl(var(--destructive))] px-[10px] py-[2px] text-[12px] font-medium leading-4 text-[hsl(var(--background))]' : '',
-    variant === 'outline' ? 'h-[22px] rounded-[10px] border border-[hsl(var(--border))] px-[10px] py-[2px] text-[12px] font-medium leading-4 text-[hsl(var(--foreground))]' : '',
-    variant === 'icon' ? 'h-[22px] gap-1 rounded-[10px] bg-[hsl(var(--foreground))] px-[10px] py-[2px] text-[12px] font-medium leading-4 text-[hsl(var(--background))]' : '',
-    variant === 'number' ? 'h-5 min-w-[20px] rounded-full bg-[hsl(var(--foreground))] px-[6px] py-[2px] text-[12px] font-medium leading-4 text-[hsl(var(--background))]' : '',
-    variant === 'destructive-number' ? 'h-5 min-w-[20px] rounded-full bg-[hsl(var(--destructive))] px-[6px] py-[2px] text-[12px] font-medium leading-4 text-[hsl(var(--background))]' : '',
-    variant === 'secondary-number' ? 'h-5 min-w-[20px] rounded-full border border-[hsl(var(--border))] px-1 py-[2px] text-[12px] font-medium leading-4 text-[hsl(var(--foreground))]' : '',
+    'inline-flex items-center justify-center text-center align-middle rounded-full px-2.5 py-0.5 text-xs font-semibold',
+    variant === 'default' ? 'bg-primary text-primary-foreground' : '',
+    variant === 'secondary' ? 'bg-secondary text-secondary-foreground' : '',
+    variant === 'destructive' ? 'bg-destructive text-destructive-foreground' : '',
+    variant === 'outline' ? 'border border-input text-foreground' : '',
+    variant === 'icon' ? 'gap-1 bg-primary text-primary-foreground' : '',
+    variant === 'number' ? 'min-w-5 rounded-full bg-primary px-1.5 text-primary-foreground' : '',
+    variant === 'destructive-number' ? 'min-w-5 rounded-full bg-destructive px-1.5 text-destructive-foreground' : '',
+    variant === 'secondary-number' ? 'min-w-5 rounded-full border border-input px-1.5 text-foreground' : '',
     className
   ]"
 >
@@ -25,4 +25,3 @@
   </svg>
   <span [ngClass]="[variant === 'secondary-number' ? 'font-mono' : '']">{{ text }}</span>
 </span>
-

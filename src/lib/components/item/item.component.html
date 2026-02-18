@@ -1,8 +1,8 @@
 <div
   [ngClass]="[
     'relative flex w-full select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors',
-    selected ? 'bg-[hsl(var(--accent))] text-[hsl(var(--accent-foreground))]' : 'text-[hsl(var(--foreground))]',
-    disabled ? 'pointer-events-none opacity-50' : 'hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--accent-foreground))]',
+    selected ? 'bg-accent text-accent-foreground' : 'text-foreground',
+    disabled ? 'pointer-events-none opacity-50' : 'hover:bg-accent hover:text-accent-foreground',
     className
   ]"
 >

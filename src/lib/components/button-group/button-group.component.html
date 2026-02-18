@@ -1,39 +1,38 @@
 <div [ngClass]="['inline-flex items-center gap-2', className]">
   <ng-container [ngSwitch]="variant">
     <ng-container *ngSwitchCase="'orientation'">
-      <div class="inline-flex flex-col overflow-hidden rounded-[8px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] shadow-sm">
-        <button type="button" class="inline-flex h-9 w-9 items-center justify-center border-b border-[hsl(var(--border))] text-[hsl(var(--foreground))]">+</button>
-        <button type="button" class="inline-flex h-9 w-9 items-center justify-center text-[hsl(var(--foreground))]">-</button>
+      <div class="inline-flex flex-col overflow-hidden rounded-md border border-border bg-background shadow-sm">
+        <button type="button" class="inline-flex h-9 w-9 items-center justify-center border-b border-border text-foreground">+</button>
+        <button type="button" class="inline-flex h-9 w-9 items-center justify-center text-foreground">-</button>
       </div>
     </ng-container>
 
     <ng-container *ngSwitchCase="'separator'">
-      <div class="inline-flex overflow-hidden rounded-[8px] border border-[hsl(var(--border))] bg-[hsl(var(--muted))] shadow-sm">
-        <button type="button" class="inline-flex h-8 items-center justify-center border-r border-[hsl(var(--border))] px-3 text-[14px] font-medium leading-5 text-[hsl(var(--foreground))]">Copy</button>
-        <button type="button" class="inline-flex h-8 items-center justify-center px-3 text-[14px] font-medium leading-5 text-[hsl(var(--foreground))]">Paste</button>
+      <div class="inline-flex overflow-hidden rounded-md border border-border bg-muted shadow-sm">
+        <button type="button" class="inline-flex h-8 items-center justify-center border-r border-border px-3 text-sm font-medium text-foreground">Copy</button>
+        <button type="button" class="inline-flex h-8 items-center justify-center px-3 text-sm font-medium text-foreground">Paste</button>
       </div>
     </ng-container>
 
     <ng-container *ngSwitchCase="'nested'">
-      <div class="inline-flex overflow-hidden rounded-[8px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] shadow-sm">
-        <button *ngFor="let item of ['1', '2', '3', '4', '5']; let last = last" type="button" [ngClass]="['inline-flex h-8 items-center justify-center px-3 text-[14px] font-medium leading-5 text-[hsl(var(--foreground))]', !last ? 'border-r border-[hsl(var(--border))]' : '']">{{ item }}</button>
+      <div class="inline-flex overflow-hidden rounded-md border border-border bg-background shadow-sm">
+        <button *ngFor="let item of ['1', '2', '3', '4', '5']; let last = last" type="button" [ngClass]="['inline-flex h-8 items-center justify-center px-3 text-sm font-medium text-foreground', !last ? 'border-r border-border' : '']">{{ item }}</button>
       </div>
-      <div class="inline-flex overflow-hidden rounded-[8px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] shadow-sm">
-        <button type="button" class="inline-flex h-8 w-8 items-center justify-center border-r border-[hsl(var(--border))] text-[hsl(var(--foreground))]">←</button>
-        <button type="button" class="inline-flex h-8 w-8 items-center justify-center text-[hsl(var(--foreground))]">→</button>
+      <div class="inline-flex overflow-hidden rounded-md border border-border bg-background shadow-sm">
+        <button type="button" class="inline-flex h-8 w-8 items-center justify-center border-r border-border text-foreground">←</button>
+        <button type="button" class="inline-flex h-8 w-8 items-center justify-center text-foreground">→</button>
       </div>
     </ng-container>
 
     <ng-container *ngSwitchDefault>
-      <div class="inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-[8px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] shadow-sm text-[hsl(var(--foreground))]">←</div>
-      <div class="inline-flex overflow-hidden rounded-[8px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] shadow-sm">
-        <button *ngFor="let item of items; let last = last" type="button" [ngClass]="['inline-flex h-9 items-center justify-center px-4 text-[14px] font-medium leading-5 text-[hsl(var(--foreground))]', !last ? 'border-r border-[hsl(var(--border))]' : '']">{{ item }}</button>
+      <div class="inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-md border border-border bg-background shadow-sm text-foreground">←</div>
+      <div class="inline-flex overflow-hidden rounded-md border border-border bg-background shadow-sm">
+        <button *ngFor="let item of items; let last = last" type="button" [ngClass]="['inline-flex h-9 items-center justify-center px-4 text-sm font-medium text-foreground', !last ? 'border-r border-border' : '']">{{ item }}</button>
       </div>
-      <div class="inline-flex overflow-hidden rounded-[8px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] shadow-sm">
-        <button type="button" class="inline-flex h-9 items-center justify-center border-r border-[hsl(var(--border))] px-4 text-[14px] font-medium leading-5 text-[hsl(var(--foreground))]">Snooze</button>
-        <button type="button" class="inline-flex h-9 w-9 items-center justify-center text-[hsl(var(--foreground))]">…</button>
+      <div class="inline-flex overflow-hidden rounded-md border border-border bg-background shadow-sm">
+        <button type="button" class="inline-flex h-9 items-center justify-center border-r border-border px-4 text-sm font-medium text-foreground">Snooze</button>
+        <button type="button" class="inline-flex h-9 w-9 items-center justify-center text-foreground">…</button>
       </div>
     </ng-container>
   </ng-container>
 </div>
-

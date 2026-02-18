@@ -1,18 +1,18 @@
 <section
   [ngClass]="[
-    'w-full rounded-[14px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] py-6 shadow-sm',
+    'w-full rounded-lg border border-border bg-background py-6 shadow-sm',
     className
   ]"
 >
   <ng-container *ngIf="variant === 'login'; else defaultCard">
     <div class="flex w-full items-start gap-1.5 px-6">
       <div class="min-w-0 flex-1">
-        <h3 class="m-0 text-[14px] font-semibold leading-5 text-[hsl(var(--foreground))]">{{ title }}</h3>
-        <p class="m-0 mt-1.5 text-[14px] leading-5 text-[hsl(var(--muted-foreground))]">{{ description }}</p>
+        <h3 class="m-0 text-lg font-semibold leading-none tracking-tight text-foreground">{{ title }}</h3>
+        <p class="m-0 mt-1.5 text-sm text-muted-foreground">{{ description }}</p>
       </div>
       <button
         type="button"
-        class="inline-flex h-9 items-center justify-center rounded-[10px] px-4 py-2 text-[14px] font-medium leading-5 text-[hsl(var(--foreground))]"
+        class="inline-flex h-9 items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-foreground"
         (click)="onActionPressed()"
       >
         {{ actionText }}
@@ -21,24 +21,24 @@
 
     <div class="mt-6 flex flex-col gap-4 px-6">
       <div class="w-full">
-        <label class="mb-3 block text-[14px] font-medium leading-5 text-[hsl(var(--foreground))]">{{ emailLabel }}</label>
+        <label class="mb-3 block text-sm font-medium text-foreground">{{ emailLabel }}</label>
         <input
           type="email"
           [placeholder]="emailPlaceholder"
-          class="h-9 w-full rounded-[8px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-3 py-1 text-[16px] leading-6 text-[hsl(var(--foreground))] shadow-sm placeholder:text-[hsl(var(--muted-foreground))] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(var(--ring))]"
+          class="h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm text-foreground shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         />
       </div>
 
       <div class="w-full">
         <div class="mb-3 flex w-full items-center justify-between gap-4">
-          <label class="text-[14px] font-medium leading-5 text-[hsl(var(--foreground))]">{{ passwordLabel }}</label>
-          <button type="button" class="text-[14px] leading-5 text-[hsl(var(--foreground))]">
+          <label class="text-sm font-medium text-foreground">{{ passwordLabel }}</label>
+          <button type="button" class="text-sm text-foreground">
             {{ passwordHint }}
           </button>
         </div>
         <input
           type="password"
-          class="h-9 w-full rounded-[8px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-3 py-1 text-[16px] leading-6 text-[hsl(var(--foreground))] shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(var(--ring))]"
+          class="h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm text-foreground shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         />
       </div>
     </div>
@@ -46,14 +46,14 @@
     <div class="mt-6 flex w-full flex-col gap-2 px-6">
       <button
         type="button"
-        class="flex h-9 w-full items-center justify-center rounded-[10px] bg-[hsl(var(--foreground))] px-4 py-2 text-[14px] font-medium leading-5 text-[hsl(var(--background))] shadow-sm"
+        class="flex h-9 w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm"
         (click)="onPrimaryAction()"
       >
         {{ primaryActionText }}
       </button>
       <button
         type="button"
-        class="flex h-9 w-full items-center justify-center rounded-[10px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-2 text-[14px] font-medium leading-5 text-[hsl(var(--foreground))] shadow-sm"
+        class="flex h-9 w-full items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm"
         (click)="onSecondaryAction()"
       >
         {{ secondaryActionText }}

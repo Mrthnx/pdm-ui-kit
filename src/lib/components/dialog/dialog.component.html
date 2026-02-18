@@ -1,22 +1,22 @@
 <div *ngIf="open" class="fixed inset-0 z-50 flex items-center justify-center p-4">
-  <div class="absolute inset-0 bg-[hsl(var(--foreground)/0.3)]" (click)="onBackdropClick()"></div>
+  <div class="absolute inset-0 bg-foreground/30" (click)="onBackdropClick()"></div>
   <section
     role="dialog"
     aria-modal="true"
     [ngClass]="[
-      'relative z-10 w-full max-w-[423px] rounded-[10px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] p-6 shadow-lg',
+      'relative z-10 w-full max-w-lg rounded-lg border border-border bg-background p-6 shadow-lg',
       className
     ]"
   >
     <div class="flex items-start justify-between gap-3">
       <div class="min-w-0">
-        <h2 class="m-0 text-[18px] font-semibold leading-7 text-[hsl(var(--foreground))]">{{ title }}</h2>
-        <p *ngIf="description" class="m-0 mt-2 text-[14px] leading-5 text-[hsl(var(--muted-foreground))]">{{ description }}</p>
+        <h2 class="m-0 text-lg font-semibold leading-none tracking-tight text-foreground">{{ title }}</h2>
+        <p *ngIf="description" class="m-0 mt-2 text-sm text-muted-foreground">{{ description }}</p>
       </div>
       <button
         *ngIf="showCloseButton"
         type="button"
-        class="inline-flex h-6 w-6 items-center justify-center text-[hsl(var(--foreground))] opacity-70"
+        class="inline-flex h-6 w-6 items-center justify-center rounded-sm text-foreground opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none"
         (click)="close()"
         aria-label="Close dialog"
       >
@@ -29,26 +29,26 @@
     <ng-container *ngIf="variant === 'default'; else customCloseDialog">
       <div class="mt-4 flex flex-col gap-4">
         <div class="flex flex-col gap-3">
-          <label class="text-[14px] font-medium leading-5 text-[hsl(var(--foreground))]">{{ nameLabel }}</label>
-          <div class="h-9 rounded-[8px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-3 py-1 text-[16px] leading-6 text-[hsl(var(--muted-foreground))] shadow-sm">{{ nameValue }}</div>
+          <label class="text-sm font-medium text-foreground">{{ nameLabel }}</label>
+          <div class="h-9 rounded-md border border-border bg-background px-3 py-1 text-sm text-muted-foreground shadow-sm">{{ nameValue }}</div>
         </div>
         <div class="flex flex-col gap-3">
-          <label class="text-[14px] font-medium leading-5 text-[hsl(var(--foreground))]">{{ usernameLabel }}</label>
-          <div class="h-9 rounded-[8px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-3 py-1 text-[16px] leading-6 text-[hsl(var(--muted-foreground))] shadow-sm">{{ usernameValue }}</div>
+          <label class="text-sm font-medium text-foreground">{{ usernameLabel }}</label>
+          <div class="h-9 rounded-md border border-border bg-background px-3 py-1 text-sm text-muted-foreground shadow-sm">{{ usernameValue }}</div>
         </div>
       </div>
 
       <div class="mt-4 flex justify-end gap-2">
         <button
           type="button"
-          class="h-9 rounded-[10px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 text-[14px] font-medium leading-5 text-[hsl(var(--foreground))] shadow-sm"
+          class="inline-flex h-9 items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm"
           (click)="onSecondaryAction()"
         >
           {{ secondaryActionText }}
         </button>
         <button
           type="button"
-          class="h-9 rounded-[10px] bg-[hsl(var(--foreground))] px-4 text-[14px] font-medium leading-5 text-[hsl(var(--background))] shadow-sm"
+          class="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm"
           (click)="onPrimaryAction()"
         >
           {{ primaryActionText }}
@@ -57,13 +57,13 @@
     </ng-container>
 
     <ng-template #customCloseDialog>
-      <div class="mt-4 h-9 rounded-[8px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-3 py-1 text-[16px] leading-6 text-[hsl(var(--muted-foreground))] shadow-sm">
+      <div class="mt-4 h-9 rounded-md border border-border bg-background px-3 py-1 text-sm text-muted-foreground shadow-sm">
         {{ linkValue }}
       </div>
       <div class="mt-4 flex">
         <button
           type="button"
-          class="h-9 rounded-[10px] bg-[hsl(var(--muted))] px-4 text-[14px] font-medium leading-5 text-[hsl(var(--foreground))] shadow-sm"
+          class="inline-flex h-9 items-center justify-center rounded-md bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground shadow-sm"
           (click)="onSecondaryAction()"
         >
           Close

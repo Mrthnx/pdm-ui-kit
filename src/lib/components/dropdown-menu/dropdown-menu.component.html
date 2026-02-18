@@ -1,7 +1,7 @@
 <div class="relative inline-block" [ngClass]="className">
   <button
     type="button"
-    class="inline-flex h-9 items-center justify-center rounded-[10px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 text-[14px] font-medium text-[hsl(var(--foreground))] shadow-sm"
+    class="inline-flex h-9 items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
     [attr.aria-expanded]="open"
     (click)="toggle()"
   >
@@ -11,16 +11,16 @@
   <div
     *ngIf="open"
     [ngClass]="[
-      'absolute left-0 top-full z-50 mt-2 min-w-[224px] overflow-hidden rounded-[8px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] p-1 text-[hsl(var(--foreground))] shadow-md',
+      'absolute left-0 top-full z-50 mt-2 min-w-32 overflow-hidden rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md',
       panelClassName
     ]"
   >
     <ng-container *ngFor="let item of resolvedItems">
-      <div *ngIf="item.type === 'separator'" class="my-[5px] h-px bg-[hsl(var(--muted))]"></div>
+      <div *ngIf="item.type === 'separator'" class="-mx-1 my-1 h-px bg-muted"></div>
 
       <div
         *ngIf="item.type === 'label'"
-        [ngClass]="['px-2 py-1.5 text-[14px] font-semibold leading-5 text-[hsl(var(--foreground))]', item.inset ? 'pl-8' : '']"
+        [ngClass]="['px-2 py-1.5 text-sm font-semibold text-foreground', item.inset ? 'pl-8' : '']"
       >
         {{ item.label }}
       </div>
@@ -30,7 +30,7 @@
         type="button"
         [disabled]="item.disabled"
         [ngClass]="[
-          'relative flex w-full items-center gap-2 rounded-[6px] px-2 py-1.5 text-left text-[14px] leading-5 text-[hsl(var(--foreground))] transition-colors hover:bg-[hsl(var(--muted))] disabled:pointer-events-none disabled:opacity-50',
+          'relative flex w-full cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-left text-sm text-foreground outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground disabled:pointer-events-none disabled:opacity-50',
           item.inset ? 'pl-8' : ''
         ]"
         (click)="select(item)"
@@ -39,17 +39,17 @@
           <svg
             *ngIf="item.checked"
             viewBox="0 0 24 24"
-            class="h-3.5 w-3.5 text-[hsl(var(--foreground))]"
+            class="h-3.5 w-3.5 text-foreground"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path d="M5 12.5L9.2 16.7L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
-          <span *ngIf="item.radioSelected" class="h-2 w-2 rounded-full bg-[hsl(var(--foreground))]"></span>
+          <span *ngIf="item.radioSelected" class="h-2 w-2 rounded-full bg-foreground"></span>
         </span>
         <span class="min-w-0 flex-1 truncate">{{ item.label }}</span>
-        <span *ngIf="item.shortcut" class="text-[12px] leading-5 text-[hsl(var(--muted-foreground))]">{{ item.shortcut }}</span>
-        <span *ngIf="item.showChevron" class="text-[16px] leading-none text-[hsl(var(--muted-foreground))]">›</span>
+        <span *ngIf="item.shortcut" class="text-xs text-muted-foreground">{{ item.shortcut }}</span>
+        <span *ngIf="item.showChevron" class="text-sm text-muted-foreground">›</span>
       </button>
     </ng-container>
   </div>

@@ -1,7 +1,7 @@
 <label
   [attr.for]="forId"
-  [ngClass]="['text-sm font-medium leading-5 text-[hsl(var(--foreground))] peer-disabled:cursor-not-allowed peer-disabled:opacity-70', className]"
+  [ngClass]="['text-sm font-medium leading-none text-foreground peer-disabled:cursor-not-allowed peer-disabled:opacity-70', className]"
 >
   <ng-content></ng-content>
-  <span *ngIf="required" class="ml-1 text-[hsl(var(--destructive))]">*</span>
+  <span *ngIf="required" class="ml-1 text-destructive">*</span>
 </label>

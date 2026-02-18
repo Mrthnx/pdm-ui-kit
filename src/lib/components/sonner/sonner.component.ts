@@ -20,6 +20,6 @@ export class PdmSonnerComponent {
     if (this.tone === 'error') return 'border-red-200 bg-red-50 text-red-900';
     if (this.tone === 'warning') return 'border-amber-200 bg-amber-50 text-amber-900';
 
-    return 'border-[hsl(var(--border))] bg-[hsl(var(--background))] text-[hsl(var(--foreground))]';
+    return 'border-border bg-background text-foreground';
   }
 }

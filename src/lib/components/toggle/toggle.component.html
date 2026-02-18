@@ -4,10 +4,11 @@
   [attr.aria-pressed]="pressed"
   [ngClass]="[
     'inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50',
+    'ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
     sizeClass,
     pressed
-      ? 'bg-[hsl(var(--accent))] text-[hsl(var(--accent-foreground))]'
-      : 'bg-transparent text-[hsl(var(--foreground))] hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--accent-foreground))]',
+      ? 'bg-accent text-accent-foreground'
+      : 'bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground',
     className
   ]"
   (click)="toggle()"

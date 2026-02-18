@@ -4,8 +4,7 @@
   [disabled]="disabled"
   [attr.aria-invalid]="invalid"
   [ngClass]="[
-    'flex h-9 w-full rounded-[8px] border bg-[hsl(var(--background))] px-3 py-2 text-sm leading-5 text-[hsl(var(--foreground))] shadow-sm ring-offset-[hsl(var(--background))] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[hsl(var(--foreground))] disabled:cursor-not-allowed disabled:opacity-50',
-    invalid ? 'border-[hsl(var(--destructive))]' : 'border-[hsl(var(--input))]',
+    'border-input focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 aria-invalid:ring-2 aria-invalid:ring-destructive aria-invalid:border-destructive aria-invalid:placeholder:text-destructive/70 flex h-9 w-full rounded-md border bg-transparent px-3 py-2 text-sm text-foreground shadow-sm outline-none disabled:cursor-not-allowed disabled:opacity-50',
     className
   ]"
   (change)="onChange($event)"

@@ -1,7 +1,7 @@
 <nav aria-label="Pagination" [ngClass]="['mx-auto flex w-full justify-center', className]">
   <ul class="flex items-center gap-1">
     <li>
-      <button type="button" class="inline-flex h-8 items-center justify-center gap-1 rounded-md px-2 text-sm text-[hsl(var(--foreground))] hover:bg-[hsl(var(--accent))] disabled:opacity-50" [disabled]="page <= 1" (click)="setPage(page - 1)">
+      <button type="button" class="inline-flex h-9 items-center justify-center gap-1 rounded-md px-2 text-sm text-foreground hover:bg-accent disabled:opacity-50 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" [disabled]="page <= 1" (click)="setPage(page - 1)">
         <pdm-icon name="chevron-left" [size]="14"></pdm-icon>
         Previous
       </button>
@@ -10,10 +10,10 @@
       <button
         type="button"
         [ngClass]="[
-          'inline-flex h-6 min-w-[24px] items-center justify-center rounded-md px-2 text-sm',
+          'inline-flex h-9 min-w-9 items-center justify-center rounded-md px-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
           pageNumber === page
-            ? 'border border-[hsl(var(--border))] bg-[hsl(var(--muted))] text-[hsl(var(--foreground))] shadow-sm'
-            : 'text-[hsl(var(--foreground))] hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--accent-foreground))]'
+            ? 'border border-border bg-muted text-foreground shadow-sm'
+            : 'text-foreground hover:bg-accent hover:text-accent-foreground'
         ]"
         (click)="setPage(pageNumber)"
       >
@@ -21,7 +21,7 @@
       </button>
     </li>
     <li>
-      <button type="button" class="inline-flex h-8 items-center justify-center gap-1 rounded-md px-2 text-sm text-[hsl(var(--foreground))] hover:bg-[hsl(var(--accent))] disabled:opacity-50" [disabled]="page >= pageCount" (click)="setPage(page + 1)">
+      <button type="button" class="inline-flex h-9 items-center justify-center gap-1 rounded-md px-2 text-sm text-foreground hover:bg-accent disabled:opacity-50 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" [disabled]="page >= pageCount" (click)="setPage(page + 1)">
         Next
         <pdm-icon name="chevron-right" [size]="14"></pdm-icon>
       </button>

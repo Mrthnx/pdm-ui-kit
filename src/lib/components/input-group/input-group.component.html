@@ -7,16 +7,14 @@
 >
   <div
     [ngClass]="[
-      'flex h-9 min-w-0 flex-1 items-center overflow-hidden rounded-[8px] border bg-[hsl(var(--background))] px-3 py-1 text-base leading-6 text-[hsl(var(--foreground))] shadow-sm transition-[border-color,box-shadow]',
-      invalid ? 'border-[hsl(var(--destructive))]' : 'border-[hsl(var(--input))]',
-      !invalid && !disabled ? 'focus-within:border-[hsl(var(--ring))] focus-within:shadow-[0_0_0_3px_hsl(var(--ring)/0.5)]' : '',
-      invalid && !disabled ? 'focus-within:border-[hsl(var(--destructive))] focus-within:shadow-[0_0_0_3px_hsl(var(--destructive)/0.2)]' : '',
+      'flex h-9 min-w-0 flex-1 items-center overflow-hidden rounded-md border border-input bg-transparent px-3 py-1 text-sm text-foreground shadow-sm transition-colors focus-within:border-ring focus-within:ring-2 focus-within:ring-ring/50',
+      invalid ? 'border-destructive focus-within:ring-destructive' : '',
       disabled ? 'cursor-not-allowed' : ''
     ]"
   >
     <div
       *ngIf="prefixText || prefixIcon"
-      class="inline-flex h-full shrink-0 items-center gap-2 pr-2 text-sm leading-5 text-[hsl(var(--muted-foreground))]"
+      class="inline-flex h-full shrink-0 items-center gap-2 pr-2 text-sm text-muted-foreground"
     >
       <pdm-icon *ngIf="prefixIcon" [name]="prefixIcon" [size]="16"></pdm-icon>
       <span *ngIf="prefixText">{{ prefixText }}</span>
@@ -31,15 +29,15 @@
       [disabled]="disabled"
       [attr.aria-invalid]="invalid"
       [ngClass]="[
-        'h-full min-w-0 flex-1 border-0 bg-transparent p-0 text-base leading-6 text-[hsl(var(--foreground))] outline-none placeholder:text-[hsl(var(--muted-foreground))]',
-        type === 'file' ? 'text-sm leading-5 file:mr-1 file:border-0 file:bg-transparent file:px-[6px] file:py-px file:text-sm file:font-medium file:leading-5 file:text-[hsl(var(--foreground))]' : ''
+      'h-full min-w-0 flex-1 border-0 bg-transparent p-0 text-sm text-foreground outline-none placeholder:text-muted-foreground aria-invalid:placeholder:text-destructive/70',
+        type === 'file' ? 'text-sm file:mr-2 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground' : ''
       ]"
       (input)="onInput($event)"
     />
 
     <div
       *ngIf="!buttonText && (suffixText || suffixIcon)"
-      class="inline-flex h-full shrink-0 items-center gap-2 pl-2 text-sm leading-5 text-[hsl(var(--muted-foreground))]"
+      class="inline-flex h-full shrink-0 items-center gap-2 pl-2 text-sm text-muted-foreground"
     >
       <pdm-icon *ngIf="suffixIcon" [name]="suffixIcon" [size]="16"></pdm-icon>
       <span *ngIf="suffixText" class="font-medium">{{ suffixText }}</span>
@@ -51,7 +49,7 @@
     *ngIf="buttonText"
     type="button"
     [disabled]="disabled"
-    class="inline-flex h-9 shrink-0 items-center justify-center rounded-[10px] border border-[hsl(var(--input))] bg-[hsl(var(--background))] px-4 py-2 text-sm font-medium leading-5 text-[hsl(var(--foreground))] shadow-sm outline-none transition-[border-color,box-shadow] focus:outline-none focus-visible:outline-none disabled:cursor-not-allowed"
+    class="inline-flex h-9 shrink-0 items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-not-allowed"
     (click)="onButtonClick($event)"
   >
     {{ buttonText }}

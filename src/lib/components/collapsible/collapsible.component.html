@@ -1,13 +1,13 @@
-<div [ngClass]="['flex w-[350px] flex-col gap-2', className]">
+<div [ngClass]="['flex w-full max-w-sm flex-col gap-2', className]">
   <button
     type="button"
     [disabled]="disabled"
-    class="flex w-full items-center justify-between px-4 text-left"
+    class="flex w-full items-center justify-between rounded-md px-4 py-2 text-left text-sm font-medium text-foreground hover:bg-accent ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
     [attr.aria-expanded]="open"
     (click)="toggle()"
   >
-    <span class="text-[14px] font-semibold leading-5 text-[hsl(var(--foreground))]">{{ title }}</span>
-    <span class="inline-flex h-8 w-8 items-center justify-center text-[hsl(var(--foreground))]">
+    <span>{{ title }}</span>
+    <span class="inline-flex h-8 w-8 items-center justify-center text-foreground">
       <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M7 15L12 20L17 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
         <path d="M17 9L12 4L7 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -18,9 +18,9 @@
   <div class="flex w-full flex-col gap-2">
     <div
       *ngFor="let item of visibleItems"
-      class="w-full rounded-[8px] border border-[hsl(var(--border))] bg-[hsl(var(--background))] px-4 py-2"
+      class="w-full rounded-md border border-border bg-background px-4 py-2"
     >
-      <span class="font-mono text-[14px] leading-5 text-[hsl(var(--foreground))]">{{ item }}</span>
+      <span class="font-mono text-sm text-foreground">{{ item }}</span>
     </div>
   </div>
 </div>
