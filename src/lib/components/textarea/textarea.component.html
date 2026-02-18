@@ -1,5 +1,12 @@
 <div [ngClass]="['grid w-full gap-2', className]">
-  <label *ngIf="label" [attr.for]="id" class="text-sm font-medium leading-none text-foreground">{{ label }}</label>
+  <label
+    *ngIf="label"
+    [attr.for]="id"
+    [ngClass]="[
+      'text-sm font-medium leading-none',
+      invalid ? 'text-destructive' : 'text-foreground'
+    ]"
+  >{{ label }}</label>
   <textarea
     [id]="id"
     [rows]="rows"

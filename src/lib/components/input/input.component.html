@@ -2,7 +2,10 @@
   <label
     *ngIf="label"
     [attr.for]="id"
-    class="text-sm font-medium leading-none text-foreground"
+    [ngClass]="[
+      'text-sm font-medium leading-none',
+      invalid ? 'text-destructive' : 'text-foreground'
+    ]"
     >{{ label }}</label
   >
   <input

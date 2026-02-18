@@ -3,7 +3,12 @@
     <label
       *ngIf="label"
       [attr.for]="id"
-      [ngClass]="['text-sm font-medium leading-none text-foreground', disabled ? 'opacity-70' : '', labelClassName]"
+      [ngClass]="[
+        'text-sm font-medium leading-none',
+        disabled ? 'opacity-70' : '',
+        invalid ? 'text-destructive' : 'text-foreground',
+        labelClassName
+      ]"
     >
       {{ label }}
       <span *ngIf="required" class="text-destructive">*</span>
