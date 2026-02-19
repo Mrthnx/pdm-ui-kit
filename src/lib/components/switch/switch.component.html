@@ -1,14 +1,32 @@
-<label [attr.for]="id" [ngClass]="['inline-flex items-center gap-2', className]">
-  <input
+<div [ngClass]="['flex items-center space-x-2', className]">
+  <button
+    type="button"
+    role="switch"
+    [attr.aria-checked]="checked"
+    [attr.aria-disabled]="disabled"
+    [attr.data-state]="checked ? 'checked' : 'unchecked'"
+    [attr.data-disabled]="disabled ? 'true' : 'false'"
+    [attr.data-size]="size"
+    [attr.data-slot]="'switch'"
+    [attr.value]="checked ? 'on' : 'off'"
     [id]="id"
-    type="checkbox"
-    class="peer sr-only"
-    [checked]="checked"
     [disabled]="disabled"
-    (change)="onToggle($event)"
-  />
-  <span class="relative inline-flex h-6 w-11 items-center rounded-full border border-transparent bg-muted transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-ring peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background peer-disabled:opacity-50 peer-checked:bg-primary">
-    <span class="h-5 w-5 translate-x-0.5 rounded-full bg-background shadow-sm transition-transform peer-checked:translate-x-5"></span>
-  </span>
-  <span *ngIf="label" class="text-sm text-foreground">{{ label }}</span>
-</label>
+    [ngClass]="rootClasses"
+    (click)="onToggle()"
+  >
+    <span
+      [attr.data-state]="checked ? 'checked' : 'unchecked'"
+      [attr.data-slot]="'switch-thumb'"
+      [ngClass]="thumbClasses"
+    ></span>
+  </button>
+  <label
+    *ngIf="label"
+    [attr.for]="id"
+    [attr.data-slot]="'label'"
+    class="flex cursor-pointer items-center gap-2 text-sm leading-none font-medium select-none peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
+    (click)="onToggle()"
+  >
+    {{ label }}
+  </label>
+</div>
