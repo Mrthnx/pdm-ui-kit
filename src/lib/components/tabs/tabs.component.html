@@ -1,5 +1,5 @@
 <div [ngClass]="['w-full', className]">
-  <div role="tablist" class="inline-flex h-8 w-fit items-center justify-center rounded-lg bg-muted p-[3px] text-muted-foreground">
+  <div role="tablist" class="inline-flex h-8 w-fit items-center justify-center rounded-lg bg-transparent p-[3px] text-muted-foreground">
     <button
       *ngFor="let item of items"
       role="tab"
@@ -7,7 +7,7 @@
       [disabled]="item.disabled"
       [ngClass]="[
         'relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 whitespace-nowrap rounded-md border border-transparent px-1.5 py-0.5 text-sm font-medium transition-all focus-visible:border-ring focus-visible:outline-none focus-visible:outline-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50',
-        value === item.value ? 'bg-background text-foreground shadow-sm' : 'text-foreground/60 hover:text-foreground dark:text-muted-foreground dark:hover:text-foreground'
+        value === item.value ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground'
       ]"
       (click)="select(item)"
       type="button"
