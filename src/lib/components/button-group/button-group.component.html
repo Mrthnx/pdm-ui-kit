@@ -1,6 +1,6 @@
 <div
   role="group"
-  [attr.aria-orientation]="variant === 'orientation' || direction === 'vertical' ? 'vertical' : 'horizontal'"
+  [attr.aria-orientation]="variant === 'orientation' || orientation === 'vertical' || direction === 'vertical' ? 'vertical' : 'horizontal'"
   [ngClass]="rootClasses"
 >
   <ng-content></ng-content>
