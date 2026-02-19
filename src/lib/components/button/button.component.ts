@@ -34,19 +34,19 @@ export class PdmButtonComponent {
   @Output() pressed = new EventEmitter<MouseEvent>();
 
   readonly toneClassMap: Record<PdmButtonVariant, { default: string; hover: string }> = {
-    default: { default: 'bg-primary text-primary-foreground', hover: 'bg-primary text-primary-foreground opacity-90' },
-    primary: { default: 'bg-primary text-primary-foreground', hover: 'bg-primary text-primary-foreground opacity-90' },
-    destructive: { default: 'bg-destructive text-destructive-foreground', hover: 'bg-destructive text-destructive-foreground opacity-90' },
-    outline: { default: 'border border-border bg-background text-foreground', hover: 'border border-border bg-muted text-foreground' },
-    subtle: { default: 'bg-secondary text-secondary-foreground', hover: 'bg-accent text-accent-foreground' },
-    secondary: { default: 'bg-secondary text-secondary-foreground', hover: 'bg-accent text-accent-foreground' },
-    ghost: { default: 'bg-transparent text-foreground', hover: 'bg-accent text-accent-foreground' },
-    link: { default: 'bg-transparent text-primary', hover: 'bg-transparent text-primary underline underline-offset-4' },
-    'with-icon': { default: 'bg-primary text-primary-foreground', hover: 'bg-primary text-primary-foreground opacity-90' },
-    icon: { default: 'border border-input bg-background text-foreground', hover: 'border border-input bg-accent text-accent-foreground' },
-    'icon-circle': { default: 'border border-input bg-background text-foreground', hover: 'border border-input bg-accent text-accent-foreground' },
-    rounded: { default: 'border border-input bg-background text-foreground', hover: 'border border-input bg-accent text-accent-foreground' },
-    loading: { default: 'bg-primary text-primary-foreground opacity-70', hover: 'bg-primary text-primary-foreground opacity-70' }
+    default: { default: 'border-transparent bg-primary text-primary-foreground', hover: 'border-transparent bg-primary text-primary-foreground opacity-90' },
+    primary: { default: 'border-transparent bg-primary text-primary-foreground', hover: 'border-transparent bg-primary text-primary-foreground opacity-90' },
+    destructive: { default: 'border-transparent bg-destructive text-destructive-foreground', hover: 'border-transparent bg-destructive text-destructive-foreground opacity-90' },
+    outline: { default: 'border-border bg-background text-foreground', hover: 'border-border bg-muted text-foreground' },
+    subtle: { default: 'border-transparent bg-secondary text-secondary-foreground', hover: 'border-transparent bg-accent text-accent-foreground' },
+    secondary: { default: 'border-transparent bg-secondary text-secondary-foreground', hover: 'border-transparent bg-accent text-accent-foreground' },
+    ghost: { default: 'border-transparent bg-transparent text-foreground', hover: 'border-transparent bg-accent text-accent-foreground' },
+    link: { default: 'border-transparent bg-transparent text-primary', hover: 'border-transparent bg-transparent text-primary underline underline-offset-4' },
+    'with-icon': { default: 'border-transparent bg-primary text-primary-foreground', hover: 'border-transparent bg-primary text-primary-foreground opacity-90' },
+    icon: { default: 'border-border bg-background text-foreground', hover: 'border-border bg-accent text-accent-foreground' },
+    'icon-circle': { default: 'border-border bg-background text-foreground', hover: 'border-border bg-accent text-accent-foreground' },
+    rounded: { default: 'border-border bg-background text-foreground', hover: 'border-border bg-accent text-accent-foreground' },
+    loading: { default: 'border-transparent bg-primary text-primary-foreground opacity-70', hover: 'border-transparent bg-primary text-primary-foreground opacity-70' }
   };
 
   get isDisabled(): boolean {
@@ -58,7 +58,7 @@ export class PdmButtonComponent {
     const toneClass = this.toneClassMap[this.variant][currentState];
 
     return [
-      'inline-flex items-center justify-center gap-2 rounded-md border border-transparent text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-clip-padding',
+      'inline-flex items-center justify-center gap-2 rounded-md border text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-clip-padding',
       this.variant === 'link' ? 'px-4 py-2 h-9' : '',
       this.variant === 'icon' ? 'h-9 w-9 p-0' : '',
       this.variant === 'icon-circle' ? 'h-10 w-10 rounded-full p-0' : '',
