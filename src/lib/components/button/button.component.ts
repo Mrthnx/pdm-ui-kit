@@ -37,7 +37,7 @@ export class PdmButtonComponent {
     default: { default: 'bg-primary text-primary-foreground', hover: 'bg-primary text-primary-foreground opacity-90' },
     primary: { default: 'bg-primary text-primary-foreground', hover: 'bg-primary text-primary-foreground opacity-90' },
     destructive: { default: 'bg-destructive text-destructive-foreground', hover: 'bg-destructive text-destructive-foreground opacity-90' },
-    outline: { default: 'border border-input bg-background text-foreground', hover: 'border border-input bg-accent text-accent-foreground' },
+    outline: { default: 'border border-border bg-background text-foreground', hover: 'border border-border bg-muted text-foreground' },
     subtle: { default: 'bg-secondary text-secondary-foreground', hover: 'bg-accent text-accent-foreground' },
     secondary: { default: 'bg-secondary text-secondary-foreground', hover: 'bg-accent text-accent-foreground' },
     ghost: { default: 'bg-transparent text-foreground', hover: 'bg-accent text-accent-foreground' },
@@ -58,7 +58,7 @@ export class PdmButtonComponent {
     const toneClass = this.toneClassMap[this.variant][currentState];
 
     return [
-      'inline-flex items-center justify-center gap-2 rounded-md border border-transparent text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+      'inline-flex items-center justify-center gap-2 rounded-md border border-transparent text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-clip-padding',
       this.variant === 'link' ? 'px-4 py-2 h-9' : '',
       this.variant === 'icon' ? 'h-9 w-9 p-0' : '',
       this.variant === 'icon-circle' ? 'h-10 w-10 rounded-full p-0' : '',
