@@ -1,5 +1,5 @@
-<div [ngClass]="['relative w-full overflow-auto', className]">
-  <table class="w-full caption-bottom text-sm">
+<div [ngClass]="wrapperClasses" [attr.data-slot]="variant === 'interactive' ? 'table-container' : null">
+  <table #tableElement [ngClass]="tableClasses" [attr.data-slot]="variant === 'interactive' ? 'table' : null">
     <ng-content></ng-content>
   </table>
 </div>
