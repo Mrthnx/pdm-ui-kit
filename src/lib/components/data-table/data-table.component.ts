@@ -15,15 +15,15 @@ export interface PdmDataTableRow {
 })
 export class PdmDataTableComponent {
   @Input() className = '';
-  @Input() filterPlaceholder = 'Filter emails...';
+  @Input() filterPlaceholder = 'Filter...';
   @Input() columnsLabel = 'Columns';
-  @Input() rows: PdmDataTableRow[] = [
-    { id: '1', status: 'Success', email: 'ken99@yahoo.com', amount: '$316.00' },
-    { id: '2', status: 'Success', email: 'abe45@gmail.com', amount: '$242.00' },
-    { id: '3', status: 'Processing', email: 'monserrat44@gmail.com', amount: '$837.00' },
-    { id: '4', status: 'Success', email: 'silas22@gmail.com', amount: '$874.00' },
-    { id: '5', status: 'Failed', email: 'carmella@hotmail.com', amount: '$721.00' }
-  ];
+  @Input() statusLabel = 'Status';
+  @Input() emailLabel = 'Email';
+  @Input() amountLabel = 'Amount';
+  @Input() previousLabel = 'Previous';
+  @Input() nextLabel = 'Next';
+  @Input() emptyLabel = 'No results.';
+  @Input() rows: PdmDataTableRow[] = [];
 
   @Input() page = 1;
   @Input() pageSize = 5;

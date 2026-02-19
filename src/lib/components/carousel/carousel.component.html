@@ -13,26 +13,15 @@
       </svg>
     </button>
 
-    <ng-container [ngSwitch]="variant">
-      <div *ngSwitchCase="'sizes'" class="flex items-center">
-        <div *ngFor="let slide of visibleSlides; let i = index" class="flex items-center" [ngClass]="i > 0 ? 'pl-4' : ''">
-          <div class="flex h-40 w-32 items-center p-1">
-            <div class="flex h-full w-full items-center justify-center rounded-lg border border-border bg-background py-6 shadow-sm">
-              <div class="text-center text-2xl font-semibold text-foreground">{{ slide }}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div *ngSwitchDefault class="flex flex-col items-center justify-center">
-        <div class="flex h-80 w-80 items-center p-1">
+    <div class="flex items-center">
+      <div *ngFor="let slide of visibleSlides; let i = index" class="flex items-center" [ngClass]="i > 0 ? 'pl-4' : ''">
+        <div class="flex h-40 w-32 items-center p-1">
           <div class="flex h-full w-full items-center justify-center rounded-lg border border-border bg-background py-6 shadow-sm">
-            <div class="text-center text-3xl font-semibold text-foreground">{{ visibleSlides[0] }}</div>
+            <div class="text-center text-2xl font-semibold text-foreground">{{ slide }}</div>
           </div>
         </div>
-        <p *ngIf="variant === 'api'" class="m-0 pt-2 text-sm font-medium text-muted-foreground">Slide {{ index + 1 }} of {{ slides.length }}</p>
       </div>
-    </ng-container>
+    </div>
 
     <button
       type="button"
@@ -47,6 +36,10 @@
       </svg>
     </button>
   </div>
+
+  <p *ngIf="variant !== 'orientation' && showCounter" class="m-0 pt-2 text-sm font-medium text-muted-foreground">
+    {{ slides.length ? (index + 1) : 0 }} / {{ slides.length }}
+  </p>
 
   <div *ngIf="variant === 'orientation'" class="flex flex-col items-center gap-4">
     <button

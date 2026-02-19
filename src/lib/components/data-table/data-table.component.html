@@ -21,16 +21,16 @@
       <thead>
         <tr class="border-b border-border">
           <th class="w-10 px-2 text-left font-medium"><input type="checkbox" class="h-4 w-4 rounded-sm border border-input" /></th>
-          <th class="w-32 px-2 py-2 text-left font-medium">Status</th>
+          <th class="w-32 px-2 py-2 text-left font-medium">{{ statusLabel }}</th>
           <th class="px-2 py-2 text-left font-medium">
             <button type="button" class="inline-flex items-center gap-1 rounded-sm px-3 py-2 text-sm">
-              <span>Email</span>
+              <span>{{ emailLabel }}</span>
               <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M8 6L4 10L8 14M16 18L20 14L16 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
               </svg>
             </button>
           </th>
-          <th class="w-24 px-2 py-2 text-right font-medium">Amount</th>
+          <th class="w-24 px-2 py-2 text-right font-medium">{{ amountLabel }}</th>
           <th class="px-2 py-2"></th>
         </tr>
       </thead>
@@ -51,13 +51,16 @@
             </button>
           </td>
         </tr>
+        <tr *ngIf="pagedRows.length === 0">
+          <td colspan="5" class="px-3 py-6 text-center text-sm text-muted-foreground">{{ emptyLabel }}</td>
+        </tr>
       </tbody>
     </table>
   </div>
 
   <div class="flex w-full items-center gap-2 py-4">
     <p class="flex-1 pr-2 text-sm text-muted-foreground">{{ selectedCount }} of {{ rows.length }} row(s) selected.</p>
-    <button type="button" class="h-9 rounded-md border border-input bg-background px-4 text-sm font-medium text-foreground shadow-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50" [disabled]="page <= 1" (click)="previous()">Previous</button>
-    <button type="button" class="h-9 rounded-md border border-input bg-background px-4 text-sm font-medium text-foreground shadow-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50" [disabled]="page >= totalPages" (click)="next()">Next</button>
+    <button type="button" class="h-9 rounded-md border border-input bg-background px-4 text-sm font-medium text-foreground shadow-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50" [disabled]="page <= 1" (click)="previous()">{{ previousLabel }}</button>
+    <button type="button" class="h-9 rounded-md border border-input bg-background px-4 text-sm font-medium text-foreground shadow-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50" [disabled]="page >= totalPages" (click)="next()">{{ nextLabel }}</button>
   </div>
 </section>

@@ -10,9 +10,11 @@ export type PdmCarouselVariant = 'default' | 'sizes' | 'orientation' | 'api';
 export class PdmCarouselComponent {
   @Input() variant: PdmCarouselVariant = 'default';
   @Input() className = '';
-  @Input() slides: number[] = [1, 2, 3, 4, 5];
+  @Input() slides: Array<string | number> = [];
   @Input() startIndex = 0;
   @Input() loop = false;
+  @Input() windowSize?: number;
+  @Input() showCounter = false;
 
   @Output() indexChange = new EventEmitter<number>();
 
@@ -38,29 +40,28 @@ export class PdmCarouselComponent {
     if (this.slides.length === 0) {
       return 0;
     }
-    if (this.variant === 'sizes') {
-      return Math.max(0, this.slides.length - 3);
-    }
-    if (this.variant === 'orientation') {
-      return Math.max(0, this.slides.length - 2);
-    }
-    return Math.max(0, this.slides.length - 1);
+    return Math.max(0, this.slides.length - this.currentWindowSize);
   }
 
-  get visibleSlides(): number[] {
+  get visibleSlides(): Array<string | number> {
     if (this.slides.length === 0) {
       return [];
     }
 
+    return this.sliceWindow(this.currentWindowSize);
+  }
+
+  get currentWindowSize(): number {
+    if (typeof this.windowSize === 'number' && this.windowSize > 0) {
+      return Math.max(1, Math.floor(this.windowSize));
+    }
     if (this.variant === 'sizes') {
-      return this.sliceWindow(3);
+      return 3;
     }
-
     if (this.variant === 'orientation') {
-      return this.sliceWindow(2);
+      return 2;
     }
-
-    return [this.slides[this._index]];
+    return 1;
   }
 
   onPrev(): void {
@@ -94,7 +95,7 @@ export class PdmCarouselComponent {
     return Math.min(this.maxIndex, Math.max(0, value));
   }
 
-  private sliceWindow(size: number): number[] {
+  private sliceWindow(size: number): Array<string | number> {
     return this.slides.slice(this._index, this._index + size);
   }
 }

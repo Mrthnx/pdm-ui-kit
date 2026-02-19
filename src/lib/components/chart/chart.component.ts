@@ -10,35 +10,32 @@ export type PdmChartType = 'area' | 'bar' | 'line' | 'pie' | 'radar' | 'radial' 
 export class PdmChartComponent {
   @Input() type: PdmChartType = 'bar';
   @Input() className = '';
-  @Input() title = 'Bar Chart - Interactive';
-  @Input() description = 'Showing total visitors for the last 3 months';
+  @Input() title = '';
+  @Input() description = '';
 
-  @Input() desktopLabel = 'Desktop';
-  @Input() desktopValue = '24,828';
-  @Input() mobileLabel = 'Mobile';
-  @Input() mobileValue = '25,010';
+  @Input() desktopLabel = '';
+  @Input() desktopValue = '';
+  @Input() mobileLabel = '';
+  @Input() mobileValue = '';
 
-  @Input() labels: string[] = ['Apr 9', 'Apr 19', 'Apr 29', 'May 9', 'May 19', 'May 29', 'Jun 9', 'Jun 19', 'Jun 30'];
+  @Input() labels: string[] = [];
 
-  @Input() bars: number[] = [
-    48, 21, 53, 69, 56, 77, 12, 54, 61, 59, 66, 27, 24, 27, 84, 62, 44, 18, 45, 57,
-    45, 72, 56, 15, 73, 25, 59, 86, 49, 59, 69, 93, 96, 72, 30, 58, 75, 67, 43, 43,
-    84, 89, 62, 96, 59, 72, 82, 34, 34, 70, 62, 42, 40, 80, 60, 33, 67, 34, 34, 88,
-    22, 84, 19, 62, 56, 43, 95, 70, 67, 89, 84, 31, 18, 92, 16, 87, 54, 44, 91, 23,
-    67, 77, 49, 59, 93, 26, 29, 81, 84, 30, 22, 84
-  ];
-  @Input() line: number[] = [40, 28, 56, 49, 73, 67, 81, 58, 92];
-  @Input() pie: number[] = [35, 28, 20, 17];
-  @Input() radar: number[] = [72, 58, 88, 64, 79, 70];
-  @Input() radialValue = 76;
-  @Input() radialLabel = 'Completion';
-  @Input() radialDescription = 'Updated monthly';
-  @Input() tooltipTitle = 'June 2024';
-  @Input() tooltipPrimaryLabel = 'Desktop';
-  @Input() tooltipPrimaryValue = '12,450';
-  @Input() tooltipSecondaryLabel = 'Mobile';
-  @Input() tooltipSecondaryValue = '8,110';
-  @Input() pieLabels: string[] = ['Desktop', 'Mobile', 'Tablet', 'Other'];
+  @Input() bars: number[] = [];
+  @Input() line: number[] = [];
+  @Input() pie: number[] = [];
+  @Input() radar: number[] = [];
+  @Input() radialValue = 0;
+  @Input() radialLabel = '';
+  @Input() radialDescription = '';
+  @Input() tooltipTitle = '';
+  @Input() tooltipPrimaryLabel = '';
+  @Input() tooltipPrimaryValue = '';
+  @Input() tooltipSecondaryLabel = '';
+  @Input() tooltipSecondaryValue = '';
+  @Input() pieLabels: string[] = [];
+  @Input() tooltipHint = '';
+  @Input() radarMetricPrefix = 'Metric';
+  @Input() emptyLabel = 'No data available';
 
   get normalizedBars(): number[] {
     if (!this.bars.length) {

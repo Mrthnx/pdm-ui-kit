@@ -1,11 +1,11 @@
 <section [ngClass]="['w-full rounded-lg border border-border bg-card text-card-foreground', className]">
-  <div class="flex w-full items-stretch border-b border-border">
+  <div *ngIf="title || description || desktopLabel || desktopValue || mobileLabel || mobileValue" class="flex w-full items-stretch border-b border-border">
     <div class="flex min-w-0 flex-1 flex-col gap-1 px-6 pb-3 pt-4">
-      <h3 class="m-0 text-sm font-semibold leading-none tracking-tight">{{ title }}</h3>
-      <p class="m-0 text-sm text-muted-foreground">{{ description }}</p>
+      <h3 *ngIf="title" class="m-0 text-sm font-semibold leading-none tracking-tight">{{ title }}</h3>
+      <p *ngIf="description" class="m-0 text-sm text-muted-foreground">{{ description }}</p>
     </div>
 
-    <div class="flex h-24">
+    <div *ngIf="desktopLabel || desktopValue || mobileLabel || mobileValue" class="flex h-24">
       <div class="flex h-full w-44 flex-col justify-center border-l border-border bg-muted px-6 py-4">
         <span class="text-xs text-muted-foreground">{{ desktopLabel }}</span>
         <span class="mt-1 text-2xl font-semibold">{{ desktopValue }}</span>
@@ -20,6 +20,7 @@
   <div class="w-full p-6">
     <ng-container [ngSwitch]="type">
       <div *ngSwitchCase="'bar'" class="flex h-60 w-full flex-col justify-end gap-2">
+        <p *ngIf="normalizedBars.length === 0" class="m-0 text-sm text-muted-foreground">{{ emptyLabel }}</p>
         <div class="relative h-48 w-full overflow-hidden">
           <div class="absolute bottom-0 left-0 right-0 border-t border-border opacity-50"></div>
           <div class="absolute left-0 right-0 top-1/4 border-t border-border opacity-50"></div>
@@ -29,12 +30,13 @@
             <div *ngFor="let bar of normalizedBars" class="w-1.5 rounded-sm bg-primary" [style.height.px]="bar"></div>
           </div>
         </div>
-        <div class="flex h-4 w-full items-center justify-between gap-2">
+        <div *ngIf="labels.length" class="flex h-4 w-full items-center justify-between gap-2">
           <span *ngFor="let label of labels" class="truncate text-xs text-muted-foreground">{{ label }}</span>
         </div>
       </div>
 
       <div *ngSwitchCase="'line'" class="flex h-60 w-full flex-col gap-2">
+        <p *ngIf="normalizedLine.length === 0" class="m-0 text-sm text-muted-foreground">{{ emptyLabel }}</p>
         <svg viewBox="0 0 320 180" class="h-48 w-full">
           <line x1="0" y1="180" x2="320" y2="180" stroke="hsl(var(--border))" stroke-width="1"></line>
           <line x1="0" y1="135" x2="320" y2="135" stroke="hsl(var(--border))" stroke-width="1" opacity="0.5"></line>
@@ -42,12 +44,13 @@
           <line x1="0" y1="45" x2="320" y2="45" stroke="hsl(var(--border))" stroke-width="1" opacity="0.5"></line>
           <path [attr.d]="linePath" fill="none" stroke="hsl(var(--primary))" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
-        <div class="flex h-4 w-full items-center justify-between gap-2">
+        <div *ngIf="labels.length" class="flex h-4 w-full items-center justify-between gap-2">
           <span *ngFor="let label of labels" class="truncate text-xs text-muted-foreground">{{ label }}</span>
         </div>
       </div>
 
       <div *ngSwitchCase="'area'" class="flex h-60 w-full flex-col gap-2">
+        <p *ngIf="normalizedLine.length === 0" class="m-0 text-sm text-muted-foreground">{{ emptyLabel }}</p>
         <svg viewBox="0 0 320 180" class="h-48 w-full">
           <defs>
             <linearGradient id="pdm-chart-area-gradient" x1="0" y1="0" x2="0" y2="1">
@@ -62,7 +65,7 @@
           <path [attr.d]="areaPath" fill="url(#pdm-chart-area-gradient)"></path>
           <path [attr.d]="linePath" fill="none" stroke="hsl(var(--primary))" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
-        <div class="flex h-4 w-full items-center justify-between gap-2">
+        <div *ngIf="labels.length" class="flex h-4 w-full items-center justify-between gap-2">
           <span *ngFor="let label of labels" class="truncate text-xs text-muted-foreground">{{ label }}</span>
         </div>
       </div>
@@ -91,7 +94,7 @@
         </svg>
         <div class="grid flex-1 gap-2">
           <div *ngFor="let item of radar; index as i" class="flex items-center justify-between rounded-md border border-border px-3 py-2 text-sm">
-            <span class="text-muted-foreground">Metric {{ i + 1 }}</span>
+            <span class="text-muted-foreground">{{ radarMetricPrefix }} {{ i + 1 }}</span>
             <span class="font-medium">{{ item }}</span>
           </div>
         </div>
@@ -136,7 +139,7 @@
             <span class="font-semibold">{{ tooltipSecondaryValue }}</span>
           </div>
         </div>
-        <p class="m-0 text-xs text-muted-foreground">Tooltip style preparado para charts de línea, área y barras.</p>
+        <p *ngIf="tooltipHint" class="m-0 text-xs text-muted-foreground">{{ tooltipHint }}</p>
       </div>
     </ng-container>
   </div>
