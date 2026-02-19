@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-export type PdmButtonGroupVariant = 'default' | 'orientation' | 'separator' | 'nested';
+export type PdmButtonGroupVariant = 'default' | 'orientation' | 'separator' | 'nested' | 'group';
 
 @Component({
   selector: 'pdm-button-group',
@@ -12,4 +12,3 @@ export class PdmButtonGroupComponent {
   @Input() items: string[] = ['Archive', 'Report'];
   @Input() className = '';
 }
-

@@ -1,5 +1,15 @@
-<div [ngClass]="['inline-flex items-center gap-2', className]">
+<div
+  [ngClass]="[
+    variant === 'group'
+      ? 'inline-flex w-fit items-stretch gap-0 [&>*]:rounded-none [&>*:first-child]:rounded-l-lg [&>*:last-child]:rounded-r-lg [&>*:not(:first-child)]:border-l-0 [&>*:not(:first-child)]:-ml-px [&>input]:flex-1 *:focus-visible:z-10 *:focus-visible:relative'
+      : 'inline-flex items-center gap-2',
+    className
+  ]"
+>
   <ng-container [ngSwitch]="variant">
+    <ng-container *ngSwitchCase="'group'">
+      <ng-content></ng-content>
+    </ng-container>
     <ng-container *ngSwitchCase="'orientation'">
       <div class="inline-flex flex-col overflow-hidden rounded-md border border-border bg-background shadow-sm">
         <button type="button" class="inline-flex h-9 w-9 items-center justify-center border-b border-border text-foreground">+</button>
