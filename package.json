@@ -1,6 +1,6 @@
 {
   "name": "pdm-ui-kit",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "description": "PDM UI Kit Angular components",
   "author": "Corelusa",
   "license": "MIT",
@@ -23,7 +23,9 @@
   },
   "peerDependencies": {
     "@angular/common": ">=14.0.0 <16.0.0",
-    "@angular/core": ">=14.0.0 <16.0.0"
+    "@angular/core": ">=14.0.0 <16.0.0",
+    "@angular/platform-browser": ">=14.0.0 <16.0.0",
+    "lucide": ">=0.575.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
@@ -33,7 +35,9 @@
     "@angular/compiler": "^14.2.0",
     "@angular/compiler-cli": "^14.2.0",
     "@angular/core": "^14.2.0",
+    "@angular/platform-browser": "^14.3.0",
     "autoprefixer": "^10.4.24",
+    "lucide": "^0.575.0",
     "ng-packagr": "^14.2.2",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.19",
