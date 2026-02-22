@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 
 export type PdmDatePickerVariant = 'default' | 'with-input' | 'date-time' | 'natural-language' | 'range';
 
@@ -7,7 +7,7 @@ export type PdmDatePickerVariant = 'default' | 'with-input' | 'date-time' | 'nat
   templateUrl: './date-picker.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PdmDatePickerComponent {
+export class PdmDatePickerComponent implements OnChanges {
   @Input() variant: PdmDatePickerVariant = 'default';
   @Input() className = '';
   @Input() open = false;
@@ -18,6 +18,7 @@ export class PdmDatePickerComponent {
   @Input() year = 2025;
   @Input() selectedDay = 25;
   @Input() time = '10:30:00';
+  @Input() endTime = '12:30:00';
   @Input() naturalLanguageValue = 'In 2 days';
   @Input() naturalLanguageHint = 'Your post will be published on June 21, 2025.';
   @Input() closeOnSelect = true;
@@ -27,16 +28,25 @@ export class PdmDatePickerComponent {
   @Output() openChange = new EventEmitter<boolean>();
   @Output() valueChange = new EventEmitter<string>();
 
+  @ViewChild('popupAnchor') popupAnchorRef?: ElementRef<HTMLElement>;
+  @ViewChild('popupPanel') popupPanelRef?: ElementRef<HTMLElement>;
+
+  openDirection: 'up' | 'down' = 'down';
+
   constructor(private readonly elementRef: ElementRef<HTMLElement>) {}
 
   toggle(): void {
     this.open = !this.open;
     this.openChange.emit(this.open);
+    if (this.open) {
+      this.schedulePopupPositionUpdate();
+    }
   }
 
   close(): void {
     if (!this.open) return;
     this.open = false;
+    this.openDirection = 'down';
     this.openChange.emit(false);
   }
 
@@ -75,6 +85,12 @@ export class PdmDatePickerComponent {
     }
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['open']?.currentValue) {
+      this.schedulePopupPositionUpdate();
+    }
+  }
+
   @HostListener('document:keydown.escape')
   onEsc(): void {
     this.close();
@@ -87,5 +103,32 @@ export class PdmDatePickerComponent {
     if (target && !this.elementRef.nativeElement.contains(target)) {
       this.close();
     }
+  }
+
+  @HostListener('window:resize')
+  @HostListener('window:scroll')
+  onViewportChange(): void {
+    if (this.open) {
+      this.schedulePopupPositionUpdate();
+    }
+  }
+
+  private schedulePopupPositionUpdate(): void {
+    setTimeout(() => this.updatePopupDirection());
+  }
+
+  private updatePopupDirection(): void {
+    const anchorEl = this.popupAnchorRef?.nativeElement;
+    const popupEl = this.popupPanelRef?.nativeElement;
+
+    if (!anchorEl || !popupEl) return;
+
+    const anchorRect = anchorEl.getBoundingClientRect();
+    const popupHeight = popupEl.offsetHeight || popupEl.getBoundingClientRect().height;
+    const gap = 8;
+    const spaceBelow = window.innerHeight - anchorRect.bottom;
+    const spaceAbove = anchorRect.top;
+
+    this.openDirection = spaceBelow < popupHeight + gap && spaceAbove > spaceBelow ? 'up' : 'down';
   }
 }

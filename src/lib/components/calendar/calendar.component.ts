@@ -53,9 +53,18 @@ export class PdmCalendarComponent implements OnChanges {
     return this.monthOptions[this.clampMonth(this.month) - 1];
   }
 
+  get leftMonthHeading(): string {
+    return new Date(this.year, this.clampMonth(this.month) - 1, 1).toLocaleString('en-US', { month: 'long', year: 'numeric' });
+  }
+
   get rightMonthName(): string {
     const next = this.shiftMonth(this.year, this.month, 1);
     return this.monthOptions[next.month - 1];
+  }
+
+  get rightMonthHeading(): string {
+    const next = this.shiftMonth(this.year, this.month, 1);
+    return new Date(next.year, next.month - 1, 1).toLocaleString('en-US', { month: 'long', year: 'numeric' });
   }
 
   get rightYear(): number {

@@ -1,11 +1,11 @@
 <section
   [ngClass]="[
     'rounded-lg border border-border bg-background p-3 shadow-sm',
-    mode === 'range' ? 'w-full max-w-xl' : 'w-[250px]',
+    mode === 'range' ? 'w-full max-w-[520px]' : 'w-[250px]',
     className
   ]"
 >
-  <div [ngClass]="['grid gap-4', mode === 'range' ? 'grid-cols-2' : 'grid-cols-1']">
+  <div [ngClass]="['grid', mode === 'range' ? 'grid-cols-2 gap-8' : 'grid-cols-1 gap-4']">
     <div class="space-y-4">
       <header class="flex items-center justify-between">
         <button
@@ -19,7 +19,7 @@
           </svg>
         </button>
 
-        <div class="flex w-40 items-center justify-center gap-1.5">
+        <div *ngIf="mode === 'single'; else rangeLeftHeader" class="flex w-40 items-center justify-center gap-1.5">
           <label class="relative inline-flex h-8 items-center rounded-md border border-border bg-background pl-2 pr-1 text-sm font-medium text-foreground shadow-xs">
             <select
               class="h-full appearance-none bg-transparent pr-4 text-sm font-medium outline-none"
@@ -53,11 +53,18 @@
           </label>
         </div>
 
+        <ng-template #rangeLeftHeader>
+          <span class="flex-1 text-center text-[14px] font-medium leading-5 text-foreground">
+            {{ leftMonthHeading }}
+          </span>
+        </ng-template>
+
         <button
           type="button"
           class="inline-flex h-8 w-8 items-center justify-center rounded-md text-foreground hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
           (click)="nextMonth()"
           aria-label="Next month"
+          [class.invisible]="mode === 'range'"
         >
           <svg viewBox="0 0 16 16" class="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M6.5 4L10 8L6.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -66,18 +73,18 @@
       </header>
 
       <div>
-        <div class="grid grid-cols-7">
-          <span *ngFor="let day of weekdays" class="inline-flex h-[21px] w-8 items-center justify-center text-xs font-normal text-muted-foreground">
+        <div class="grid grid-cols-7 gap-x-1">
+          <span *ngFor="let day of weekdays" class="inline-flex h-[21px] items-center justify-center text-[12px] font-normal leading-4 text-muted-foreground">
             {{ day }}
           </span>
         </div>
 
-        <div class="mt-2 grid grid-cols-7 gap-y-2">
+        <div class="mt-2 grid grid-cols-7 gap-x-1 gap-y-2">
           <button
             *ngFor="let cell of leftCells; trackBy: trackByIndex"
             type="button"
             [ngClass]="[
-              'inline-flex h-8 w-8 items-center justify-center rounded-md text-sm font-normal transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50',
+              'inline-flex h-8 w-8 items-center justify-center justify-self-center rounded-md text-[14px] font-normal leading-5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50',
               cell.outside ? 'text-foreground opacity-50' : 'text-foreground',
               cell.inRange ? 'bg-accent text-accent-foreground' : '',
               cell.selected ? 'bg-primary text-primary-foreground' : '',
@@ -92,8 +99,8 @@
     </div>
 
     <div *ngIf="mode === 'range'" class="space-y-4">
-      <header class="flex h-8 items-center justify-between px-1">
-        <span class="text-sm font-medium text-foreground">{{ rightMonthName }} {{ rightYear }}</span>
+      <header class="flex h-8 items-center justify-between">
+        <span class="flex-1 text-center text-[14px] font-medium leading-5 text-foreground">{{ rightMonthHeading }}</span>
         <button
           type="button"
           class="inline-flex h-8 w-8 items-center justify-center rounded-md text-foreground hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
@@ -107,18 +114,18 @@
       </header>
 
       <div>
-        <div class="grid grid-cols-7">
-          <span *ngFor="let day of weekdays" class="inline-flex h-[21px] w-8 items-center justify-center text-xs font-normal text-muted-foreground">
+        <div class="grid grid-cols-7 gap-x-1">
+          <span *ngFor="let day of weekdays" class="inline-flex h-[21px] items-center justify-center text-[12px] font-normal leading-4 text-muted-foreground">
             {{ day }}
           </span>
         </div>
 
-        <div class="mt-2 grid grid-cols-7 gap-y-2">
+        <div class="mt-2 grid grid-cols-7 gap-x-1 gap-y-2">
           <button
             *ngFor="let cell of rightCells; trackBy: trackByIndex"
             type="button"
             [ngClass]="[
-              'inline-flex h-8 w-8 items-center justify-center rounded-md text-sm font-normal transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50',
+              'inline-flex h-8 w-8 items-center justify-center justify-self-center rounded-md text-[14px] font-normal leading-5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50',
               cell.outside ? 'text-foreground opacity-50' : 'text-foreground',
               cell.inRange ? 'bg-accent text-accent-foreground' : '',
               cell.selected ? 'bg-primary text-primary-foreground' : '',

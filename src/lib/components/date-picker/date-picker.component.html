@@ -1,7 +1,7 @@
 <section [ngClass]="['flex w-full flex-col gap-3', variant === 'range' ? 'max-w-xl' : 'max-w-sm', className]">
   <label class="text-sm font-medium text-foreground">{{ label }}</label>
 
-  <div class="relative">
+  <div #popupAnchor class="relative">
     <div class="flex items-center gap-2" *ngIf="variant === 'date-time'; else defaultTrigger">
       <button
         type="button"
@@ -56,8 +56,94 @@
       {{ naturalLanguageHint }}
     </p>
 
-    <div *ngIf="open" class="absolute left-0 top-full z-30 mt-2 w-auto">
-      <div class="rounded-lg border border-border bg-background p-0 shadow-md">
+    <div
+      *ngIf="open"
+      #popupPanel
+      [ngClass]="[
+        'absolute left-0 z-30 inline-block align-top',
+        openDirection === 'up' ? 'bottom-full mb-2' : 'top-full mt-2'
+      ]"
+    >
+      <ng-container *ngIf="variant === 'date-time'; else nonDateTimePopup">
+        <div class="inline-block w-[392px] rounded-lg border border-input bg-background shadow-md">
+          <div class="border-b border-input p-3">
+            <pdm-calendar
+              [month]="month"
+              [year]="year"
+              [selectedDay]="selectedDay"
+              mode="single"
+              className="w-full max-w-none rounded-md border-0 bg-background p-3 shadow-none"
+              (monthChange)="month = $event"
+              (yearChange)="year = $event"
+              (selectedDayChange)="selectedDay = $event"
+              (dateSelect)="onCalendarDateSelect($event)"
+            ></pdm-calendar>
+          </div>
+
+          <div class="space-y-4 p-4">
+            <div class="space-y-2">
+              <p class="text-sm font-semibold text-foreground">Start Time</p>
+              <div class="inline-flex h-12 w-full items-center justify-between rounded-xl border border-input bg-background px-4 text-foreground">
+                <span class="inline-flex items-center gap-3 text-xs">
+                  <svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
+                    <path d="M12 7V12L15 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <span class="text-[14px] leading-5">{{ time }}</span>
+                </span>
+                <svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
+                  <path d="M12 7V12L15 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <p class="text-sm font-semibold text-foreground">End Time</p>
+              <div class="inline-flex h-12 w-full items-center justify-between rounded-xl border border-input bg-background px-4 text-foreground">
+                <span class="inline-flex items-center gap-3 text-xs">
+                  <svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
+                    <path d="M12 7V12L15 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <span class="text-[14px] leading-5">{{ endTime }}</span>
+                </span>
+                <svg viewBox="0 0 24 24" class="h-5 w-5 text-muted-foreground" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" />
+                  <path d="M12 7V12L15 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #nonDateTimePopup>
+      <ng-container *ngIf="variant === 'with-input' || variant === 'natural-language'; else plainCalendarPopup">
+        <div class="inline-block rounded-lg border border-border bg-background p-0 shadow-md">
+          <pdm-calendar
+            [month]="month"
+            [year]="year"
+            [selectedDay]="selectedDay"
+            mode="single"
+            (monthChange)="month = $event"
+            (yearChange)="year = $event"
+            (selectedDayChange)="selectedDay = $event"
+            (dateSelect)="onCalendarDateSelect($event)"
+          ></pdm-calendar>
+
+          <div class="flex gap-2 border-t border-border p-3">
+            <button type="button" class="inline-flex h-8 items-center rounded-md border border-input px-3 text-xs text-foreground hover:bg-accent" (click)="selectPreset('Today')">
+              Today
+            </button>
+            <button type="button" class="inline-flex h-8 items-center rounded-md border border-input px-3 text-xs text-foreground hover:bg-accent" (click)="selectPreset('Tomorrow')">
+              Tomorrow
+            </button>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #plainCalendarPopup>
         <pdm-calendar
           [month]="month"
           [year]="year"
@@ -68,16 +154,8 @@
           (selectedDayChange)="selectedDay = $event"
           (dateSelect)="onCalendarDateSelect($event)"
         ></pdm-calendar>
-
-        <div *ngIf="variant === 'with-input' || variant === 'natural-language'" class="flex gap-2 border-t border-border p-3">
-          <button type="button" class="inline-flex h-8 items-center rounded-md border border-input px-3 text-xs text-foreground hover:bg-accent" (click)="selectPreset('Today')">
-            Today
-          </button>
-          <button type="button" class="inline-flex h-8 items-center rounded-md border border-input px-3 text-xs text-foreground hover:bg-accent" (click)="selectPreset('Tomorrow')">
-            Tomorrow
-          </button>
-        </div>
-      </div>
+      </ng-template>
+      </ng-template>
     </div>
   </div>
 </section>
