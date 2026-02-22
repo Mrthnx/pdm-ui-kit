@@ -1,40 +1,89 @@
 <section
   [ngClass]="[
     'rounded-lg border border-border bg-background p-3 shadow-sm',
-    mode === 'range' ? 'w-full max-w-2xl' : 'w-full max-w-sm',
+    mode === 'range' ? 'w-full max-w-xl' : 'w-[250px]',
     className
   ]"
 >
   <div [ngClass]="['grid gap-4', mode === 'range' ? 'grid-cols-2' : 'grid-cols-1']">
     <div class="space-y-4">
       <header class="flex items-center justify-between">
-        <button type="button" class="inline-flex h-8 w-8 items-center justify-center rounded-md text-foreground hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">‹</button>
-        <div [ngClass]="['flex items-center justify-center gap-1', mode === 'range' ? 'w-full' : 'w-full']">
-          <ng-container *ngIf="mode === 'single'; else monthText">
-            <span class="inline-flex h-8 items-center rounded-md border border-border px-2 text-sm font-medium text-foreground shadow-sm">Jun</span>
-            <span class="inline-flex h-8 items-center rounded-md border border-border px-2 text-sm font-medium text-foreground shadow-sm">2025</span>
-          </ng-container>
-          <ng-template #monthText>
-            <span class="text-sm font-medium text-foreground">{{ leftMonthName }} {{ year }}</span>
-          </ng-template>
+        <button
+          type="button"
+          class="inline-flex h-8 w-8 items-center justify-center rounded-md text-foreground hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+          (click)="previousMonth()"
+          aria-label="Previous month"
+        >
+          <svg viewBox="0 0 16 16" class="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M9.5 4L6 8L9.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+
+        <div class="flex w-40 items-center justify-center gap-1.5">
+          <label class="relative inline-flex h-8 items-center rounded-md border border-border bg-background pl-2 pr-1 text-sm font-medium text-foreground shadow-xs">
+            <select
+              class="h-full appearance-none bg-transparent pr-4 text-sm font-medium outline-none"
+              [value]="month"
+              (change)="onMonthSelect($any($event.target).value)"
+              aria-label="Month"
+            >
+              <option *ngFor="let monthOption of monthOptions; let i = index" [value]="i + 1">
+                {{ monthOption }}
+              </option>
+            </select>
+            <svg viewBox="0 0 12 12" class="pointer-events-none absolute right-1 h-3 w-3 text-foreground" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </label>
+
+          <label class="relative inline-flex h-8 items-center rounded-md border border-border bg-background pl-2 pr-1 text-sm font-medium text-foreground shadow-xs">
+            <select
+              class="h-full appearance-none bg-transparent pr-4 text-sm font-medium outline-none"
+              [value]="year"
+              (change)="onYearSelect($any($event.target).value)"
+              aria-label="Year"
+            >
+              <option *ngFor="let yearOption of yearOptions" [value]="yearOption">
+                {{ yearOption }}
+              </option>
+            </select>
+            <svg viewBox="0 0 12 12" class="pointer-events-none absolute right-1 h-3 w-3 text-foreground" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </label>
         </div>
-        <button type="button" class="inline-flex h-8 w-8 items-center justify-center rounded-md text-foreground hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">{{ mode === 'range' ? '' : '›' }}</button>
+
+        <button
+          type="button"
+          class="inline-flex h-8 w-8 items-center justify-center rounded-md text-foreground hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+          (click)="nextMonth()"
+          aria-label="Next month"
+        >
+          <svg viewBox="0 0 16 16" class="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M6.5 4L10 8L6.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
       </header>
 
       <div>
         <div class="grid grid-cols-7">
-          <span *ngFor="let day of weekdays" class="inline-flex h-5 items-center justify-center text-xs font-normal text-muted-foreground">{{ day }}</span>
+          <span *ngFor="let day of weekdays" class="inline-flex h-[21px] w-8 items-center justify-center text-xs font-normal text-muted-foreground">
+            {{ day }}
+          </span>
         </div>
+
         <div class="mt-2 grid grid-cols-7 gap-y-2">
           <button
-            *ngFor="let cell of leftCells"
+            *ngFor="let cell of leftCells; trackBy: trackByIndex"
             type="button"
             [ngClass]="[
-              'inline-flex h-8 w-8 items-center justify-center rounded-md text-sm font-normal transition-colors hover:bg-accent hover:text-accent-foreground',
-              cell.outside ? 'text-muted-foreground opacity-50' : 'text-foreground',
+              'inline-flex h-8 w-8 items-center justify-center rounded-md text-sm font-normal transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50',
+              cell.outside ? 'text-foreground opacity-50' : 'text-foreground',
               cell.inRange ? 'bg-accent text-accent-foreground' : '',
-              cell.selected ? 'bg-primary text-primary-foreground' : ''
+              cell.selected ? 'bg-primary text-primary-foreground' : '',
+              !cell.selected ? 'hover:bg-accent hover:text-accent-foreground' : ''
             ]"
+            (click)="selectCell(cell, 'left')"
           >
             {{ cell.day }}
           </button>
@@ -43,25 +92,39 @@
     </div>
 
     <div *ngIf="mode === 'range'" class="space-y-4">
-      <header class="flex items-center justify-between">
-        <span class="text-sm font-medium text-foreground">{{ rightMonthName }} {{ month === 12 ? year + 1 : year }}</span>
-        <button type="button" class="inline-flex h-8 w-8 items-center justify-center rounded-md text-foreground hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">›</button>
+      <header class="flex h-8 items-center justify-between px-1">
+        <span class="text-sm font-medium text-foreground">{{ rightMonthName }} {{ rightYear }}</span>
+        <button
+          type="button"
+          class="inline-flex h-8 w-8 items-center justify-center rounded-md text-foreground hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+          (click)="nextMonth()"
+          aria-label="Next month"
+        >
+          <svg viewBox="0 0 16 16" class="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M6.5 4L10 8L6.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
       </header>
 
       <div>
         <div class="grid grid-cols-7">
-          <span *ngFor="let day of weekdays" class="inline-flex h-5 items-center justify-center text-xs font-normal text-muted-foreground">{{ day }}</span>
+          <span *ngFor="let day of weekdays" class="inline-flex h-[21px] w-8 items-center justify-center text-xs font-normal text-muted-foreground">
+            {{ day }}
+          </span>
         </div>
+
         <div class="mt-2 grid grid-cols-7 gap-y-2">
           <button
-            *ngFor="let cell of rightCells"
+            *ngFor="let cell of rightCells; trackBy: trackByIndex"
             type="button"
             [ngClass]="[
-              'inline-flex h-8 w-8 items-center justify-center rounded-md text-sm font-normal transition-colors hover:bg-accent hover:text-accent-foreground',
-              cell.outside ? 'text-muted-foreground opacity-50' : 'text-foreground',
+              'inline-flex h-8 w-8 items-center justify-center rounded-md text-sm font-normal transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50',
+              cell.outside ? 'text-foreground opacity-50' : 'text-foreground',
               cell.inRange ? 'bg-accent text-accent-foreground' : '',
-              cell.selected ? 'bg-primary text-primary-foreground' : ''
+              cell.selected ? 'bg-primary text-primary-foreground' : '',
+              !cell.selected ? 'hover:bg-accent hover:text-accent-foreground' : ''
             ]"
+            (click)="selectCell(cell, 'right')"
           >
             {{ cell.day }}
           </button>
