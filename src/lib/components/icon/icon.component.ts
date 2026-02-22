@@ -60,6 +60,21 @@ const FALLBACK_NODE: IconNode = [['circle', { cx: '12', cy: '12', r: '9' }]];
 @Component({
   selector: 'pdm-icon',
   templateUrl: './icon.component.html',
+  styles: [
+    `
+      :host {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 0;
+        flex-shrink: 0;
+      }
+
+      :host svg {
+        display: block;
+      }
+    `
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PdmIconComponent {
