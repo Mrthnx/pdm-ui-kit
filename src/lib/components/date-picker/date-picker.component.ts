@@ -49,6 +49,8 @@ export class PdmDatePickerComponent {
   @Input() closeOnSelect = true;
   @Input() minDate: Date | null = null;
   @Input() maxDate: Date | null = null;
+  @Input() minYear: number | null = null;
+  @Input() maxYear: number | null = null;
   @Input() disabledDates: Date[] = [];
   @Input() isDateDisabled: ((date: Date) => boolean) | null = null;
 

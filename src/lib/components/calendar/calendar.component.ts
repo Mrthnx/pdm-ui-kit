@@ -50,6 +50,8 @@ export class PdmCalendarComponent {
   @Input() disabledDates: Date[] = [];
   @Input() minDate: Date | null = null;
   @Input() maxDate: Date | null = null;
+  @Input() minYear: number | null = null;
+  @Input() maxYear: number | null = null;
   @Input() isDateDisabled: ((date: Date) => boolean) | null = null;
   @Input() allowSameDayRange = true;
   @Input() readonly = false;
@@ -158,9 +160,15 @@ export class PdmCalendarComponent {
 
   get yearOptions(): readonly number[] {
     const currentYear = this.singleHeaderYear;
-    const minYear = this.minDate ? this.minDate.getFullYear() : currentYear - 100;
-    const maxYear = this.maxDate ? this.maxDate.getFullYear() : currentYear + 100;
+    let minYear = this.minYear ?? (this.minDate ? this.minDate.getFullYear() : currentYear - 100);
+    let maxYear = this.maxYear ?? (this.maxDate ? this.maxDate.getFullYear() : currentYear + 10);
     const years: number[] = [];
+
+    if (minYear > maxYear) {
+      const nextMin = maxYear;
+      maxYear = minYear;
+      minYear = nextMin;
+    }
 
     for (let year = minYear; year <= maxYear; year += 1) {
       years.push(year);
