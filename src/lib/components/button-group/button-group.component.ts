@@ -42,7 +42,11 @@ export class PdmButtonGroupComponent {
 
     const groupHorizontalClasses = isGroup && !isVertical && !this.separated
       ? [
+          '[&>*]:rounded-none',
+          '[&>*:first-child]:rounded-l-md',
+          '[&>*:last-child]:rounded-r-md',
           '[&>*:not(:first-child)]:-ml-px',
+          '[&>*:not(:first-child)]:border-l-0',
           '[&>pdm-button]:flex',
           '[&>pdm-button>button]:h-9',
           '[&>pdm-input]:flex-1',
@@ -65,7 +69,11 @@ export class PdmButtonGroupComponent {
 
     const groupVerticalClasses = isGroup && isVertical && !this.separated
       ? [
+          '[&>*]:rounded-none',
+          '[&>*:first-child]:rounded-t-md',
+          '[&>*:last-child]:rounded-b-md',
           '[&>*:not(:first-child)]:-mt-px',
+          '[&>*:not(:first-child)]:border-t-0',
           '[&>pdm-button]:flex',
           '[&>pdm-button>button]:h-9',
           '[&>pdm-button>button]:!rounded-none',
