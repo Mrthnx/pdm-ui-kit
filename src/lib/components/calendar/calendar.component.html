@@ -1,142 +1,102 @@
-<section
-  [ngClass]="[
-    'rounded-lg border border-border bg-background p-3 shadow-sm',
-    mode === 'range' ? 'w-full max-w-[520px]' : 'w-[250px]',
-    className
-  ]"
->
-  <div [ngClass]="['grid', mode === 'range' ? 'grid-cols-2 gap-8' : 'grid-cols-1 gap-4']">
-    <div class="space-y-4">
-      <header class="flex items-center justify-between">
-        <button
-          type="button"
-          class="inline-flex h-8 w-8 items-center justify-center rounded-md text-foreground hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
-          (click)="previousMonth()"
-          aria-label="Previous month"
-        >
-          <svg viewBox="0 0 16 16" class="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M9.5 4L6 8L9.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </button>
+<div [ngClass]="rootClasses" [ngStyle]="rootStyle">
+  <div *ngFor="let month of visibleMonths; let monthIndex = index; trackBy: trackByIndex" [ngClass]="monthPanelClasses(monthIndex)">
+    <div [ngClass]="headerClasses(month)">
+      <button
+        *ngIf="month.showPrevButton; else prevPlaceholder"
+        type="button"
+        [ngClass]="navButtonClasses()"
+        aria-label="Previous month"
+        (click)="goToPreviousMonth()"
+        [disabled]="readonly"
+      >
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="m15 18-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+      <ng-template #prevPlaceholder>
+        <div [ngClass]="navPlaceholderClasses()" aria-hidden="true"></div>
+      </ng-template>
 
-        <div *ngIf="mode === 'single'; else rangeLeftHeader" class="flex w-40 items-center justify-center gap-1.5">
-          <label class="relative inline-flex h-8 items-center rounded-md border border-border bg-background pl-2 pr-1 text-sm font-medium text-foreground shadow-xs">
+      <ng-container *ngIf="month.titleStyle === 'dropdowns'; else plainTitle">
+        <div [ngClass]="dropdownWrapClasses()">
+          <div [ngClass]="dropdownClasses('w-[72px]')">
             <select
-              class="h-full appearance-none bg-transparent pr-4 text-sm font-medium outline-none"
-              [value]="month"
-              (change)="onMonthSelect($any($event.target).value)"
+              [ngClass]="dropdownSelectClasses()"
+              [ngStyle]="dropdownSelectStyle"
+              [value]="singleHeaderMonth"
               aria-label="Month"
+              (change)="onSingleMonthChange($any($event.target).value)"
             >
-              <option *ngFor="let monthOption of monthOptions; let i = index" [value]="i + 1">
-                {{ monthOption }}
-              </option>
+              <option *ngFor="let monthOption of monthOptions" [value]="monthOption.value">{{ monthOption.label }}</option>
             </select>
-            <svg viewBox="0 0 12 12" class="pointer-events-none absolute right-1 h-3 w-3 text-foreground" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+            <svg viewBox="0 0 24 24" class="h-3 w-3 text-foreground" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
-          </label>
-
-          <label class="relative inline-flex h-8 items-center rounded-md border border-border bg-background pl-2 pr-1 text-sm font-medium text-foreground shadow-xs">
+          </div>
+          <div [ngClass]="dropdownClasses('w-[82px]')">
             <select
-              class="h-full appearance-none bg-transparent pr-4 text-sm font-medium outline-none"
-              [value]="year"
-              (change)="onYearSelect($any($event.target).value)"
+              [ngClass]="dropdownSelectClasses()"
+              [ngStyle]="dropdownSelectStyle"
+              [value]="singleHeaderYear"
               aria-label="Year"
+              (change)="onSingleYearChange($any($event.target).value)"
             >
-              <option *ngFor="let yearOption of yearOptions" [value]="yearOption">
-                {{ yearOption }}
-              </option>
+              <option *ngFor="let year of yearOptions" [value]="year">{{ year }}</option>
             </select>
-            <svg viewBox="0 0 12 12" class="pointer-events-none absolute right-1 h-3 w-3 text-foreground" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+            <svg viewBox="0 0 24 24" class="h-3 w-3 text-foreground" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
-          </label>
+          </div>
         </div>
+      </ng-container>
 
-        <ng-template #rangeLeftHeader>
-          <span class="flex-1 text-center text-[14px] font-medium leading-5 text-foreground">
-            {{ leftMonthHeading }}
-          </span>
-        </ng-template>
-
-        <button
-          type="button"
-          class="inline-flex h-8 w-8 items-center justify-center rounded-md text-foreground hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
-          (click)="nextMonth()"
-          aria-label="Next month"
-          [class.invisible]="mode === 'range'"
-        >
-          <svg viewBox="0 0 16 16" class="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M6.5 4L10 8L6.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </button>
-      </header>
-
-      <div>
-        <div class="grid grid-cols-7 gap-x-1">
-          <span *ngFor="let day of weekdays" class="inline-flex h-[21px] items-center justify-center text-[12px] font-normal leading-4 text-muted-foreground">
-            {{ day }}
-          </span>
+      <ng-template #plainTitle>
+        <div class="flex min-w-0 flex-1 items-center justify-center">
+          <p class="text-foreground text-center text-sm font-medium leading-5">
+            {{ month.title }}
+          </p>
         </div>
+      </ng-template>
 
-        <div class="mt-2 grid grid-cols-7 gap-x-1 gap-y-2">
-          <button
-            *ngFor="let cell of leftCells; trackBy: trackByIndex"
-            type="button"
-            [ngClass]="[
-              'inline-flex h-8 w-8 items-center justify-center justify-self-center rounded-md text-[14px] font-normal leading-5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50',
-              cell.outside ? 'text-foreground opacity-50' : 'text-foreground',
-              cell.inRange ? 'bg-accent text-accent-foreground' : '',
-              cell.selected ? 'bg-primary text-primary-foreground' : '',
-              !cell.selected ? 'hover:bg-accent hover:text-accent-foreground' : ''
-            ]"
-            (click)="selectCell(cell, 'left')"
-          >
-            {{ cell.day }}
-          </button>
-        </div>
-      </div>
+      <button
+        *ngIf="month.showNextButton; else nextPlaceholder"
+        type="button"
+        [ngClass]="navButtonClasses()"
+        aria-label="Next month"
+        (click)="goToNextMonth()"
+        [disabled]="readonly"
+      >
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="m9 18 6-6-6-6" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+      <ng-template #nextPlaceholder>
+        <div [ngClass]="navPlaceholderClasses()" aria-hidden="true"></div>
+      </ng-template>
     </div>
 
-    <div *ngIf="mode === 'range'" class="space-y-4">
-      <header class="flex h-8 items-center justify-between">
-        <span class="flex-1 text-center text-[14px] font-medium leading-5 text-foreground">{{ rightMonthHeading }}</span>
-        <button
-          type="button"
-          class="inline-flex h-8 w-8 items-center justify-center rounded-md text-foreground hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
-          (click)="nextMonth()"
-          aria-label="Next month"
-        >
-          <svg viewBox="0 0 16 16" class="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M6.5 4L10 8L6.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </button>
-      </header>
-
-      <div>
-        <div class="grid grid-cols-7 gap-x-1">
-          <span *ngFor="let day of weekdays" class="inline-flex h-[21px] items-center justify-center text-[12px] font-normal leading-4 text-muted-foreground">
-            {{ day }}
-          </span>
+    <div [ngClass]="calendarGridWrapClasses()">
+      <div [ngClass]="weekdayRowClasses()">
+        <div *ngFor="let day of weekdays; trackBy: trackByIndex" [ngClass]="weekdayCellClasses()">
+          <span>{{ day }}</span>
         </div>
+      </div>
 
-        <div class="mt-2 grid grid-cols-7 gap-x-1 gap-y-2">
+      <div *ngFor="let week of month.weeks; trackBy: trackByIndex" [ngClass]="weekRowClasses()">
+        <div *ngFor="let cell of week; trackBy: trackByDate" [ngClass]="dayCellClasses(cell)">
           <button
-            *ngFor="let cell of rightCells; trackBy: trackByIndex"
             type="button"
-            [ngClass]="[
-              'inline-flex h-8 w-8 items-center justify-center justify-self-center rounded-md text-[14px] font-normal leading-5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50',
-              cell.outside ? 'text-foreground opacity-50' : 'text-foreground',
-              cell.inRange ? 'bg-accent text-accent-foreground' : '',
-              cell.selected ? 'bg-primary text-primary-foreground' : '',
-              !cell.selected ? 'hover:bg-accent hover:text-accent-foreground' : ''
-            ]"
-            (click)="selectCell(cell, 'right')"
+            [ngClass]="dayButtonClasses(cell)"
+            [disabled]="readonly"
+            [attr.aria-selected]="cell.selected"
+            [attr.aria-disabled]="cell.disabled || readonly"
+            [attr.title]="cell.date | date : 'yyyy-MM-dd'"
+            (click)="onDatePressed(cell)"
           >
-            {{ cell.day }}
+            <span [ngClass]="dayLabelClasses(cell)">{{ cell.label }}</span>
           </button>
         </div>
       </div>
     </div>
   </div>
-</section>
+</div>
