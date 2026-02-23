@@ -30,7 +30,7 @@ interface PdmCalendarMonthView {
   weeks: readonly (readonly PdmCalendarCell[])[];
 }
 
-const DEFAULT_VIEW_MONTH = new Date(2025, 5, 1); // June 2025 (Figma default)
+const DEFAULT_VIEW_MONTH = new Date();
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 @Component({
