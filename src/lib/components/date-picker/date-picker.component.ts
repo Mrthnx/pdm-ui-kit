@@ -154,7 +154,7 @@ export class PdmDatePickerComponent {
       'min-h-[36px] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
       focusStyle
         ? 'bg-accent border-neutral-400 ring-3 ring-neutral-300'
-        : 'bg-input border-input',
+        : 'bg-background border-input',
       this.invalid ? 'border-destructive ring-destructive/20' : '',
       this.triggerClassName
     ];

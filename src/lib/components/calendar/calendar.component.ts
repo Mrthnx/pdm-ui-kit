@@ -159,10 +159,19 @@ export class PdmCalendarComponent {
   }
 
   get yearOptions(): readonly number[] {
-    const currentYear = this.singleHeaderYear;
-    let minYear = this.minYear ?? (this.minDate ? this.minDate.getFullYear() : currentYear - 100);
-    let maxYear = this.maxYear ?? (this.maxDate ? this.maxDate.getFullYear() : currentYear + 10);
+    const baseYear = new Date().getFullYear();
+    const selectedYear = this.singleHeaderYear;
+    let minYear = this.minYear ?? (this.minDate ? this.minDate.getFullYear() : baseYear - 100);
+    let maxYear = this.maxYear ?? (this.maxDate ? this.maxDate.getFullYear() : baseYear + 10);
     const years: number[] = [];
+
+    if (selectedYear < minYear) {
+      minYear = selectedYear;
+    }
+
+    if (selectedYear > maxYear) {
+      maxYear = selectedYear;
+    }
 
     if (minYear > maxYear) {
       const nextMin = maxYear;
