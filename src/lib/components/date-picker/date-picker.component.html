@@ -1,0 +1,50 @@
+<div [ngClass]="rootClasses">
+  <pdm-label *ngIf="label" [forId]="triggerId" [required]="required" [className]="labelClassName">
+    {{ label }}
+  </pdm-label>
+
+  <div class="relative inline-block w-full">
+    <button
+      type="button"
+      [id]="triggerId"
+      [disabled]="disabled"
+      [attr.aria-expanded]="open"
+      [attr.aria-controls]="panelId"
+      [attr.aria-haspopup]="'dialog'"
+      [attr.aria-invalid]="invalid"
+      [ngClass]="triggerClasses"
+      [attr.title]="displayText"
+      (click)="toggleOpen()"
+      (focus)="onTriggerFocus()"
+      (blur)="onTriggerBlur()"
+    >
+      <span class="flex h-5 w-5 shrink-0 items-center justify-center p-0.5 text-muted-foreground" aria-hidden="true">
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M8 2v4" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path d="M16 2v4" stroke-linecap="round" stroke-linejoin="round"></path>
+          <rect x="3" y="4.5" width="18" height="16.5" rx="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+          <path d="M3 9.5h18" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </span>
+
+      <span [ngClass]="textClasses">{{ displayText }}</span>
+    </button>
+
+    <div *ngIf="open" [id]="panelId" [ngClass]="panelClasses" role="dialog" [attr.aria-labelledby]="label ? triggerId : null">
+      <pdm-calendar
+        [variant]="resolvedVariant"
+        [value]="value"
+        [rangeValue]="rangeValue"
+        [readonly]="readonly"
+        [allowSameDayRange]="allowSameDayRange"
+        [minDate]="minDate"
+        [maxDate]="maxDate"
+        [disabledDates]="disabledDates"
+        [isDateDisabled]="isDateDisabled"
+        (valueChange)="onCalendarValueChange($event)"
+        (rangeValueChange)="onCalendarRangeValueChange($event)"
+        (monthChange)="onCalendarMonthChange($event)"
+      ></pdm-calendar>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 
 export type PdmCalendarVariant = 'single' | 'range';
 
@@ -42,6 +42,8 @@ export class PdmCalendarComponent {
   private _value: Date | null = null;
   private _rangeValue: PdmCalendarRange | null = null;
   private _month: Date | null = null;
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   @Input() variant: PdmCalendarVariant | string = 'single';
   @Input() className = '';
@@ -269,7 +271,7 @@ export class PdmCalendarComponent {
       cell.selected ? 'bg-primary text-primary-foreground' : cell.rangeFill ? 'text-accent-foreground' : 'text-foreground',
       cell.muted && !cell.rangeFill ? 'opacity-50' : '',
       cell.disabled ? 'cursor-not-allowed opacity-40' : '',
-      !cell.disabled && !this.readonly ? 'hover:bg-accent/70' : ''
+      !cell.disabled && !this.readonly && !cell.selected ? 'hover:bg-accent/70' : ''
     ];
   }
 
@@ -277,11 +279,11 @@ export class PdmCalendarComponent {
     return ['font-normal'];
   }
 
-  trackByIndex(index: number): number {
+  trackByIndex = (index: number): number => {
     return index;
   }
 
-  trackByDate(_index: number, cell: PdmCalendarCell): string {
+  trackByDate = (_index: number, cell: PdmCalendarCell): string => {
     return this.dateKey(cell.date);
   }
 
@@ -331,10 +333,12 @@ export class PdmCalendarComponent {
       this._value = date;
       this.valueChange.emit(this.cloneDate(date));
       this.syncVisibleMonthToDate(date);
+      this.cdr.markForCheck();
       return;
     }
 
     this.handleRangeSelection(date);
+    this.cdr.markForCheck();
   }
 
   private handleRangeSelection(date: Date): void {

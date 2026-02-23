@@ -18,6 +18,7 @@ export * from './lib/components/combobox/combobox.component';
 export * from './lib/components/command/command.component';
 export * from './lib/components/context-menu/context-menu.component';
 export * from './lib/components/data-table/data-table.component';
+export * from './lib/components/date-picker/date-picker.component';
 export * from './lib/components/dialog/dialog.component';
 export * from './lib/components/dropdown-menu/dropdown-menu.component';
 export * from './lib/components/drawer/drawer.component';
