@@ -51,6 +51,10 @@ export class PdmButtonGroupComponent {
           '[&>pdm-button>button]:h-9',
           '[&>pdm-input]:flex-1',
           '[&>pdm-input>div]:w-full',
+          '[&>pdm-select>select]:!rounded-none',
+          '[&>pdm-select:first-child>select]:!rounded-l-md',
+          '[&>pdm-select:last-child>select]:!rounded-r-md',
+          '[&>pdm-select>select]:shadow-none',
           '[&>pdm-button>button]:!rounded-none',
           '[&>pdm-button:first-child>button]:!rounded-l-md',
           '[&>pdm-button:last-child>button]:!rounded-r-md',
@@ -63,7 +67,11 @@ export class PdmButtonGroupComponent {
           '[&>pdm-input>div>input]:bg-background',
           '[&>pdm-input>div>input]:shadow-none',
           '[&>pdm-button>button]:rounded-l-none',
-          '[&>pdm-button>button]:shadow-none'
+          '[&>pdm-button>button]:shadow-none',
+          '[&>pdm-tooltip>span>*]:rounded-none',
+          '[&>pdm-tooltip:first-child>span>*]:rounded-l-md',
+          '[&>pdm-tooltip:last-child>span>*]:rounded-r-md',
+          '[&>pdm-tooltip:not(:first-child)>span>*]:border-l-0'
         ].join(' ')
       : '';
 
@@ -85,9 +93,17 @@ export class PdmButtonGroupComponent {
           '[&>pdm-input-group>div]:!rounded-none',
           '[&>pdm-input-group:first-child>div]:!rounded-t-md',
           '[&>pdm-input-group:last-child>div]:!rounded-b-md',
+          '[&>pdm-select>select]:!rounded-none',
+          '[&>pdm-select:first-child>select]:!rounded-t-md',
+          '[&>pdm-select:last-child>select]:!rounded-b-md',
+          '[&>pdm-select>select]:shadow-none',
           '[&>pdm-input>div>input]:bg-background',
           '[&>pdm-input>div>input]:shadow-none',
-          '[&>pdm-button>button]:shadow-none'
+          '[&>pdm-button>button]:shadow-none',
+          '[&>pdm-tooltip>span>*]:rounded-none',
+          '[&>pdm-tooltip:first-child>span>*]:rounded-t-md',
+          '[&>pdm-tooltip:last-child>span>*]:rounded-b-md',
+          '[&>pdm-tooltip:not(:first-child)>span>*]:border-t-0'
         ].join(' ')
       : '';
 
