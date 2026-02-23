@@ -30,7 +30,6 @@ interface PdmCalendarMonthView {
   weeks: readonly (readonly PdmCalendarCell[])[];
 }
 
-const DEFAULT_VIEW_MONTH = new Date();
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 @Component({
@@ -454,23 +453,31 @@ export class PdmCalendarComponent {
   }
 
   private getAnchorMonth(): Date {
+    let candidate: Date | null = null;
+
     if (this._month) {
-      return this.cloneDate(this._month);
+      candidate = this.cloneDate(this._month);
+    } else if (this.resolvedVariant === 'single' && this._value) {
+      candidate = this.startOfMonth(this._value);
+    } else if (this.resolvedVariant === 'range' && this._rangeValue?.start) {
+      candidate = this.startOfMonth(this._rangeValue.start);
+    } else {
+      candidate = this.startOfMonth(new Date());
     }
 
-    if (this.resolvedVariant === 'single' && this._value) {
-      return this.startOfMonth(this._value);
+    if (!this.isValidDate(candidate)) {
+      return this.startOfMonth(new Date());
     }
 
-    if (this.resolvedVariant === 'range' && this._rangeValue?.start) {
-      return this.startOfMonth(this._rangeValue.start);
-    }
-
-    return this.startOfMonth(DEFAULT_VIEW_MONTH);
+    return candidate;
   }
 
   private setAnchorMonth(month: Date): void {
-    this._month = this.startOfMonth(month);
+    const normalized = this.startOfMonth(month);
+    if (!this.isValidDate(normalized)) {
+      return;
+    }
+    this._month = normalized;
     this.monthChange.emit(this.cloneDate(this._month));
   }
 
@@ -522,6 +529,10 @@ export class PdmCalendarComponent {
 
   private cloneDate(date: Date): Date {
     return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  }
+
+  private isValidDate(date: Date | null | undefined): date is Date {
+    return !!date && date instanceof Date && !Number.isNaN(date.getTime());
   }
 
   private startOfMonth(date: Date): Date {

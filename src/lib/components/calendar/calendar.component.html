@@ -27,7 +27,13 @@
               aria-label="Month"
               (change)="onSingleMonthChange($any($event.target).value)"
             >
-              <option *ngFor="let monthOption of monthOptions" [value]="monthOption.value">{{ monthOption.label }}</option>
+              <option
+                *ngFor="let monthOption of monthOptions"
+                [value]="monthOption.value"
+                [selected]="monthOption.value === singleHeaderMonth"
+              >
+                {{ monthOption.label }}
+              </option>
             </select>
             <svg viewBox="0 0 24 24" class="h-3 w-3 text-foreground" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -41,7 +47,13 @@
               aria-label="Year"
               (change)="onSingleYearChange($any($event.target).value)"
             >
-              <option *ngFor="let year of yearOptions" [value]="year">{{ year }}</option>
+              <option
+                *ngFor="let year of yearOptions"
+                [value]="year"
+                [selected]="year === singleHeaderYear"
+              >
+                {{ year }}
+              </option>
             </select>
             <svg viewBox="0 0 24 24" class="h-3 w-3 text-foreground" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"></path>

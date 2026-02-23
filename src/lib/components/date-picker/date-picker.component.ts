@@ -150,11 +150,11 @@ export class PdmDatePickerComponent {
     const focusStyle = this.open || this.triggerFocused;
 
     return [
-      'relative flex w-full items-center gap-2 overflow-hidden rounded-lg border px-3 py-[7.5px] text-left shadow-xs outline-none transition-colors',
+      'border-input focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 aria-invalid:ring-2 aria-invalid:ring-destructive aria-invalid:border-destructive relative flex w-full items-center gap-2 overflow-hidden rounded-lg border bg-background px-3 py-[7.5px] text-left text-sm shadow-sm outline-none transition-colors',
       'min-h-[36px] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
       focusStyle
-        ? 'bg-accent border-neutral-400 ring-3 ring-neutral-300'
-        : 'bg-background border-input',
+        ? 'border-ring ring-2 ring-ring/50'
+        : '',
       this.invalid ? 'border-destructive ring-destructive/20' : '',
       this.triggerClassName
     ];
