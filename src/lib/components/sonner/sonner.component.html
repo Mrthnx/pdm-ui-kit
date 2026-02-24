@@ -1,10 +1,10 @@
 <div [ngClass]="['flex w-full max-w-sm items-start gap-3 rounded-lg border p-4 shadow-lg', toneClass, className]" role="status" aria-live="polite">
   <div class="grid gap-0.5">
-    <p *ngIf="title" class="text-sm font-semibold">{{ title }}</p>
-    <p *ngIf="description" class="text-sm opacity-90">{{ description }}</p>
+    <p *ngIf="title" class="m-0 text-sm font-semibold">{{ title }}</p>
+    <p *ngIf="description" class="m-0 text-sm opacity-90">{{ description }}</p>
     <ng-content></ng-content>
   </div>
-  <button type="button" class="ml-auto rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none" (click)="dismissed.emit()" aria-label="Dismiss">
+  <button type="button" class="ml-auto appearance-none rounded-sm border-0 bg-transparent p-0 opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none" (click)="dismissed.emit()" aria-label="Dismiss">
     <pdm-icon name="x" [size]="14"></pdm-icon>
   </button>
 </div>

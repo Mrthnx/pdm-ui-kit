@@ -1,7 +1,7 @@
 <div [ngClass]="['flex flex-col gap-1', className]" [style.width.px]="width">
   <button
     type="button"
-    class="flex h-9 w-full items-center justify-between gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm"
+    class="flex h-9 w-full appearance-none items-center justify-between gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm"
     [attr.aria-expanded]="open"
     (click)="toggle()"
   >
@@ -28,7 +28,7 @@
       <button
         *ngFor="let option of options"
         type="button"
-        class="flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-left text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground"
+        class="flex w-full appearance-none items-center gap-2 rounded-sm border-0 bg-transparent px-2 py-1.5 text-left text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground"
         [ngClass]="option === value ? 'bg-accent text-accent-foreground' : ''"
         (click)="select(option)"
       >

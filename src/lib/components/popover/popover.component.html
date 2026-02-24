@@ -1,5 +1,5 @@
 <div class="relative inline-block" [ngClass]="className">
-  <button *ngIf="showTrigger" type="button" class="inline-flex h-9 items-center justify-center rounded-md border border-input bg-background px-3 text-sm font-medium text-foreground shadow-sm" [attr.aria-expanded]="open" (click)="toggle()">{{ triggerText }}</button>
+  <button *ngIf="showTrigger" type="button" class="inline-flex h-9 appearance-none items-center justify-center rounded-md border border-input bg-background px-3 text-sm font-medium text-foreground shadow-sm" [attr.aria-expanded]="open" (click)="toggle()">{{ triggerText }}</button>
   <div *ngIf="open || !showTrigger" [ngClass]="['absolute left-0 top-full z-30 mt-2 min-w-80 rounded-md border border-border bg-popover p-4 text-popover-foreground shadow-md', panelClassName]">
     <ng-content></ng-content>
   </div>

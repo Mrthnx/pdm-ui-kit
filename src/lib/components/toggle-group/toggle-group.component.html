@@ -5,7 +5,7 @@
     [disabled]="item.disabled"
     [attr.aria-pressed]="item.value === value"
     [ngClass]="[
-      'inline-flex h-8 items-center justify-center rounded-sm px-2.5 text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+      'inline-flex h-8 appearance-none items-center justify-center rounded-sm border-0 bg-transparent px-2.5 text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
       item.value === value
         ? 'bg-accent text-accent-foreground'
         : 'text-foreground hover:bg-accent hover:text-accent-foreground'

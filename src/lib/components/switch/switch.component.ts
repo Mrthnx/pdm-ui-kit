@@ -21,7 +21,7 @@ export class PdmSwitchComponent {
 
   get rootClasses(): string[] {
     return [
-      'peer relative inline-flex shrink-0 items-center rounded-full border border-transparent outline-none transition-all focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50',
+      'peer relative inline-flex appearance-none shrink-0 items-center rounded-full border border-transparent outline-none transition-all focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50',
       this.size === 'sm' ? 'h-[14px] w-[24px]' : 'h-[18.4px] w-[32px]',
       this.checked ? 'bg-primary' : 'bg-input dark:bg-input/80'
     ];

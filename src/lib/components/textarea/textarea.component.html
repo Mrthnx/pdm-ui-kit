@@ -22,6 +22,6 @@
     ]"
     (input)="onInput($event)"
   ></textarea>
-  <p *ngIf="!invalid && helperText" class="text-sm text-muted-foreground">{{ helperText }}</p>
-  <p *ngIf="invalid && errorText" class="text-sm text-destructive">{{ errorText }}</p>
+  <p *ngIf="!invalid && helperText" class="m-0 text-sm text-muted-foreground">{{ helperText }}</p>
+  <p *ngIf="invalid && errorText" class="m-0 text-sm text-destructive">{{ errorText }}</p>
 </div>

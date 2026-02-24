@@ -25,7 +25,7 @@
           *ngIf="!item.type || item.type === 'item'"
           type="button"
           [disabled]="item.disabled"
-          class="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pr-2 text-left text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground disabled:pointer-events-none disabled:opacity-50"
+          class="relative flex w-full appearance-none cursor-default select-none items-center rounded-sm border-0 bg-transparent py-1.5 pr-2 text-left text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground disabled:pointer-events-none disabled:opacity-50"
           [ngClass]="item.inset ? 'pl-8' : 'px-2'"
           (click)="select(item)"
         >

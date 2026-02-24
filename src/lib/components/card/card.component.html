@@ -12,7 +12,7 @@
       </div>
       <button
         type="button"
-        class="inline-flex h-9 items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-foreground"
+        class="inline-flex h-9 appearance-none items-center justify-center rounded-md border-0 bg-transparent px-4 py-2 text-sm font-medium text-foreground"
         (click)="onActionPressed()"
       >
         {{ actionText }}
@@ -32,7 +32,7 @@
       <div class="w-full">
         <div class="mb-3 flex w-full items-center justify-between gap-4">
           <label class="text-sm font-medium text-foreground">{{ passwordLabel }}</label>
-          <button type="button" class="text-sm text-foreground">
+          <button type="button" class="appearance-none border-0 bg-transparent p-0 text-sm text-foreground">
             {{ passwordHint }}
           </button>
         </div>
@@ -46,14 +46,14 @@
     <div class="mt-6 flex w-full flex-col gap-2 px-6">
       <button
         type="button"
-        class="flex h-9 w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm"
+        class="flex h-9 w-full appearance-none items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm"
         (click)="onPrimaryAction()"
       >
         {{ primaryActionText }}
       </button>
       <button
         type="button"
-        class="flex h-9 w-full items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm"
+        class="flex h-9 w-full appearance-none items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm"
         (click)="onSecondaryAction()"
       >
         {{ secondaryActionText }}

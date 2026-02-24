@@ -6,7 +6,7 @@
       [attr.aria-selected]="value === item.value"
       [disabled]="item.disabled"
       [ngClass]="[
-        'relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 whitespace-nowrap rounded-md border border-transparent px-1.5 py-0.5 text-sm font-medium transition-all focus-visible:border-ring focus-visible:outline-none focus-visible:outline-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50',
+        'relative inline-flex h-[calc(100%-1px)] appearance-none flex-1 items-center justify-center gap-1.5 whitespace-nowrap rounded-md border border-transparent px-1.5 py-0.5 text-sm font-medium transition-all focus-visible:border-ring focus-visible:outline-none focus-visible:outline-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50',
         value === item.value ? 'bg-background text-foreground shadow-sm' : 'bg-transparent text-muted-foreground'
       ]"
       (click)="select(item)"

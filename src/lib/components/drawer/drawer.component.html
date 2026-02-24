@@ -12,20 +12,20 @@
       <p class="m-0 mt-1 text-xs text-muted-foreground">{{ description }}</p>
 
       <div class="mt-3 flex w-full items-center justify-center gap-4">
-        <button type="button" class="inline-flex h-6 w-6 items-center justify-center rounded-full border border-border text-muted-foreground">{{ decrementLabel }}</button>
+        <button type="button" class="inline-flex h-6 w-6 appearance-none items-center justify-center rounded-full border border-border bg-transparent p-0 text-muted-foreground">{{ decrementLabel }}</button>
         <div class="text-center">
           <div class="text-5xl font-semibold leading-none text-foreground">{{ value }}</div>
           <div class="mt-1 text-xs tracking-wide text-muted-foreground">{{ unit }}</div>
         </div>
-        <button type="button" class="inline-flex h-6 w-6 items-center justify-center rounded-full border border-border text-muted-foreground">{{ incrementLabel }}</button>
+        <button type="button" class="inline-flex h-6 w-6 appearance-none items-center justify-center rounded-full border border-border bg-transparent p-0 text-muted-foreground">{{ incrementLabel }}</button>
       </div>
 
       <div *ngIf="bars.length" class="mt-3 flex h-14 w-full items-end gap-1">
         <div *ngFor="let bar of bars" class="flex-1 bg-foreground" [style.height.px]="bar"></div>
       </div>
 
-      <button *ngIf="primaryLabel" type="button" class="mt-3 h-9 w-full rounded-md bg-primary text-sm font-medium text-primary-foreground" (click)="onPrimaryAction()">{{ primaryLabel }}</button>
-      <button *ngIf="secondaryLabel" type="button" class="mt-2 h-9 w-full rounded-md border border-input bg-background text-sm font-medium text-foreground" (click)="onSecondaryAction()">{{ secondaryLabel }}</button>
+      <button *ngIf="primaryLabel" type="button" class="mt-3 h-9 w-full appearance-none rounded-md bg-primary text-sm font-medium text-primary-foreground" (click)="onPrimaryAction()">{{ primaryLabel }}</button>
+      <button *ngIf="secondaryLabel" type="button" class="mt-2 h-9 w-full appearance-none rounded-md border border-input bg-background text-sm font-medium text-foreground" (click)="onSecondaryAction()">{{ secondaryLabel }}</button>
     </div>
   </section>
 
@@ -36,7 +36,7 @@
           <h3 class="m-0 text-lg font-semibold leading-none tracking-tight text-foreground">{{ profileTitle }}</h3>
           <p class="m-0 mt-1 text-sm text-muted-foreground">{{ profileDescription }}</p>
         </div>
-        <button type="button" class="h-5 w-5 text-muted-foreground" (click)="close()">×</button>
+        <button type="button" class="h-5 w-5 appearance-none border-0 bg-transparent p-0 text-muted-foreground" (click)="close()">×</button>
       </div>
 
       <div class="mt-3 flex flex-col gap-3">
@@ -50,7 +50,7 @@
         </div>
       </div>
 
-      <button *ngIf="responsivePrimaryLabel" type="button" class="mt-3 h-8 w-full rounded-md bg-primary text-xs font-medium text-primary-foreground" (click)="onPrimaryAction()">{{ responsivePrimaryLabel }}</button>
+      <button *ngIf="responsivePrimaryLabel" type="button" class="mt-3 h-8 w-full appearance-none rounded-md bg-primary text-xs font-medium text-primary-foreground" (click)="onPrimaryAction()">{{ responsivePrimaryLabel }}</button>
     </section>
   </ng-template>
 </div>

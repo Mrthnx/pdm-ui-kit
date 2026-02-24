@@ -8,7 +8,7 @@
       class="h-9 flex-1 rounded-md border border-input bg-transparent px-3 py-1 text-sm text-foreground shadow-sm placeholder:text-muted-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
     />
 
-    <button type="button" class="inline-flex h-9 items-center gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium text-foreground shadow-sm">
+    <button type="button" class="inline-flex h-9 appearance-none items-center gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium text-foreground shadow-sm">
       <span>{{ columnsLabel }}</span>
       <svg viewBox="0 0 24 24" class="h-4 w-4 text-foreground" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -23,7 +23,7 @@
           <th class="w-10 px-2 text-left font-medium"><input type="checkbox" class="h-4 w-4 rounded-sm border border-input" /></th>
           <th class="w-32 px-2 py-2 text-left font-medium">{{ statusLabel }}</th>
           <th class="px-2 py-2 text-left font-medium">
-            <button type="button" class="inline-flex items-center gap-1 rounded-sm px-3 py-2 text-sm">
+            <button type="button" class="inline-flex appearance-none items-center gap-1 rounded-sm border-0 bg-transparent px-3 py-2 text-sm">
               <span>{{ emailLabel }}</span>
               <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M8 6L4 10L8 14M16 18L20 14L16 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -42,7 +42,7 @@
           <td class="px-2 py-2">{{ row.email }}</td>
           <td class="px-2 py-2 text-right">{{ row.amount }}</td>
           <td class="px-2 py-2">
-            <button type="button" class="inline-flex h-8 w-8 items-center justify-center" (click)="onAction(row)">
+            <button type="button" class="inline-flex h-8 w-8 appearance-none items-center justify-center border-0 bg-transparent p-0" (click)="onAction(row)">
               <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="6" cy="12" r="1.5" fill="currentColor"></circle>
                 <circle cx="12" cy="12" r="1.5" fill="currentColor"></circle>
@@ -59,8 +59,8 @@
   </div>
 
   <div class="flex w-full items-center gap-2 py-4">
-    <p class="flex-1 pr-2 text-sm text-muted-foreground">{{ selectedCount }} of {{ rows.length }} row(s) selected.</p>
-    <button type="button" class="h-9 rounded-md border border-input bg-background px-4 text-sm font-medium text-foreground shadow-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50" [disabled]="page <= 1" (click)="previous()">{{ previousLabel }}</button>
-    <button type="button" class="h-9 rounded-md border border-input bg-background px-4 text-sm font-medium text-foreground shadow-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50" [disabled]="page >= totalPages" (click)="next()">{{ nextLabel }}</button>
+    <p class="m-0 flex-1 pr-2 text-sm text-muted-foreground">{{ selectedCount }} of {{ rows.length }} row(s) selected.</p>
+    <button type="button" class="h-9 appearance-none rounded-md border border-input bg-background px-4 text-sm font-medium text-foreground shadow-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50" [disabled]="page <= 1" (click)="previous()">{{ previousLabel }}</button>
+    <button type="button" class="h-9 appearance-none rounded-md border border-input bg-background px-4 text-sm font-medium text-foreground shadow-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50" [disabled]="page >= totalPages" (click)="next()">{{ nextLabel }}</button>
   </div>
 </section>

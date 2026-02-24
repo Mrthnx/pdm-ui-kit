@@ -16,7 +16,7 @@
       <button
         *ngIf="showCloseButton"
         type="button"
-        class="inline-flex h-6 w-6 items-center justify-center rounded-sm text-foreground opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none"
+        class="inline-flex h-6 w-6 appearance-none items-center justify-center rounded-sm border-0 bg-transparent p-0 text-foreground opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none"
         (click)="close()"
         aria-label="Close dialog"
       >
@@ -41,14 +41,14 @@
       <div class="mt-4 flex justify-end gap-2">
         <button
           type="button"
-          class="inline-flex h-9 items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm"
+          class="inline-flex h-9 appearance-none items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm"
           (click)="onSecondaryAction()"
         >
           {{ secondaryActionText }}
         </button>
         <button
           type="button"
-          class="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm"
+          class="inline-flex h-9 appearance-none items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm"
           (click)="onPrimaryAction()"
         >
           {{ primaryActionText }}
@@ -63,7 +63,7 @@
       <div class="mt-4 flex">
         <button
           type="button"
-          class="inline-flex h-9 items-center justify-center rounded-md bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground shadow-sm"
+          class="inline-flex h-9 appearance-none items-center justify-center rounded-md bg-secondary px-4 py-2 text-sm font-medium text-secondary-foreground shadow-sm"
           (click)="onSecondaryAction()"
         >
           Close

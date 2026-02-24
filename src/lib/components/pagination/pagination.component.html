@@ -18,11 +18,11 @@
     ></pdm-select>
   </div>
 
-  <ul class="flex items-center gap-1">
+  <ul class="m-0 flex list-none items-center gap-1 p-0">
     <li>
       <button
         type="button"
-        class="inline-flex h-9 items-center justify-center gap-1 rounded-md px-2 text-sm text-foreground hover:bg-accent disabled:opacity-50 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        class="inline-flex h-9 appearance-none items-center justify-center gap-1 rounded-md border-0 bg-transparent px-2 text-sm text-foreground hover:bg-accent disabled:opacity-50 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         [disabled]="page <= 1"
         (click)="setPage(page - 1)"
       >
@@ -43,8 +43,8 @@
           [ngClass]="[
             'inline-flex h-9 min-w-9 items-center justify-center rounded-md px-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
             pageNumber === page
-              ? 'border border-border bg-muted text-foreground shadow-sm'
-              : 'text-foreground hover:bg-accent hover:text-accent-foreground',
+              ? 'appearance-none border border-border bg-muted text-foreground shadow-sm'
+              : 'appearance-none border-0 bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground',
           ]"
           (click)="setPage(+pageNumber)"
         >
@@ -55,7 +55,7 @@
     <li>
       <button
         type="button"
-        class="inline-flex h-9 items-center justify-center gap-1 rounded-md px-2 text-sm text-foreground hover:bg-accent disabled:opacity-50 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        class="inline-flex h-9 appearance-none items-center justify-center gap-1 rounded-md border-0 bg-transparent px-2 text-sm text-foreground hover:bg-accent disabled:opacity-50 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         [disabled]="page >= pageCount"
         (click)="setPage(page + 1)"
       >

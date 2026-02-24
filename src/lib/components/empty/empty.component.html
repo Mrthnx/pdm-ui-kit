@@ -4,8 +4,8 @@
   </div>
 
   <div class="space-y-2">
-    <h3 class="text-2xl font-semibold leading-none tracking-tight">{{ title }}</h3>
-    <p class="mx-auto max-w-md text-sm leading-relaxed text-muted-foreground">
+    <h3 class="m-0 text-2xl font-semibold leading-none tracking-tight">{{ title }}</h3>
+    <p class="m-0 mx-auto max-w-md text-sm leading-relaxed text-muted-foreground">
       {{ description }}
     </p>
   </div>
@@ -18,7 +18,7 @@
   <button
     *ngIf="linkLabel"
     type="button"
-    class="mt-1 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+    class="mt-1 inline-flex appearance-none items-center gap-2 border-0 bg-transparent p-0 text-sm font-medium text-muted-foreground underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
     (click)="linkAction.emit()"
   >
     <span>{{ linkLabel }}</span>

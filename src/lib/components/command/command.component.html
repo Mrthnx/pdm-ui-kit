@@ -3,7 +3,7 @@
     <span class="text-sm font-medium text-muted-foreground">{{ hintLabel }}</span>
     <button
       type="button"
-      class="inline-flex h-5 items-center gap-0.5 rounded-sm border border-border bg-muted px-1.5"
+      class="inline-flex h-5 appearance-none items-center gap-0.5 rounded-sm border border-border bg-muted px-1.5"
       (click)="toggleOpen()"
     >
       <pdm-icon name="command" [size]="12" className="text-muted-foreground" [decorative]="true"></pdm-icon>
@@ -33,7 +33,7 @@
           *ngFor="let item of group.items"
           type="button"
           [disabled]="item.disabled"
-          class="flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-left text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground"
+          class="flex w-full appearance-none items-center gap-2 rounded-sm border-0 bg-transparent px-2 py-1.5 text-left text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground"
           [ngClass]="[
             item.disabled ? 'opacity-50' : '',
             item.label === 'Calendar' ? 'bg-accent text-accent-foreground' : ''
@@ -49,7 +49,7 @@
         <div *ngIf="groupIndex === 0 && groupedItems.length > 1" class="my-1 border-t border-border"></div>
       </ng-container>
 
-      <p *ngIf="filteredItems.length === 0" class="py-6 text-center text-sm text-muted-foreground">{{ emptyMessage }}</p>
+      <p *ngIf="filteredItems.length === 0" class="m-0 py-6 text-center text-sm text-muted-foreground">{{ emptyMessage }}</p>
     </div>
   </section>
 </div>
