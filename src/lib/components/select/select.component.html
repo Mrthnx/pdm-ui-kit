@@ -1,5 +1,6 @@
 <div [ngClass]="['relative', className || 'w-full']">
   <button
+    #triggerEl
     type="button"
     [id]="id"
     [disabled]="disabled"
@@ -31,9 +32,11 @@
 
   <div
     *ngIf="open"
+    #panelEl
     role="listbox"
     [attr.aria-labelledby]="id || null"
-    class="absolute left-0 top-[calc(100%+4px)] z-50 max-h-96 w-full overflow-y-auto rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md"
+    [ngClass]="panelClasses"
+    [style.max-height.px]="panelMaxHeightPx"
   >
     <button
       *ngFor="let option of options"

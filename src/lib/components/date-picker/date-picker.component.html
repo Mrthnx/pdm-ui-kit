@@ -5,6 +5,7 @@
 
   <div class="relative inline-block w-full">
     <button
+      #triggerEl
       type="button"
       [id]="triggerId"
       [disabled]="disabled"
@@ -30,7 +31,7 @@
       <span [ngClass]="textClasses">{{ displayText }}</span>
     </button>
 
-    <div *ngIf="open" [id]="panelId" [ngClass]="panelClasses" role="dialog" [attr.aria-labelledby]="label ? triggerId : null">
+    <div *ngIf="open" #panelEl [id]="panelId" [ngClass]="panelClasses" role="dialog" [attr.aria-labelledby]="label ? triggerId : null">
       <pdm-calendar
         [variant]="resolvedVariant"
         [value]="value"

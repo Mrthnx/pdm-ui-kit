@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output,
+  ViewChild
+} from '@angular/core';
 
 export interface PdmSelectOption {
   label: string;
@@ -21,10 +31,18 @@ export class PdmSelectComponent {
   @Input() placeholder = 'Select an option';
 
   open = false;
+  panelPlacement: 'top' | 'bottom' = 'bottom';
+  panelMaxHeightPx: number | null = null;
 
   @Output() valueChange = new EventEmitter<string>();
 
-  constructor(private readonly elementRef: ElementRef<HTMLElement>) {}
+  @ViewChild('triggerEl') private triggerRef?: ElementRef<HTMLElement>;
+  @ViewChild('panelEl') private panelRef?: ElementRef<HTMLElement>;
+
+  constructor(
+    private readonly elementRef: ElementRef<HTMLElement>,
+    private readonly cdr: ChangeDetectorRef
+  ) {}
 
   get selectedOption(): PdmSelectOption | undefined {
     return this.options.find((option) => option.value === this.value);
@@ -34,9 +52,24 @@ export class PdmSelectComponent {
     return this.selectedOption?.label || this.placeholder;
   }
 
+  get panelClasses(): string[] {
+    return [
+      'absolute left-0 z-50 w-full overflow-y-auto rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md',
+      this.panelPlacement === 'top' ? 'bottom-[calc(100%+4px)]' : 'top-[calc(100%+4px)]'
+    ];
+  }
+
   toggle(): void {
     if (this.disabled) return;
     this.open = !this.open;
+
+    if (this.open) {
+      this.schedulePanelPlacementUpdate();
+      return;
+    }
+
+    this.panelPlacement = 'bottom';
+    this.panelMaxHeightPx = null;
   }
 
   onChange(event: Event): void {
@@ -60,5 +93,39 @@ export class PdmSelectComponent {
   @HostListener('document:keydown.escape')
   onEscape(): void {
     this.open = false;
+  }
+
+  @HostListener('window:resize')
+  @HostListener('window:scroll')
+  onViewportChange(): void {
+    this.updatePanelPlacement();
+  }
+
+  private schedulePanelPlacementUpdate(): void {
+    setTimeout(() => this.updatePanelPlacement());
+  }
+
+  private updatePanelPlacement(): void {
+    if (!this.open) return;
+
+    const triggerEl = this.triggerRef?.nativeElement;
+    const panelEl = this.panelRef?.nativeElement;
+    if (!triggerEl || !panelEl || typeof window === 'undefined') {
+      return;
+    }
+
+    const viewportHeight = window.innerHeight;
+    const gap = 4;
+    const triggerRect = triggerEl.getBoundingClientRect();
+    const panelHeight = panelEl.offsetHeight;
+    const spaceBelow = Math.max(0, viewportHeight - triggerRect.bottom - gap);
+    const spaceAbove = Math.max(0, triggerRect.top - gap);
+    const nextPlacement: 'top' | 'bottom' =
+      spaceBelow < panelHeight && spaceAbove > spaceBelow ? 'top' : 'bottom';
+    const availableHeight = nextPlacement === 'top' ? spaceAbove : spaceBelow;
+
+    this.panelPlacement = nextPlacement;
+    this.panelMaxHeightPx = Math.max(120, Math.min(384, Math.floor(availableHeight)));
+    this.cdr.markForCheck();
   }
 }

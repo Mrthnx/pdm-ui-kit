@@ -6,7 +6,8 @@ import {
   EventEmitter,
   HostListener,
   Input,
-  Output
+  Output,
+  ViewChild
 } from '@angular/core';
 import { format as formatDateFns } from 'date-fns';
 import { PdmCalendarRange, PdmCalendarVariant } from '../calendar/calendar.component';
@@ -25,6 +26,10 @@ export class PdmDatePickerComponent {
 
   private readonly instanceId = `pdm-date-picker-${++nextDatePickerId}`;
   private triggerFocused = false;
+  panelPlacement: 'top' | 'bottom' = 'bottom';
+
+  @ViewChild('triggerEl') private triggerRef?: ElementRef<HTMLElement>;
+  @ViewChild('panelEl') private panelRef?: ElementRef<HTMLElement>;
 
   constructor(
     private readonly elementRef: ElementRef<HTMLElement>,
@@ -62,6 +67,11 @@ export class PdmDatePickerComponent {
   @Input()
   set open(value: boolean) {
     this._open = !!value;
+    if (this._open) {
+      this.schedulePanelPlacementUpdate();
+    } else {
+      this.panelPlacement = 'bottom';
+    }
     this.cdr.markForCheck();
   }
   get open(): boolean {
@@ -162,7 +172,9 @@ export class PdmDatePickerComponent {
 
   get panelClasses(): string[] {
     return [
-      'absolute left-0 top-full z-30 mt-2',
+      this.panelPlacement === 'top'
+        ? 'absolute bottom-full left-0 z-30 mb-2'
+        : 'absolute left-0 top-full z-30 mt-2',
       this.panelClassName
     ];
   }
@@ -244,6 +256,12 @@ export class PdmDatePickerComponent {
     }
   }
 
+  @HostListener('window:resize')
+  @HostListener('window:scroll')
+  onViewportChange(): void {
+    this.updatePanelPlacement();
+  }
+
   private setOpen(nextOpen: boolean): void {
     if (this._open === nextOpen) {
       return;
@@ -251,7 +269,42 @@ export class PdmDatePickerComponent {
 
     this._open = nextOpen;
     this.openChange.emit(this._open);
+    if (this._open) {
+      this.schedulePanelPlacementUpdate();
+    } else {
+      this.panelPlacement = 'bottom';
+    }
     this.cdr.markForCheck();
+  }
+
+  private schedulePanelPlacementUpdate(): void {
+    setTimeout(() => this.updatePanelPlacement());
+  }
+
+  private updatePanelPlacement(): void {
+    if (!this._open) {
+      return;
+    }
+
+    const triggerEl = this.triggerRef?.nativeElement;
+    const panelEl = this.panelRef?.nativeElement;
+    if (!triggerEl || !panelEl || typeof window === 'undefined') {
+      return;
+    }
+
+    const viewportHeight = window.innerHeight;
+    const gap = 8;
+    const triggerRect = triggerEl.getBoundingClientRect();
+    const panelHeight = panelEl.offsetHeight;
+    const spaceBelow = Math.max(0, viewportHeight - triggerRect.bottom - gap);
+    const spaceAbove = Math.max(0, triggerRect.top - gap);
+    const nextPlacement: 'top' | 'bottom' =
+      spaceBelow < panelHeight && spaceAbove > spaceBelow ? 'top' : 'bottom';
+
+    if (this.panelPlacement !== nextPlacement) {
+      this.panelPlacement = nextPlacement;
+      this.cdr.markForCheck();
+    }
   }
 
   private formatDate(date: Date): string {
