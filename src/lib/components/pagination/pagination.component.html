@@ -1,27 +1,64 @@
-<nav aria-label="Pagination" [ngClass]="['mx-auto flex w-full justify-center', className]">
+<nav
+  aria-label="Pagination"
+  [ngClass]="[
+    'mx-auto flex w-full flex-wrap items-center justify-center gap-4',
+    className,
+  ]"
+>
+  <div class="flex items-center gap-3" *ngIf="rowsPerPageOptions.length > 0">
+    <span class="text-sm font-medium text-foreground">{{
+      rowsPerPageLabel
+    }}</span>
+    <pdm-select
+      [value]="rowsPerPageValue"
+      [options]="rowsPerPageSelectOptions"
+      [placeholder]="rowsPerPageValue"
+      className="w-[120px]"
+      (valueChange)="onRowsPerPageChangeValue($event)"
+    ></pdm-select>
+  </div>
+
   <ul class="flex items-center gap-1">
     <li>
-      <button type="button" class="inline-flex h-9 items-center justify-center gap-1 rounded-md px-2 text-sm text-foreground hover:bg-accent disabled:opacity-50 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" [disabled]="page <= 1" (click)="setPage(page - 1)">
+      <button
+        type="button"
+        class="inline-flex h-9 items-center justify-center gap-1 rounded-md px-2 text-sm text-foreground hover:bg-accent disabled:opacity-50 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        [disabled]="page <= 1"
+        (click)="setPage(page - 1)"
+      >
         <pdm-icon name="chevron-left" [size]="14"></pdm-icon>
         Previous
       </button>
     </li>
     <li *ngFor="let pageNumber of visiblePages">
-      <button
-        type="button"
-        [ngClass]="[
-          'inline-flex h-9 min-w-9 items-center justify-center rounded-md px-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-          pageNumber === page
-            ? 'border border-border bg-muted text-foreground shadow-sm'
-            : 'text-foreground hover:bg-accent hover:text-accent-foreground'
-        ]"
-        (click)="setPage(pageNumber)"
-      >
-        {{ pageNumber }}
-      </button>
+      <ng-container *ngIf="pageNumber === 'ellipsis'; else pageButton">
+        <span
+          class="inline-flex h-9 min-w-9 items-center justify-center px-2 text-sm text-muted-foreground"
+          >...</span
+        >
+      </ng-container>
+      <ng-template #pageButton>
+        <button
+          type="button"
+          [ngClass]="[
+            'inline-flex h-9 min-w-9 items-center justify-center rounded-md px-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+            pageNumber === page
+              ? 'border border-border bg-muted text-foreground shadow-sm'
+              : 'text-foreground hover:bg-accent hover:text-accent-foreground',
+          ]"
+          (click)="setPage(+pageNumber)"
+        >
+          {{ pageNumber }}
+        </button>
+      </ng-template>
     </li>
     <li>
-      <button type="button" class="inline-flex h-9 items-center justify-center gap-1 rounded-md px-2 text-sm text-foreground hover:bg-accent disabled:opacity-50 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" [disabled]="page >= pageCount" (click)="setPage(page + 1)">
+      <button
+        type="button"
+        class="inline-flex h-9 items-center justify-center gap-1 rounded-md px-2 text-sm text-foreground hover:bg-accent disabled:opacity-50 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        [disabled]="page >= pageCount"
+        (click)="setPage(page + 1)"
+      >
         Next
         <pdm-icon name="chevron-right" [size]="14"></pdm-icon>
       </button>

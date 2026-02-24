@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import type { PdmNativeSelectOption } from '../native-select/native-select.component';
 
 @Component({
   selector: 'pdm-pagination',
@@ -8,23 +9,33 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 export class PdmPaginationComponent {
   @Input() page = 1;
   @Input() pageCount = 1;
-  @Input() maxVisible = 5;
+  @Input() maxVisible = 4;
   @Input() className = '';
+  @Input() rowsPerPageLabel = 'Rows per page';
+  @Input() rowsPerPage = 10;
+  @Input() rowsPerPageOptions: number[] = [10, 20, 30, 50];
 
   @Output() pageChange = new EventEmitter<number>();
+  @Output() rowsPerPageChange = new EventEmitter<number>();
 
-  get visiblePages(): number[] {
+  get rowsPerPageSelectOptions(): PdmNativeSelectOption[] {
+    return this.rowsPerPageOptions.map((value) => ({
+      label: String(value),
+      value: String(value)
+    }));
+  }
+
+  get rowsPerPageValue(): string {
+    return String(this.rowsPerPage);
+  }
+
+  get visiblePages(): Array<number | 'ellipsis'> {
     const total = Math.max(1, this.pageCount);
-    const visible = Math.max(1, this.maxVisible);
-    const half = Math.floor(visible / 2);
-    let start = Math.max(1, this.page - half);
-    let end = Math.min(total, start + visible - 1);
-
-    if (end - start + 1 < visible) {
-      start = Math.max(1, end - visible + 1);
+    if (total <= Math.max(1, this.maxVisible)) {
+      return Array.from({ length: total }, (_, i) => i + 1);
     }
 
-    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+    return [1, 2, 'ellipsis', total];
   }
 
   setPage(next: number): void {
@@ -33,5 +44,14 @@ export class PdmPaginationComponent {
     }
 
     this.pageChange.emit(next);
+  }
+
+  onRowsPerPageChangeValue(value: string): void {
+    const next = Number(value);
+    if (!Number.isFinite(next) || next <= 0 || next === this.rowsPerPage) {
+      return;
+    }
+
+    this.rowsPerPageChange.emit(next);
   }
 }
