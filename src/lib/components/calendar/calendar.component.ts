@@ -283,8 +283,12 @@ export class PdmCalendarComponent {
 
   dayButtonClasses(cell: PdmCalendarCell): string[] {
     return [
-      'relative z-10 flex h-8 w-8 appearance-none items-center justify-center rounded-md border-0 bg-transparent p-0 text-sm leading-5',
-      cell.selected ? 'bg-primary text-primary-foreground' : cell.rangeFill ? 'text-accent-foreground' : 'text-foreground',
+      'relative z-10 flex h-8 w-8 appearance-none items-center justify-center rounded-md border-0 p-0 text-sm leading-5',
+      cell.selected
+        ? 'bg-primary text-primary-foreground'
+        : cell.rangeFill
+          ? 'bg-transparent text-accent-foreground'
+          : 'bg-transparent text-foreground',
       cell.muted && !cell.rangeFill ? 'opacity-50' : '',
       cell.disabled ? 'cursor-not-allowed opacity-40' : '',
       !cell.disabled && !this.readonly && !cell.selected ? 'hover:bg-accent/70' : ''
