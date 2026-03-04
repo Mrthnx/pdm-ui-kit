@@ -60,10 +60,10 @@ export class PdmDialogComponent {
   get panelClassName(): string {
     const base = [
       'relative z-10 w-full border border-border bg-background text-foreground shadow-lg',
-      this.size === 'desktop' ? 'max-w-[640px] max-h-[calc(100vh-2rem)] rounded-[10px] overflow-hidden' : '',
-      this.size === 'mobile' ? 'max-w-[320px] min-h-[240px] rounded-[10px] overflow-hidden' : '',
+      this.size === 'desktop' ? 'max-w-[640px] max-h-[calc(100vh-2rem)] rounded-[10px] overflow-visible' : '',
+      this.size === 'mobile' ? 'max-w-[320px] min-h-[240px] rounded-[10px] overflow-visible' : '',
       this.size === 'mobile-fullscreen'
-        ? 'max-w-[320px] h-[min(100dvh,640px)] rounded-none sm:rounded-[10px] overflow-hidden'
+        ? 'max-w-[320px] h-[min(100dvh,640px)] rounded-none sm:rounded-[10px] overflow-visible'
         : '',
       this.className
     ];

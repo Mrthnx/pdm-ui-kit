@@ -173,8 +173,8 @@ export class PdmDatePickerComponent {
   get panelClasses(): string[] {
     return [
       this.panelPlacement === 'top'
-        ? 'absolute bottom-full left-0 z-30 mb-2'
-        : 'absolute left-0 top-full z-30 mt-2',
+        ? 'absolute bottom-full left-0 z-50 mb-2'
+        : 'absolute left-0 top-full z-50 mt-2',
       this.panelClassName
     ];
   }
