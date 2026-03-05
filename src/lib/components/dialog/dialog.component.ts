@@ -14,7 +14,7 @@ export class PdmDialogComponent {
   @Input() variant: PdmDialogVariant = 'default';
   @Input() size: PdmDialogSize = 'desktop';
   @Input() title = 'Edit profile';
-  @Input() description = 'Make changes to your profile here. Click save when you\'re done.';
+  @Input() description = '';
   @Input() closeOnBackdrop = true;
   @Input() closeOnEsc = true;
   @Input() showCloseButton = true;
