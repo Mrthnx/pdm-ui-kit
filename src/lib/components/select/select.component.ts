@@ -6,9 +6,14 @@ import {
   EventEmitter,
   HostListener,
   Input,
+  OnDestroy,
   Output,
-  ViewChild
+  ViewChild,
+  ViewContainerRef
 } from '@angular/core';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
+import { Subscription } from 'rxjs';
 
 export interface PdmSelectOption {
   label: string;
@@ -21,7 +26,7 @@ export interface PdmSelectOption {
   templateUrl: './select.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PdmSelectComponent {
+export class PdmSelectComponent implements OnDestroy {
   @Input() id = '';
   @Input() value = '';
   @Input() options: PdmSelectOption[] = [];
@@ -31,18 +36,25 @@ export class PdmSelectComponent {
   @Input() placeholder = 'Select an option';
 
   open = false;
-  panelPlacement: 'top' | 'bottom' = 'bottom';
-  panelMaxHeightPx: number | null = null;
 
   @Output() valueChange = new EventEmitter<string>();
 
   @ViewChild('triggerEl') private triggerRef?: ElementRef<HTMLElement>;
-  @ViewChild('panelEl') private panelRef?: ElementRef<HTMLElement>;
+  @ViewChild('panelTemplate') private panelTemplateRef!: any;
+
+  private overlayRef: OverlayRef | null = null;
+  private backdropSub: Subscription | null = null;
 
   constructor(
     private readonly elementRef: ElementRef<HTMLElement>,
-    private readonly cdr: ChangeDetectorRef
+    private readonly cdr: ChangeDetectorRef,
+    private readonly overlay: Overlay,
+    private readonly viewContainerRef: ViewContainerRef
   ) {}
+
+  ngOnDestroy(): void {
+    this.destroyOverlay();
+  }
 
   get selectedOption(): PdmSelectOption | undefined {
     return this.options.find((option) => option.value === this.value);
@@ -52,24 +64,13 @@ export class PdmSelectComponent {
     return this.selectedOption?.label || this.placeholder;
   }
 
-  get panelClasses(): string[] {
-    return [
-      'absolute left-0 z-50 w-full overflow-y-auto rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md',
-      this.panelPlacement === 'top' ? 'bottom-[calc(100%+4px)]' : 'top-[calc(100%+4px)]'
-    ];
-  }
-
   toggle(): void {
     if (this.disabled) return;
-    this.open = !this.open;
-
     if (this.open) {
-      this.schedulePanelPlacementUpdate();
-      return;
+      this.closePanel();
+    } else {
+      this.openPanel();
     }
-
-    this.panelPlacement = 'bottom';
-    this.panelMaxHeightPx = null;
   }
 
   onChange(event: Event): void {
@@ -79,53 +80,83 @@ export class PdmSelectComponent {
   selectOption(option: PdmSelectOption): void {
     if (option.disabled) return;
     this.valueChange.emit(option.value);
-    this.open = false;
-  }
-
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent): void {
-    if (!this.open) return;
-    if (!this.elementRef.nativeElement.contains(event.target as Node)) {
-      this.open = false;
-    }
+    this.closePanel();
   }
 
   @HostListener('document:keydown.escape')
   onEscape(): void {
-    this.open = false;
+    this.closePanel();
   }
 
-  @HostListener('window:resize')
-  @HostListener('window:scroll')
-  onViewportChange(): void {
-    this.updatePanelPlacement();
-  }
-
-  private schedulePanelPlacementUpdate(): void {
-    setTimeout(() => this.updatePanelPlacement());
-  }
-
-  private updatePanelPlacement(): void {
-    if (!this.open) return;
+  private openPanel(): void {
+    if (this.overlayRef) return;
 
     const triggerEl = this.triggerRef?.nativeElement;
-    const panelEl = this.panelRef?.nativeElement;
-    if (!triggerEl || !panelEl || typeof window === 'undefined') {
-      return;
-    }
+    if (!triggerEl) return;
 
-    const viewportHeight = window.innerHeight;
-    const gap = 4;
-    const triggerRect = triggerEl.getBoundingClientRect();
-    const panelHeight = panelEl.offsetHeight;
-    const spaceBelow = Math.max(0, viewportHeight - triggerRect.bottom - gap);
-    const spaceAbove = Math.max(0, triggerRect.top - gap);
-    const nextPlacement: 'top' | 'bottom' =
-      spaceBelow < panelHeight && spaceAbove > spaceBelow ? 'top' : 'bottom';
-    const availableHeight = nextPlacement === 'top' ? spaceAbove : spaceBelow;
-
-    this.panelPlacement = nextPlacement;
-    this.panelMaxHeightPx = Math.max(120, Math.min(384, Math.floor(availableHeight)));
+    this.open = true;
     this.cdr.markForCheck();
+
+    const positionStrategy = this.overlay
+      .position()
+      .flexibleConnectedTo(triggerEl)
+      .withPositions([
+        {
+          originX: 'start',
+          originY: 'bottom',
+          overlayX: 'start',
+          overlayY: 'top',
+          offsetY: 4
+        },
+        {
+          originX: 'start',
+          originY: 'top',
+          overlayX: 'start',
+          overlayY: 'bottom',
+          offsetY: -4
+        }
+      ])
+      .withFlexibleDimensions(false)
+      .withPush(true);
+
+    this.overlayRef = this.overlay.create({
+      positionStrategy,
+      scrollStrategy: this.overlay.scrollStrategies.reposition(),
+      width: triggerEl.offsetWidth
+    });
+
+    const portal = new TemplatePortal(
+      this.panelTemplateRef,
+      this.viewContainerRef
+    );
+    this.overlayRef.attach(portal);
+
+    this.backdropSub = this.overlayRef.outsidePointerEvents().subscribe((event) => {
+      const target = event.target as Node;
+      if (!triggerEl.contains(target)) {
+        this.closePanel();
+      }
+    });
+
+    this.cdr.markForCheck();
+  }
+
+  private closePanel(): void {
+    if (!this.overlayRef) return;
+
+    this.open = false;
+    this.destroyOverlay();
+    this.cdr.markForCheck();
+  }
+
+  private destroyOverlay(): void {
+    if (this.backdropSub) {
+      this.backdropSub.unsubscribe();
+      this.backdropSub = null;
+    }
+    if (this.overlayRef) {
+      this.overlayRef.dispose();
+      this.overlayRef = null;
+    }
   }
 }

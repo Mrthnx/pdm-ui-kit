@@ -30,13 +30,28 @@
     ></pdm-icon>
   </button>
 
+  <select
+    class="sr-only"
+    tabindex="-1"
+    aria-hidden="true"
+    [value]="value"
+    (change)="onChange($event)"
+  >
+    <option
+      *ngFor="let option of options"
+      [value]="option.value"
+      [disabled]="option.disabled"
+    >
+      {{ option.label }}
+    </option>
+  </select>
+</div>
+
+<ng-template #panelTemplate>
   <div
-    *ngIf="open"
-    #panelEl
     role="listbox"
     [attr.aria-labelledby]="id || null"
-    [ngClass]="panelClasses"
-    [style.max-height.px]="panelMaxHeightPx"
+    class="overflow-y-auto rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md max-h-96"
   >
     <button
       *ngFor="let option of options"
@@ -66,20 +81,4 @@
       </span>
     </button>
   </div>
-
-  <select
-    class="sr-only"
-    tabindex="-1"
-    aria-hidden="true"
-    [value]="value"
-    (change)="onChange($event)"
-  >
-    <option
-      *ngFor="let option of options"
-      [value]="option.value"
-      [disabled]="option.disabled"
-    >
-      {{ option.label }}
-    </option>
-  </select>
-</div>
+</ng-template>

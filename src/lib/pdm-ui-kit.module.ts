@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { PdmAccordionComponent } from './components/accordion/accordion.component';
 import { PdmAlertComponent } from './components/alert/alert.component';
 import { PdmAlertDialogComponent } from './components/alert-dialog/alert-dialog.component';
@@ -119,7 +120,7 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, OverlayModule],
   declarations: COMPONENTS,
   exports: COMPONENTS
 })
