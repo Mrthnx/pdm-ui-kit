@@ -120,6 +120,7 @@ export class PdmSelectComponent implements OnDestroy {
       .withPush(true);
 
     this.overlayRef = this.overlay.create({
+      panelClass: 'custom-overlay-pane',
       positionStrategy,
       scrollStrategy: this.overlay.scrollStrategies.reposition(),
       width: triggerEl.offsetWidth
