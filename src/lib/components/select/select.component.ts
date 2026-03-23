@@ -1,19 +1,23 @@
 import {
+  AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ContentChildren,
   ElementRef,
   EventEmitter,
   HostListener,
   Input,
   OnDestroy,
   Output,
+  QueryList,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { Subscription } from 'rxjs';
+import { PdmSelectOptionDirective } from './select-option.directive';
 
 export interface PdmSelectOption {
   label: string;
@@ -26,7 +30,7 @@ export interface PdmSelectOption {
   templateUrl: './select.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PdmSelectComponent implements OnDestroy {
+export class PdmSelectComponent implements AfterContentInit, OnDestroy {
   @Input() id = '';
   @Input() value = '';
   @Input() options: PdmSelectOption[] = [];
@@ -42,6 +46,10 @@ export class PdmSelectComponent implements OnDestroy {
   @ViewChild('triggerEl') private triggerRef?: ElementRef<HTMLElement>;
   @ViewChild('panelTemplate') private panelTemplateRef!: any;
 
+  /** Collects any `<pdm-select-option>` children projected into this component. */
+  @ContentChildren(PdmSelectOptionDirective)
+  private projectedOptions!: QueryList<PdmSelectOptionDirective>;
+
   private overlayRef: OverlayRef | null = null;
   private backdropSub: Subscription | null = null;
 
@@ -52,12 +60,33 @@ export class PdmSelectComponent implements OnDestroy {
     private readonly viewContainerRef: ViewContainerRef
   ) {}
 
+  ngAfterContentInit(): void {
+    // Re-render when projected options change (e.g. *ngFor on pdm-select-option).
+    this.projectedOptions.changes.subscribe(() => this.cdr.markForCheck());
+  }
+
   ngOnDestroy(): void {
     this.destroyOverlay();
   }
 
+  /**
+   * Returns the effective list of options.
+   * Projected `<pdm-select-option>` children take priority over the `[options]` input.
+   * Falls back to `[options]` when no children are projected.
+   */
+  get resolvedOptions(): PdmSelectOption[] {
+    if (this.projectedOptions && this.projectedOptions.length > 0) {
+      return this.projectedOptions.map((d) => ({
+        label: d.resolvedLabel,
+        value: d.value,
+        disabled: d.disabled
+      }));
+    }
+    return this.options;
+  }
+
   get selectedOption(): PdmSelectOption | undefined {
-    return this.options.find((option) => option.value === this.value);
+    return this.resolvedOptions.find((option) => option.value === this.value);
   }
 
   get selectedLabel(): string {
@@ -120,7 +149,8 @@ export class PdmSelectComponent implements OnDestroy {
       .withPush(true);
 
     this.overlayRef = this.overlay.create({
-      panelClass: 'block w-full',
+      // Fix: use a token array — DOMTokenList.add() rejects space-containing strings.
+      panelClass: ['block'],
       positionStrategy,
       scrollStrategy: this.overlay.scrollStrategies.reposition(),
       width: triggerEl.offsetWidth

@@ -44,6 +44,7 @@ import { PdmProgressComponent } from './components/progress/progress.component';
 import { PdmRadioGroupComponent } from './components/radio-group/radio-group.component';
 import { PdmScrollAreaComponent } from './components/scroll-area/scroll-area.component';
 import { PdmSelectComponent } from './components/select/select.component';
+import { PdmSelectOptionDirective } from './components/select/select-option.directive';
 import { PdmSeparatorComponent } from './components/separator/separator.component';
 import { PdmSheetComponent } from './components/sheet/sheet.component';
 import { PdmSidebarComponent } from './components/sidebar/sidebar.component';
@@ -103,6 +104,7 @@ const COMPONENTS = [
   PdmRadioGroupComponent,
   PdmScrollAreaComponent,
   PdmSelectComponent,
+  PdmSelectOptionDirective,
   PdmSeparatorComponent,
   PdmSheetComponent,
   PdmSidebarComponent,

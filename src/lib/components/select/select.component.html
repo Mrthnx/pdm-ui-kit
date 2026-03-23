@@ -30,6 +30,7 @@
     ></pdm-icon>
   </button>
 
+  <!-- Hidden native select kept for screen-reader / form fallback -->
   <select
     class="sr-only"
     tabindex="-1"
@@ -38,13 +39,18 @@
     (change)="onChange($event)"
   >
     <option
-      *ngFor="let option of options"
+      *ngFor="let option of resolvedOptions"
       [value]="option.value"
       [disabled]="option.disabled"
     >
       {{ option.label }}
     </option>
   </select>
+
+  <!-- Slot for content-projected pdm-select-option elements (hidden from layout) -->
+  <span class="hidden">
+    <ng-content select="pdm-select-option"></ng-content>
+  </span>
 </div>
 
 <ng-template #panelTemplate>
@@ -54,7 +60,7 @@
     class="overflow-y-auto rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md max-h-96"
   >
     <button
-      *ngFor="let option of options"
+      *ngFor="let option of resolvedOptions"
       type="button"
       role="option"
       [attr.aria-selected]="option.value === value"

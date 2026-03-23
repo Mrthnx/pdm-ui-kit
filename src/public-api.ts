@@ -42,6 +42,7 @@ export * from './lib/components/progress/progress.component';
 export * from './lib/components/radio-group/radio-group.component';
 export * from './lib/components/scroll-area/scroll-area.component';
 export * from './lib/components/select/select.component';
+export * from './lib/components/select/select-option.directive';
 export * from './lib/components/separator/separator.component';
 export * from './lib/components/sheet/sheet.component';
 export * from './lib/components/sidebar/sidebar.component';
