@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output
+} from '@angular/core';
 import { PdmMenuItem } from '../dropdown-menu/dropdown-menu.component';
 
 export interface PdmContextMenuItem extends PdmMenuItem {
@@ -11,7 +21,7 @@ export interface PdmContextMenuItem extends PdmMenuItem {
   templateUrl: './context-menu.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PdmContextMenuComponent {
+export class PdmContextMenuComponent implements OnInit, OnDestroy {
   @Input() items: PdmContextMenuItem[] = [
     { type: 'item', label: 'Back', value: 'back', inset: true, shortcut: '⌘[' },
     { type: 'item', label: 'Forward', value: 'forward', inset: true, shortcut: '⌘]', disabled: true },
@@ -36,7 +46,20 @@ export class PdmContextMenuComponent {
   x = 0;
   y = 0;
 
+  private boundPointerDown!: (event: PointerEvent) => void;
+
   constructor(private readonly elementRef: ElementRef<HTMLElement>) {}
+
+  ngOnInit(): void {
+    this.boundPointerDown = (event: PointerEvent) => this.onDocumentPointerDown(event);
+    document.addEventListener('pointerdown', this.boundPointerDown, { capture: true });
+  }
+
+  ngOnDestroy(): void {
+    if (this.boundPointerDown) {
+      document.removeEventListener('pointerdown', this.boundPointerDown, { capture: true });
+    }
+  }
 
   onContextMenu(event: MouseEvent): void {
     event.preventDefault();
@@ -53,11 +76,12 @@ export class PdmContextMenuComponent {
 
   @HostListener('document:keydown.escape')
   onEsc(): void {
-    this.open = false;
+    if (this.open) {
+      this.open = false;
+    }
   }
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent): void {
+  private onDocumentPointerDown(event: PointerEvent): void {
     if (!this.open) return;
     const target = event.target as Node | null;
     if (target && !this.elementRef.nativeElement.contains(target)) {

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
 
 export type PdmDrawerVariant = 'drawer' | 'responsive-dialog';
 
@@ -28,11 +28,29 @@ export class PdmDrawerComponent {
   @Input() usernameValue = '';
   @Input() responsivePrimaryLabel = '';
 
+  /** Close when the ESC key is pressed. Default: `true`. */
+  @Input() closeOnEsc = true;
+  /** Close when the backdrop is clicked. Default: `true`. */
+  @Input() closeOnBackdropClick = true;
+
   @Output() openChange = new EventEmitter<boolean>();
   @Output() primaryAction = new EventEmitter<void>();
   @Output() secondaryAction = new EventEmitter<void>();
 
   @Input() bars: number[] = [];
+
+  @HostListener('document:keydown.escape')
+  onEsc(): void {
+    if (this.open && this.closeOnEsc) {
+      this.close();
+    }
+  }
+
+  onBackdropClick(): void {
+    if (this.closeOnBackdropClick) {
+      this.close();
+    }
+  }
 
   close(): void {
     this.openChange.emit(false);

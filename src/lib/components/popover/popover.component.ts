@@ -6,6 +6,8 @@ import {
   EventEmitter,
   HostListener,
   Input,
+  OnDestroy,
+  OnInit,
   Output,
   ViewChild
 } from '@angular/core';
@@ -15,7 +17,7 @@ import {
   templateUrl: './popover.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PdmPopoverComponent {
+export class PdmPopoverComponent implements OnInit, OnDestroy {
   private _open = false;
   @Input() triggerText = 'Open';
   @Input() className = '';
@@ -29,10 +31,23 @@ export class PdmPopoverComponent {
   @ViewChild('triggerEl') private triggerRef?: ElementRef<HTMLElement>;
   @ViewChild('panelEl') private panelRef?: ElementRef<HTMLElement>;
 
+  private boundPointerDown!: (event: PointerEvent) => void;
+
   constructor(
     private readonly elementRef: ElementRef<HTMLElement>,
     private readonly cdr: ChangeDetectorRef
   ) {}
+
+  ngOnInit(): void {
+    this.boundPointerDown = (event: PointerEvent) => this.onDocumentPointerDown(event);
+    document.addEventListener('pointerdown', this.boundPointerDown, { capture: true });
+  }
+
+  ngOnDestroy(): void {
+    if (this.boundPointerDown) {
+      document.removeEventListener('pointerdown', this.boundPointerDown, { capture: true });
+    }
+  }
 
   @Input()
   set open(value: boolean) {
@@ -70,20 +85,19 @@ export class PdmPopoverComponent {
     }
   }
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent): void {
+  @HostListener('window:resize')
+  @HostListener('window:scroll')
+  onViewportChange(): void {
+    this.updatePanelPlacement();
+  }
+
+  private onDocumentPointerDown(event: PointerEvent): void {
     if (!this.open) return;
     const target = event.target as Node | null;
     if (target && !this.elementRef.nativeElement.contains(target)) {
       this.open = false;
       this.openChange.emit(false);
     }
-  }
-
-  @HostListener('window:resize')
-  @HostListener('window:scroll')
-  onViewportChange(): void {
-    this.updatePanelPlacement();
   }
 
   private schedulePanelPlacementUpdate(): void {

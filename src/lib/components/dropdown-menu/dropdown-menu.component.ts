@@ -163,7 +163,9 @@ export class PdmDropdownMenuComponent implements OnDestroy {
 
   @HostListener('document:keydown.escape')
   onEsc(): void {
-    this.closePanel();
+    if (this.open) {
+      this.closePanel();
+    }
   }
 
   private openPanel(): void {

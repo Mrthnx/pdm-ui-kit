@@ -1,5 +1,5 @@
 <div *ngIf="open" class="fixed inset-0 z-50" [ngClass]="className">
-  <div class="absolute inset-0 bg-foreground/30" (click)="close()"></div>
+  <div class="absolute inset-0 bg-foreground/30" (click)="onBackdropClick()"></div>
 
   <section
     *ngIf="variant === 'drawer'; else responsiveDialog"

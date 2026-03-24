@@ -38,6 +38,7 @@ import { PdmLabelComponent } from './components/label/label.component';
 import { PdmMenubarComponent } from './components/menubar/menubar.component';
 import { PdmNativeSelectComponent } from './components/native-select/native-select.component';
 import { PdmNavigationMenuComponent } from './components/navigation-menu/navigation-menu.component';
+import { PdmOutsideClickDirective } from './overlay/pdm-outside-click.directive';
 import { PdmPaginationComponent } from './components/pagination/pagination.component';
 import { PdmPopoverComponent } from './components/popover/popover.component';
 import { PdmProgressComponent } from './components/progress/progress.component';
@@ -98,6 +99,7 @@ const COMPONENTS = [
   PdmMenubarComponent,
   PdmNativeSelectComponent,
   PdmNavigationMenuComponent,
+  PdmOutsideClickDirective,
   PdmPaginationComponent,
   PdmPopoverComponent,
   PdmProgressComponent,

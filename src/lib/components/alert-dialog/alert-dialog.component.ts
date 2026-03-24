@@ -15,30 +15,48 @@ export class PdmAlertDialogComponent {
   @Input() cancelText = 'Cancel';
   @Input() className = '';
 
+  /** Close when the ESC key is pressed. Default: `true`. */
+  @Input() closeOnEsc = true;
+
   @Output() openChange = new EventEmitter<boolean>();
   @Output() confirm = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
 
+  /**
+   * Returns `true` when at least one consumer listens to `openChange`.
+   * - **Controlled** (has observers): parent manages `open` via two-way binding → only emit.
+   * - **Uncontrolled** (no observers): we own the `open` state → mutate it locally.
+   */
+  private get isControlled(): boolean {
+    return this.openChange.observed;
+  }
+
   onTriggerClick(): void {
-    this.open = true;
+    if (!this.isControlled) {
+      this.open = true;
+    }
     this.openChange.emit(true);
   }
 
   onCancel(): void {
     this.cancel.emit();
-    this.open = false;
+    if (!this.isControlled) {
+      this.open = false;
+    }
     this.openChange.emit(false);
   }
 
   onConfirm(): void {
     this.confirm.emit();
-    this.open = false;
+    if (!this.isControlled) {
+      this.open = false;
+    }
     this.openChange.emit(false);
   }
 
   @HostListener('document:keydown.escape')
   onEsc(): void {
-    if (this.open) {
+    if (this.open && this.closeOnEsc) {
       this.onCancel();
     }
   }
