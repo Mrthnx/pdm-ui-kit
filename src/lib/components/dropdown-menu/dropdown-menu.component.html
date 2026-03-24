@@ -1,19 +1,19 @@
-<div class="relative inline-block" [ngClass]="className">
-  <button
-    type="button"
-    class="inline-flex h-9 appearance-none items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-    [attr.aria-expanded]="open"
-    (click)="toggle()"
-  >
-    {{ triggerText }}
-  </button>
+<button
+  #triggerEl
+  type="button"
+  [ngClass]="[
+    'inline-flex h-9 appearance-none items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+    className
+  ]"
+  [attr.aria-expanded]="open"
+  (click)="toggle()"
+>
+  {{ triggerText }}
+</button>
 
+<ng-template #panelTemplate>
   <div
-    *ngIf="open"
-    [ngClass]="[
-      'absolute left-0 top-full z-50 mt-2 min-w-32 overflow-hidden rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md',
-      panelClassName
-    ]"
+    class="min-w-32 overflow-hidden rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md"
   >
     <ng-container *ngFor="let item of resolvedItems">
       <div *ngIf="item.type === 'separator'" class="-mx-1 my-1 h-px bg-muted"></div>
@@ -53,4 +53,4 @@
       </button>
     </ng-container>
   </div>
-</div>
+</ng-template>

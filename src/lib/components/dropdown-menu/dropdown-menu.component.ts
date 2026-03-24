@@ -1,4 +1,20 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnDestroy,
+  Output,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
+import { Subscription } from 'rxjs';
+import { PdmOverlayOptions } from '../../overlay/pdm-overlay-options';
 
 export type PdmDropdownMenuVariant = 'default' | 'checkboxes' | 'radio-group';
 
@@ -19,23 +35,57 @@ export interface PdmMenuItem {
   templateUrl: './dropdown-menu.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PdmDropdownMenuComponent {
+export class PdmDropdownMenuComponent implements OnDestroy {
   @Input() triggerText = 'Open';
   @Input() variant: PdmDropdownMenuVariant = 'default';
   @Input() items: PdmMenuItem[] = [];
   @Input() closeOnSelect = true;
-  @Input() panelClassName = '';
+  /**
+   * Additional CSS classes applied to the trigger wrapper element.
+   * Preserved for backward compatibility.
+   */
   @Input() className = '';
+  /**
+   * Additional CSS classes applied to the overlay panel.
+   * Backward-compatible: mapped to `overlayOptions.panelClass` when `overlayOptions` is not set.
+   * When both are supplied, `overlayOptions.panelClass` takes precedence.
+   */
+  @Input() panelClassName = '';
+  /**
+   * Optional CDK OverlayConfig overrides.
+   * Shallow-merged on top of component defaults — consumer always wins.
+   * Providing `positionStrategy` or `scrollStrategy` replaces the component default entirely.
+   */
+  @Input() overlayOptions?: PdmOverlayOptions;
 
   @Output() itemSelect = new EventEmitter<string>();
   @Output() itemsChange = new EventEmitter<PdmMenuItem[]>();
 
   open = false;
 
-  constructor(private readonly elementRef: ElementRef<HTMLElement>) {}
+  @ViewChild('triggerEl') private triggerRef?: ElementRef<HTMLElement>;
+  @ViewChild('panelTemplate') private panelTemplateRef!: any;
+
+  private overlayRef: OverlayRef | null = null;
+  private backdropSub: Subscription | null = null;
+
+  constructor(
+    private readonly elementRef: ElementRef<HTMLElement>,
+    private readonly cdr: ChangeDetectorRef,
+    private readonly overlay: Overlay,
+    private readonly viewContainerRef: ViewContainerRef
+  ) {}
+
+  ngOnDestroy(): void {
+    this.destroyOverlay();
+  }
 
   toggle(): void {
-    this.open = !this.open;
+    if (this.open) {
+      this.closePanel();
+    } else {
+      this.openPanel();
+    }
   }
 
   get resolvedItems(): PdmMenuItem[] {
@@ -106,21 +156,88 @@ export class PdmDropdownMenuComponent {
 
     const shouldClose = this.variant === 'default' ? this.closeOnSelect : false;
     if (shouldClose) {
-      this.open = false;
+      this.closePanel();
     }
   }
 
   @HostListener('document:keydown.escape')
   onEsc(): void {
-    this.open = false;
+    this.closePanel();
   }
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent): void {
-    if (!this.open) return;
-    const target = event.target as Node | null;
-    if (target && !this.elementRef.nativeElement.contains(target)) {
-      this.open = false;
+  private openPanel(): void {
+    if (this.overlayRef) return;
+
+    const triggerEl = this.triggerRef?.nativeElement;
+    if (!triggerEl) return;
+
+    this.open = true;
+    this.cdr.markForCheck();
+
+    const positionStrategy = this.overlay
+      .position()
+      .flexibleConnectedTo(triggerEl)
+      .withPositions([
+        {
+          originX: 'start',
+          originY: 'bottom',
+          overlayX: 'start',
+          overlayY: 'top',
+          offsetY: 8
+        },
+        {
+          originX: 'start',
+          originY: 'top',
+          overlayX: 'start',
+          overlayY: 'bottom',
+          offsetY: -8
+        }
+      ])
+      .withFlexibleDimensions(false)
+      .withPush(true);
+
+    // Resolve panelClass: overlayOptions.panelClass wins; otherwise map panelClassName.
+    const resolvedPanelClass = this.overlayOptions?.panelClass
+      ?? (this.panelClassName ? ['block', this.panelClassName] : ['block']);
+
+    this.overlayRef = this.overlay.create({
+      positionStrategy,
+      scrollStrategy: this.overlay.scrollStrategies.reposition(),
+      // Consumer overrides are spread last — they win over every default above.
+      ...this.overlayOptions,
+      // panelClass always overrides last: it already merges panelClassName + overlayOptions.
+      panelClass: resolvedPanelClass
+    });
+
+    const portal = new TemplatePortal(this.panelTemplateRef, this.viewContainerRef);
+    this.overlayRef.attach(portal);
+
+    this.backdropSub = this.overlayRef.outsidePointerEvents().subscribe((event) => {
+      const target = event.target as Node;
+      if (!triggerEl.contains(target)) {
+        this.closePanel();
+      }
+    });
+
+    this.cdr.markForCheck();
+  }
+
+  private closePanel(): void {
+    if (!this.overlayRef) return;
+
+    this.open = false;
+    this.destroyOverlay();
+    this.cdr.markForCheck();
+  }
+
+  private destroyOverlay(): void {
+    if (this.backdropSub) {
+      this.backdropSub.unsubscribe();
+      this.backdropSub = null;
+    }
+    if (this.overlayRef) {
+      this.overlayRef.dispose();
+      this.overlayRef = null;
     }
   }
 }

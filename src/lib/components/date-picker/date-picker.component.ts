@@ -6,11 +6,17 @@ import {
   EventEmitter,
   HostListener,
   Input,
+  OnDestroy,
   Output,
-  ViewChild
+  ViewChild,
+  ViewContainerRef
 } from '@angular/core';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
+import { Subscription } from 'rxjs';
 import { format as formatDateFns } from 'date-fns';
 import { PdmCalendarRange, PdmCalendarVariant } from '../calendar/calendar.component';
+import { PdmOverlayOptions } from '../../overlay/pdm-overlay-options';
 
 let nextDatePickerId = 0;
 
@@ -19,21 +25,25 @@ let nextDatePickerId = 0;
   templateUrl: './date-picker.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PdmDatePickerComponent {
+export class PdmDatePickerComponent implements OnDestroy {
   private _value: Date | null = null;
   private _rangeValue: PdmCalendarRange | null = null;
   private _open = false;
 
   private readonly instanceId = `pdm-date-picker-${++nextDatePickerId}`;
   private triggerFocused = false;
-  panelPlacement: 'top' | 'bottom' = 'bottom';
+
+  private overlayRef: OverlayRef | null = null;
+  private backdropSub: Subscription | null = null;
 
   @ViewChild('triggerEl') private triggerRef?: ElementRef<HTMLElement>;
-  @ViewChild('panelEl') private panelRef?: ElementRef<HTMLElement>;
+  @ViewChild('panelTemplate') private panelTemplateRef!: any;
 
   constructor(
     private readonly elementRef: ElementRef<HTMLElement>,
-    private readonly cdr: ChangeDetectorRef
+    private readonly cdr: ChangeDetectorRef,
+    private readonly overlay: Overlay,
+    private readonly viewContainerRef: ViewContainerRef
   ) {}
 
   @Input() id = '';
@@ -42,7 +52,18 @@ export class PdmDatePickerComponent {
   @Input() labelClassName = '';
   @Input() className = '';
   @Input() triggerClassName = '';
+  /**
+   * Additional CSS classes applied to the overlay panel.
+   * Backward-compatible: mapped to `overlayOptions.panelClass` when `overlayOptions` is not set.
+   * When both are supplied, `overlayOptions.panelClass` takes precedence.
+   */
   @Input() panelClassName = '';
+  /**
+   * Optional CDK OverlayConfig overrides.
+   * Shallow-merged on top of component defaults — consumer always wins.
+   * Providing `positionStrategy` or `scrollStrategy` replaces the component default entirely.
+   */
+  @Input() overlayOptions?: PdmOverlayOptions;
   @Input() placeholder = 'Pick a date';
   @Input() rangePlaceholder = 'Pick a date range';
   @Input() format = 'MMM d, yyyy';
@@ -66,13 +87,12 @@ export class PdmDatePickerComponent {
 
   @Input()
   set open(value: boolean) {
-    this._open = !!value;
-    if (this._open) {
-      this.schedulePanelPlacementUpdate();
+    if (this._open === !!value) return;
+    if (!!value) {
+      this.openPanel();
     } else {
-      this.panelPlacement = 'bottom';
+      this.closePanel();
     }
-    this.cdr.markForCheck();
   }
   get open(): boolean {
     return this._open;
@@ -99,6 +119,10 @@ export class PdmDatePickerComponent {
   }
   get rangeValue(): PdmCalendarRange | null {
     return this._rangeValue;
+  }
+
+  ngOnDestroy(): void {
+    this.destroyOverlay();
   }
 
   get resolvedVariant(): PdmCalendarVariant {
@@ -157,7 +181,7 @@ export class PdmDatePickerComponent {
   }
 
   get triggerClasses(): string[] {
-    const focusStyle = this.open || this.triggerFocused;
+    const focusStyle = this._open || this.triggerFocused;
 
     return [
       'border-input focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 aria-invalid:ring-2 aria-invalid:ring-destructive aria-invalid:border-destructive relative flex w-full appearance-none items-center gap-2 overflow-hidden rounded-lg border bg-background px-3 py-[7.5px] text-left text-sm shadow-sm outline-none transition-colors',
@@ -170,21 +194,12 @@ export class PdmDatePickerComponent {
     ];
   }
 
-  get panelClasses(): string[] {
-    return [
-      this.panelPlacement === 'top'
-        ? 'absolute bottom-full left-0 z-50 mb-2'
-        : 'absolute left-0 top-full z-50 mt-2',
-      this.panelClassName
-    ];
-  }
-
   toggleOpen(): void {
     if (this.disabled || this.readonly) {
       return;
     }
 
-    this.setOpen(!this.open);
+    this.setOpen(!this._open);
   }
 
   onTriggerFocus(): void {
@@ -239,27 +254,9 @@ export class PdmDatePickerComponent {
 
   @HostListener('document:keydown.escape')
   onEscape(): void {
-    if (this.open) {
+    if (this._open) {
       this.setOpen(false);
     }
-  }
-
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent): void {
-    if (!this.open) {
-      return;
-    }
-
-    const target = event.target as Node | null;
-    if (target && !this.elementRef.nativeElement.contains(target)) {
-      this.setOpen(false);
-    }
-  }
-
-  @HostListener('window:resize')
-  @HostListener('window:scroll')
-  onViewportChange(): void {
-    this.updatePanelPlacement();
   }
 
   private setOpen(nextOpen: boolean): void {
@@ -267,43 +264,88 @@ export class PdmDatePickerComponent {
       return;
     }
 
-    this._open = nextOpen;
-    this.openChange.emit(this._open);
-    if (this._open) {
-      this.schedulePanelPlacementUpdate();
+    if (nextOpen) {
+      this.openPanel();
     } else {
-      this.panelPlacement = 'bottom';
+      this.closePanel();
     }
+  }
+
+  private openPanel(): void {
+    if (this.overlayRef) return;
+
+    const triggerEl = this.triggerRef?.nativeElement;
+    if (!triggerEl) return;
+
+    this._open = true;
+    this.openChange.emit(true);
+    this.cdr.markForCheck();
+
+    const positionStrategy = this.overlay
+      .position()
+      .flexibleConnectedTo(triggerEl)
+      .withPositions([
+        {
+          originX: 'start',
+          originY: 'bottom',
+          overlayX: 'start',
+          overlayY: 'top',
+          offsetY: 8
+        },
+        {
+          originX: 'start',
+          originY: 'top',
+          overlayX: 'start',
+          overlayY: 'bottom',
+          offsetY: -8
+        }
+      ])
+      .withFlexibleDimensions(false)
+      .withPush(true);
+
+    // Resolve panelClass: overlayOptions.panelClass wins; otherwise map panelClassName.
+    const resolvedPanelClass = this.overlayOptions?.panelClass
+      ?? (this.panelClassName ? ['block', this.panelClassName] : ['block']);
+
+    this.overlayRef = this.overlay.create({
+      positionStrategy,
+      scrollStrategy: this.overlay.scrollStrategies.reposition(),
+      // Consumer overrides are spread last — they win over every default above.
+      ...this.overlayOptions,
+      // panelClass always overrides last: it already merges panelClassName + overlayOptions.
+      panelClass: resolvedPanelClass
+    });
+
+    const portal = new TemplatePortal(this.panelTemplateRef, this.viewContainerRef);
+    this.overlayRef.attach(portal);
+
+    this.backdropSub = this.overlayRef.outsidePointerEvents().subscribe((event) => {
+      const target = event.target as Node;
+      if (!triggerEl.contains(target)) {
+        this.closePanel();
+      }
+    });
+
     this.cdr.markForCheck();
   }
 
-  private schedulePanelPlacementUpdate(): void {
-    setTimeout(() => this.updatePanelPlacement());
+  private closePanel(): void {
+    if (!this.overlayRef && !this._open) return;
+
+    this._open = false;
+    this.openChange.emit(false);
+    this.destroyOverlay();
+    this.cdr.markForCheck();
   }
 
-  private updatePanelPlacement(): void {
-    if (!this._open) {
-      return;
+  private destroyOverlay(): void {
+    if (this.backdropSub) {
+      this.backdropSub.unsubscribe();
+      this.backdropSub = null;
     }
-
-    const triggerEl = this.triggerRef?.nativeElement;
-    const panelEl = this.panelRef?.nativeElement;
-    if (!triggerEl || !panelEl || typeof window === 'undefined') {
-      return;
-    }
-
-    const viewportHeight = window.innerHeight;
-    const gap = 8;
-    const triggerRect = triggerEl.getBoundingClientRect();
-    const panelHeight = panelEl.offsetHeight;
-    const spaceBelow = Math.max(0, viewportHeight - triggerRect.bottom - gap);
-    const spaceAbove = Math.max(0, triggerRect.top - gap);
-    const nextPlacement: 'top' | 'bottom' =
-      spaceBelow < panelHeight && spaceAbove > spaceBelow ? 'top' : 'bottom';
-
-    if (this.panelPlacement !== nextPlacement) {
-      this.panelPlacement = nextPlacement;
-      this.cdr.markForCheck();
+    if (this.overlayRef) {
+      this.overlayRef.dispose();
+      this.overlayRef = null;
     }
   }
 

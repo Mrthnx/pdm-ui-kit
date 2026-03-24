@@ -18,6 +18,7 @@ import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { Subscription } from 'rxjs';
 import { PdmSelectOptionDirective } from './select-option.directive';
+import { PdmOverlayOptions } from '../../overlay/pdm-overlay-options';
 
 export interface PdmSelectOption {
   label: string;
@@ -38,6 +39,12 @@ export class PdmSelectComponent implements AfterContentInit, OnDestroy {
   @Input() invalid = false;
   @Input() className = '';
   @Input() placeholder = 'Select an option';
+  /**
+   * Optional CDK OverlayConfig overrides.
+   * Shallow-merged on top of component defaults — consumer always wins.
+   * Providing `positionStrategy` or `scrollStrategy` replaces the component default entirely.
+   */
+  @Input() overlayOptions?: PdmOverlayOptions;
 
   open = false;
 
@@ -153,7 +160,9 @@ export class PdmSelectComponent implements AfterContentInit, OnDestroy {
       panelClass: ['block'],
       positionStrategy,
       scrollStrategy: this.overlay.scrollStrategies.reposition(),
-      width: triggerEl.offsetWidth
+      width: triggerEl.offsetWidth,
+      // Consumer overrides are spread last — they win over every default above.
+      ...this.overlayOptions
     });
 
     const portal = new TemplatePortal(
