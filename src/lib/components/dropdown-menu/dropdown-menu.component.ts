@@ -15,6 +15,7 @@ import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { Subscription } from 'rxjs';
 import { PdmOverlayOptions } from '../../overlay/pdm-overlay-options';
+import { createFlexiblePositionStrategy } from '../../overlay/create-flexible-position-strategy';
 
 export type PdmDropdownMenuVariant = 'default' | 'checkboxes' | 'radio-group';
 
@@ -174,27 +175,11 @@ export class PdmDropdownMenuComponent implements OnDestroy {
     this.open = true;
     this.cdr.markForCheck();
 
-    const positionStrategy = this.overlay
-      .position()
-      .flexibleConnectedTo(triggerEl)
-      .withPositions([
-        {
-          originX: 'start',
-          originY: 'bottom',
-          overlayX: 'start',
-          overlayY: 'top',
-          offsetY: 8
-        },
-        {
-          originX: 'start',
-          originY: 'top',
-          overlayX: 'start',
-          overlayY: 'bottom',
-          offsetY: -8
-        }
-      ])
-      .withFlexibleDimensions(false)
-      .withPush(true);
+    const positionStrategy = createFlexiblePositionStrategy(
+      this.overlay,
+      triggerEl,
+      8
+    );
 
     // Resolve panelClass: overlayOptions.panelClass wins; otherwise map panelClassName.
     const resolvedPanelClass = this.overlayOptions?.panelClass

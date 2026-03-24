@@ -19,6 +19,7 @@ import { TemplatePortal } from '@angular/cdk/portal';
 import { Subscription } from 'rxjs';
 import { PdmSelectOptionDirective } from './select-option.directive';
 import { PdmOverlayOptions } from '../../overlay/pdm-overlay-options';
+import { createFlexiblePositionStrategy } from '../../overlay/create-flexible-position-strategy';
 
 export interface PdmSelectOption {
   label: string;
@@ -133,27 +134,11 @@ export class PdmSelectComponent implements AfterContentInit, OnDestroy {
     this.open = true;
     this.cdr.markForCheck();
 
-    const positionStrategy = this.overlay
-      .position()
-      .flexibleConnectedTo(triggerEl)
-      .withPositions([
-        {
-          originX: 'start',
-          originY: 'bottom',
-          overlayX: 'start',
-          overlayY: 'top',
-          offsetY: 4
-        },
-        {
-          originX: 'start',
-          originY: 'top',
-          overlayX: 'start',
-          overlayY: 'bottom',
-          offsetY: -4
-        }
-      ])
-      .withFlexibleDimensions(false)
-      .withPush(true);
+    const positionStrategy = createFlexiblePositionStrategy(
+      this.overlay,
+      triggerEl,
+      4
+    );
 
     this.overlayRef = this.overlay.create({
       // Fix: use a token array — DOMTokenList.add() rejects space-containing strings.

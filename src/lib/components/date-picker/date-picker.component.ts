@@ -17,6 +17,7 @@ import { Subscription } from 'rxjs';
 import { format as formatDateFns } from 'date-fns';
 import { PdmCalendarRange, PdmCalendarVariant } from '../calendar/calendar.component';
 import { PdmOverlayOptions } from '../../overlay/pdm-overlay-options';
+import { createFlexiblePositionStrategy } from '../../overlay/create-flexible-position-strategy';
 
 let nextDatePickerId = 0;
 
@@ -281,27 +282,11 @@ export class PdmDatePickerComponent implements OnDestroy {
     this.openChange.emit(true);
     this.cdr.markForCheck();
 
-    const positionStrategy = this.overlay
-      .position()
-      .flexibleConnectedTo(triggerEl)
-      .withPositions([
-        {
-          originX: 'start',
-          originY: 'bottom',
-          overlayX: 'start',
-          overlayY: 'top',
-          offsetY: 8
-        },
-        {
-          originX: 'start',
-          originY: 'top',
-          overlayX: 'start',
-          overlayY: 'bottom',
-          offsetY: -8
-        }
-      ])
-      .withFlexibleDimensions(false)
-      .withPush(true);
+    const positionStrategy = createFlexiblePositionStrategy(
+      this.overlay,
+      triggerEl,
+      8
+    );
 
     // Resolve panelClass: overlayOptions.panelClass wins; otherwise map panelClassName.
     const resolvedPanelClass = this.overlayOptions?.panelClass

@@ -1,5 +1,6 @@
 export * from './lib/pdm-ui-kit.module';
 export * from './lib/overlay/pdm-overlay-options';
+export * from './lib/overlay/create-flexible-position-strategy';
 export * from './lib/components/accordion/accordion.component';
 export * from './lib/components/alert/alert.component';
 export * from './lib/components/alert-dialog/alert-dialog.component';
