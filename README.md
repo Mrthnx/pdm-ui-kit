@@ -1,6 +1,6 @@
 # PDM UI Kit
 
-Librería de componentes UI para Angular (13, 14 y 15), construida sobre patrones visuales del **Figma de shadcn/ui** y adaptada para el ecosistema de Corelusa.
+Librería de componentes UI para Angular 15+, construida sobre patrones visuales del **Figma de shadcn/ui** y adaptada para el ecosistema de Corelusa.
 
 ## ✨ What's New in v0.2.0
 
@@ -19,7 +19,7 @@ Este kit está **basado en el Figma de shadcn/ui** y mantiene una estructura de 
 
 ## Compatibilidad
 
-- Angular: 13, 14, 15
+- Angular: 15, 16, 17
 - Arquitectura: NgModules (no standalone)
 - Estilos: Tailwind CSS v3 + variables CSS del proyecto consumidor
 
