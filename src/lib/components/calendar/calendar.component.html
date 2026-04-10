@@ -19,7 +19,7 @@
 
       <ng-container *ngIf="month.titleStyle === 'dropdowns'; else plainTitle">
         <div [ngClass]="dropdownWrapClasses()">
-          <div [ngClass]="dropdownClasses('w-[72px]')">
+          <div [ngClass]="dropdownClasses('w-16 sm:w-[72px]')">
             <select
               [ngClass]="dropdownSelectClasses()"
               [ngStyle]="dropdownSelectStyle"
@@ -39,7 +39,7 @@
               <path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
           </div>
-          <div [ngClass]="dropdownClasses('w-[82px]')">
+          <div [ngClass]="dropdownClasses('w-16 sm:w-[82px]')">
             <select
               [ngClass]="dropdownSelectClasses()"
               [ngStyle]="dropdownSelectStyle"

@@ -1,3 +1,32 @@
-<aside [ngClass]="['h-full border-r border-border bg-background transition-all', collapsed ? 'w-14' : 'w-64', className]">
+<!-- Mobile drawer mode -->
+<ng-container *ngIf="mobileMode === 'drawer'">
+  <!-- Backdrop -->
+  <div
+    *ngIf="open"
+    class="fixed inset-0 z-40 bg-black/50 lg:hidden"
+    (click)="onBackdropClick()"
+  ></div>
+  
+  <!-- Drawer -->
+  <aside
+    [ngClass]="[
+      'fixed inset-y-0 left-0 z-50 h-full w-64 transform border-r border-border bg-background transition-transform duration-300 lg:relative lg:z-auto lg:translate-x-0',
+      open ? 'translate-x-0' : '-translate-x-full',
+      className
+    ]"
+  >
+    <ng-content></ng-content>
+  </aside>
+</ng-container>
+
+<!-- Sidebar persistente mode -->
+<aside
+  *ngIf="mobileMode === 'sidebar'"
+  [ngClass]="[
+    'h-full border-r border-border bg-background transition-all',
+    collapsed ? 'w-14 sm:w-14' : 'w-48 sm:w-56 lg:w-64',
+    className
+  ]"
+>
   <ng-content></ng-content>
 </aside>

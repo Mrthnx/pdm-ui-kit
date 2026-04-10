@@ -1,15 +1,19 @@
-<div *ngIf="open" class="fixed inset-0 z-50 flex items-center justify-center p-4">
-  <div class="absolute inset-0 bg-foreground/30" (click)="onBackdropClick()"></div>
+<div *ngIf="open" [ngClass]="containerClassName">
+  <!-- Backdrop -->
+  <div class="absolute inset-0 bg-foreground/30 backdrop-blur-sm" (click)="onBackdropClick()"></div>
+  
+  <!-- Dialog Panel -->
   <section role="dialog" aria-modal="true" [ngClass]="panelClassName">
+    <!-- Header -->
     <div *ngIf="showHeader" [ngClass]="headerWrapperClassName">
-      <div class="min-w-0">
+      <div class="min-w-0 flex-1">
         <h2 class="m-0 text-lg font-semibold leading-none tracking-tight text-foreground">{{ title }}</h2>
         <p *ngIf="description" class="m-0 mt-2 text-sm text-muted-foreground">{{ description }}</p>
       </div>
       <button
         *ngIf="showCloseButton"
         type="button"
-        class="inline-flex h-6 w-6 appearance-none items-center justify-center rounded-sm border-0 bg-transparent p-0 text-foreground opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none"
+        class="inline-flex h-6 w-6 flex-shrink-0 appearance-none items-center justify-center rounded-sm border-0 bg-transparent p-0 text-foreground opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none"
         (click)="close()"
         aria-label="Close dialog"
       >
@@ -19,15 +23,17 @@
       </button>
     </div>
 
+    <!-- Body -->
     <div [ngClass]="bodyWrapperClassName">
       <ng-content></ng-content>
     </div>
 
+    <!-- Footer -->
     <div *ngIf="showFooter" [ngClass]="footerWrapperClassName">
       <ng-container *ngIf="variant === 'custom-close'; else defaultActions">
         <button
           type="button"
-          class="inline-flex h-9 appearance-none items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm"
+          class="inline-flex h-9 w-full appearance-none items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm sm:w-auto"
           (click)="onSecondaryAction()"
         >
           {{ secondaryActionText }}
@@ -37,14 +43,14 @@
       <ng-template #defaultActions>
         <button
           type="button"
-          class="inline-flex h-9 appearance-none items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm"
+          class="inline-flex h-9 w-full appearance-none items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm sm:w-auto"
           (click)="onSecondaryAction()"
         >
           {{ secondaryActionText }}
         </button>
         <button
           type="button"
-          class="inline-flex h-9 appearance-none items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm"
+          class="inline-flex h-9 w-full appearance-none items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm sm:w-auto"
           (click)="onPrimaryAction()"
         >
           {{ primaryActionText }}

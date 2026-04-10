@@ -11,6 +11,7 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
+import { Z_INDEX } from '../../utils/z-index';
 
 @Component({
   selector: 'pdm-popover',
@@ -64,10 +65,11 @@ export class PdmPopoverComponent implements OnInit, OnDestroy {
   }
 
   get panelClasses(): string[] {
+    const baseClasses = 'min-w-80 rounded-md border border-border bg-popover p-4 text-popover-foreground shadow-md';
     return [
       this.panelPlacement === 'top'
-        ? 'absolute bottom-full left-0 z-30 mb-2 min-w-80 rounded-md border border-border bg-popover p-4 text-popover-foreground shadow-md'
-        : 'absolute left-0 top-full z-30 mt-2 min-w-80 rounded-md border border-border bg-popover p-4 text-popover-foreground shadow-md',
+        ? `absolute bottom-full left-0 ${Z_INDEX.popover} mb-2 ${baseClasses}`
+        : `absolute left-0 top-full ${Z_INDEX.popover} mt-2 ${baseClasses}`,
       this.panelClassName
     ];
   }

@@ -20,6 +20,7 @@ import { Subscription } from 'rxjs';
 import { PdmSelectOptionDirective } from './select-option.directive';
 import { PdmOverlayOptions } from '../../overlay/pdm-overlay-options';
 import { createFlexiblePositionStrategy } from '../../overlay/create-flexible-position-strategy';
+import { Z_INDEX } from '../../utils/z-index';
 
 export interface PdmSelectOption {
   label: string;
@@ -143,8 +144,9 @@ export class PdmSelectComponent implements AfterContentInit, OnDestroy {
     );
 
     this.overlayRef = this.overlay.create({
-      // Fix: use a token array — DOMTokenList.add() rejects space-containing strings.
-      panelClass: ['block'],
+      // CRÍTICO: z-[70] para aparecer SOBRE modals (z-[60])
+      // panelClass se aplica al cdk-overlay-pane wrapper
+      panelClass: [Z_INDEX.popover],
       positionStrategy,
       scrollStrategy: this.overlay.scrollStrategies.reposition(),
       width: triggerEl.offsetWidth,

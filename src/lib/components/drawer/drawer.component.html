@@ -1,56 +1,81 @@
-<div *ngIf="open" class="fixed inset-0 z-50" [ngClass]="className">
-  <div class="absolute inset-0 bg-foreground/30" (click)="onBackdropClick()"></div>
+<div *ngIf="open" [ngClass]="containerClassName">
+  <!-- Backdrop -->
+  <div class="absolute inset-0 bg-foreground/30 backdrop-blur-sm" (click)="onBackdropClick()"></div>
 
-  <section
-    *ngIf="variant === 'drawer'; else responsiveDialog"
-    class="absolute inset-x-0 bottom-0 mx-auto w-full max-w-6xl rounded-t-lg border border-border bg-background p-6 shadow-lg"
-  >
-    <div class="mx-auto mb-4 h-1 w-10 rounded-full bg-border"></div>
+  <!-- Panel -->
+  <section [ngClass]="panelClassName">
+    <!-- Handle visual (solo para bottom) -->
+    <div 
+      *ngIf="showHandle && position === 'bottom'" 
+      class="mx-auto mb-4 mt-2 h-1 w-10 rounded-full bg-border">
+    </div>
 
-    <div class="mx-auto flex max-w-sm flex-col items-center">
-      <h3 class="m-0 text-sm font-semibold text-foreground">{{ title }}</h3>
-      <p class="m-0 mt-1 text-xs text-muted-foreground">{{ description }}</p>
+    <!-- Header (opcional) -->
+    <div *ngIf="title || description || showCloseButton" class="flex items-start justify-between gap-4 p-6 pb-4">
+      <div *ngIf="title || description" class="flex-1 min-w-0">
+        <h3 *ngIf="title" class="m-0 text-lg font-semibold leading-none tracking-tight text-foreground">
+          {{ title }}
+        </h3>
+        <p *ngIf="description" class="m-0 mt-1 text-sm text-muted-foreground">
+          {{ description }}
+        </p>
+      </div>
+      
+      <button
+        *ngIf="showCloseButton"
+        type="button"
+        class="inline-flex h-6 w-6 flex-shrink-0 appearance-none items-center justify-center rounded-sm border-0 bg-transparent p-0 text-foreground opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+        (click)="close()"
+        aria-label="Close drawer"
+      >
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+        </svg>
+      </button>
+    </div>
 
-      <div class="mt-3 flex w-full items-center justify-center gap-4">
-        <button type="button" class="inline-flex h-6 w-6 appearance-none items-center justify-center rounded-full border border-border bg-transparent p-0 text-muted-foreground">{{ decrementLabel }}</button>
-        <div class="text-center">
-          <div class="text-5xl font-semibold leading-none text-foreground">{{ value }}</div>
-          <div class="mt-1 text-xs tracking-wide text-muted-foreground">{{ unit }}</div>
+    <!-- Content -->
+    <div class="px-6 pb-6">
+      <!-- Contenido genérico -->
+      <ng-container *ngIf="!showLegacyContent">
+        <ng-content></ng-content>
+      </ng-container>
+
+      <!-- LEGACY: contenido específico hardcodeado (backward compatibility) -->
+      <ng-container *ngIf="showLegacyContent">
+        <!-- Variant: drawer -->
+        <div *ngIf="variant === 'drawer'" class="mx-auto flex max-w-sm flex-col items-center">
+          <div *ngIf="value !== ''" class="mt-3 flex w-full items-center justify-center gap-4">
+            <button type="button" class="inline-flex h-6 w-6 appearance-none items-center justify-center rounded-full border border-border bg-transparent p-0 text-muted-foreground">{{ decrementLabel }}</button>
+            <div class="text-center">
+              <div class="text-5xl font-semibold leading-none text-foreground">{{ value }}</div>
+              <div *ngIf="unit" class="mt-1 text-xs tracking-wide text-muted-foreground">{{ unit }}</div>
+            </div>
+            <button type="button" class="inline-flex h-6 w-6 appearance-none items-center justify-center rounded-full border border-border bg-transparent p-0 text-muted-foreground">{{ incrementLabel }}</button>
+          </div>
+
+          <div *ngIf="bars.length" class="mt-3 flex h-14 w-full items-end gap-1">
+            <div *ngFor="let bar of bars" class="flex-1 bg-foreground" [style.height.px]="bar"></div>
+          </div>
+
+          <button *ngIf="primaryLabel" type="button" class="mt-3 h-9 w-full appearance-none rounded-md bg-primary text-sm font-medium text-primary-foreground" (click)="onPrimaryAction()">{{ primaryLabel }}</button>
+          <button *ngIf="secondaryLabel" type="button" class="mt-2 h-9 w-full appearance-none rounded-md border border-input bg-background text-sm font-medium text-foreground" (click)="onSecondaryAction()">{{ secondaryLabel }}</button>
         </div>
-        <button type="button" class="inline-flex h-6 w-6 appearance-none items-center justify-center rounded-full border border-border bg-transparent p-0 text-muted-foreground">{{ incrementLabel }}</button>
-      </div>
 
-      <div *ngIf="bars.length" class="mt-3 flex h-14 w-full items-end gap-1">
-        <div *ngFor="let bar of bars" class="flex-1 bg-foreground" [style.height.px]="bar"></div>
-      </div>
+        <!-- Variant: responsive-dialog -->
+        <div *ngIf="variant === 'responsive-dialog'" class="flex flex-col gap-3">
+          <div *ngIf="nameLabel && nameValue">
+            <label class="mb-1 block text-xs font-medium text-foreground">{{ nameLabel }}</label>
+            <div class="h-8 rounded-md border border-border bg-background px-2 py-1 text-xs text-foreground">{{ nameValue }}</div>
+          </div>
+          <div *ngIf="usernameLabel && usernameValue">
+            <label class="mb-1 block text-xs font-medium text-foreground">{{ usernameLabel }}</label>
+            <div class="h-8 rounded-md border border-border bg-background px-2 py-1 text-xs text-foreground">{{ usernameValue }}</div>
+          </div>
 
-      <button *ngIf="primaryLabel" type="button" class="mt-3 h-9 w-full appearance-none rounded-md bg-primary text-sm font-medium text-primary-foreground" (click)="onPrimaryAction()">{{ primaryLabel }}</button>
-      <button *ngIf="secondaryLabel" type="button" class="mt-2 h-9 w-full appearance-none rounded-md border border-input bg-background text-sm font-medium text-foreground" (click)="onSecondaryAction()">{{ secondaryLabel }}</button>
+          <button *ngIf="responsivePrimaryLabel" type="button" class="mt-3 h-8 w-full appearance-none rounded-md bg-primary text-xs font-medium text-primary-foreground" (click)="onPrimaryAction()">{{ responsivePrimaryLabel }}</button>
+        </div>
+      </ng-container>
     </div>
   </section>
-
-  <ng-template #responsiveDialog>
-    <section class="absolute left-1/2 top-1/2 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-lg border border-border bg-background p-6 shadow-lg">
-      <div class="flex items-start justify-between">
-        <div>
-          <h3 class="m-0 text-lg font-semibold leading-none tracking-tight text-foreground">{{ profileTitle }}</h3>
-          <p class="m-0 mt-1 text-sm text-muted-foreground">{{ profileDescription }}</p>
-        </div>
-        <button type="button" class="h-5 w-5 appearance-none border-0 bg-transparent p-0 text-muted-foreground" (click)="close()">×</button>
-      </div>
-
-      <div class="mt-3 flex flex-col gap-3">
-        <div>
-          <label class="mb-1 block text-xs font-medium text-foreground">{{ nameLabel }}</label>
-          <div class="h-8 rounded-md border border-border bg-background px-2 py-1 text-xs text-foreground">{{ nameValue }}</div>
-        </div>
-        <div>
-          <label class="mb-1 block text-xs font-medium text-foreground">{{ usernameLabel }}</label>
-          <div class="h-8 rounded-md border border-border bg-background px-2 py-1 text-xs text-foreground">{{ usernameValue }}</div>
-        </div>
-      </div>
-
-      <button *ngIf="responsivePrimaryLabel" type="button" class="mt-3 h-8 w-full appearance-none rounded-md bg-primary text-xs font-medium text-primary-foreground" (click)="onPrimaryAction()">{{ responsivePrimaryLabel }}</button>
-    </section>
-  </ng-template>
 </div>

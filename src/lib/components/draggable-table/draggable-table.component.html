@@ -1,0 +1,5 @@
+<div [ngClass]="wrapperClasses" [attr.data-slot]="variant === 'interactive' ? 'table-container' : null">
+  <table #tableElement [ngClass]="tableClasses" [attr.data-slot]="variant === 'interactive' ? 'table' : null">
+    <ng-content></ng-content>
+  </table>
+</div>

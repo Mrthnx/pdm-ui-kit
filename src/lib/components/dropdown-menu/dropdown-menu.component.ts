@@ -16,6 +16,7 @@ import { TemplatePortal } from '@angular/cdk/portal';
 import { Subscription } from 'rxjs';
 import { PdmOverlayOptions } from '../../overlay/pdm-overlay-options';
 import { createFlexiblePositionStrategy } from '../../overlay/create-flexible-position-strategy';
+import { Z_INDEX } from '../../utils/z-index';
 
 export type PdmDropdownMenuVariant = 'default' | 'checkboxes' | 'radio-group';
 
@@ -185,7 +186,7 @@ export class PdmDropdownMenuComponent implements OnDestroy {
 
     // Resolve panelClass: overlayOptions.panelClass wins; otherwise map panelClassName.
     const resolvedPanelClass = this.overlayOptions?.panelClass
-      ?? (this.panelClassName ? ['block', this.panelClassName] : ['block']);
+      ?? (this.panelClassName ? [Z_INDEX.popover, this.panelClassName] : [Z_INDEX.popover]);
 
     this.overlayRef = this.overlay.create({
       positionStrategy,

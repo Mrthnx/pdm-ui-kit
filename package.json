@@ -1,14 +1,16 @@
 {
   "name": "pdm-ui-kit",
-  "version": "0.1.50",
-  "description": "PDM UI Kit Angular components",
+  "version": "0.2.0",
+  "description": "PDM UI Kit Angular components - Responsive by default",
   "author": "Corelusa",
   "license": "MIT",
   "keywords": [
     "angular",
     "ui",
     "components",
-    "design-system"
+    "design-system",
+    "responsive",
+    "shadcn"
   ],
   "repository": {
     "type": "git",

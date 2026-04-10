@@ -1,10 +1,21 @@
-<nav [ngClass]="['relative z-10 flex max-w-max flex-1 items-center justify-center', className]">
-  <ul class="group flex flex-1 list-none items-center justify-center space-x-1">
+<nav
+  [ngClass]="[
+    'relative z-10 flex w-full items-center',
+    mobileMode === 'scroll' ? 'overflow-x-auto scrollbar-thin' : '',
+    className
+  ]"
+>
+  <ul
+    [ngClass]="[
+      'group flex list-none items-center gap-1',
+      mobileMode === 'scroll' ? 'flex-nowrap' : 'flex-wrap justify-center'
+    ]"
+  >
     <li *ngFor="let item of items">
       <a
         [href]="item.href || '#'"
         [ngClass]="[
-          'group inline-flex h-9 w-max items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+          'group inline-flex h-9 items-center justify-center rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 whitespace-nowrap',
           item.active ? 'bg-accent text-accent-foreground' : 'text-foreground'
         ]"
       >

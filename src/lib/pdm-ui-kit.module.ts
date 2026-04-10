@@ -22,6 +22,7 @@ import { PdmContextMenuComponent } from './components/context-menu/context-menu.
 import { PdmDataTableComponent } from './components/data-table/data-table.component';
 import { PdmDatePickerComponent } from './components/date-picker/date-picker.component';
 import { PdmDialogComponent } from './components/dialog/dialog.component';
+import { PdmDraggableTableComponent } from './components/draggable-table/draggable-table.component';
 import { PdmDropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
 import { PdmDrawerComponent } from './components/drawer/drawer.component';
 import { PdmEmptyComponent } from './components/empty/empty.component';
@@ -83,6 +84,7 @@ const COMPONENTS = [
   PdmDataTableComponent,
   PdmDatePickerComponent,
   PdmDialogComponent,
+  PdmDraggableTableComponent,
   PdmDropdownMenuComponent,
   PdmDrawerComponent,
   PdmEmptyComponent,
