@@ -1,15 +1,38 @@
 {
-  "generatedAt": "2026-05-28T03:24:46.754Z",
+  "generatedAt": "2026-05-28T03:59:26.859Z",
   "scope": "turn_delta",
-  "sessionId": "lens-mpowb4u0-71d8d263",
-  "turnIndex": 45,
-  "projectSeqStart": 117,
-  "projectSeqEnd": 117,
+  "sessionId": "lens-mpoxysih-28989e04",
+  "turnIndex": 42,
+  "projectSeqStart": 121,
+  "projectSeqEnd": 122,
   "deltaOnly": true,
-  "files": [],
+  "files": [
+    {
+      "filePath": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/package-lock.json",
+      "displayPath": "package-lock.json",
+      "fileSeq": 1,
+      "warnings": [
+        {
+          "id": "cq:1b1bd0d7b1",
+          "filePath": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/package-lock.json",
+          "displayPath": "package-lock.json",
+          "severity": "warning",
+          "tool": "pi-lens",
+          "message": "Pi-lens analysis unavailable. Tools for json not installed.",
+          "category": "other",
+          "origin": "dispatch"
+        }
+      ]
+    }
+  ],
   "summary": {
-    "warnings": 0,
-    "files": 0,
-    "topRules": []
+    "warnings": 1,
+    "files": 1,
+    "topRules": [
+      {
+        "rule": "pi-lens",
+        "count": 1
+      }
+    ]
   }
 }

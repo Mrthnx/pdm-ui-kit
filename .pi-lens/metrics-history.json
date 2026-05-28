@@ -88,8 +88,8 @@
     },
     "src/lib/components/select/select.component.ts": {
       "latest": {
-        "commit": "c6d4f16",
-        "timestamp": "2026-05-28T02:54:08.848Z",
+        "commit": "41c006b",
+        "timestamp": "2026-05-28T03:45:21.672Z",
         "mi": 33.6,
         "cognitive": 35,
         "nesting": 4,
@@ -117,14 +117,24 @@
           "lines": 160,
           "maxCyclomatic": 6,
           "entropy": 6.65
+        },
+        {
+          "commit": "41c006b",
+          "timestamp": "2026-05-28T03:45:21.672Z",
+          "mi": 33.6,
+          "cognitive": 35,
+          "nesting": 4,
+          "lines": 160,
+          "maxCyclomatic": 6,
+          "entropy": 6.65
         }
       ],
       "trend": "stable"
     },
     "src/lib/components/input/input.component.ts": {
       "latest": {
-        "commit": "c6d4f16",
-        "timestamp": "2026-05-28T02:54:08.696Z",
+        "commit": "41c006b",
+        "timestamp": "2026-05-28T03:45:21.613Z",
         "mi": 45.8,
         "cognitive": 0,
         "nesting": 2,
@@ -146,6 +156,16 @@
         {
           "commit": "c6d4f16",
           "timestamp": "2026-05-28T02:54:08.696Z",
+          "mi": 45.8,
+          "cognitive": 0,
+          "nesting": 2,
+          "lines": 40,
+          "maxCyclomatic": 1,
+          "entropy": 4.87
+        },
+        {
+          "commit": "41c006b",
+          "timestamp": "2026-05-28T03:45:21.613Z",
           "mi": 45.8,
           "cognitive": 0,
           "nesting": 2,
@@ -183,14 +203,14 @@
     },
     "src/lib/components/button-group/button-group.component.ts": {
       "latest": {
-        "commit": "c6d4f16",
-        "timestamp": "2026-05-28T02:55:17.851Z",
-        "mi": 22.1,
-        "cognitive": 24,
+        "commit": "41c006b",
+        "timestamp": "2026-05-28T03:40:35.319Z",
+        "mi": 24.4,
+        "cognitive": 21,
         "nesting": 1,
-        "lines": 206,
-        "maxCyclomatic": 32,
-        "entropy": 2.52
+        "lines": 232,
+        "maxCyclomatic": 12,
+        "entropy": 2.79
       },
       "history": [
         {
@@ -212,6 +232,16 @@
           "lines": 206,
           "maxCyclomatic": 32,
           "entropy": 2.52
+        },
+        {
+          "commit": "41c006b",
+          "timestamp": "2026-05-28T03:40:35.319Z",
+          "mi": 24.4,
+          "cognitive": 21,
+          "nesting": 1,
+          "lines": 232,
+          "maxCyclomatic": 12,
+          "entropy": 2.79
         }
       ],
       "trend": "stable"
@@ -493,8 +523,8 @@
     },
     "src/lib/components/button/button.component.ts": {
       "latest": {
-        "commit": "c6d4f16",
-        "timestamp": "2026-05-28T02:54:08.668Z",
+        "commit": "41c006b",
+        "timestamp": "2026-05-28T03:40:40.412Z",
         "mi": 30.7,
         "cognitive": 46,
         "nesting": 3,
@@ -506,6 +536,16 @@
         {
           "commit": "c6d4f16",
           "timestamp": "2026-05-28T02:54:08.668Z",
+          "mi": 30.7,
+          "cognitive": 46,
+          "nesting": 3,
+          "lines": 110,
+          "maxCyclomatic": 37,
+          "entropy": 4.5
+        },
+        {
+          "commit": "41c006b",
+          "timestamp": "2026-05-28T03:40:40.412Z",
           "mi": 30.7,
           "cognitive": 46,
           "nesting": 3,
@@ -590,7 +630,32 @@
         }
       ],
       "trend": "stable"
+    },
+    "src/lib/components/switch/switch.component.ts": {
+      "latest": {
+        "commit": "41c006b",
+        "timestamp": "2026-05-28T03:49:08.976Z",
+        "mi": 46.6,
+        "cognitive": 11,
+        "nesting": 3,
+        "lines": 38,
+        "maxCyclomatic": 3,
+        "entropy": 4.92
+      },
+      "history": [
+        {
+          "commit": "41c006b",
+          "timestamp": "2026-05-28T03:49:08.976Z",
+          "mi": 46.6,
+          "cognitive": 11,
+          "nesting": 3,
+          "lines": 38,
+          "maxCyclomatic": 3,
+          "entropy": 4.92
+        }
+      ],
+      "trend": "stable"
     }
   },
-  "capturedAt": "2026-05-28T02:55:22.852Z"
+  "capturedAt": "2026-05-28T03:49:13.976Z"
 }

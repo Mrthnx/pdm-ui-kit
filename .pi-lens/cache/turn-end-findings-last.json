@@ -1,6 +1,6 @@
 {
-  "signature": "context.md::ℹ️ Advisory — no action required this turn:\nCode-quality warnings introduced/touched this turn: 1 across 1 file(s).\nTop rules: pi-lens×1\nDetails written to .pi-lens/cache/code-quality-warnings.json\nNo action required unless you are already refactoring these areas.",
-  "sessionId": "lens-mpowfq5j-2703d112",
-  "projectSeqStart": 112,
-  "projectSeqEnd": 113
+  "signature": "package-lock.json::ℹ️ Advisory — no action required this turn:\nCode-quality warnings introduced/touched this turn: 1 across 1 file(s).\nTop rules: pi-lens×1\nDetails written to .pi-lens/cache/code-quality-warnings.json\nNo action required unless you are already refactoring these areas.",
+  "sessionId": "lens-mpoxysih-28989e04",
+  "projectSeqStart": 121,
+  "projectSeqEnd": 122
 }

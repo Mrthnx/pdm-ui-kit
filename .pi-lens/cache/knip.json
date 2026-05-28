@@ -18,6 +18,16 @@
     },
     {
       "type": "file",
+      "name": "src/lib/utils/responsive.ts",
+      "file": "src/lib/utils/responsive.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/utils/z-index.ts",
+      "file": "src/lib/utils/z-index.ts"
+    },
+    {
+      "type": "file",
       "name": "src/lib/overlay/create-flexible-position-strategy.ts",
       "file": "src/lib/overlay/create-flexible-position-strategy.ts"
     },
@@ -35,16 +45,6 @@
       "type": "file",
       "name": "src/lib/overlay/z-index-helper.ts",
       "file": "src/lib/overlay/z-index-helper.ts"
-    },
-    {
-      "type": "file",
-      "name": "src/lib/utils/responsive.ts",
-      "file": "src/lib/utils/responsive.ts"
-    },
-    {
-      "type": "file",
-      "name": "src/lib/utils/z-index.ts",
-      "file": "src/lib/utils/z-index.ts"
     },
     {
       "type": "file",
@@ -68,18 +68,13 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/badge/badge.component.ts",
-      "file": "src/lib/components/badge/badge.component.ts"
-    },
-    {
-      "type": "file",
-      "name": "src/lib/components/breadcrumb/breadcrumb.component.ts",
-      "file": "src/lib/components/breadcrumb/breadcrumb.component.ts"
-    },
-    {
-      "type": "file",
       "name": "src/lib/components/avatar/avatar.component.ts",
       "file": "src/lib/components/avatar/avatar.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/badge/badge.component.ts",
+      "file": "src/lib/components/badge/badge.component.ts"
     },
     {
       "type": "file",
@@ -88,8 +83,8 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/button-group/button-group.component.ts",
-      "file": "src/lib/components/button-group/button-group.component.ts"
+      "name": "src/lib/components/breadcrumb/breadcrumb.component.ts",
+      "file": "src/lib/components/breadcrumb/breadcrumb.component.ts"
     },
     {
       "type": "file",
@@ -98,8 +93,8 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/carousel/carousel.component.ts",
-      "file": "src/lib/components/carousel/carousel.component.ts"
+      "name": "src/lib/components/button-group/button-group.component.ts",
+      "file": "src/lib/components/button-group/button-group.component.ts"
     },
     {
       "type": "file",
@@ -108,13 +103,13 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/chart/chart.component.ts",
-      "file": "src/lib/components/chart/chart.component.ts"
+      "name": "src/lib/components/carousel/carousel.component.ts",
+      "file": "src/lib/components/carousel/carousel.component.ts"
     },
     {
       "type": "file",
-      "name": "src/lib/components/collapsible/collapsible.component.ts",
-      "file": "src/lib/components/collapsible/collapsible.component.ts"
+      "name": "src/lib/components/chart/chart.component.ts",
+      "file": "src/lib/components/chart/chart.component.ts"
     },
     {
       "type": "file",
@@ -125,6 +120,11 @@
       "type": "file",
       "name": "src/lib/components/combobox/combobox.component.ts",
       "file": "src/lib/components/combobox/combobox.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/collapsible/collapsible.component.ts",
+      "file": "src/lib/components/collapsible/collapsible.component.ts"
     },
     {
       "type": "file",
@@ -168,11 +168,6 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/field/field.component.ts",
-      "file": "src/lib/components/field/field.component.ts"
-    },
-    {
-      "type": "file",
       "name": "src/lib/components/empty/empty.component.ts",
       "file": "src/lib/components/empty/empty.component.ts"
     },
@@ -188,8 +183,8 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/input-group/input-group.component.ts",
-      "file": "src/lib/components/input-group/input-group.component.ts"
+      "name": "src/lib/components/field/field.component.ts",
+      "file": "src/lib/components/field/field.component.ts"
     },
     {
       "type": "file",
@@ -198,8 +193,8 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/input-otp/input-otp.component.ts",
-      "file": "src/lib/components/input-otp/input-otp.component.ts"
+      "name": "src/lib/components/input-group/input-group.component.ts",
+      "file": "src/lib/components/input-group/input-group.component.ts"
     },
     {
       "type": "file",
@@ -208,8 +203,8 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/kbd/kbd.component.ts",
-      "file": "src/lib/components/kbd/kbd.component.ts"
+      "name": "src/lib/components/input-otp/input-otp.component.ts",
+      "file": "src/lib/components/input-otp/input-otp.component.ts"
     },
     {
       "type": "file",
@@ -218,13 +213,13 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/menubar/menubar.component.ts",
-      "file": "src/lib/components/menubar/menubar.component.ts"
+      "name": "src/lib/components/kbd/kbd.component.ts",
+      "file": "src/lib/components/kbd/kbd.component.ts"
     },
     {
       "type": "file",
-      "name": "src/lib/components/label/label.component.ts",
-      "file": "src/lib/components/label/label.component.ts"
+      "name": "src/lib/components/menubar/menubar.component.ts",
+      "file": "src/lib/components/menubar/menubar.component.ts"
     },
     {
       "type": "file",
@@ -233,13 +228,13 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/navigation-menu/navigation-menu.component.ts",
-      "file": "src/lib/components/navigation-menu/navigation-menu.component.ts"
+      "name": "src/lib/components/label/label.component.ts",
+      "file": "src/lib/components/label/label.component.ts"
     },
     {
       "type": "file",
-      "name": "src/lib/components/popover/popover.component.ts",
-      "file": "src/lib/components/popover/popover.component.ts"
+      "name": "src/lib/components/navigation-menu/navigation-menu.component.ts",
+      "file": "src/lib/components/navigation-menu/navigation-menu.component.ts"
     },
     {
       "type": "file",
@@ -248,13 +243,28 @@
     },
     {
       "type": "file",
+      "name": "src/lib/components/progress/progress.component.ts",
+      "file": "src/lib/components/progress/progress.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/popover/popover.component.ts",
+      "file": "src/lib/components/popover/popover.component.ts"
+    },
+    {
+      "type": "file",
       "name": "src/lib/components/radio-group/radio-group.component.ts",
       "file": "src/lib/components/radio-group/radio-group.component.ts"
     },
     {
       "type": "file",
-      "name": "src/lib/components/progress/progress.component.ts",
-      "file": "src/lib/components/progress/progress.component.ts"
+      "name": "src/lib/components/separator/separator.component.ts",
+      "file": "src/lib/components/separator/separator.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/scroll-area/scroll-area.component.ts",
+      "file": "src/lib/components/scroll-area/scroll-area.component.ts"
     },
     {
       "type": "file",
@@ -268,18 +278,8 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/scroll-area/scroll-area.component.ts",
-      "file": "src/lib/components/scroll-area/scroll-area.component.ts"
-    },
-    {
-      "type": "file",
       "name": "src/lib/components/sheet/sheet.component.ts",
       "file": "src/lib/components/sheet/sheet.component.ts"
-    },
-    {
-      "type": "file",
-      "name": "src/lib/components/separator/separator.component.ts",
-      "file": "src/lib/components/separator/separator.component.ts"
     },
     {
       "type": "file",
@@ -288,23 +288,13 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/skeleton/skeleton.component.ts",
-      "file": "src/lib/components/skeleton/skeleton.component.ts"
-    },
-    {
-      "type": "file",
       "name": "src/lib/components/slider/slider.component.ts",
       "file": "src/lib/components/slider/slider.component.ts"
     },
     {
       "type": "file",
-      "name": "src/lib/components/spinner/spinner.component.ts",
-      "file": "src/lib/components/spinner/spinner.component.ts"
-    },
-    {
-      "type": "file",
-      "name": "src/lib/components/table/table.component.ts",
-      "file": "src/lib/components/table/table.component.ts"
+      "name": "src/lib/components/skeleton/skeleton.component.ts",
+      "file": "src/lib/components/skeleton/skeleton.component.ts"
     },
     {
       "type": "file",
@@ -318,13 +308,23 @@
     },
     {
       "type": "file",
+      "name": "src/lib/components/table/table.component.ts",
+      "file": "src/lib/components/table/table.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/spinner/spinner.component.ts",
+      "file": "src/lib/components/spinner/spinner.component.ts"
+    },
+    {
+      "type": "file",
       "name": "src/lib/components/tabs/tabs.component.ts",
       "file": "src/lib/components/tabs/tabs.component.ts"
     },
     {
       "type": "file",
-      "name": "src/lib/components/toggle/toggle.component.ts",
-      "file": "src/lib/components/toggle/toggle.component.ts"
+      "name": "src/lib/components/toggle-group/toggle-group.component.ts",
+      "file": "src/lib/components/toggle-group/toggle-group.component.ts"
     },
     {
       "type": "file",
@@ -333,8 +333,8 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/toggle-group/toggle-group.component.ts",
-      "file": "src/lib/components/toggle-group/toggle-group.component.ts"
+      "name": "src/lib/components/toggle/toggle.component.ts",
+      "file": "src/lib/components/toggle/toggle.component.ts"
     },
     {
       "type": "file",
@@ -409,6 +409,16 @@
     },
     {
       "type": "file",
+      "name": "src/lib/utils/responsive.ts",
+      "file": "src/lib/utils/responsive.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/utils/z-index.ts",
+      "file": "src/lib/utils/z-index.ts"
+    },
+    {
+      "type": "file",
       "name": "src/lib/overlay/create-flexible-position-strategy.ts",
       "file": "src/lib/overlay/create-flexible-position-strategy.ts"
     },
@@ -426,16 +436,6 @@
       "type": "file",
       "name": "src/lib/overlay/z-index-helper.ts",
       "file": "src/lib/overlay/z-index-helper.ts"
-    },
-    {
-      "type": "file",
-      "name": "src/lib/utils/responsive.ts",
-      "file": "src/lib/utils/responsive.ts"
-    },
-    {
-      "type": "file",
-      "name": "src/lib/utils/z-index.ts",
-      "file": "src/lib/utils/z-index.ts"
     },
     {
       "type": "file",
@@ -459,18 +459,13 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/badge/badge.component.ts",
-      "file": "src/lib/components/badge/badge.component.ts"
-    },
-    {
-      "type": "file",
-      "name": "src/lib/components/breadcrumb/breadcrumb.component.ts",
-      "file": "src/lib/components/breadcrumb/breadcrumb.component.ts"
-    },
-    {
-      "type": "file",
       "name": "src/lib/components/avatar/avatar.component.ts",
       "file": "src/lib/components/avatar/avatar.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/badge/badge.component.ts",
+      "file": "src/lib/components/badge/badge.component.ts"
     },
     {
       "type": "file",
@@ -479,8 +474,8 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/button-group/button-group.component.ts",
-      "file": "src/lib/components/button-group/button-group.component.ts"
+      "name": "src/lib/components/breadcrumb/breadcrumb.component.ts",
+      "file": "src/lib/components/breadcrumb/breadcrumb.component.ts"
     },
     {
       "type": "file",
@@ -489,8 +484,8 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/carousel/carousel.component.ts",
-      "file": "src/lib/components/carousel/carousel.component.ts"
+      "name": "src/lib/components/button-group/button-group.component.ts",
+      "file": "src/lib/components/button-group/button-group.component.ts"
     },
     {
       "type": "file",
@@ -499,13 +494,13 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/chart/chart.component.ts",
-      "file": "src/lib/components/chart/chart.component.ts"
+      "name": "src/lib/components/carousel/carousel.component.ts",
+      "file": "src/lib/components/carousel/carousel.component.ts"
     },
     {
       "type": "file",
-      "name": "src/lib/components/collapsible/collapsible.component.ts",
-      "file": "src/lib/components/collapsible/collapsible.component.ts"
+      "name": "src/lib/components/chart/chart.component.ts",
+      "file": "src/lib/components/chart/chart.component.ts"
     },
     {
       "type": "file",
@@ -516,6 +511,11 @@
       "type": "file",
       "name": "src/lib/components/combobox/combobox.component.ts",
       "file": "src/lib/components/combobox/combobox.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/collapsible/collapsible.component.ts",
+      "file": "src/lib/components/collapsible/collapsible.component.ts"
     },
     {
       "type": "file",
@@ -559,11 +559,6 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/field/field.component.ts",
-      "file": "src/lib/components/field/field.component.ts"
-    },
-    {
-      "type": "file",
       "name": "src/lib/components/empty/empty.component.ts",
       "file": "src/lib/components/empty/empty.component.ts"
     },
@@ -579,8 +574,8 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/input-group/input-group.component.ts",
-      "file": "src/lib/components/input-group/input-group.component.ts"
+      "name": "src/lib/components/field/field.component.ts",
+      "file": "src/lib/components/field/field.component.ts"
     },
     {
       "type": "file",
@@ -589,8 +584,8 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/input-otp/input-otp.component.ts",
-      "file": "src/lib/components/input-otp/input-otp.component.ts"
+      "name": "src/lib/components/input-group/input-group.component.ts",
+      "file": "src/lib/components/input-group/input-group.component.ts"
     },
     {
       "type": "file",
@@ -599,8 +594,8 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/kbd/kbd.component.ts",
-      "file": "src/lib/components/kbd/kbd.component.ts"
+      "name": "src/lib/components/input-otp/input-otp.component.ts",
+      "file": "src/lib/components/input-otp/input-otp.component.ts"
     },
     {
       "type": "file",
@@ -609,13 +604,13 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/menubar/menubar.component.ts",
-      "file": "src/lib/components/menubar/menubar.component.ts"
+      "name": "src/lib/components/kbd/kbd.component.ts",
+      "file": "src/lib/components/kbd/kbd.component.ts"
     },
     {
       "type": "file",
-      "name": "src/lib/components/label/label.component.ts",
-      "file": "src/lib/components/label/label.component.ts"
+      "name": "src/lib/components/menubar/menubar.component.ts",
+      "file": "src/lib/components/menubar/menubar.component.ts"
     },
     {
       "type": "file",
@@ -624,13 +619,13 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/navigation-menu/navigation-menu.component.ts",
-      "file": "src/lib/components/navigation-menu/navigation-menu.component.ts"
+      "name": "src/lib/components/label/label.component.ts",
+      "file": "src/lib/components/label/label.component.ts"
     },
     {
       "type": "file",
-      "name": "src/lib/components/popover/popover.component.ts",
-      "file": "src/lib/components/popover/popover.component.ts"
+      "name": "src/lib/components/navigation-menu/navigation-menu.component.ts",
+      "file": "src/lib/components/navigation-menu/navigation-menu.component.ts"
     },
     {
       "type": "file",
@@ -639,13 +634,28 @@
     },
     {
       "type": "file",
+      "name": "src/lib/components/progress/progress.component.ts",
+      "file": "src/lib/components/progress/progress.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/popover/popover.component.ts",
+      "file": "src/lib/components/popover/popover.component.ts"
+    },
+    {
+      "type": "file",
       "name": "src/lib/components/radio-group/radio-group.component.ts",
       "file": "src/lib/components/radio-group/radio-group.component.ts"
     },
     {
       "type": "file",
-      "name": "src/lib/components/progress/progress.component.ts",
-      "file": "src/lib/components/progress/progress.component.ts"
+      "name": "src/lib/components/separator/separator.component.ts",
+      "file": "src/lib/components/separator/separator.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/scroll-area/scroll-area.component.ts",
+      "file": "src/lib/components/scroll-area/scroll-area.component.ts"
     },
     {
       "type": "file",
@@ -659,18 +669,8 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/scroll-area/scroll-area.component.ts",
-      "file": "src/lib/components/scroll-area/scroll-area.component.ts"
-    },
-    {
-      "type": "file",
       "name": "src/lib/components/sheet/sheet.component.ts",
       "file": "src/lib/components/sheet/sheet.component.ts"
-    },
-    {
-      "type": "file",
-      "name": "src/lib/components/separator/separator.component.ts",
-      "file": "src/lib/components/separator/separator.component.ts"
     },
     {
       "type": "file",
@@ -679,23 +679,13 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/skeleton/skeleton.component.ts",
-      "file": "src/lib/components/skeleton/skeleton.component.ts"
-    },
-    {
-      "type": "file",
       "name": "src/lib/components/slider/slider.component.ts",
       "file": "src/lib/components/slider/slider.component.ts"
     },
     {
       "type": "file",
-      "name": "src/lib/components/spinner/spinner.component.ts",
-      "file": "src/lib/components/spinner/spinner.component.ts"
-    },
-    {
-      "type": "file",
-      "name": "src/lib/components/table/table.component.ts",
-      "file": "src/lib/components/table/table.component.ts"
+      "name": "src/lib/components/skeleton/skeleton.component.ts",
+      "file": "src/lib/components/skeleton/skeleton.component.ts"
     },
     {
       "type": "file",
@@ -709,13 +699,23 @@
     },
     {
       "type": "file",
+      "name": "src/lib/components/table/table.component.ts",
+      "file": "src/lib/components/table/table.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/spinner/spinner.component.ts",
+      "file": "src/lib/components/spinner/spinner.component.ts"
+    },
+    {
+      "type": "file",
       "name": "src/lib/components/tabs/tabs.component.ts",
       "file": "src/lib/components/tabs/tabs.component.ts"
     },
     {
       "type": "file",
-      "name": "src/lib/components/toggle/toggle.component.ts",
-      "file": "src/lib/components/toggle/toggle.component.ts"
+      "name": "src/lib/components/toggle-group/toggle-group.component.ts",
+      "file": "src/lib/components/toggle-group/toggle-group.component.ts"
     },
     {
       "type": "file",
@@ -724,8 +724,8 @@
     },
     {
       "type": "file",
-      "name": "src/lib/components/toggle-group/toggle-group.component.ts",
-      "file": "src/lib/components/toggle-group/toggle-group.component.ts"
+      "name": "src/lib/components/toggle/toggle.component.ts",
+      "file": "src/lib/components/toggle/toggle.component.ts"
     },
     {
       "type": "file",

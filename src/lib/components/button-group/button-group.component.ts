@@ -10,7 +10,7 @@ export type PdmButtonGroupOrientation = "horizontal" | "vertical";
 type Axis = "horizontal" | "vertical";
 
 const ROOT_LAYOUT: Record<Axis, string> = {
-	horizontal: "flex flex-col sm:flex-row sm:items-center sm:flex-wrap",
+	horizontal: "w-full flex flex-row items-center overflow-x-auto",
 	vertical: "flex flex-col items-stretch",
 };
 
@@ -41,7 +41,9 @@ const ATTACHMENT_CONTROL_CLASSES: Record<Axis, string[]> = {
 		"[&>pdm-button:last-child>button]:!rounded-r-md",
 
 		"[&>pdm-input]:flex-1",
+		"[&>pdm-input]:min-w-0",
 		"[&>pdm-input>div]:w-full",
+		"[&>pdm-input>div]:min-w-0",
 		"[&>pdm-input>div]:!rounded-none",
 		"[&>pdm-input>div]:shadow-none",
 		"[&>pdm-input>div>input]:!rounded-none",
@@ -52,6 +54,7 @@ const ATTACHMENT_CONTROL_CLASSES: Record<Axis, string[]> = {
 		"[&>pdm-input:first-child>div>input]:!rounded-l-md",
 		"[&>pdm-input:last-child>div>input]:!rounded-r-md",
 
+		"[&>pdm-input-group]:min-w-0",
 		"[&>pdm-input-group>div]:!rounded-none",
 		"[&>pdm-input-group>div]:shadow-none",
 		"[&>pdm-input-group:first-child>div]:!rounded-l-md",
