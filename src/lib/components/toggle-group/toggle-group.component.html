@@ -1,4 +1,10 @@
-<div [ngClass]="['inline-flex items-center rounded-md border border-border p-1', className]" role="group">
+<div
+  [ngClass]="[
+    'flex flex-wrap items-center rounded-md border border-border p-1 gap-1',
+    className,
+  ]"
+  role="group"
+>
   <button
     *ngFor="let item of items"
     type="button"
@@ -8,7 +14,7 @@
       'inline-flex h-8 appearance-none items-center justify-center rounded-sm border-0 bg-transparent px-2.5 text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
       item.value === value
         ? 'bg-accent text-accent-foreground'
-        : 'text-foreground hover:bg-accent hover:text-accent-foreground'
+        : 'text-foreground hover:bg-accent hover:text-accent-foreground',
     ]"
     (click)="onSelect(item.value, item.disabled)"
   >

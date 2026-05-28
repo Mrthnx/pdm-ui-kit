@@ -1,0 +1,788 @@
+{
+  "success": true,
+  "issues": [
+    {
+      "type": "file",
+      "name": "src/public-api.ts",
+      "file": "src/public-api.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/pdm-ui-kit.module.ts",
+      "file": "src/lib/pdm-ui-kit.module.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/styles/tokens.css",
+      "file": "src/lib/styles/tokens.css"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/overlay/create-flexible-position-strategy.ts",
+      "file": "src/lib/overlay/create-flexible-position-strategy.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/overlay/pdm-outside-click.directive.ts",
+      "file": "src/lib/overlay/pdm-outside-click.directive.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/overlay/pdm-overlay-options.ts",
+      "file": "src/lib/overlay/pdm-overlay-options.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/overlay/z-index-helper.ts",
+      "file": "src/lib/overlay/z-index-helper.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/utils/responsive.ts",
+      "file": "src/lib/utils/responsive.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/utils/z-index.ts",
+      "file": "src/lib/utils/z-index.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/accordion/accordion.component.ts",
+      "file": "src/lib/components/accordion/accordion.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/alert/alert.component.ts",
+      "file": "src/lib/components/alert/alert.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/aspect-ratio/aspect-ratio.component.ts",
+      "file": "src/lib/components/aspect-ratio/aspect-ratio.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/alert-dialog/alert-dialog.component.ts",
+      "file": "src/lib/components/alert-dialog/alert-dialog.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/badge/badge.component.ts",
+      "file": "src/lib/components/badge/badge.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/breadcrumb/breadcrumb.component.ts",
+      "file": "src/lib/components/breadcrumb/breadcrumb.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/avatar/avatar.component.ts",
+      "file": "src/lib/components/avatar/avatar.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/button/button.component.ts",
+      "file": "src/lib/components/button/button.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/button-group/button-group.component.ts",
+      "file": "src/lib/components/button-group/button-group.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/calendar/calendar.component.ts",
+      "file": "src/lib/components/calendar/calendar.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/carousel/carousel.component.ts",
+      "file": "src/lib/components/carousel/carousel.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/card/card.component.ts",
+      "file": "src/lib/components/card/card.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/chart/chart.component.ts",
+      "file": "src/lib/components/chart/chart.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/collapsible/collapsible.component.ts",
+      "file": "src/lib/components/collapsible/collapsible.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/checkbox/checkbox.component.ts",
+      "file": "src/lib/components/checkbox/checkbox.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/combobox/combobox.component.ts",
+      "file": "src/lib/components/combobox/combobox.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/command/command.component.ts",
+      "file": "src/lib/components/command/command.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/context-menu/context-menu.component.ts",
+      "file": "src/lib/components/context-menu/context-menu.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/data-table/data-table.component.ts",
+      "file": "src/lib/components/data-table/data-table.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/date-picker/date-picker.component.ts",
+      "file": "src/lib/components/date-picker/date-picker.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/dialog/dialog.component.ts",
+      "file": "src/lib/components/dialog/dialog.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/draggable-table/draggable-table.component.ts",
+      "file": "src/lib/components/draggable-table/draggable-table.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/drawer/drawer.component.ts",
+      "file": "src/lib/components/drawer/drawer.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/dropdown-menu/dropdown-menu.component.ts",
+      "file": "src/lib/components/dropdown-menu/dropdown-menu.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/field/field.component.ts",
+      "file": "src/lib/components/field/field.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/empty/empty.component.ts",
+      "file": "src/lib/components/empty/empty.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/hover-card/hover-card.component.ts",
+      "file": "src/lib/components/hover-card/hover-card.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/icon/icon.component.ts",
+      "file": "src/lib/components/icon/icon.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/input-group/input-group.component.ts",
+      "file": "src/lib/components/input-group/input-group.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/input/input.component.ts",
+      "file": "src/lib/components/input/input.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/input-otp/input-otp.component.ts",
+      "file": "src/lib/components/input-otp/input-otp.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/input-password/input-password.component.ts",
+      "file": "src/lib/components/input-password/input-password.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/kbd/kbd.component.ts",
+      "file": "src/lib/components/kbd/kbd.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/item/item.component.ts",
+      "file": "src/lib/components/item/item.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/menubar/menubar.component.ts",
+      "file": "src/lib/components/menubar/menubar.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/label/label.component.ts",
+      "file": "src/lib/components/label/label.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/native-select/native-select.component.ts",
+      "file": "src/lib/components/native-select/native-select.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/navigation-menu/navigation-menu.component.ts",
+      "file": "src/lib/components/navigation-menu/navigation-menu.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/popover/popover.component.ts",
+      "file": "src/lib/components/popover/popover.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/pagination/pagination.component.ts",
+      "file": "src/lib/components/pagination/pagination.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/radio-group/radio-group.component.ts",
+      "file": "src/lib/components/radio-group/radio-group.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/progress/progress.component.ts",
+      "file": "src/lib/components/progress/progress.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/select/select-option.directive.ts",
+      "file": "src/lib/components/select/select-option.directive.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/select/select.component.ts",
+      "file": "src/lib/components/select/select.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/scroll-area/scroll-area.component.ts",
+      "file": "src/lib/components/scroll-area/scroll-area.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/sheet/sheet.component.ts",
+      "file": "src/lib/components/sheet/sheet.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/separator/separator.component.ts",
+      "file": "src/lib/components/separator/separator.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/sidebar/sidebar.component.ts",
+      "file": "src/lib/components/sidebar/sidebar.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/skeleton/skeleton.component.ts",
+      "file": "src/lib/components/skeleton/skeleton.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/slider/slider.component.ts",
+      "file": "src/lib/components/slider/slider.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/spinner/spinner.component.ts",
+      "file": "src/lib/components/spinner/spinner.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/table/table.component.ts",
+      "file": "src/lib/components/table/table.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/sonner/sonner.component.ts",
+      "file": "src/lib/components/sonner/sonner.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/switch/switch.component.ts",
+      "file": "src/lib/components/switch/switch.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/tabs/tabs.component.ts",
+      "file": "src/lib/components/tabs/tabs.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/toggle/toggle.component.ts",
+      "file": "src/lib/components/toggle/toggle.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/textarea/textarea.component.ts",
+      "file": "src/lib/components/textarea/textarea.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/toggle-group/toggle-group.component.ts",
+      "file": "src/lib/components/toggle-group/toggle-group.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/tooltip/tooltip.component.ts",
+      "file": "src/lib/components/tooltip/tooltip.component.ts"
+    },
+    {
+      "type": "dependency",
+      "name": "date-fns",
+      "file": "package.json",
+      "line": 34
+    },
+    {
+      "type": "devDependency",
+      "name": "@angular/cdk",
+      "file": "package.json",
+      "line": 38
+    },
+    {
+      "type": "devDependency",
+      "name": "@angular/common",
+      "file": "package.json",
+      "line": 39
+    },
+    {
+      "type": "devDependency",
+      "name": "@angular/platform-browser",
+      "file": "package.json",
+      "line": 43
+    },
+    {
+      "type": "devDependency",
+      "name": "autoprefixer",
+      "file": "package.json",
+      "line": 44
+    },
+    {
+      "type": "devDependency",
+      "name": "lucide",
+      "file": "package.json",
+      "line": 45
+    },
+    {
+      "type": "devDependency",
+      "name": "postcss",
+      "file": "package.json",
+      "line": 47
+    },
+    {
+      "type": "devDependency",
+      "name": "tailwindcss",
+      "file": "package.json",
+      "line": 48
+    }
+  ],
+  "unusedExports": [],
+  "unusedFiles": [
+    {
+      "type": "file",
+      "name": "src/public-api.ts",
+      "file": "src/public-api.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/pdm-ui-kit.module.ts",
+      "file": "src/lib/pdm-ui-kit.module.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/styles/tokens.css",
+      "file": "src/lib/styles/tokens.css"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/overlay/create-flexible-position-strategy.ts",
+      "file": "src/lib/overlay/create-flexible-position-strategy.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/overlay/pdm-outside-click.directive.ts",
+      "file": "src/lib/overlay/pdm-outside-click.directive.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/overlay/pdm-overlay-options.ts",
+      "file": "src/lib/overlay/pdm-overlay-options.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/overlay/z-index-helper.ts",
+      "file": "src/lib/overlay/z-index-helper.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/utils/responsive.ts",
+      "file": "src/lib/utils/responsive.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/utils/z-index.ts",
+      "file": "src/lib/utils/z-index.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/accordion/accordion.component.ts",
+      "file": "src/lib/components/accordion/accordion.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/alert/alert.component.ts",
+      "file": "src/lib/components/alert/alert.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/aspect-ratio/aspect-ratio.component.ts",
+      "file": "src/lib/components/aspect-ratio/aspect-ratio.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/alert-dialog/alert-dialog.component.ts",
+      "file": "src/lib/components/alert-dialog/alert-dialog.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/badge/badge.component.ts",
+      "file": "src/lib/components/badge/badge.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/breadcrumb/breadcrumb.component.ts",
+      "file": "src/lib/components/breadcrumb/breadcrumb.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/avatar/avatar.component.ts",
+      "file": "src/lib/components/avatar/avatar.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/button/button.component.ts",
+      "file": "src/lib/components/button/button.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/button-group/button-group.component.ts",
+      "file": "src/lib/components/button-group/button-group.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/calendar/calendar.component.ts",
+      "file": "src/lib/components/calendar/calendar.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/carousel/carousel.component.ts",
+      "file": "src/lib/components/carousel/carousel.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/card/card.component.ts",
+      "file": "src/lib/components/card/card.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/chart/chart.component.ts",
+      "file": "src/lib/components/chart/chart.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/collapsible/collapsible.component.ts",
+      "file": "src/lib/components/collapsible/collapsible.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/checkbox/checkbox.component.ts",
+      "file": "src/lib/components/checkbox/checkbox.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/combobox/combobox.component.ts",
+      "file": "src/lib/components/combobox/combobox.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/command/command.component.ts",
+      "file": "src/lib/components/command/command.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/context-menu/context-menu.component.ts",
+      "file": "src/lib/components/context-menu/context-menu.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/data-table/data-table.component.ts",
+      "file": "src/lib/components/data-table/data-table.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/date-picker/date-picker.component.ts",
+      "file": "src/lib/components/date-picker/date-picker.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/dialog/dialog.component.ts",
+      "file": "src/lib/components/dialog/dialog.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/draggable-table/draggable-table.component.ts",
+      "file": "src/lib/components/draggable-table/draggable-table.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/drawer/drawer.component.ts",
+      "file": "src/lib/components/drawer/drawer.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/dropdown-menu/dropdown-menu.component.ts",
+      "file": "src/lib/components/dropdown-menu/dropdown-menu.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/field/field.component.ts",
+      "file": "src/lib/components/field/field.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/empty/empty.component.ts",
+      "file": "src/lib/components/empty/empty.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/hover-card/hover-card.component.ts",
+      "file": "src/lib/components/hover-card/hover-card.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/icon/icon.component.ts",
+      "file": "src/lib/components/icon/icon.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/input-group/input-group.component.ts",
+      "file": "src/lib/components/input-group/input-group.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/input/input.component.ts",
+      "file": "src/lib/components/input/input.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/input-otp/input-otp.component.ts",
+      "file": "src/lib/components/input-otp/input-otp.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/input-password/input-password.component.ts",
+      "file": "src/lib/components/input-password/input-password.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/kbd/kbd.component.ts",
+      "file": "src/lib/components/kbd/kbd.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/item/item.component.ts",
+      "file": "src/lib/components/item/item.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/menubar/menubar.component.ts",
+      "file": "src/lib/components/menubar/menubar.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/label/label.component.ts",
+      "file": "src/lib/components/label/label.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/native-select/native-select.component.ts",
+      "file": "src/lib/components/native-select/native-select.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/navigation-menu/navigation-menu.component.ts",
+      "file": "src/lib/components/navigation-menu/navigation-menu.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/popover/popover.component.ts",
+      "file": "src/lib/components/popover/popover.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/pagination/pagination.component.ts",
+      "file": "src/lib/components/pagination/pagination.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/radio-group/radio-group.component.ts",
+      "file": "src/lib/components/radio-group/radio-group.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/progress/progress.component.ts",
+      "file": "src/lib/components/progress/progress.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/select/select-option.directive.ts",
+      "file": "src/lib/components/select/select-option.directive.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/select/select.component.ts",
+      "file": "src/lib/components/select/select.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/scroll-area/scroll-area.component.ts",
+      "file": "src/lib/components/scroll-area/scroll-area.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/sheet/sheet.component.ts",
+      "file": "src/lib/components/sheet/sheet.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/separator/separator.component.ts",
+      "file": "src/lib/components/separator/separator.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/sidebar/sidebar.component.ts",
+      "file": "src/lib/components/sidebar/sidebar.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/skeleton/skeleton.component.ts",
+      "file": "src/lib/components/skeleton/skeleton.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/slider/slider.component.ts",
+      "file": "src/lib/components/slider/slider.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/spinner/spinner.component.ts",
+      "file": "src/lib/components/spinner/spinner.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/table/table.component.ts",
+      "file": "src/lib/components/table/table.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/sonner/sonner.component.ts",
+      "file": "src/lib/components/sonner/sonner.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/switch/switch.component.ts",
+      "file": "src/lib/components/switch/switch.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/tabs/tabs.component.ts",
+      "file": "src/lib/components/tabs/tabs.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/toggle/toggle.component.ts",
+      "file": "src/lib/components/toggle/toggle.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/textarea/textarea.component.ts",
+      "file": "src/lib/components/textarea/textarea.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/toggle-group/toggle-group.component.ts",
+      "file": "src/lib/components/toggle-group/toggle-group.component.ts"
+    },
+    {
+      "type": "file",
+      "name": "src/lib/components/tooltip/tooltip.component.ts",
+      "file": "src/lib/components/tooltip/tooltip.component.ts"
+    }
+  ],
+  "unusedDeps": [
+    {
+      "type": "dependency",
+      "name": "date-fns",
+      "file": "package.json",
+      "line": 34
+    },
+    {
+      "type": "devDependency",
+      "name": "@angular/cdk",
+      "file": "package.json",
+      "line": 38
+    },
+    {
+      "type": "devDependency",
+      "name": "@angular/common",
+      "file": "package.json",
+      "line": 39
+    },
+    {
+      "type": "devDependency",
+      "name": "@angular/platform-browser",
+      "file": "package.json",
+      "line": 43
+    },
+    {
+      "type": "devDependency",
+      "name": "autoprefixer",
+      "file": "package.json",
+      "line": 44
+    },
+    {
+      "type": "devDependency",
+      "name": "lucide",
+      "file": "package.json",
+      "line": 45
+    },
+    {
+      "type": "devDependency",
+      "name": "postcss",
+      "file": "package.json",
+      "line": 47
+    },
+    {
+      "type": "devDependency",
+      "name": "tailwindcss",
+      "file": "package.json",
+      "line": 48
+    }
+  ],
+  "unlistedDeps": [],
+  "summary": "Found 76 issues"
+}

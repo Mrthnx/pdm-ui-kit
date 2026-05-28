@@ -2,7 +2,172 @@
 
 Librería de componentes UI para Angular 15+, construida sobre patrones visuales del **Figma de shadcn/ui** y adaptada para el ecosistema de Corelusa.
 
-## ✨ What's New in v0.2.0
+## ⚠️ Consumer Setup - IMPORTANT
+
+Para que los componentes funcionen correctamente, seguí estos pasos:
+
+### 1) Configurar Tailwind para escanear la librería
+
+En tu `tailwind.config.js`, agregá el path de la librería:
+
+```js
+module.exports = {
+  content: [
+    './src/**/*.{html,ts}',
+    // ... otros paths
+    'node_modules/pdm-ui-kit/**/*.{ts,html}'
+  ],
+  // ... resto de tu config
+};
+```
+
+**Sin esto, las clases Tailwind no se generarán y la UI se verá sin estilos.**
+
+### 2) Definir los tokens CSS
+
+Copiá las variables en tu CSS base (por ejemplo `styles.css`):
+
+```css
+:root {
+  /* Colores base */
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+
+  /* Colores de componente */
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+
+  /* Bordes y inputs */
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 221.2 83.2% 53.3%;
+
+  /* Radio */
+  --radius: 0.5rem;
+
+  /* Charts (para pdm-chart) */
+  --chart-1: 12 76% 61%;
+  --chart-2: 173 58% 39%;
+  --chart-3: 197 37% 24%;
+  --chart-4: 43 74% 66%;
+  --chart-5: 27 87% 67%;
+}
+
+/* Dark mode (opcional) */
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 217.2 91.2% 59.8%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 224.3 76.3% 48%;
+}
+```
+
+### 3) Configurar los colores en Tailwind
+
+```js
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))'
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))'
+        },
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))'
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))'
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))'
+        },
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))'
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))'
+        },
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        chart: {
+          '1': 'hsl(var(--chart-1))',
+          '2': 'hsl(var(--chart-2))',
+          '3': 'hsl(var(--chart-3))',
+          '4': 'hsl(var(--chart-4))',
+          '5': 'hsl(var(--chart-5))',
+        }
+      },
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)'
+      }
+    }
+  },
+  plugins: [require('tailwindcss-animate')]
+};
+```
+
+### 4) Opcional: Importar tokens directamente
+
+Si preferís importar los tokens desde el paquete:
+
+```css
+@import 'pdm-ui-kit/styles';
+```
+
+> **Nota:** Esta opción aún requiere la configuración de Tailwind content.
+
+---
+
+## ✨ What's New in v0.3.0
+
+- 🐛 **Overlay robustness** — Tooltip, popover, hover-card ahora usan CDK Overlay y no se tapan
+- 📱 **Responsive fixes** — Button-group, toggle-group, input-group ahora funcionan en mobile
+- 📦 **CSS bundle** — Tokens exportados para consumo directo
+- 🏷️ **Host display** — Componentes ahora responden correctamente a `w-full`, flex y grid
+- 📜 **Dialog scroll** — Scroll interno ahora funciona correctamente en todos los navegadores
 
 - 🎯 **Responsive by default** — Todas las tablas y dialogs manejan mobile correctamente
 - 🔧 **Generic data-table** — Configurá columnas para cualquier tipo de dato

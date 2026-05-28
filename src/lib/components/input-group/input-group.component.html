@@ -1,15 +1,15 @@
 <div
   [ngClass]="[
-    'flex w-full items-center gap-2',
+    'flex w-full flex-col items-stretch gap-2 sm:flex-row sm:items-center',
     disabled ? 'opacity-50' : '',
-    className
+    className,
   ]"
 >
   <div
     [ngClass]="[
       'flex h-9 min-w-0 flex-1 items-center overflow-hidden rounded-md border border-input bg-transparent px-3 py-1 text-sm text-foreground shadow-sm transition-colors focus-within:border-ring focus-within:ring-2 focus-within:ring-ring/50',
       invalid ? 'border-destructive focus-within:ring-destructive' : '',
-      disabled ? 'cursor-not-allowed' : ''
+      disabled ? 'cursor-not-allowed' : '',
     ]"
   >
     <div
@@ -29,8 +29,10 @@
       [disabled]="disabled"
       [attr.aria-invalid]="invalid"
       [ngClass]="[
-      'h-full min-w-0 flex-1 border-0 bg-transparent p-0 text-sm text-foreground outline-none placeholder:text-muted-foreground aria-invalid:placeholder:text-destructive/70',
-        type === 'file' ? 'text-sm file:mr-2 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground' : ''
+        'h-full min-w-0 flex-1 border-0 bg-transparent p-0 text-sm text-foreground outline-none placeholder:text-muted-foreground aria-invalid:placeholder:text-destructive/70',
+        type === 'file'
+          ? 'text-sm file:mr-2 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground'
+          : '',
       ]"
       (input)="onInput($event)"
     />
@@ -49,7 +51,7 @@
     *ngIf="buttonText"
     type="button"
     [disabled]="disabled"
-    class="inline-flex h-9 shrink-0 appearance-none items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-not-allowed"
+    class="inline-flex h-9 w-full shrink-0 appearance-none items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-not-allowed sm:w-auto"
     (click)="onButtonClick($event)"
   >
     {{ buttonText }}

@@ -1,132 +1,183 @@
 import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  EventEmitter,
-  HostListener,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  ViewChild
-} from '@angular/core';
-import { Z_INDEX } from '../../utils/z-index';
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	EventEmitter,
+	HostListener,
+	Input,
+	OnDestroy,
+	OnInit,
+	Output,
+	ViewChild,
+	ViewContainerRef,
+} from "@angular/core";
+import { Overlay, OverlayRef, ConnectedPosition } from "@angular/cdk/overlay";
+import { TemplatePortal } from "@angular/cdk/portal";
+import {
+	mergeOverlayPanelClass,
+	OVERLAY_BASE_Z_INDEX,
+} from "../../overlay/z-index-helper";
 
 @Component({
-  selector: 'pdm-popover',
-  templateUrl: './popover.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+	selector: "pdm-popover",
+	templateUrl: "./popover.component.html",
+	styles: [":host { display: inline-block; }"],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PdmPopoverComponent implements OnInit, OnDestroy {
-  private _open = false;
-  @Input() triggerText = 'Open';
-  @Input() className = '';
-  @Input() panelClassName = '';
-  @Input() showTrigger = true;
-  @Output() openChange = new EventEmitter<boolean>();
+	private _open = false;
 
-  panelPlacement: 'top' | 'bottom' = 'bottom';
+	@Input() triggerText = "Open";
+	@Input() className = "";
+	@Input() panelClassName = "";
+	@Input() showTrigger = true;
 
-  @ViewChild('anchorEl') private anchorRef?: ElementRef<HTMLElement>;
-  @ViewChild('triggerEl') private triggerRef?: ElementRef<HTMLElement>;
-  @ViewChild('panelEl') private panelRef?: ElementRef<HTMLElement>;
+	@Output() openChange = new EventEmitter<boolean>();
 
-  private boundPointerDown!: (event: PointerEvent) => void;
+	@ViewChild("triggerEl") private triggerRef?: ElementRef<HTMLElement>;
+	@ViewChild("panelTemplate") private panelTemplateRef: any;
 
-  constructor(
-    private readonly elementRef: ElementRef<HTMLElement>,
-    private readonly cdr: ChangeDetectorRef
-  ) {}
+	private overlayRef: OverlayRef | null = null;
+	private outsideClickSub: any = null;
 
-  ngOnInit(): void {
-    this.boundPointerDown = (event: PointerEvent) => this.onDocumentPointerDown(event);
-    document.addEventListener('pointerdown', this.boundPointerDown, { capture: true });
-  }
+	constructor(
+		private readonly overlay: Overlay,
+		private readonly viewContainerRef: ViewContainerRef,
+		private readonly elementRef: ElementRef<HTMLElement>,
+		private readonly cdr: ChangeDetectorRef,
+	) {}
 
-  ngOnDestroy(): void {
-    if (this.boundPointerDown) {
-      document.removeEventListener('pointerdown', this.boundPointerDown, { capture: true });
-    }
-  }
+	ngOnInit(): void {}
+	ngOnDestroy(): void {
+		this.destroyOverlay();
+	}
 
-  @Input()
-  set open(value: boolean) {
-    this._open = !!value;
-    if (this._open) {
-      this.schedulePanelPlacementUpdate();
-    } else {
-      this.panelPlacement = 'bottom';
-    }
-    this.cdr.markForCheck();
-  }
-  get open(): boolean {
-    return this._open;
-  }
+	@Input()
+	set open(value: boolean) {
+		if (this._open === !!value) return;
 
-  get panelClasses(): string[] {
-    const baseClasses = 'min-w-80 rounded-md border border-border bg-popover p-4 text-popover-foreground shadow-md';
-    return [
-      this.panelPlacement === 'top'
-        ? `absolute bottom-full left-0 ${Z_INDEX.popover} mb-2 ${baseClasses}`
-        : `absolute left-0 top-full ${Z_INDEX.popover} mt-2 ${baseClasses}`,
-      this.panelClassName
-    ];
-  }
+		if (value) {
+			this.openPanel();
+		} else {
+			this.closePanel();
+		}
+	}
+	get open(): boolean {
+		return this._open;
+	}
 
-  toggle(): void {
-    this.open = !this.open;
-    this.openChange.emit(this.open);
-  }
+	toggle(): void {
+		this.open = !this.open;
+	}
 
-  @HostListener('document:keydown.escape')
-  onEsc(): void {
-    if (this.open) {
-      this.open = false;
-      this.openChange.emit(false);
-    }
-  }
+	@HostListener("document:keydown.escape")
+	onEsc(): void {
+		if (this.open) {
+			this.open = false;
+			this.openChange.emit(false);
+		}
+	}
 
-  @HostListener('window:resize')
-  @HostListener('window:scroll')
-  onViewportChange(): void {
-    this.updatePanelPlacement();
-  }
+	private openPanel(): void {
+		if (this.overlayRef) return;
 
-  private onDocumentPointerDown(event: PointerEvent): void {
-    if (!this.open) return;
-    const target = event.target as Node | null;
-    if (target && !this.elementRef.nativeElement.contains(target)) {
-      this.open = false;
-      this.openChange.emit(false);
-    }
-  }
+		const triggerEl = this.triggerRef?.nativeElement;
+		if (!triggerEl) return;
 
-  private schedulePanelPlacementUpdate(): void {
-    setTimeout(() => this.updatePanelPlacement());
-  }
+		this._open = true;
+		this.openChange.emit(true);
+		this.cdr.markForCheck();
 
-  private updatePanelPlacement(): void {
-    if (!this.open) return;
+		const positionStrategy = this.overlay
+			.position()
+			.flexibleConnectedTo(triggerEl)
+			.withPositions(this.getPositionConfigs())
+			.withFlexibleDimensions(false)
+			.withPush(true);
 
-    const anchorEl = this.triggerRef?.nativeElement || this.anchorRef?.nativeElement;
-    const panelEl = this.panelRef?.nativeElement;
-    if (!anchorEl || !panelEl || typeof window === 'undefined') {
-      return;
-    }
+		const panelClass = mergeOverlayPanelClass(
+			OVERLAY_BASE_Z_INDEX,
+			this.panelClassName,
+		);
 
-    const viewportHeight = window.innerHeight;
-    const gap = 8;
-    const anchorRect = anchorEl.getBoundingClientRect();
-    const panelHeight = panelEl.offsetHeight;
-    const spaceBelow = Math.max(0, viewportHeight - anchorRect.bottom - gap);
-    const spaceAbove = Math.max(0, anchorRect.top - gap);
-    const nextPlacement: 'top' | 'bottom' =
-      spaceBelow < panelHeight && spaceAbove > spaceBelow ? 'top' : 'bottom';
+		this.overlayRef = this.overlay.create({
+			positionStrategy,
+			panelClass,
+		});
 
-    if (this.panelPlacement !== nextPlacement) {
-      this.panelPlacement = nextPlacement;
-      this.cdr.markForCheck();
-    }
-  }
+		const portal = new TemplatePortal(
+			this.panelTemplateRef,
+			this.viewContainerRef,
+		);
+		this.overlayRef.attach(portal);
+
+		// Close on click outside
+		this.outsideClickSub = this.overlayRef
+			.outsidePointerEvents()
+			.subscribe(() => {
+				this.open = false;
+				this.openChange.emit(false);
+			});
+
+		this.cdr.markForCheck();
+	}
+
+	private closePanel(): void {
+		if (!this.overlayRef) return;
+
+		this._open = false;
+		this.openChange.emit(false);
+		this.cdr.markForCheck();
+		this.destroyOverlay();
+	}
+
+	private destroyOverlay(): void {
+		if (this.outsideClickSub) {
+			this.outsideClickSub.unsubscribe();
+			this.outsideClickSub = null;
+		}
+		if (this.overlayRef) {
+			this.overlayRef.detach();
+			this.overlayRef.dispose();
+			this.overlayRef = null;
+		}
+	}
+
+	private getPositionConfigs(): ConnectedPosition[] {
+		return [
+			// Bottom (default)
+			{
+				originX: "start",
+				originY: "bottom",
+				overlayX: "start",
+				overlayY: "top",
+				offsetY: 8,
+			},
+			// Top (fallback)
+			{
+				originX: "start",
+				originY: "top",
+				overlayX: "start",
+				overlayY: "bottom",
+				offsetY: -8,
+			},
+			// Right
+			{
+				originX: "end",
+				originY: "bottom",
+				overlayX: "start",
+				overlayY: "top",
+				offsetY: 8,
+			},
+			// Left
+			{
+				originX: "start",
+				originY: "bottom",
+				overlayX: "end",
+				overlayY: "top",
+				offsetY: 8,
+			},
+		];
+	}
 }

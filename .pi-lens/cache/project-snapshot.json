@@ -1,0 +1,873 @@
+{
+  "version": 1,
+  "projectRoot": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit",
+  "generatedAt": "2026-05-28T03:07:49.592Z",
+  "seq": 112,
+  "files": {
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/accordion/accordion.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/accordion/accordion.component.ts",
+      "mtimeMs": 1776275867529.8074,
+      "size": 1030,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/alert-dialog/alert-dialog.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/alert-dialog/alert-dialog.component.ts",
+      "mtimeMs": 1776275867530.4849,
+      "size": 1710,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/alert/alert.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/alert/alert.component.ts",
+      "mtimeMs": 1776275867531.0356,
+      "size": 726,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/aspect-ratio/aspect-ratio.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/aspect-ratio/aspect-ratio.component.ts",
+      "mtimeMs": 1776275867531.6038,
+      "size": 508,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/avatar/avatar.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/avatar/avatar.component.ts",
+      "mtimeMs": 1776275867532.1511,
+      "size": 800,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/badge/badge.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/badge/badge.component.ts",
+      "mtimeMs": 1776275867532.6833,
+      "size": 513,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/breadcrumb/breadcrumb.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/breadcrumb/breadcrumb.component.ts",
+      "mtimeMs": 1776275867533.192,
+      "size": 1714,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/button-group/button-group.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/button-group/button-group.component.ts",
+      "mtimeMs": 1779937536021.1343,
+      "size": 9235,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/button/button.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/button/button.component.ts",
+      "mtimeMs": 1776275867534.5867,
+      "size": 5319,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/calendar/calendar.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/calendar/calendar.component.ts",
+      "mtimeMs": 1776275867535.2952,
+      "size": 17406,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/card/card.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/card/card.component.ts",
+      "mtimeMs": 1776275867535.8416,
+      "size": 1186,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/carousel/carousel.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/carousel/carousel.component.ts",
+      "mtimeMs": 1776275867536.3762,
+      "size": 2405,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/chart/chart.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/chart/chart.component.ts",
+      "mtimeMs": 1776275867537.029,
+      "size": 3981,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/checkbox/checkbox.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/checkbox/checkbox.component.ts",
+      "mtimeMs": 1776275867537.5476,
+      "size": 883,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/collapsible/collapsible.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/collapsible/collapsible.component.ts",
+      "mtimeMs": 1776275867538.1123,
+      "size": 815,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/combobox/combobox.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/combobox/combobox.component.ts",
+      "mtimeMs": 1779935989983.007,
+      "size": 3791,
+      "imports": [
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/z-index-helper.ts"
+      ],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/command/command.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/command/command.component.ts",
+      "mtimeMs": 1776275867539.3462,
+      "size": 2257,
+      "imports": [
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/icon/icon.component.ts"
+      ],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/context-menu/context-menu.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/context-menu/context-menu.component.ts",
+      "mtimeMs": 1779935989983.703,
+      "size": 4311,
+      "imports": [
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/dropdown-menu/dropdown-menu.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/z-index-helper.ts"
+      ],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/data-table/data-table.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/data-table/data-table.component.ts",
+      "mtimeMs": 1776275867540.7993,
+      "size": 8987,
+      "imports": [
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/utils/responsive.ts"
+      ],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/date-picker/date-picker.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/date-picker/date-picker.component.ts",
+      "mtimeMs": 1779935210619.673,
+      "size": 9901,
+      "imports": [
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/calendar/calendar.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/create-flexible-position-strategy.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/pdm-overlay-options.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/z-index-helper.ts"
+      ],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/dialog/dialog.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/dialog/dialog.component.ts",
+      "mtimeMs": 1779935210628.9875,
+      "size": 6018,
+      "imports": [
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/utils/responsive.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/utils/z-index.ts"
+      ],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/draggable-table/draggable-table.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/draggable-table/draggable-table.component.ts",
+      "mtimeMs": 1776275867543.3806,
+      "size": 11206,
+      "imports": [
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/table/table.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/utils/responsive.ts"
+      ],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/drawer/drawer.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/drawer/drawer.component.ts",
+      "mtimeMs": 1776275867544.1199,
+      "size": 5013,
+      "imports": [
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/utils/responsive.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/utils/z-index.ts"
+      ],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/dropdown-menu/dropdown-menu.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/dropdown-menu/dropdown-menu.component.ts",
+      "mtimeMs": 1776275867544.726,
+      "size": 7263,
+      "imports": [
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/create-flexible-position-strategy.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/pdm-overlay-options.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/utils/z-index.ts"
+      ],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/empty/empty.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/empty/empty.component.ts",
+      "mtimeMs": 1776275867545.2458,
+      "size": 1105,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/field/field.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/field/field.component.ts",
+      "mtimeMs": 1776275867545.7065,
+      "size": 1361,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/hover-card/hover-card.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/hover-card/hover-card.component.ts",
+      "mtimeMs": 1779935989983.5908,
+      "size": 5130,
+      "imports": [
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/z-index-helper.ts"
+      ],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/icon/icon.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/icon/icon.component.ts",
+      "mtimeMs": 1776275867546.8152,
+      "size": 5464,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/input-group/input-group.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/input-group/input-group.component.ts",
+      "mtimeMs": 1779935210646.2388,
+      "size": 927,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/input-otp/input-otp.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/input-otp/input-otp.component.ts",
+      "mtimeMs": 1776275867547.7856,
+      "size": 3983,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/input-password/input-password.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/input-password/input-password.component.ts",
+      "mtimeMs": 1776275867548.321,
+      "size": 1320,
+      "imports": [
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/input/input.component.ts"
+      ],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/input/input.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/input/input.component.ts",
+      "mtimeMs": 1779935210646.5667,
+      "size": 1137,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/item/item.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/item/item.component.ts",
+      "mtimeMs": 1776275867549.6824,
+      "size": 325,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/kbd/kbd.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/kbd/kbd.component.ts",
+      "mtimeMs": 1776275867550.1682,
+      "size": 264,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/label/label.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/label/label.component.ts",
+      "mtimeMs": 1776275867550.6284,
+      "size": 322,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/menubar/menubar.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/menubar/menubar.component.ts",
+      "mtimeMs": 1779935989990.027,
+      "size": 3874,
+      "imports": [
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/dropdown-menu/dropdown-menu.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/z-index-helper.ts"
+      ],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/native-select/native-select.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/native-select/native-select.component.ts",
+      "mtimeMs": 1776275867552.958,
+      "size": 773,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/navigation-menu/navigation-menu.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/navigation-menu/navigation-menu.component.ts",
+      "mtimeMs": 1776275867553.6345,
+      "size": 1193,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/pagination/pagination.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/pagination/pagination.component.ts",
+      "mtimeMs": 1776275867555.6162,
+      "size": 1615,
+      "imports": [
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/native-select/native-select.component.ts"
+      ],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/popover/popover.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/popover/popover.component.ts",
+      "mtimeMs": 1779935989975.8223,
+      "size": 3737,
+      "imports": [
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/z-index-helper.ts"
+      ],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/progress/progress.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/progress/progress.component.ts",
+      "mtimeMs": 1776275867556.929,
+      "size": 576,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/radio-group/radio-group.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/radio-group/radio-group.component.ts",
+      "mtimeMs": 1776275867557.5925,
+      "size": 822,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/scroll-area/scroll-area.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/scroll-area/scroll-area.component.ts",
+      "mtimeMs": 1776275867558.0781,
+      "size": 319,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/select/select-option.directive.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/select/select-option.directive.ts",
+      "mtimeMs": 1776275867558.494,
+      "size": 1437,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/select/select.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/select/select.component.ts",
+      "mtimeMs": 1779935210630.7153,
+      "size": 5005,
+      "imports": [
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/select/select-option.directive.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/create-flexible-position-strategy.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/pdm-overlay-options.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/utils/z-index.ts"
+      ],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/separator/separator.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/separator/separator.component.ts",
+      "mtimeMs": 1776275867559.475,
+      "size": 494,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/sheet/sheet.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/sheet/sheet.component.ts",
+      "mtimeMs": 1776275867560.3098,
+      "size": 2859,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/sidebar/sidebar.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/sidebar/sidebar.component.ts",
+      "mtimeMs": 1776275867560.8535,
+      "size": 1582,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/skeleton/skeleton.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/skeleton/skeleton.component.ts",
+      "mtimeMs": 1776275867561.4207,
+      "size": 279,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/slider/slider.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/slider/slider.component.ts",
+      "mtimeMs": 1776275867561.9448,
+      "size": 829,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/sonner/sonner.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/sonner/sonner.component.ts",
+      "mtimeMs": 1776275867562.4211,
+      "size": 865,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/spinner/spinner.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/spinner/spinner.component.ts",
+      "mtimeMs": 1776275867562.8755,
+      "size": 298,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/switch/switch.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/switch/switch.component.ts",
+      "mtimeMs": 1776275867563.4358,
+      "size": 1521,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/table/table.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/table/table.component.ts",
+      "mtimeMs": 1779935210643.111,
+      "size": 5243,
+      "imports": [
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/utils/responsive.ts"
+      ],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/tabs/tabs.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/tabs/tabs.component.ts",
+      "mtimeMs": 1779935210644.7202,
+      "size": 768,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/textarea/textarea.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/textarea/textarea.component.ts",
+      "mtimeMs": 1776275867565.1797,
+      "size": 786,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/toggle-group/toggle-group.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/toggle-group/toggle-group.component.ts",
+      "mtimeMs": 1779935210656.4526,
+      "size": 703,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/toggle/toggle.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/toggle/toggle.component.ts",
+      "mtimeMs": 1776275867566.2913,
+      "size": 802,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/tooltip/tooltip.component.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/tooltip/tooltip.component.ts",
+      "mtimeMs": 1779935989945.2407,
+      "size": 3842,
+      "imports": [
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/z-index-helper.ts"
+      ],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/create-flexible-position-strategy.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/create-flexible-position-strategy.ts",
+      "mtimeMs": 1776275867567.1497,
+      "size": 1709,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/pdm-outside-click.directive.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/pdm-outside-click.directive.ts",
+      "mtimeMs": 1776275867567.3376,
+      "size": 2696,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/pdm-overlay-options.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/pdm-overlay-options.ts",
+      "mtimeMs": 1776275867567.5498,
+      "size": 792,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/z-index-helper.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/z-index-helper.ts",
+      "mtimeMs": 1779935210618.4202,
+      "size": 2597,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts",
+      "mtimeMs": 1776275867567.869,
+      "size": 6605,
+      "imports": [
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/accordion/accordion.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/alert-dialog/alert-dialog.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/alert/alert.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/aspect-ratio/aspect-ratio.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/avatar/avatar.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/badge/badge.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/breadcrumb/breadcrumb.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/button-group/button-group.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/button/button.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/calendar/calendar.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/card/card.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/carousel/carousel.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/chart/chart.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/checkbox/checkbox.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/collapsible/collapsible.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/combobox/combobox.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/command/command.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/context-menu/context-menu.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/data-table/data-table.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/date-picker/date-picker.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/dialog/dialog.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/draggable-table/draggable-table.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/drawer/drawer.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/dropdown-menu/dropdown-menu.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/empty/empty.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/field/field.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/hover-card/hover-card.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/icon/icon.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/input-group/input-group.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/input-otp/input-otp.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/input-password/input-password.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/input/input.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/item/item.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/kbd/kbd.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/label/label.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/menubar/menubar.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/native-select/native-select.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/navigation-menu/navigation-menu.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/pagination/pagination.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/popover/popover.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/progress/progress.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/radio-group/radio-group.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/scroll-area/scroll-area.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/select/select-option.directive.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/select/select.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/separator/separator.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/sheet/sheet.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/sidebar/sidebar.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/skeleton/skeleton.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/slider/slider.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/sonner/sonner.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/spinner/spinner.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/switch/switch.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/table/table.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/tabs/tabs.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/textarea/textarea.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/toggle-group/toggle-group.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/toggle/toggle.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/tooltip/tooltip.component.ts",
+        "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/pdm-outside-click.directive.ts"
+      ],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/utils/responsive.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/utils/responsive.ts",
+      "mtimeMs": 1776275867568.4446,
+      "size": 5973,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/utils/z-index.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/utils/z-index.ts",
+      "mtimeMs": 1779935210628.301,
+      "size": 2668,
+      "imports": [],
+      "lastSeq": 0
+    },
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/public-api.ts": {
+      "path": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/public-api.ts",
+      "mtimeMs": 1779935210592.9753,
+      "size": 4008,
+      "imports": [],
+      "lastSeq": 0
+    }
+  },
+  "symbols": {},
+  "reverseDeps": {
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/accordion/accordion.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/alert-dialog/alert-dialog.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/alert/alert.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/aspect-ratio/aspect-ratio.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/avatar/avatar.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/badge/badge.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/breadcrumb/breadcrumb.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/button-group/button-group.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/button/button.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/calendar/calendar.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/date-picker/date-picker.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/card/card.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/carousel/carousel.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/chart/chart.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/checkbox/checkbox.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/collapsible/collapsible.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/combobox/combobox.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/command/command.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/context-menu/context-menu.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/data-table/data-table.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/date-picker/date-picker.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/dialog/dialog.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/draggable-table/draggable-table.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/drawer/drawer.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/dropdown-menu/dropdown-menu.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/context-menu/context-menu.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/menubar/menubar.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/empty/empty.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/field/field.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/hover-card/hover-card.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/icon/icon.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/command/command.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/input-group/input-group.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/input-otp/input-otp.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/input-password/input-password.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/input/input.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/input-password/input-password.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/item/item.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/kbd/kbd.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/label/label.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/menubar/menubar.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/native-select/native-select.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/pagination/pagination.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/navigation-menu/navigation-menu.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/pagination/pagination.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/popover/popover.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/progress/progress.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/radio-group/radio-group.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/scroll-area/scroll-area.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/select/select-option.directive.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/select/select.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/select/select.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/separator/separator.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/sheet/sheet.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/sidebar/sidebar.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/skeleton/skeleton.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/slider/slider.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/sonner/sonner.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/spinner/spinner.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/switch/switch.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/table/table.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/draggable-table/draggable-table.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/tabs/tabs.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/textarea/textarea.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/toggle-group/toggle-group.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/toggle/toggle.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/tooltip/tooltip.component.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/create-flexible-position-strategy.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/date-picker/date-picker.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/dropdown-menu/dropdown-menu.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/select/select.component.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/pdm-outside-click.directive.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/pdm-overlay-options.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/date-picker/date-picker.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/dropdown-menu/dropdown-menu.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/select/select.component.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/overlay/z-index-helper.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/combobox/combobox.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/context-menu/context-menu.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/date-picker/date-picker.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/hover-card/hover-card.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/menubar/menubar.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/popover/popover.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/tooltip/tooltip.component.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/pdm-ui-kit.module.ts": [],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/utils/responsive.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/data-table/data-table.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/dialog/dialog.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/draggable-table/draggable-table.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/drawer/drawer.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/table/table.component.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/utils/z-index.ts": [
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/dialog/dialog.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/drawer/drawer.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/dropdown-menu/dropdown-menu.component.ts",
+      "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/lib/components/select/select.component.ts"
+    ],
+    "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit/src/public-api.ts": []
+  },
+  "cachedExports": [],
+  "projectRulesScan": {
+    "rules": [],
+    "hasCustomRules": false
+  },
+  "projectIndex": {
+    "entryCount": 8
+  },
+  "startupScan": {
+    "cwd": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit",
+    "scanRoot": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit",
+    "projectRoot": "/Users/marthin.lachira/Developer/Corelusa/pdm-ui-kit",
+    "canWarmCaches": true,
+    "sourceFileCount": 67
+  },
+  "languageProfile": {
+    "present": {
+      "jsts": true,
+      "python": false,
+      "go": false,
+      "rust": false,
+      "cxx": false,
+      "cmake": false,
+      "fish": false,
+      "shell": false,
+      "json": false,
+      "markdown": false,
+      "css": false,
+      "yaml": false,
+      "sql": false,
+      "ruby": false,
+      "html": false,
+      "docker": false,
+      "php": false,
+      "powershell": false,
+      "prisma": false,
+      "csharp": false,
+      "fsharp": false,
+      "java": false,
+      "kotlin": false,
+      "swift": false,
+      "dart": false,
+      "lua": false,
+      "zig": false,
+      "haskell": false,
+      "elixir": false,
+      "gleam": false,
+      "ocaml": false,
+      "clojure": false,
+      "terraform": false,
+      "nix": false,
+      "toml": false
+    },
+    "configured": {
+      "jsts": true
+    },
+    "counts": {
+      "jsts": 67
+    },
+    "detectedKinds": [
+      "jsts"
+    ]
+  }
+}

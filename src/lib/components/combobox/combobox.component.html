@@ -1,42 +1,98 @@
 <div [ngClass]="['flex flex-col gap-1', className]" [style.width.px]="width">
   <button
+    #triggerEl
     type="button"
     class="flex h-9 w-full appearance-none items-center justify-between gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm"
     [attr.aria-expanded]="open"
+    [attr.aria-haspopup]="'listbox'"
     (click)="toggle()"
   >
-    <span class="min-w-0 flex-1 truncate text-left text-sm font-medium text-foreground">{{ selectedLabel }}</span>
-    <svg viewBox="0 0 24 24" class="h-4 w-4 text-foreground" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M7 15L12 20L17 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-      <path d="M17 9L12 4L7 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+    <span
+      class="min-w-0 flex-1 truncate text-left text-sm font-medium text-foreground"
+      >{{ selectedLabel }}</span
+    >
+    <svg
+      viewBox="0 0 24 24"
+      class="h-4 w-4 text-foreground"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M7 15L12 20L17 15"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></path>
+      <path
+        d="M17 9L12 4L7 9"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></path>
     </svg>
   </button>
 
-  <div
-    *ngIf="open"
-    class="w-full rounded-md border border-border bg-popover p-0 text-popover-foreground shadow-md"
-  >
-    <div class="flex items-center gap-2 border-b border-border px-3">
-      <svg viewBox="0 0 24 24" class="h-4 w-4 text-muted-foreground" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.5"></circle>
-        <path d="M20 20L16.6 16.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
-      </svg>
-      <div class="h-9 flex-1 py-2 text-sm text-muted-foreground">{{ searchPlaceholder }}</div>
-    </div>
-
-    <div class="p-1">
-      <button
-        *ngFor="let option of options"
-        type="button"
-        class="flex w-full appearance-none items-center gap-2 rounded-sm border-0 bg-transparent px-2 py-1.5 text-left text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground"
-        [ngClass]="option === value ? 'bg-accent text-accent-foreground' : ''"
-        (click)="select(option)"
-      >
-        <span class="min-w-0 flex-1 truncate">{{ option }}</span>
-        <svg *ngIf="option === value" viewBox="0 0 24 24" class="h-4 w-4 text-foreground" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M5 12.5L9.2 16.7L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+  <!-- Template for CDK Overlay -->
+  <ng-template #panelTemplate>
+    <div
+      class="w-full rounded-md border border-border bg-popover p-0 text-popover-foreground shadow-md"
+    >
+      <div class="flex items-center gap-2 border-b border-border px-3 py-2">
+        <svg
+          viewBox="0 0 24 24"
+          class="h-4 w-4 text-muted-foreground"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle
+            cx="11"
+            cy="11"
+            r="7"
+            stroke="currentColor"
+            stroke-width="1.5"
+          ></circle>
+          <path
+            d="M20 20L16.6 16.6"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          ></path>
         </svg>
-      </button>
+        <div class="flex-1 py-2 text-sm text-muted-foreground">
+          {{ searchPlaceholder }}
+        </div>
+      </div>
+
+      <div class="p-1">
+        <button
+          *ngFor="let option of options"
+          type="button"
+          class="flex w-full appearance-none items-center gap-2 rounded-sm border-0 bg-transparent px-2 py-1.5 text-left text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground"
+          [ngClass]="option === value ? 'bg-accent text-accent-foreground' : ''"
+          role="option"
+          [attr.aria-selected]="option === value"
+          (click)="select(option)"
+        >
+          <span class="min-w-0 flex-1 truncate">{{ option }}</span>
+          <svg
+            *ngIf="option === value"
+            viewBox="0 0 24 24"
+            class="h-4 w-4 text-foreground"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M5 12.5L9.2 16.7L19 7"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </svg>
+        </button>
+      </div>
     </div>
-  </div>
+  </ng-template>
 </div>

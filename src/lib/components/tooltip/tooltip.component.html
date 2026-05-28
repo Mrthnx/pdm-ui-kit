@@ -1,6 +1,19 @@
-<span class="relative inline-flex" [ngClass]="className" (mouseenter)="open = true" (mouseleave)="open = false" (focusin)="open = true" (focusout)="open = false">
+<span
+  class="relative inline-flex"
+  [ngClass]="className"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
+  (focusin)="onFocusIn()"
+  (focusout)="onFocusOut()"
+>
   <ng-content></ng-content>
-  <span *ngIf="open" [ngClass]="['pointer-events-none absolute z-[70] overflow-hidden rounded-md bg-foreground px-3 py-1.5 text-xs text-background animate-in fade-in-0 zoom-in-95', positionClass]">
-    {{ text }}
-  </span>
+
+  <!-- Template for CDK Overlay -->
+  <ng-template #tooltipTemplate>
+    <span
+      class="pointer-events-none overflow-hidden rounded-md bg-foreground px-3 py-1.5 text-xs text-background animate-in fade-in-0 zoom-in-95"
+    >
+      {{ text }}
+    </span>
+  </ng-template>
 </span>

@@ -1,24 +1,22 @@
 <div
   class="relative inline-flex"
   [ngClass]="className"
-  (mouseenter)="open = true"
-  (mouseleave)="open = false"
-  (focusin)="open = true"
-  (focusout)="open = false"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
+  (focusin)="onFocusIn()"
+  (focusout)="onFocusOut()"
 >
   <div>
     <ng-content select="[pdmHoverTrigger]"></ng-content>
   </div>
 
-  <section
-    *ngIf="open"
-    [style.width.px]="panelWidth"
-    [ngClass]="[
-      'absolute z-[70] rounded-md border border-border bg-popover p-4 text-popover-foreground shadow-md',
-      positionClass,
-      panelClassName
-    ]"
-  >
-    <ng-content select="[pdmHoverContent]"></ng-content>
-  </section>
+  <!-- Template for CDK Overlay -->
+  <ng-template #panelTemplate>
+    <section
+      [style.width.px]="panelWidth"
+      class="rounded-md border border-border bg-popover p-4 text-popover-foreground shadow-md"
+    >
+      <ng-content select="[pdmHoverContent]"></ng-content>
+    </section>
+  </ng-template>
 </div>

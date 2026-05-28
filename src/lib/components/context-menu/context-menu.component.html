@@ -1,4 +1,8 @@
-<div class="relative" [ngClass]="className" (contextmenu)="onContextMenu($event)">
+<div
+  class="relative"
+  [ngClass]="className"
+  (contextmenu)="onContextMenu($event)"
+>
   <div
     class="flex items-center justify-center rounded-md border border-dashed border-border"
     [style.width.px]="width"
@@ -7,41 +11,80 @@
     <span class="text-sm font-medium text-foreground">{{ triggerLabel }}</span>
   </div>
 
-  <div
-    *ngIf="open"
-    class="fixed z-[70] min-w-48 max-w-xs rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md sm:min-w-52"
-    [style.left.px]="x + 4"
-    [style.top.px]="y + 2"
-  >
-    <div>
-      <ng-container *ngFor="let item of items">
-        <div *ngIf="item.type === 'separator'" class="-mx-1 my-1 h-px bg-muted"></div>
+  <!-- Template for CDK Overlay -->
+  <ng-template #menuTemplate>
+    <div
+      class="min-w-48 max-w-xs rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md sm:min-w-52"
+    >
+      <div>
+        <ng-container *ngFor="let item of items">
+          <div
+            *ngIf="item.type === 'separator'"
+            class="-mx-1 my-1 h-px bg-muted"
+          ></div>
 
-        <div *ngIf="item.type === 'label'" class="px-2 py-1.5 text-sm font-semibold text-foreground">
-          {{ item.label }}
-        </div>
+          <div
+            *ngIf="item.type === 'label'"
+            class="px-2 py-1.5 text-sm font-semibold text-foreground"
+          >
+            {{ item.label }}
+          </div>
 
-        <button
-          *ngIf="!item.type || item.type === 'item'"
-          type="button"
-          [disabled]="item.disabled"
-          class="relative flex w-full appearance-none cursor-default select-none items-center rounded-sm border-0 bg-transparent py-1.5 pr-2 text-left text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground disabled:pointer-events-none disabled:opacity-50"
-          [ngClass]="item.inset ? 'pl-8' : 'px-2'"
-          (click)="select(item)"
-        >
-          <span class="mr-2 inline-flex w-4 shrink-0 items-center justify-center text-foreground">
-            <svg *ngIf="item.checked" viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 12.5L9.2 16.7L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+          <button
+            *ngIf="!item.type || item.type === 'item'"
+            type="button"
+            [disabled]="item.disabled"
+            class="relative flex w-full appearance-none cursor-default select-none items-center rounded-sm border-0 bg-transparent py-1.5 pr-2 text-left text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground disabled:pointer-events-none disabled:opacity-50"
+            [ngClass]="item.inset ? 'pl-8' : 'px-2'"
+            (click)="select(item)"
+          >
+            <span
+              class="mr-2 inline-flex w-4 shrink-0 items-center justify-center text-foreground"
+            >
+              <svg
+                *ngIf="item.checked"
+                viewBox="0 0 24 24"
+                class="h-3.5 w-3.5"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5 12.5L9.2 16.7L19 7"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+              <span
+                *ngIf="item.selectedDot"
+                class="h-2 w-2 rounded-full bg-foreground"
+              ></span>
+            </span>
+            <span class="min-w-0 flex-1 truncate text-foreground">{{
+              item.label
+            }}</span>
+            <span *ngIf="item.shortcut" class="text-xs text-muted-foreground">{{
+              item.shortcut
+            }}</span>
+            <svg
+              *ngIf="item.showChevron"
+              viewBox="0 0 24 24"
+              class="h-3.5 w-3.5 text-muted-foreground"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9 6L15 12L9 18"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
             </svg>
-            <span *ngIf="item.selectedDot" class="h-2 w-2 rounded-full bg-foreground"></span>
-          </span>
-          <span class="min-w-0 flex-1 truncate text-foreground">{{ item.label }}</span>
-          <span *ngIf="item.shortcut" class="text-xs text-muted-foreground">{{ item.shortcut }}</span>
-          <svg *ngIf="item.showChevron" viewBox="0 0 24 24" class="h-3.5 w-3.5 text-muted-foreground" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-          </svg>
-        </button>
-      </ng-container>
+          </button>
+        </ng-container>
+      </div>
     </div>
-  </div>
+  </ng-template>
 </div>

@@ -1,86 +1,176 @@
 import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  EventEmitter,
-  HostListener,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output
-} from '@angular/core';
-import { PdmMenuItem } from '../dropdown-menu/dropdown-menu.component';
+	ChangeDetectionStrategy,
+	ChangeDetectorRef,
+	Component,
+	ElementRef,
+	EventEmitter,
+	HostListener,
+	Input,
+	OnDestroy,
+	OnInit,
+	Output,
+	ViewChild,
+	ViewContainerRef,
+} from "@angular/core";
+import { Overlay, OverlayRef, ConnectedPosition } from "@angular/cdk/overlay";
+import { TemplatePortal } from "@angular/cdk/portal";
+import {
+	mergeOverlayPanelClass,
+	OVERLAY_BASE_Z_INDEX,
+} from "../../overlay/z-index-helper";
+import { PdmMenuItem } from "../dropdown-menu/dropdown-menu.component";
 
 export interface PdmMenubarItem {
-  label: string;
-  items: PdmMenuItem[];
+	label: string;
+	items: PdmMenuItem[];
 }
 
 @Component({
-  selector: 'pdm-menubar',
-  templateUrl: './menubar.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+	selector: "pdm-menubar",
+	templateUrl: "./menubar.component.html",
+	styles: [":host { display: block; }"],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PdmMenubarComponent implements OnInit, OnDestroy {
-  @Input() menus: PdmMenubarItem[] = [];
-  @Input() className = '';
-  @Output() itemSelect = new EventEmitter<string>();
+	@Input() menus: PdmMenubarItem[] = [];
+	@Input() className = "";
+	@Input() panelClassName = "";
 
-  openIndex = -1;
+	@Output() itemSelect = new EventEmitter<string>();
 
-  private boundPointerDown!: (event: PointerEvent) => void;
+	openIndex = -1;
 
-  constructor(
-    private readonly elementRef: ElementRef<HTMLElement>,
-    private readonly cdr: ChangeDetectorRef
-  ) {}
+	@ViewChild("menuTemplate") menuTemplateRef: any;
 
-  ngOnInit(): void {
-    this.boundPointerDown = (event: PointerEvent) => this.onDocumentPointerDown(event);
-    document.addEventListener('pointerdown', this.boundPointerDown, { capture: true });
-  }
+	private overlayRef: OverlayRef | null = null;
+	private outsideClickSub: any = null;
 
-  ngOnDestroy(): void {
-    if (this.boundPointerDown) {
-      document.removeEventListener('pointerdown', this.boundPointerDown, { capture: true });
-    }
-  }
+	constructor(
+		private readonly overlay: Overlay,
+		private readonly viewContainerRef: ViewContainerRef,
+		private readonly elementRef: ElementRef<HTMLElement>,
+		private readonly cdr: ChangeDetectorRef,
+	) {}
 
-  @HostListener('document:keydown.escape')
-  onEsc(): void {
-    if (this.openIndex >= 0) {
-      this.openIndex = -1;
-      this.cdr.markForCheck();
-    }
-  }
+	ngOnInit(): void {}
+	ngOnDestroy(): void {
+		this.destroyOverlay();
+	}
 
-  toggle(index: number): void {
-    this.openIndex = this.openIndex === index ? -1 : index;
-  }
+	@HostListener("document:click")
+	@HostListener("document:keydown.escape")
+	onDocumentClickOrEsc(event: MouseEvent | KeyboardEvent): void {
+		// Close on escape
+		if (event.type === "keydown") {
+			if (this.openIndex >= 0) {
+				this.openIndex = -1;
+				this.cdr.markForCheck();
+			}
+			return;
+		}
 
-  select(value: string): void {
-    this.itemSelect.emit(value);
-    this.openIndex = -1;
-  }
+		// Close on click outside
+		if (this.openIndex >= 0) {
+			const target = event.target as Node;
+			if (!this.elementRef.nativeElement.contains(target)) {
+				this.openIndex = -1;
+				this.cdr.markForCheck();
+			}
+		}
+	}
 
-  selectItem(item: PdmMenuItem): void {
-    if (item.disabled || !item.value) {
-      return;
-    }
+	toggle(index: number, event: MouseEvent): void {
+		event.stopPropagation();
+		this.openIndex = this.openIndex === index ? -1 : index;
+		this.cdr.markForCheck();
 
-    this.select(item.value);
-  }
+		if (this.openIndex >= 0) {
+			this.createOverlay(event);
+		} else {
+			this.destroyOverlay();
+		}
+	}
 
-  private onDocumentPointerDown(event: PointerEvent): void {
-    if (this.openIndex < 0) return;
+	select(value: string): void {
+		this.itemSelect.emit(value);
+		this.openIndex = -1;
+		this.cdr.markForCheck();
+		this.destroyOverlay();
+	}
 
-    const target = event.target as Node | null;
-    if (!target) return;
+	selectItem(item: PdmMenuItem): void {
+		if (item.disabled || !item.value) {
+			return;
+		}
+		this.select(item.value);
+	}
 
-    if (!this.elementRef.nativeElement.contains(target)) {
-      this.openIndex = -1;
-      this.cdr.markForCheck();
-    }
-  }
+	private createOverlay(event: MouseEvent): void {
+		this.destroyOverlay();
+
+		const triggerEl = event.currentTarget as HTMLElement;
+
+		const positionStrategy = this.overlay
+			.position()
+			.flexibleConnectedTo(triggerEl)
+			.withPositions(this.getPositionConfigs())
+			.withFlexibleDimensions(false)
+			.withPush(true);
+
+		const panelClass = mergeOverlayPanelClass(
+			OVERLAY_BASE_Z_INDEX,
+			this.panelClassName,
+		);
+
+		this.overlayRef = this.overlay.create({
+			positionStrategy,
+			panelClass,
+		});
+
+		const portal = new TemplatePortal(
+			this.menuTemplateRef,
+			this.viewContainerRef,
+		);
+		this.overlayRef.attach(portal);
+
+		// Close on click outside
+		this.outsideClickSub = this.overlayRef
+			.outsidePointerEvents()
+			.subscribe(() => {
+				this.openIndex = -1;
+				this.cdr.markForCheck();
+				this.destroyOverlay();
+			});
+	}
+
+	private destroyOverlay(): void {
+		if (this.outsideClickSub) {
+			this.outsideClickSub.unsubscribe();
+			this.outsideClickSub = null;
+		}
+		if (this.overlayRef) {
+			this.overlayRef.detach();
+			this.overlayRef.dispose();
+			this.overlayRef = null;
+		}
+	}
+
+	private getPositionConfigs(): ConnectedPosition[] {
+		return [
+			{
+				originX: "start",
+				originY: "bottom",
+				overlayX: "start",
+				overlayY: "top",
+				offsetY: 4,
+			},
+			{
+				originX: "start",
+				originY: "top",
+				overlayX: "start",
+				overlayY: "bottom",
+				offsetY: -4,
+			},
+		];
+	}
 }

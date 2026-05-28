@@ -1,0 +1,60 @@
+{
+	"subagents": {
+		"agentOverrides": {
+			"worker": {
+				"model": "openai-codex/gpt-5.4-mini"
+			},
+			"sdd-archive": {
+				"model": "opencode-go/deepseek-v4-flash"
+			},
+			"context-builder": {
+				"model": "openai-codex/gpt-5.4-mini"
+			},
+			"delegate": {
+				"model": "openai-codex/gpt-5.4-mini"
+			},
+			"oracle": {
+				"model": "openai-codex/gpt-5.4-mini"
+			},
+			"planner": {
+				"model": "openai-codex/gpt-5.4-mini"
+			},
+			"researcher": {
+				"model": "openai-codex/gpt-5.4-mini"
+			},
+			"reviewer": {
+				"model": "openai-codex/gpt-5.4-mini"
+			},
+			"scout": {
+				"model": "openai-codex/gpt-5.4-mini"
+			},
+			"sdd-onboard": {
+				"model": "opencode-go/qwen3.5-plus"
+			},
+			"sdd-init": {
+				"model": "openai-codex/gpt-5.4"
+			},
+			"sdd-explore": {
+				"model": "openai-codex/gpt-5.4"
+			},
+			"sdd-proposal": {
+				"model": "github-copilot/gemini-3.1-pro-preview"
+			},
+			"sdd-spec": {
+				"model": "github-copilot/gemini-3.1-pro-preview"
+			},
+			"sdd-design": {
+				"model": "anthropic/claude-sonnet-4-6"
+			},
+			"sdd-tasks": {
+				"model": "opencode-go/qwen3.6-plus"
+			},
+			"sdd-apply": {
+				"model": "opencode-go/deepseek-v4-flash"
+			},
+			"sdd-verify": {
+				"model": "opencode-go/deepseek-v4-flash"
+			}
+		}
+	}
+}
