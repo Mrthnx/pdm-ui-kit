@@ -4,7 +4,7 @@
   (contextmenu)="onContextMenu($event)"
 >
   <div
-    class="flex items-center justify-center rounded-md border border-dashed border-border"
+    class="flex items-center justify-center rounded-md border border-solid border-dashed border-border"
     [style.width.px]="width"
     [style.height.px]="height"
   >
@@ -14,7 +14,7 @@
   <!-- Template for CDK Overlay -->
   <ng-template #menuTemplate>
     <div
-      class="min-w-48 max-w-xs rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md sm:min-w-52"
+      class="min-w-48 max-w-xs rounded-md border border-solid border-border bg-popover p-1 text-popover-foreground shadow-md sm:min-w-52"
     >
       <div>
         <ng-container *ngFor="let item of items">

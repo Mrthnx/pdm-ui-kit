@@ -110,10 +110,10 @@ export class PdmDraggableTableComponent implements AfterViewInit, OnChanges, OnD
 
   private getVariantWrapperClasses(): string[] {
     if (this.variant === 'interactive') {
-      return ['rounded-xl', 'border', 'border-border', 'bg-background'];
+      return ['rounded-xl', 'border border-solid', 'border-border', 'bg-background'];
     }
     if (this.variant === 'data') {
-      return ['rounded-md', 'border', 'border-border', 'bg-background'];
+      return ['rounded-md', 'border border-solid', 'border-border', 'bg-background'];
     }
     return [];
   }

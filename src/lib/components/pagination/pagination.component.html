@@ -43,7 +43,7 @@
           [ngClass]="[
             'inline-flex h-9 min-w-9 items-center justify-center rounded-md px-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
             pageNumber === page
-              ? 'appearance-none box-border border border-border bg-muted text-foreground shadow-sm'
+              ? 'appearance-none box-border border border-solid border-border bg-muted text-foreground shadow-sm'
               : 'appearance-none box-border border-0 bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground',
           ]"
           (click)="setPage(+pageNumber)"

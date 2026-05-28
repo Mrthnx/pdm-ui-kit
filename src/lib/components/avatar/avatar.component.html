@@ -13,7 +13,7 @@
     *ngFor="let groupSrc of groupSources; let i = index"
     [ngClass]="[
       'relative h-8 w-8 shrink-0 overflow-hidden rounded-full',
-      i > 0 ? '-mr-2 border border-border' : '-mr-2'
+      i > 0 ? '-mr-2 border border-solid border-border' : '-mr-2'
     ]"
   >
     <img [src]="groupSrc" [alt]="alt + ' ' + (i + 1)" class="h-full w-full rounded-full object-cover" />

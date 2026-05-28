@@ -134,7 +134,7 @@ export class PdmDrawerComponent {
     const base = [
       'absolute',
       'bg-background',
-      'border',
+      'border border-solid',
       'border-border',
       'shadow-lg',
       'overflow-auto'

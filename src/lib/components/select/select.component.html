@@ -10,7 +10,7 @@
     aria-haspopup="listbox"
     (click)="toggle()"
     [ngClass]="[
-      'border-input focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 aria-invalid:ring-2 aria-invalid:ring-destructive aria-invalid:border-destructive flex h-9 w-full appearance-none box-border items-center justify-between rounded-md border bg-background px-3 py-2 text-sm shadow-sm outline-none disabled:cursor-not-allowed disabled:opacity-50',
+      'border-input focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 aria-invalid:ring-2 aria-invalid:ring-destructive aria-invalid:border-destructive flex h-9 w-full appearance-none box-border items-center justify-between rounded-md border border-solid bg-background px-3 py-2 text-sm shadow-sm outline-none disabled:cursor-not-allowed disabled:opacity-50',
     ]"
   >
     <span
@@ -57,7 +57,7 @@
   <div
     role="listbox"
     [attr.aria-labelledby]="id || null"
-    class="w-full overflow-y-auto rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md max-h-96"
+    class="w-full overflow-y-auto rounded-md border border-solid border-border bg-popover p-1 text-popover-foreground shadow-md max-h-96"
   >
     <button
       *ngFor="let option of resolvedOptions"

@@ -97,7 +97,7 @@ export class PdmInputOtpComponent {
 
 	getInputClasses(index: number): string {
 		const classes = [
-			"h-9 w-9 appearance-none box-border border bg-background text-center text-sm font-normal text-foreground outline-none transition focus:outline-none focus-visible:outline-none",
+			"h-9 w-9 appearance-none box-border border border-solid bg-background text-center text-sm font-normal text-foreground outline-none transition focus:outline-none focus-visible:outline-none",
 			"shadow-sm",
 			"focus:border-input focus:ring-1 focus:ring-primary/30",
 			"disabled:cursor-not-allowed disabled:opacity-50",

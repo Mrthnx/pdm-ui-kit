@@ -1,7 +1,7 @@
 <nav
   role="menubar"
   [ngClass]="[
-    'inline-flex h-9 items-center gap-0.5 rounded-md border border-border bg-background p-1 shadow-sm',
+    'inline-flex h-9 items-center gap-0.5 rounded-md border border-solid border-border bg-background p-1 shadow-sm',
     className,
   ]"
 >
@@ -19,7 +19,7 @@
   <!-- Template for CDK Overlay -->
   <ng-template #menuTemplate>
     <div
-      class="min-w-40 rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-md sm:min-w-48"
+      class="min-w-40 rounded-md border border-solid border-border bg-popover p-1 text-popover-foreground shadow-md sm:min-w-48"
     >
       <button
         *ngFor="let item of menus[openIndex]?.items || []"

@@ -7,7 +7,7 @@
 >
   <div
     [ngClass]="[
-      'flex h-9 min-w-0 flex-1 box-border items-center overflow-hidden rounded-md border border-input bg-transparent px-3 py-1 text-sm text-foreground shadow-sm transition-colors focus-within:border-ring focus-within:ring-2 focus-within:ring-ring/50',
+      'flex h-9 min-w-0 flex-1 box-border items-center overflow-hidden rounded-md border border-solid border-input bg-transparent px-3 py-1 text-sm text-foreground shadow-sm transition-colors focus-within:border-ring focus-within:ring-2 focus-within:ring-ring/50',
       invalid ? 'border-destructive focus-within:ring-destructive' : '',
       disabled ? 'cursor-not-allowed' : '',
     ]"
@@ -51,7 +51,7 @@
     *ngIf="buttonText"
     type="button"
     [disabled]="disabled"
-    class="inline-flex h-9 w-full shrink-0 appearance-none box-border items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-not-allowed sm:w-auto"
+    class="inline-flex h-9 w-full shrink-0 appearance-none box-border items-center justify-center rounded-md border border-solid border-input bg-background px-4 py-2 text-sm font-medium text-foreground shadow-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-not-allowed sm:w-auto"
     (click)="onButtonClick($event)"
   >
     {{ buttonText }}

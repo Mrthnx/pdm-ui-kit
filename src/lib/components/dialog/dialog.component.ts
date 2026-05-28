@@ -192,7 +192,7 @@ export class PdmDialogComponent {
 			Z_INDEX.modal, // z-50 - debe estar sobre backdrop (z-40)
 			"flex",
 			"flex-col",
-			"border",
+			"border border-solid",
 			"border-border",
 			"bg-background",
 			"text-foreground",

@@ -2,7 +2,7 @@
   <div *ngIf="variant !== 'orientation'" class="flex items-center gap-4">
     <button
       type="button"
-      class="inline-flex h-8 w-8 appearance-none box-border items-center justify-center rounded-full border border-input bg-background p-2.5"
+      class="inline-flex h-8 w-8 appearance-none box-border items-center justify-center rounded-full border border-solid border-input bg-background p-2.5"
       [ngClass]="!canPrev ? 'opacity-50' : ''"
       [disabled]="!canPrev"
       (click)="onPrev()"
@@ -16,7 +16,7 @@
     <div class="flex items-center">
       <div *ngFor="let slide of visibleSlides; let i = index" class="flex items-center" [ngClass]="i > 0 ? 'pl-4' : ''">
         <div class="flex h-40 w-32 items-center p-1">
-          <div class="flex h-full w-full items-center justify-center rounded-lg border border-border bg-background py-6 shadow-sm">
+          <div class="flex h-full w-full items-center justify-center rounded-lg border border-solid border-border bg-background py-6 shadow-sm">
             <div class="text-center text-2xl font-semibold text-foreground">{{ slide }}</div>
           </div>
         </div>
@@ -25,7 +25,7 @@
 
     <button
       type="button"
-      class="inline-flex h-8 w-8 appearance-none box-border items-center justify-center rounded-full border border-input bg-background p-2.5"
+      class="inline-flex h-8 w-8 appearance-none box-border items-center justify-center rounded-full border border-solid border-input bg-background p-2.5"
       [ngClass]="!canNext ? 'opacity-50' : ''"
       [disabled]="!canNext"
       (click)="onNext()"
@@ -44,7 +44,7 @@
   <div *ngIf="variant === 'orientation'" class="flex flex-col items-center gap-4">
     <button
       type="button"
-      class="inline-flex h-8 w-8 appearance-none box-border items-center justify-center rounded-full border border-input bg-background p-2.5"
+      class="inline-flex h-8 w-8 appearance-none box-border items-center justify-center rounded-full border border-solid border-input bg-background p-2.5"
       [ngClass]="!canPrev ? 'opacity-50' : ''"
       [disabled]="!canPrev"
       (click)="onPrev()"
@@ -57,7 +57,7 @@
 
     <div class="flex w-80 flex-col">
       <div *ngFor="let slide of visibleSlides; let i = index" class="flex h-36 w-full items-center p-1" [ngClass]="i > 0 ? 'pt-1' : ''">
-        <div class="flex h-full w-full items-center justify-center rounded-lg border border-border bg-background py-6 shadow-sm">
+        <div class="flex h-full w-full items-center justify-center rounded-lg border border-solid border-border bg-background py-6 shadow-sm">
           <div class="text-center text-2xl font-semibold text-foreground">{{ slide }}</div>
         </div>
       </div>
@@ -65,7 +65,7 @@
 
     <button
       type="button"
-      class="inline-flex h-8 w-8 appearance-none box-border items-center justify-center rounded-full border border-input bg-background p-2.5"
+      class="inline-flex h-8 w-8 appearance-none box-border items-center justify-center rounded-full border border-solid border-input bg-background p-2.5"
       [ngClass]="!canNext ? 'opacity-50' : ''"
       [disabled]="!canNext"
       (click)="onNext()"

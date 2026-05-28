@@ -2,7 +2,7 @@
   <button
     #triggerEl
     type="button"
-    class="flex h-9 w-full appearance-none box-border items-center justify-between gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm"
+    class="flex h-9 w-full appearance-none box-border items-center justify-between gap-2 rounded-md border border-solid border-input bg-background px-3 py-2 text-sm shadow-sm"
     [attr.aria-expanded]="open"
     [attr.aria-haspopup]="'listbox'"
     (click)="toggle()"
@@ -37,7 +37,7 @@
   <!-- Template for CDK Overlay -->
   <ng-template #panelTemplate>
     <div
-      class="w-full rounded-md border border-border bg-popover p-0 text-popover-foreground shadow-md"
+      class="w-full rounded-md border border-solid border-border bg-popover p-0 text-popover-foreground shadow-md"
     >
       <div class="flex items-center gap-2 border-b border-border px-3 py-2">
         <svg

@@ -9,8 +9,8 @@
     'w-full appearance-none box-border border-0 bg-transparent p-0 text-left outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
     variant === 'card'
       ? checked
-        ? 'flex items-start gap-3 rounded-lg border border-primary bg-muted p-4'
-        : 'flex items-start gap-3 rounded-lg border border-border bg-background p-4'
+        ? 'flex items-start gap-3 rounded-lg border border-solid border-primary bg-muted p-4'
+        : 'flex items-start gap-3 rounded-lg border border-solid border-border bg-background p-4'
       : hasDescription
         ? 'flex items-start gap-3'
         : 'flex items-center gap-3',
@@ -21,7 +21,7 @@
 >
   <span
     [ngClass]="[
-      'mt-0.5 inline-flex h-4 w-4 shrink-0 box-border items-center justify-center rounded-sm border shadow-sm',
+      'mt-0.5 inline-flex h-4 w-4 shrink-0 box-border items-center justify-center rounded-sm border border-solid shadow-sm',
       checked
         ? 'border-primary bg-primary text-primary-foreground'
         : 'border-border bg-background text-transparent',

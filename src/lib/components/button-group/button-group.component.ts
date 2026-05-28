@@ -203,7 +203,7 @@ const ATTACHMENT_CONTROL_CLASSES: Record<Axis, string[]> = {
 
 const FOCUS_STACKING_CLASS = "*:focus-visible:relative *:focus-visible:z-10";
 const SEPARATOR_CLASSES =
-	"overflow-hidden rounded-md border border-border bg-secondary shadow-sm";
+	"overflow-hidden rounded-md border border-solid border-border bg-secondary shadow-sm";
 
 @Component({
 	selector: "pdm-button-group",

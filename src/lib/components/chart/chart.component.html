@@ -1,4 +1,4 @@
-<section [ngClass]="['w-full rounded-lg border border-border bg-card text-card-foreground', className]">
+<section [ngClass]="['w-full rounded-lg border border-solid border-border bg-card text-card-foreground', className]">
   <div *ngIf="title || description || desktopLabel || desktopValue || mobileLabel || mobileValue" class="flex w-full items-stretch border-b border-border">
     <div class="flex min-w-0 flex-1 flex-col gap-1 px-6 pb-3 pt-4">
       <h3 *ngIf="title" class="m-0 text-sm font-semibold leading-none tracking-tight">{{ title }}</h3>
@@ -75,7 +75,7 @@
           <div class="absolute inset-7 rounded-full bg-card"></div>
         </div>
         <div class="grid flex-1 gap-2">
-          <div *ngFor="let segment of pieSegments" class="flex items-center justify-between rounded-md border border-border px-3 py-2">
+          <div *ngFor="let segment of pieSegments" class="flex items-center justify-between rounded-md border border-solid border-border px-3 py-2">
             <div class="flex items-center gap-2">
               <span class="size-2.5 rounded-full" [style.background]="segment.color"></span>
               <span class="text-sm">{{ segment.label }}</span>
@@ -93,7 +93,7 @@
           <polygon [attr.points]="radarPoints" fill="hsl(var(--primary))" fill-opacity="0.22" stroke="hsl(var(--primary))" stroke-width="2"></polygon>
         </svg>
         <div class="grid flex-1 gap-2">
-          <div *ngFor="let item of radar; index as i" class="flex items-center justify-between rounded-md border border-border px-3 py-2 text-sm">
+          <div *ngFor="let item of radar; index as i" class="flex items-center justify-between rounded-md border border-solid border-border px-3 py-2 text-sm">
             <span class="text-muted-foreground">{{ radarMetricPrefix }} {{ i + 1 }}</span>
             <span class="font-medium">{{ item }}</span>
           </div>
@@ -128,7 +128,7 @@
       </div>
 
       <div *ngSwitchCase="'tooltips'" class="grid gap-3">
-        <div class="inline-flex w-fit min-w-56 flex-col gap-2 rounded-lg border border-border bg-card p-3 shadow-sm">
+        <div class="inline-flex w-fit min-w-56 flex-col gap-2 rounded-lg border border-solid border-border bg-card p-3 shadow-sm">
           <p class="m-0 text-xs font-medium text-muted-foreground">{{ tooltipTitle }}</p>
           <div class="flex items-center justify-between text-sm">
             <span>{{ tooltipPrimaryLabel }}</span>

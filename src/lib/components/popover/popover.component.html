@@ -3,7 +3,7 @@
     #triggerEl
     *ngIf="showTrigger"
     type="button"
-    class="inline-flex h-9 appearance-none box-border items-center justify-center rounded-md border border-input bg-background px-3 text-sm font-medium text-foreground shadow-sm"
+    class="inline-flex h-9 appearance-none box-border items-center justify-center rounded-md border border-solid border-input bg-background px-3 text-sm font-medium text-foreground shadow-sm"
     [attr.aria-expanded]="open"
     [attr.aria-haspopup]="'dialog'"
     (click)="toggle()"
@@ -17,7 +17,7 @@
   <!-- Template for CDK Overlay -->
   <ng-template #panelTemplate>
     <div
-      class="min-w-80 rounded-md border border-border bg-popover p-4 text-popover-foreground shadow-md"
+      class="min-w-80 rounded-md border border-solid border-border bg-popover p-4 text-popover-foreground shadow-md"
     >
       <ng-content></ng-content>
     </div>
