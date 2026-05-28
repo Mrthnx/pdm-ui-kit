@@ -1,12 +1,19 @@
 <div [ngClass]="['w-full', className]">
   <div *ngIf="!open" class="flex items-center gap-1">
-    <span class="text-sm font-medium text-muted-foreground">{{ hintLabel }}</span>
+    <span class="text-sm font-medium text-muted-foreground">{{
+      hintLabel
+    }}</span>
     <button
       type="button"
-      class="inline-flex h-5 appearance-none items-center gap-0.5 rounded-sm border border-border bg-muted px-1.5"
+      class="inline-flex h-5 appearance-none box-border items-center gap-0.5 rounded-sm border border-border bg-muted px-1.5"
       (click)="toggleOpen()"
     >
-      <pdm-icon name="command" [size]="12" className="text-muted-foreground" [decorative]="true"></pdm-icon>
+      <pdm-icon
+        name="command"
+        [size]="12"
+        className="text-muted-foreground"
+        [decorative]="true"
+      ></pdm-icon>
       <span class="text-xs text-muted-foreground">{{ hintKey }}</span>
     </button>
   </div>
@@ -16,40 +23,67 @@
     class="flex w-full flex-col overflow-hidden rounded-lg border border-border bg-popover text-popover-foreground shadow-md"
   >
     <div class="flex items-center gap-2 border-b border-border px-3">
-      <pdm-icon name="search" [size]="16" className="text-muted-foreground" [decorative]="true"></pdm-icon>
+      <pdm-icon
+        name="search"
+        [size]="16"
+        className="text-muted-foreground"
+        [decorative]="true"
+      ></pdm-icon>
       <input
         type="text"
         [placeholder]="placeholder"
         [value]="query"
         (input)="onQueryChange($event)"
-        class="h-10 w-full bg-transparent py-3 text-sm text-foreground outline-none placeholder:text-muted-foreground"
+        class="h-10 w-full appearance-none box-border bg-transparent py-3 text-sm text-foreground outline-none placeholder:text-muted-foreground"
       />
     </div>
 
     <div class="max-h-[50vh] overflow-y-auto p-1 md:max-h-72">
       <ng-container *ngFor="let group of groupedItems; let groupIndex = index">
-        <div *ngIf="group.name" class="px-2 py-1.5 text-xs text-muted-foreground">{{ group.name }}</div>
+        <div
+          *ngIf="group.name"
+          class="px-2 py-1.5 text-xs text-muted-foreground"
+        >
+          {{ group.name }}
+        </div>
         <button
           *ngFor="let item of group.items"
           type="button"
           [disabled]="item.disabled"
-          class="flex w-full appearance-none items-center gap-2 rounded-sm border-0 bg-transparent px-2 py-1.5 text-left text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground"
+          class="flex w-full appearance-none box-border items-center gap-2 rounded-sm border-0 bg-transparent px-2 py-1.5 text-left text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground"
           [ngClass]="[
             item.disabled ? 'opacity-50' : '',
-            item.label === 'Calendar' ? 'bg-accent text-accent-foreground' : ''
+            item.label === 'Calendar' ? 'bg-accent text-accent-foreground' : '',
           ]"
           (click)="select(item.value)"
         >
-          <span class="inline-flex h-4 w-4 items-center justify-center text-foreground">
-            <pdm-icon *ngIf="item.icon" [name]="item.icon" [size]="16" [decorative]="true"></pdm-icon>
+          <span
+            class="inline-flex h-4 w-4 items-center justify-center text-foreground"
+          >
+            <pdm-icon
+              *ngIf="item.icon"
+              [name]="item.icon"
+              [size]="16"
+              [decorative]="true"
+            ></pdm-icon>
           </span>
           <span class="min-w-0 flex-1 text-foreground">{{ item.label }}</span>
-          <span *ngIf="item.shortcut" class="text-xs text-muted-foreground">{{ item.shortcut }}</span>
+          <span *ngIf="item.shortcut" class="text-xs text-muted-foreground">{{
+            item.shortcut
+          }}</span>
         </button>
-        <div *ngIf="groupIndex === 0 && groupedItems.length > 1" class="my-1 border-t border-border"></div>
+        <div
+          *ngIf="groupIndex === 0 && groupedItems.length > 1"
+          class="my-1 border-t border-border"
+        ></div>
       </ng-container>
 
-      <p *ngIf="filteredItems.length === 0" class="m-0 py-6 text-center text-sm text-muted-foreground">{{ emptyMessage }}</p>
+      <p
+        *ngIf="filteredItems.length === 0"
+        class="m-0 py-6 text-center text-sm text-muted-foreground"
+      >
+        {{ emptyMessage }}
+      </p>
     </div>
   </section>
 </div>

@@ -3,6 +3,7 @@ import {
 	ChangeDetectorRef,
 	Component,
 	EventEmitter,
+	inject,
 	Input,
 	Output,
 } from "@angular/core";
@@ -15,7 +16,7 @@ export type PdmSwitchSize = "default" | "sm";
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PdmSwitchComponent {
-	constructor(private readonly cdr: ChangeDetectorRef) {}
+	private readonly cdr = inject(ChangeDetectorRef);
 
 	@Input() id = "";
 	@Input() checked = false;
@@ -28,7 +29,7 @@ export class PdmSwitchComponent {
 
 	get rootClasses(): string[] {
 		return [
-			"peer relative inline-flex appearance-none shrink-0 items-center rounded-full border border-transparent outline-none transition-all focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50",
+			"peer relative inline-flex appearance-none box-border shrink-0 items-center justify-start rounded-full border border-transparent p-0 outline-none transition-all focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50",
 			this.size === "sm" ? "h-[14px] w-[24px]" : "h-[18.4px] w-[32px]",
 			this.checked ? "bg-primary" : "bg-input dark:bg-input/80",
 		];
@@ -36,7 +37,7 @@ export class PdmSwitchComponent {
 
 	get thumbClasses(): string[] {
 		return [
-			"pointer-events-none self-center block rounded-full bg-background ring-0 transition-transform",
+			"pointer-events-none self-center block shrink-0 rounded-full bg-background ring-0 transition-transform",
 			this.size === "sm" ? "size-3" : "size-4",
 			this.checked ? "translate-x-[calc(100%-2px)]" : "translate-x-0",
 		];

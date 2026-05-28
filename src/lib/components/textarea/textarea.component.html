@@ -4,9 +4,10 @@
     [attr.for]="id"
     [ngClass]="[
       'text-sm font-medium leading-none',
-      invalid ? 'text-destructive' : 'text-foreground'
+      invalid ? 'text-destructive' : 'text-foreground',
     ]"
-  >{{ label }}</label>
+    >{{ label }}</label
+  >
   <textarea
     [id]="id"
     [rows]="rows"
@@ -17,11 +18,15 @@
     [required]="required"
     [attr.aria-invalid]="invalid"
     [ngClass]="[
-      'border-input focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 aria-invalid:ring-2 aria-invalid:ring-destructive aria-invalid:border-destructive aria-invalid:placeholder:text-destructive/70 placeholder:text-muted-foreground flex min-h-20 w-full rounded-md border bg-transparent px-3 py-2 text-sm shadow-sm outline-none disabled:cursor-not-allowed disabled:opacity-50',
-      textareaClassName
+      'border-input focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 aria-invalid:ring-2 aria-invalid:ring-destructive aria-invalid:border-destructive aria-invalid:placeholder:text-destructive/70 placeholder:text-muted-foreground flex min-h-20 w-full appearance-none box-border rounded-md border bg-transparent px-3 py-2 text-sm shadow-sm outline-none disabled:cursor-not-allowed disabled:opacity-50',
+      textareaClassName,
     ]"
     (input)="onInput($event)"
   ></textarea>
-  <p *ngIf="!invalid && helperText" class="m-0 text-sm text-muted-foreground">{{ helperText }}</p>
-  <p *ngIf="invalid && errorText" class="m-0 text-sm text-destructive">{{ errorText }}</p>
+  <p *ngIf="!invalid && helperText" class="m-0 text-sm text-muted-foreground">
+    {{ helperText }}
+  </p>
+  <p *ngIf="invalid && errorText" class="m-0 text-sm text-destructive">
+    {{ errorText }}
+  </p>
 </div>

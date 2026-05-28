@@ -6,7 +6,7 @@
     [attr.aria-invalid]="invalid"
     (change)="onChange($event)"
     [ngClass]="[
-      'border-input focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 aria-invalid:ring-2 aria-invalid:ring-destructive aria-invalid:border-destructive aria-invalid:placeholder:text-destructive/70 flex h-9 w-full appearance-none rounded-md border bg-transparent px-3 py-2 pr-9 text-sm shadow-sm outline-none disabled:cursor-not-allowed disabled:opacity-50'
+      'border-input focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 aria-invalid:ring-2 aria-invalid:ring-destructive aria-invalid:border-destructive aria-invalid:placeholder:text-destructive/70 flex h-9 w-full appearance-none box-border rounded-md border bg-transparent px-3 py-2 pr-9 text-sm shadow-sm outline-none disabled:cursor-not-allowed disabled:opacity-50'
     ]"
   >
     <option value="" disabled>{{ placeholder }}</option>

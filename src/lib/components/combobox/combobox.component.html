@@ -2,7 +2,7 @@
   <button
     #triggerEl
     type="button"
-    class="flex h-9 w-full appearance-none items-center justify-between gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm"
+    class="flex h-9 w-full appearance-none box-border items-center justify-between gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm"
     [attr.aria-expanded]="open"
     [attr.aria-haspopup]="'listbox'"
     (click)="toggle()"
@@ -69,7 +69,7 @@
         <button
           *ngFor="let option of options"
           type="button"
-          class="flex w-full appearance-none items-center gap-2 rounded-sm border-0 bg-transparent px-2 py-1.5 text-left text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground"
+          class="flex w-full appearance-none box-border items-center gap-2 rounded-sm border-0 bg-transparent px-2 py-1.5 text-left text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground"
           [ngClass]="option === value ? 'bg-accent text-accent-foreground' : ''"
           role="option"
           [attr.aria-selected]="option === value"

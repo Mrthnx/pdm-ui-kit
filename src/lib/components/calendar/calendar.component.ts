@@ -218,7 +218,7 @@ export class PdmCalendarComponent {
 
   navButtonClasses(): string[] {
     return [
-      'flex h-8 w-8 appearance-none items-center justify-center rounded-md border-0 bg-transparent p-0 text-foreground',
+      'flex h-8 w-8 appearance-none box-border items-center justify-center rounded-md border-0 bg-transparent p-0 text-foreground',
       'disabled:pointer-events-none disabled:opacity-40'
     ];
   }
@@ -238,7 +238,7 @@ export class PdmCalendarComponent {
   dropdownSelectClasses(): string[] {
     return [
       'text-foreground h-full bg-transparent text-sm font-medium leading-5',
-      'appearance-none border-0 outline-none ring-0 focus:outline-none focus:ring-0 text-center cursor-pointer'
+      'appearance-none box-border border-0 outline-none ring-0 focus:outline-none focus:ring-0 text-center cursor-pointer'
     ];
   }
 
@@ -283,7 +283,7 @@ export class PdmCalendarComponent {
 
   dayButtonClasses(cell: PdmCalendarCell): string[] {
     return [
-      'relative z-10 flex h-8 w-8 appearance-none items-center justify-center rounded-md border-0 p-0 text-sm leading-5',
+      'relative z-10 flex h-8 w-8 appearance-none box-border items-center justify-center rounded-md border-0 p-0 text-sm leading-5',
       cell.selected
         ? 'bg-primary text-primary-foreground'
         : cell.rangeFill

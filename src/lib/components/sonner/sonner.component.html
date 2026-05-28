@@ -4,7 +4,7 @@
     <p *ngIf="description" class="m-0 text-sm opacity-90">{{ description }}</p>
     <ng-content></ng-content>
   </div>
-  <button type="button" class="ml-auto appearance-none rounded-sm border-0 bg-transparent p-0 opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none" (click)="dismissed.emit()" aria-label="Dismiss">
+  <button type="button" class="ml-auto appearance-none box-border rounded-sm border-0 bg-transparent p-0 opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none" (click)="dismissed.emit()" aria-label="Dismiss">
     <pdm-icon name="x" [size]="14"></pdm-icon>
   </button>
 </div>

@@ -5,3 +5,4 @@ node_modules
 .alt/
 .pi/
 .pi-lens/
+.playwright-mcp/
