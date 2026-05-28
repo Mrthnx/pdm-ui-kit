@@ -10,7 +10,7 @@ export type PdmButtonGroupOrientation = "horizontal" | "vertical";
 type Axis = "horizontal" | "vertical";
 
 const ROOT_LAYOUT: Record<Axis, string> = {
-	horizontal: "w-full flex flex-row items-center overflow-x-auto",
+	horizontal: "w-full flex flex-row items-center overflow-visible",
 	vertical: "flex flex-col items-stretch",
 };
 
