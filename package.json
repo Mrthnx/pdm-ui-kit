@@ -1,6 +1,6 @@
 {
   "name": "pdm-ui-kit",
-  "version": "0.4.2",
+  "version": "1.2.0",
   "description": "PDM UI Kit Angular components - Responsive by default",
   "author": "Corelusa",
   "license": "MIT",
@@ -18,7 +18,7 @@
   },
   "sideEffects": false,
   "scripts": {
-    "build": "ng-packagr -p ng-package.json",
+    "build": "ng-packagr -p ng-package.json && node scripts/postbuild-exports.mjs",
     "pack:dist": "npm pack ./dist/pdm-ui-kit",
     "publish:dist": "npm publish ./dist/pdm-ui-kit",
     "prepublishOnly": "npm run build"

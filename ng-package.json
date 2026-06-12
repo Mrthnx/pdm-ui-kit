@@ -3,10 +3,10 @@
   "dest": "dist/pdm-ui-kit",
   "lib": {
     "entryFile": "src/public-api.ts",
-    "styleIncludePaths": ["src/lib/styles"]
+    "styleIncludePaths": ["src/styles"]
   },
   "assets": [
-    "src/lib/styles"
+    "src/styles"
   ],
   "allowedNonPeerDependencies": [
     "date-fns"
