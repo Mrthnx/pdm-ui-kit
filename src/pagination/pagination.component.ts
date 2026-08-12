@@ -31,11 +31,47 @@ export class PdmPaginationComponent {
 
   get visiblePages(): Array<number | 'ellipsis'> {
     const total = Math.max(1, this.pageCount);
-    if (total <= Math.max(1, this.maxVisible)) {
+    const current = Math.min(Math.max(1, this.page), total);
+    const maxNumericPages = Math.max(3, Math.floor(this.maxVisible));
+
+    if (total <= maxNumericPages) {
       return Array.from({ length: total }, (_, i) => i + 1);
     }
 
-    return [1, 2, 'ellipsis', total];
+    const middleSlots = maxNumericPages - 2;
+    let start = current - Math.floor((middleSlots - 1) / 2);
+    let end = start + middleSlots - 1;
+
+    if (start < 2) {
+      start = 2;
+      end = start + middleSlots - 1;
+    }
+
+    if (end > total - 1) {
+      end = total - 1;
+      start = end - middleSlots + 1;
+    }
+
+    const pages = [1];
+    for (let pageNumber = start; pageNumber <= end; pageNumber += 1) {
+      pages.push(pageNumber);
+    }
+    pages.push(total);
+
+    return pages.reduce<Array<number | 'ellipsis'>>((result, pageNumber) => {
+      const previous = result[result.length - 1];
+
+      if (typeof previous === 'number') {
+        if (pageNumber - previous === 2) {
+          result.push(previous + 1);
+        } else if (pageNumber - previous > 2) {
+          result.push('ellipsis');
+        }
+      }
+
+      result.push(pageNumber);
+      return result;
+    }, []);
   }
 
   setPage(next: number): void {
