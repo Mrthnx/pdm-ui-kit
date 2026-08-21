@@ -1,14 +1,12 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PdmSpinnerComponent } from './spinner.component';
 
-const COMPONENTS = [
-  PdmSpinnerComponent,
-];
-
+/**
+ * @deprecated Import PdmSpinnerComponent directly instead. This module is kept for backwards compatibility.
+ * For modern Angular (v14+), use: import { PdmSpinnerComponent } from 'pdm-ui-kit/spinner'
+ */
 @NgModule({
-  imports: [CommonModule],
-  declarations: COMPONENTS,
-  exports: COMPONENTS
+  imports: [PdmSpinnerComponent],
+  exports: [PdmSpinnerComponent]
 })
 export class PdmSpinnerModule {}

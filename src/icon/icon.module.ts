@@ -1,14 +1,12 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PdmIconComponent } from './icon.component';
 
-const COMPONENTS = [
-  PdmIconComponent,
-];
-
+/**
+ * @deprecated Import PdmIconComponent directly instead. This module is kept for backwards compatibility.
+ * For modern Angular (v14+), use: import { PdmIconComponent } from 'pdm-ui-kit/icon'
+ */
 @NgModule({
-  imports: [CommonModule],
-  declarations: COMPONENTS,
-  exports: COMPONENTS
+  imports: [PdmIconComponent],
+  exports: [PdmIconComponent]
 })
 export class PdmIconModule {}

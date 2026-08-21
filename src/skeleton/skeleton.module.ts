@@ -1,14 +1,12 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PdmSkeletonComponent } from './skeleton.component';
 
-const COMPONENTS = [
-  PdmSkeletonComponent,
-];
-
+/**
+ * @deprecated Import PdmSkeletonComponent directly instead. This module is kept for backwards compatibility.
+ * For modern Angular (v14+), use: import { PdmSkeletonComponent } from 'pdm-ui-kit/skeleton'
+ */
 @NgModule({
-  imports: [CommonModule],
-  declarations: COMPONENTS,
-  exports: COMPONENTS
+  imports: [PdmSkeletonComponent],
+  exports: [PdmSkeletonComponent]
 })
 export class PdmSkeletonModule {}

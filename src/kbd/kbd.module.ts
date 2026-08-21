@@ -1,14 +1,12 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PdmKbdComponent } from './kbd.component';
 
-const COMPONENTS = [
-  PdmKbdComponent,
-];
-
+/**
+ * @deprecated Import PdmKbdComponent directly instead. This module is kept for backwards compatibility.
+ * For modern Angular (v14+), use: import { PdmKbdComponent } from 'pdm-ui-kit/kbd'
+ */
 @NgModule({
-  imports: [CommonModule],
-  declarations: COMPONENTS,
-  exports: COMPONENTS
+  imports: [PdmKbdComponent],
+  exports: [PdmKbdComponent]
 })
 export class PdmKbdModule {}

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 export type PdmBadgeVariant =
   | 'default'
@@ -13,7 +14,9 @@ export type PdmBadgeVariant =
 @Component({
   selector: 'pdm-badge',
   templateUrl: './badge.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [CommonModule],
 })
 export class PdmBadgeComponent {
   @Input() variant: PdmBadgeVariant = 'default';

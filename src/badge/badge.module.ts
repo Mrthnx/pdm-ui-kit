@@ -1,14 +1,12 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PdmBadgeComponent } from './badge.component';
 
-const COMPONENTS = [
-  PdmBadgeComponent,
-];
-
+/**
+ * @deprecated Import PdmBadgeComponent directly instead. This module is kept for backwards compatibility.
+ * For modern Angular (v14+), use: import { PdmBadgeComponent } from 'pdm-ui-kit/badge'
+ */
 @NgModule({
-  imports: [CommonModule],
-  declarations: COMPONENTS,
-  exports: COMPONENTS
+  imports: [PdmBadgeComponent],
+  exports: [PdmBadgeComponent]
 })
 export class PdmBadgeModule {}

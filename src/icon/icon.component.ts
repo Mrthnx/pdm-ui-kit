@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { icons, type IconNode } from 'lucide';
 
@@ -75,7 +76,9 @@ const FALLBACK_NODE: IconNode = [['circle', { cx: '12', cy: '12', r: '9' }]];
       }
     `
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [CommonModule],
 })
 export class PdmIconComponent {
   @Input() name: PdmIconName | string = 'check';

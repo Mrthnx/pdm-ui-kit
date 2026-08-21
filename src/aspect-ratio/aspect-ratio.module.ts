@@ -1,14 +1,12 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PdmAspectRatioComponent } from './aspect-ratio.component';
 
-const COMPONENTS = [
-  PdmAspectRatioComponent,
-];
-
+/**
+ * @deprecated Import PdmAspectRatioComponent directly instead. This module is kept for backwards compatibility.
+ * For modern Angular (v14+), use: import { PdmAspectRatioComponent } from 'pdm-ui-kit/aspect-ratio'
+ */
 @NgModule({
-  imports: [CommonModule],
-  declarations: COMPONENTS,
-  exports: COMPONENTS
+  imports: [PdmAspectRatioComponent],
+  exports: [PdmAspectRatioComponent]
 })
 export class PdmAspectRatioModule {}

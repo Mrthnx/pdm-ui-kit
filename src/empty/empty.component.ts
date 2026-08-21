@@ -5,7 +5,7 @@ export type PdmEmptyVariant = 'default' | 'outline' | 'background';
 @Component({
   selector: 'pdm-empty',
   templateUrl: './empty.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PdmEmptyComponent {
   @Input() variant: PdmEmptyVariant = 'default';
