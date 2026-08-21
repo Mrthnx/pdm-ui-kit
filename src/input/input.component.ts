@@ -42,4 +42,16 @@ export class PdmInputComponent {
 	onBlur(event: FocusEvent): void {
 		this.blurred.emit(event);
 	}
+
+	get helperAttrId(): string | null {
+		return this.id ? `${this.id}-helper` : null;
+	}
+
+	get errorAttrId(): string | null {
+		return this.id ? `${this.id}-error` : null;
+	}
+
+	get descriptionAttrId(): string | null {
+		return this.invalid && this.errorText ? this.errorAttrId : this.helperAttrId;
+	}
 }

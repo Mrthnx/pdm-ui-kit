@@ -17,6 +17,7 @@
     [readonly]="readonly"
     [required]="required"
     [attr.aria-invalid]="invalid"
+    [attr.aria-describedby]="descriptionAttrId"
     [ngClass]="[
       'border-input focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 aria-invalid:ring-2 aria-invalid:ring-destructive aria-invalid:border-destructive aria-invalid:placeholder:text-destructive/70 placeholder:text-muted-foreground w-full min-w-0 appearance-none box-border rounded-lg border border-solid bg-transparent px-3 py-1 text-sm shadow-sm transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
       size === 'large' ? 'h-10 px-4 text-sm' : '',
@@ -30,10 +31,10 @@
     (input)="onInput($event)"
     (blur)="onBlur($event)"
   />
-  <p *ngIf="!invalid && helperText" class="m-0 text-sm text-muted-foreground">
+  <p *ngIf="!invalid && helperText" [id]="helperAttrId" class="m-0 text-sm text-muted-foreground">
     {{ helperText }}
   </p>
-  <p *ngIf="invalid && errorText" class="m-0 text-sm text-destructive">
+  <p *ngIf="invalid && errorText" [id]="errorAttrId" class="m-0 text-sm text-destructive">
     {{ errorText }}
   </p>
 </div>

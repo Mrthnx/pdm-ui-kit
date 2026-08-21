@@ -73,7 +73,7 @@ export class PdmDialogComponent {
 	 */
 	@Input() size: PdmDialogSize = "responsive";
 
-	@Input() title = "Edit profile";
+	@Input() title = "";
 	@Input() description = "";
 	@Input() closeOnBackdrop = true;
 	@Input() closeOnEsc = true;

@@ -3,7 +3,7 @@
   <div class="absolute inset-0 bg-foreground/30 backdrop-blur-sm" (click)="onBackdropClick()"></div>
   
   <!-- Dialog Panel -->
-  <section role="dialog" aria-modal="true" [ngClass]="panelClassName">
+  <section role="dialog" aria-modal="true" cdkTrapFocus [ngClass]="panelClassName">
     <!-- Header -->
     <div *ngIf="showHeader" [ngClass]="headerWrapperClassName">
       <div class="min-w-0 flex-1">

@@ -16,15 +16,15 @@
       "dom"
     ],
     "skipLibCheck": true,
-    "strict": false,
-    "noImplicitOverride": false,
+    "strict": true,
+    "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": false,
-    "noImplicitReturns": false,
+    "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true
   },
   "angularCompilerOptions": {
-    "strictInjectionParameters": false,
-    "strictInputAccessModifiers": false,
-    "strictTemplates": false
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
   }
 }
