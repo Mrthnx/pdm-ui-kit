@@ -115,3 +115,6 @@ export * from "./input/textarea.component";
 export * from "./toggle/toggle.component";
 export * from "./toggle/toggle-group.component";
 export * from "./tooltip/tooltip.component";
+
+// Test harnesses for unit testing
+export * from "./testing";
