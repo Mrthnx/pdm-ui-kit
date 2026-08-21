@@ -35,6 +35,12 @@ export class PdmInputComponent {
 	@Output() valueChange = new EventEmitter<string>();
 	@Output() blurred = new EventEmitter<FocusEvent>();
 
+	constructor() {
+		if (this.required && this.disabled) {
+			console.warn('PdmInputComponent: required + disabled is invalid — a required field cannot be disabled');
+		}
+	}
+
 	onInput(event: Event): void {
 		this.valueChange.emit((event.target as HTMLInputElement).value);
 	}
