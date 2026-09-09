@@ -9,6 +9,8 @@
     "src/styles"
   ],
   "allowedNonPeerDependencies": [
-    "date-fns"
+    "date-fns",
+    "clsx",
+    "tailwind-merge"
   ]
 }

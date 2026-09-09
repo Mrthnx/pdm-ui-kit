@@ -339,6 +339,34 @@ users: User[] = [
 </pdm-dialog>
 ```
 
+`maxWidth` overrides the desktop size while responsive mobile mode remains fullscreen:
+
+```html
+<pdm-dialog [open]="isOpen" maxWidth="800px" title="Custom width">
+  <p>Dialog content</p>
+</pdm-dialog>
+```
+
+`className` overrides base Tailwind utilities reliably through `cn()` and `tailwind-merge`, so the last conflicting utility wins:
+
+```html
+<pdm-dialog size="lg" className="sm:max-w-[900px]">
+  <p>Dialog content</p>
+</pdm-dialog>
+```
+
+Replace the built-in header or footer with projected slots:
+
+```html
+<pdm-dialog [open]="isOpen">
+  <div pdmHeader>Custom header</div>
+  <p>Dialog content</p>
+  <div pdmFooter>Custom footer</div>
+</pdm-dialog>
+```
+
+`pdm-alert-dialog` also supports `size`, responsive layouts, `maxWidth`, and reliable `className` overrides.
+
 #### Drawer (side panel)
 
 ```html

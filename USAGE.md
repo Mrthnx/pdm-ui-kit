@@ -47,7 +47,7 @@ export class MyFeatureModule {}
 | `pdm-ui-kit/command`                      | `PdmCommandModule`, `PdmCommandComponent`                                      |
 | `pdm-ui-kit/context-menu`                 | `PdmContextMenuModule`, `PdmContextMenuComponent`                              |
 | `pdm-ui-kit/data-table`                   | `PdmDataTableModule`, `PdmDataTableComponent`, `PdmDraggableTableComponent`, `PdmTableComponent` |
-| `pdm-ui-kit/dialog`                       | `PdmDialogModule`, `PdmDialogComponent`                                        |
+| `pdm-ui-kit/dialog`                       | `PdmDialogModule`, `PdmDialogComponent` — supports `maxWidth` and reliable `className` overrides |
 | `pdm-ui-kit/drawer`                       | `PdmDrawerModule`, `PdmDrawerComponent`, `PdmSheetComponent`                   |
 | `pdm-ui-kit/dropdown-menu`                | `PdmDropdownMenuModule`, `PdmDropdownMenuComponent`                            |
 | `pdm-ui-kit/empty`                        | `PdmEmptyModule`, `PdmEmptyComponent`                                          |

@@ -1,13 +1,14 @@
 import {
 	ChangeDetectionStrategy,
 	Component,
+	ContentChild,
+	Directive,
 	EventEmitter,
 	HostListener,
 	Input,
 	Output,
 } from "@angular/core";
-import { responsive } from "pdm-ui-kit/src/utils";
-import { Z_INDEX } from "pdm-ui-kit/src/utils";
+import { cn, responsive, Z_INDEX } from "pdm-ui-kit/src/utils";
 
 export type PdmDialogVariant = "default" | "custom-close";
 
@@ -26,35 +27,24 @@ export type PdmDialogSize =
 
 export type PdmDialogFooterAlign = "right" | "full-width" | "left";
 
+@Directive({ selector: "[pdmHeader]" })
+export class PdmDialogHeaderDirective {}
+
+@Directive({ selector: "[pdmFooter]" })
+export class PdmDialogFooterDirective {}
+
 /**
- * Modal/Dialog component con soporte responsive
- *
- * MEJORADO en v0.2.0:
- * - Modo 'responsive' (default): fullscreen en mobile, modal en desktop
- * - Tamaños predefinidos: sm, md, lg, xl
- * - Mejor manejo de scroll en mobile
- *
- * @example
- * // Responsive (recomendado)
- * <pdm-dialog [open]="isOpen" size="responsive">
- *   <p>Content</p>
- * </pdm-dialog>
- *
- * @example
- * // Tamaño fijo
- * <pdm-dialog [open]="isOpen" size="lg">
- *   <p>Content</p>
- * </pdm-dialog>
+ * Responsive modal/dialog component.
  */
 @Component({
 	selector: "pdm-dialog",
 	templateUrl: "./dialog.component.html",
 	styles: [
 		`
-    :host {
-      display: block;
-    }
-  `,
+        :host {
+          display: block;
+        }
+      `,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -63,15 +53,15 @@ export class PdmDialogComponent {
 	@Input() variant: PdmDialogVariant = "default";
 
 	/**
-	 * Tamaño del dialog
-	 * - responsive: fullscreen mobile, modal desktop (recomendado)
-	 * - sm: 400px max
-	 * - md: 500px max
-	 * - lg: 640px max (default)
-	 * - xl: 800px max
-	 * - desktop/mobile/mobile-fullscreen: legacy, deprecado
+	 * Dialog size. Responsive mode is fullscreen on mobile and a modal on desktop.
 	 */
 	@Input() size: PdmDialogSize = "responsive";
+
+	/**
+	 * Custom desktop maximum width, such as `800px` or `min(90vw, 800px)`.
+	 * Overrides `size` at the `sm` breakpoint; responsive mobile mode remains fullscreen.
+	 */
+	@Input() maxWidth = "";
 
 	@Input() title = "";
 	@Input() description = "";
@@ -87,6 +77,9 @@ export class PdmDialogComponent {
 	@Input() bodyClassName = "";
 	@Input() footerClassName = "";
 	@Input() className = "";
+
+	@ContentChild(PdmDialogHeaderDirective) customHeader?: PdmDialogHeaderDirective;
+	@ContentChild(PdmDialogFooterDirective) customFooter?: PdmDialogFooterDirective;
 
 	@Output() openChange = new EventEmitter<boolean>();
 	@Output() primaryAction = new EventEmitter<void>();
@@ -118,7 +111,6 @@ export class PdmDialogComponent {
 	}
 
 	get panelClassName(): string {
-		// Legacy sizes (backward compatibility)
 		if (this.size === "desktop") {
 			return this.buildPanelClasses([
 				"max-w-[640px]",
@@ -144,16 +136,13 @@ export class PdmDialogComponent {
 			]);
 		}
 
-		// New responsive mode (recomendado)
 		if (this.size === "responsive") {
 			return this.buildPanelClasses([
-				// Mobile: fullscreen con bordes redondeados solo arriba
 				"w-full",
 				"h-full",
 				"max-h-[100dvh]",
 				"rounded-t-[10px]",
 				"sm:rounded-[10px]",
-				// Desktop: modal centrado
 				"sm:w-auto",
 				"sm:h-auto",
 				"sm:max-w-[640px]",
@@ -161,23 +150,19 @@ export class PdmDialogComponent {
 			]);
 		}
 
-		// New size options
 		const sizeMap = {
 			sm: "sm:max-w-[400px]",
 			md: "sm:max-w-[500px]",
 			lg: "sm:max-w-[640px]",
 			xl: "sm:max-w-[800px]",
 		};
-
 		const maxWidth = sizeMap[this.size as keyof typeof sizeMap] || sizeMap.lg;
 
 		return this.buildPanelClasses([
-			// Mobile: fullscreen
 			"w-full",
 			"h-full",
 			"max-h-[100dvh]",
 			"rounded-t-[10px]",
-			// Desktop: modal
 			"sm:rounded-[10px]",
 			"sm:w-auto",
 			"sm:h-auto",
@@ -189,7 +174,7 @@ export class PdmDialogComponent {
 	private buildPanelClasses(sizeClasses: string[]): string {
 		const base = [
 			"relative",
-			Z_INDEX.modal, // z-50 - debe estar sobre backdrop (z-40)
+			Z_INDEX.modal,
 			"flex",
 			"flex-col",
 			"border border-solid",
@@ -198,42 +183,24 @@ export class PdmDialogComponent {
 			"text-foreground",
 			"shadow-lg",
 			"overflow-hidden",
-			...sizeClasses,
-			this.className,
 		];
+		const maxWidthClass = this.maxWidth ? `sm:max-w-[${this.maxWidth}]` : "";
 
-		return base.filter(Boolean).join(" ");
+		return cn(...base, ...sizeClasses, maxWidthClass, this.className);
 	}
 
 	get bodyWrapperClassName(): string {
-		// min-h-0 is CRITICAL for flex child to shrink and allow internal scroll
-		const base = [
-			"flex-1",
-			"min-h-0",
-			"overflow-y-auto",
-			"px-4",
-			"py-6",
-			"sm:px-6",
+		return cn(
+			"flex-1 min-h-0 overflow-y-auto px-4 py-6 sm:px-6",
 			this.bodyClassName,
-		];
-
-		return base.filter(Boolean).join(" ");
+		);
 	}
 
 	get headerWrapperClassName(): string {
-		const base = [
-			"flex",
-			"items-start",
-			"justify-between",
-			"gap-3",
-			"p-4",
-			"sm:p-6",
-			"border-b",
-			"border-border",
+		return cn(
+			"flex items-start justify-between gap-3 p-4 sm:p-6 border-b border-border",
 			this.headerClassName,
-		];
-
-		return base.filter(Boolean).join(" ");
+		);
 	}
 
 	get footerWrapperClassName(): string {
@@ -242,31 +209,18 @@ export class PdmDialogComponent {
 				? "left"
 				: this.alignFooter;
 
-		const base = [
-			"p-4",
-			"sm:p-6",
-			"border-t",
-			"border-border",
-			// Mobile: siempre full-width
-			"flex",
-			"flex-col",
-			"gap-2",
-			// Desktop: según alignFooter
+		return cn(
+			"p-4 sm:p-6 border-t border-border flex flex-col gap-2",
 			effectiveAlign === "full-width"
 				? "sm:flex-col"
 				: "sm:flex-row sm:items-center",
 			effectiveAlign === "left" ? "sm:justify-start" : "",
 			effectiveAlign === "right" ? "sm:justify-end" : "",
 			this.footerClassName,
-		];
-
-		return base.filter(Boolean).join(" ");
+		);
 	}
 
 	get containerClassName(): string {
-		// Container con backdrop z-40
-		// Mobile: fullscreen desde el bottom
-		// Desktop: centrado
 		return responsive({
 			default: `fixed inset-x-0 bottom-0 ${Z_INDEX.modalBackdrop} flex items-end justify-center`,
 			sm: `fixed inset-0 ${Z_INDEX.modalBackdrop} flex items-center justify-center p-4`,

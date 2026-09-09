@@ -1,3 +1,4 @@
+import { A11yModule } from '@angular/cdk/a11y';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PdmAlertComponent } from './alert.component';
@@ -9,7 +10,7 @@ const COMPONENTS = [
 ];
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, A11yModule],
   declarations: COMPONENTS,
   exports: COMPONENTS
 })
