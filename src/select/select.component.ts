@@ -4,6 +4,7 @@ import {
 	ChangeDetectorRef,
 	Component,
 	ContentChildren,
+	DoCheck,
 	ElementRef,
 	EventEmitter,
 	HostListener,
@@ -34,10 +35,17 @@ export interface PdmSelectOption {
 	styles: [":host { display: block; }"],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PdmSelectComponent implements AfterContentInit, OnDestroy {
+export class PdmSelectComponent implements AfterContentInit, DoCheck, OnDestroy {
 	@Input() id = "";
 	@Input() value = "";
-	@Input() options: PdmSelectOption[] = [];
+	@Input()
+	set options(value: PdmSelectOption[] | null | undefined) {
+		this.inputOptions = value ?? [];
+		this.cdr.markForCheck();
+	}
+	get options(): PdmSelectOption[] {
+		return this.inputOptions;
+	}
 	@Input() disabled = false;
 	@Input() invalid = false;
 	@Input() className = "";
@@ -62,6 +70,13 @@ export class PdmSelectComponent implements AfterContentInit, OnDestroy {
 
 	private overlayRef: OverlayRef | null = null;
 	private backdropSub: Subscription | null = null;
+	private projectedOptionsSub: Subscription | null = null;
+	private inputOptions: PdmSelectOption[] = [];
+	private readonly projectedOptionCache = new WeakMap<
+		PdmSelectOptionDirective,
+		PdmSelectOption
+	>();
+	private readonly cachedProjectedOptions: PdmSelectOption[] = [];
 
 	constructor(
 		private readonly cdr: ChangeDetectorRef,
@@ -70,11 +85,23 @@ export class PdmSelectComponent implements AfterContentInit, OnDestroy {
 	) {}
 
 	ngAfterContentInit(): void {
+		this.syncProjectedOptions();
 		// Re-render when projected options change (e.g. *ngFor on pdm-select-option).
-		this.projectedOptions.changes.subscribe(() => this.cdr.markForCheck());
+		this.projectedOptionsSub = this.projectedOptions.changes.subscribe(() => {
+			this.syncProjectedOptions();
+			this.cdr.markForCheck();
+		});
+	}
+
+	ngDoCheck(): void {
+		this.syncProjectedOptions();
 	}
 
 	ngOnDestroy(): void {
+		if (this.projectedOptionsSub) {
+			this.projectedOptionsSub.unsubscribe();
+			this.projectedOptionsSub = null;
+		}
 		this.destroyOverlay();
 	}
 
@@ -85,13 +112,9 @@ export class PdmSelectComponent implements AfterContentInit, OnDestroy {
 	 */
 	get resolvedOptions(): PdmSelectOption[] {
 		if (this.projectedOptions && this.projectedOptions.length > 0) {
-			return this.projectedOptions.map((d) => ({
-				label: d.resolvedLabel,
-				value: d.value,
-				disabled: d.disabled,
-			}));
+			return this.cachedProjectedOptions;
 		}
-		return this.options;
+		return this.inputOptions;
 	}
 
 	get selectedOption(): PdmSelectOption | undefined {
@@ -121,11 +144,52 @@ export class PdmSelectComponent implements AfterContentInit, OnDestroy {
 		this.closePanel();
 	}
 
+	trackByOptionValue = (index: number, option: PdmSelectOption): string => {
+		return this.optionKey(option, index);
+	};
+
 	@HostListener("document:keydown.escape")
 	onEscape(): void {
 		if (this.open) {
 			this.closePanel();
 		}
+	}
+
+	private syncProjectedOptions(): void {
+		if (!this.projectedOptions || this.projectedOptions.length === 0) {
+			if (this.cachedProjectedOptions.length > 0) {
+				this.cachedProjectedOptions.length = 0;
+			}
+			return;
+		}
+
+		let index = 0;
+		this.projectedOptions.forEach((directive) => {
+			let option = this.projectedOptionCache.get(directive);
+			if (!option) {
+				option = {
+					label: directive.resolvedLabel,
+					value: directive.value,
+					disabled: directive.disabled,
+				};
+				this.projectedOptionCache.set(directive, option);
+			}
+
+			option.label = directive.resolvedLabel;
+			option.value = directive.value;
+			option.disabled = directive.disabled;
+			this.cachedProjectedOptions[index] = option;
+			index += 1;
+		});
+
+		if (this.cachedProjectedOptions.length !== index) {
+			this.cachedProjectedOptions.length = index;
+		}
+	}
+
+	private optionKey(option: PdmSelectOption | null | undefined, index: number): string {
+		const value = option?.value;
+		return value == null ? `index:${index}` : `value:${String(value)}`;
 	}
 
 	private openPanel(): void {

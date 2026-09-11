@@ -12,6 +12,7 @@
     [attr.aria-controls]="panelId"
     [attr.aria-haspopup]="'dialog'"
     [attr.aria-invalid]="invalid"
+    [attr.aria-label]="iconOnly ? displayText : null"
     [ngClass]="triggerClasses"
     [attr.title]="displayText"
     (click)="toggleOpen()"
@@ -27,7 +28,7 @@
       </svg>
     </span>
 
-    <span [ngClass]="textClasses">{{ displayText }}</span>
+    <span *ngIf="!iconOnly" [ngClass]="textClasses">{{ displayText }}</span>
   </button>
 </div>
 

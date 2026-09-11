@@ -8,29 +8,43 @@
     ]"
     >{{ label }}</label
   >
-  <input
-    [id]="id"
-    [type]="type"
-    [value]="value"
-    [placeholder]="placeholder"
-    [disabled]="disabled"
-    [readonly]="readonly"
-    [required]="required"
-    [attr.aria-invalid]="invalid"
-    [attr.aria-describedby]="descriptionAttrId"
-    [ngClass]="[
-      'border-input focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 aria-invalid:ring-2 aria-invalid:ring-destructive aria-invalid:border-destructive aria-invalid:placeholder:text-destructive/70 placeholder:text-muted-foreground w-full min-w-0 appearance-none box-border rounded-lg border border-solid bg-transparent px-3 py-1 text-sm shadow-sm transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
-      size === 'large' ? 'h-10 px-4 text-sm' : '',
-      size === 'regular' ? 'h-9 px-3 text-sm' : '',
-      size === 'small' ? 'h-8 px-2 text-sm' : '',
-      size === 'mini' ? 'h-6 px-1.5 text-xs' : '',
-      roundness === 'round' ? 'rounded-full' : 'rounded-lg',
-      type === 'file' ? 'text-sm' : 'text-foreground',
-      inputClassName,
-    ]"
-    (input)="onInput($event)"
-    (blur)="onBlur($event)"
-  />
+  <div [ngClass]="icon ? 'relative' : ''">
+    <pdm-icon
+      *ngIf="icon"
+      [name]="icon"
+      [size]="16"
+      aria-hidden="true"
+      [ngClass]="[
+        'pointer-events-none absolute top-1/2 -translate-y-1/2 text-muted-foreground',
+        iconPosition === 'right' ? 'right-3' : 'left-3',
+      ]"
+    ></pdm-icon>
+    <input
+      [id]="id"
+      [type]="type"
+      [value]="value"
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      [readonly]="readonly"
+      [required]="required"
+      [attr.aria-invalid]="invalid"
+      [attr.aria-describedby]="descriptionAttrId"
+      [ngClass]="[
+        'border-input focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 aria-invalid:ring-2 aria-invalid:ring-destructive aria-invalid:border-destructive aria-invalid:placeholder:text-destructive/70 placeholder:text-muted-foreground w-full min-w-0 appearance-none box-border rounded-lg border border-solid bg-transparent px-3 py-1 text-sm shadow-sm transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
+        size === 'large' ? 'h-10 px-4 text-sm' : '',
+        size === 'regular' ? 'h-9 px-3 text-sm' : '',
+        size === 'small' ? 'h-8 px-2 text-sm' : '',
+        size === 'mini' ? 'h-6 px-1.5 text-xs' : '',
+        icon && iconPosition === 'left' ? 'pl-9' : '',
+        icon && iconPosition === 'right' ? 'pr-9' : '',
+        roundness === 'round' ? 'rounded-full' : 'rounded-lg',
+        type === 'file' ? 'text-sm' : 'text-foreground',
+        inputClassName,
+      ]"
+      (input)="onInput($event)"
+      (blur)="onBlur($event)"
+    />
+  </div>
   <p *ngIf="!invalid && helperText" [id]="helperAttrId" class="m-0 text-sm text-muted-foreground">
     {{ helperText }}
   </p>

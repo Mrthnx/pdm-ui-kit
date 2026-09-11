@@ -8,6 +8,7 @@ import {
 
 export type PdmInputSize = "mini" | "small" | "regular" | "large";
 export type PdmInputRoundness = "default" | "round";
+export type PdmInputIconPosition = "left" | "right";
 
 @Component({
 	selector: "pdm-input",
@@ -26,6 +27,8 @@ export class PdmInputComponent {
 	@Input() invalid = false;
 	@Input() size: PdmInputSize = "regular";
 	@Input() roundness: PdmInputRoundness = "default";
+	@Input() icon = "";
+	@Input() iconPosition: PdmInputIconPosition = "left";
 	@Input() className = "";
 	@Input() inputClassName = "";
 	@Input() label = "";

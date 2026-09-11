@@ -59,6 +59,7 @@ export class PdmDatePickerComponent implements OnDestroy {
 	@Input() labelClassName = "";
 	@Input() className = "";
 	@Input() triggerClassName = "";
+	@Input() iconOnly = false;
 	/**
 	 * Additional CSS classes applied to the overlay panel.
 	 * Backward-compatible: mapped to `overlayOptions.panelClass` when `overlayOptions` is not set.
@@ -185,7 +186,11 @@ export class PdmDatePickerComponent implements OnDestroy {
 	get rootClasses(): string[] {
 		return [
 			"grid gap-2",
-			this.resolvedVariant === "range" ? "w-[280px]" : "w-[197px]",
+			this.iconOnly
+				? "inline-grid w-auto"
+				: this.resolvedVariant === "range"
+					? "w-[280px]"
+					: "w-[197px]",
 			this.className,
 		];
 	}
@@ -194,8 +199,11 @@ export class PdmDatePickerComponent implements OnDestroy {
 		const focusStyle = this._open || this.triggerFocused;
 
 		return [
-			"border-input focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 aria-invalid:ring-2 aria-invalid:ring-destructive aria-invalid:border-destructive relative flex w-full appearance-none box-border items-center gap-2 overflow-hidden rounded-lg border border-solid bg-background px-3 py-[7.5px] text-left text-sm shadow-sm outline-none transition-colors",
+			"border-input focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 aria-invalid:ring-2 aria-invalid:ring-destructive aria-invalid:border-destructive relative flex appearance-none box-border items-center overflow-hidden rounded-lg border border-solid bg-background text-sm shadow-sm outline-none transition-colors",
 			"min-h-[36px] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
+			this.iconOnly
+				? "size-9 justify-center p-0"
+				: "w-full gap-2 px-3 py-[7.5px] text-left",
 			focusStyle ? "border-ring ring-2 ring-ring/50" : "",
 			this.invalid ? "border-destructive ring-destructive/20" : "",
 			this.triggerClassName,

@@ -39,7 +39,7 @@
     (change)="onChange($event)"
   >
     <option
-      *ngFor="let option of resolvedOptions"
+      *ngFor="let option of resolvedOptions; trackBy: trackByOptionValue"
       [value]="option.value"
       [disabled]="option.disabled"
     >
@@ -60,7 +60,7 @@
     class="w-full overflow-y-auto rounded-md border border-solid border-border bg-popover p-1 text-popover-foreground shadow-md max-h-96"
   >
     <button
-      *ngFor="let option of resolvedOptions"
+      *ngFor="let option of resolvedOptions; trackBy: trackByOptionValue"
       type="button"
       role="option"
       [attr.aria-selected]="option.value === value"

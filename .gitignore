@@ -3,6 +3,7 @@ node_modules
 # Local Pi runtime state
 .atl/
 .alt/
+.codegraph/
 .pi/
 .pi-lens/
 .playwright-mcp/
