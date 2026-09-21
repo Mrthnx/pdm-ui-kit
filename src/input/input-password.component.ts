@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { PdmInputRoundness, PdmInputSize } from './input.component';
+import { PdmInputIconPosition, PdmInputRoundness, PdmInputSize } from './input.component';
 
 @Component({
   selector: 'pdm-input-password',
@@ -18,6 +18,8 @@ export class PdmInputPasswordComponent {
   @Input() roundness: PdmInputRoundness = 'default';
   @Input() className = '';
   @Input() inputClassName = '';
+  @Input() icon = '';
+  @Input() iconPosition: PdmInputIconPosition = 'left';
   @Input() label = '';
   @Input() helperText = '';
   @Input() errorText = '';
