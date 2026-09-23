@@ -86,8 +86,17 @@ Copiá las variables en tu CSS base (por ejemplo `styles.css`):
   --border: 217.2 32.6% 17.5%;
   --input: 217.2 32.6% 17.5%;
   --ring: 224.3 76.3% 48%;
+
+  /* Ayuda a los controles nativos (scrollbars, <select>, <option>) a usar la paleta oscura. */
+  color-scheme: dark;
 }
 ```
+
+> **Dark mode + overlays:** poné la clase `.dark` en `<html>` o `<body>`, **no** en un wrapper intermedio.
+> Los paneles de `pdm-select`, `pdm-combobox`, `pdm-popover`, `pdm-tooltip`, `pdm-dialog`,
+> `pdm-dropdown-menu`, `pdm-context-menu` y `pdm-hover-card` se adjuntan al overlay container
+> global de Angular CDK (que vive en `<body>`). Si `.dark` está en un contenedor interno,
+> esos paneles quedan fuera del scope y se renderizan con tema claro.
 
 ### 3) Configurar los colores en Tailwind
 

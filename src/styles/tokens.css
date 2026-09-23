@@ -87,33 +87,46 @@
   --chart-4: 43 74% 66%;
   --chart-5: 27 87% 67%;
   
-  /* ============================================
-   * VARIANTES DARK MODE (opcional)
-   * ============================================ */
-  
-  /* Descomentar para dark mode:
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
-  }
-  */
+  /* color-scheme: permite que los controles nativos (scrollbars, <select>,
+   * <option>, <input type=date>) rendericen con la paleta correcta. */
+  color-scheme: light;
+}
+
+/* ============================================
+ * DARK MODE
+ * ============================================
+ * Activa dark mode agregando la clase `.dark` en <html> o <body>:
+ *   <html class="dark"> ... </html>
+ *
+ * IMPORTANTE — Overlays (pdm-select, pdm-combobox, pdm-popover, pdm-tooltip,
+ * pdm-dialog, pdm-dropdown-menu, pdm-context-menu, pdm-hover-card, etc.):
+ * Angular CDK adjunta los paneles desplegables al overlay container global
+ * que vive en <body>. Si ponés `.dark` en un wrapper intermedio, el panel
+ * queda fuera del scope y NO hereda estos tokens (se ve con tema claro).
+ * Por eso `.dark` debe vivir en <html> o <body>, nunca en un contenedor interno.
+ */
+.dark {
+  color-scheme: dark;
+
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 217.2 91.2% 59.8%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 224.3 76.3% 48%;
 }
 
 /**
