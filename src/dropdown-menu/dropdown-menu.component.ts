@@ -17,8 +17,10 @@ import { Subscription } from 'rxjs';
 import { PdmOverlayOptions } from 'pdm-ui-kit/src/overlay';
 import { createFlexiblePositionStrategy } from 'pdm-ui-kit/src/overlay';
 import { Z_INDEX } from 'pdm-ui-kit/src/utils';
+import type { PdmIconName } from 'pdm-ui-kit/src/icon';
 
 export type PdmDropdownMenuVariant = 'default' | 'checkboxes' | 'radio-group';
+export type PdmDropdownMenuIconPosition = 'left' | 'right';
 
 export interface PdmMenuItem {
   type?: 'item' | 'label' | 'separator';
@@ -30,6 +32,10 @@ export interface PdmMenuItem {
   showChevron?: boolean;
   checked?: boolean;
   radioSelected?: boolean;
+  icon?: PdmIconName | string;
+  iconPosition?: PdmDropdownMenuIconPosition;
+  leftSvg?: string;
+  rightSvg?: string;
 }
 
 @Component({
@@ -133,6 +139,14 @@ export class PdmDropdownMenuComponent implements OnDestroy {
       { type: 'separator' },
       { type: 'item', label: 'Log out', value: 'logout', shortcut: '⇧⌘Q' }
     ];
+  }
+
+  shouldShowLeftIcon(item: PdmMenuItem): boolean {
+    return !!item.icon && (item.iconPosition ?? 'left') === 'left' && !item.checked && !item.radioSelected && !item.leftSvg;
+  }
+
+  shouldShowRightIcon(item: PdmMenuItem): boolean {
+    return !!item.icon && item.iconPosition === 'right' && !item.rightSvg;
   }
 
   select(item: PdmMenuItem): void {

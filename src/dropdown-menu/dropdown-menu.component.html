@@ -46,8 +46,23 @@
             <path d="M5 12.5L9.2 16.7L19 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
           <span *ngIf="item.radioSelected" class="h-2 w-2 rounded-full bg-foreground"></span>
+          <span *ngIf="item.leftSvg" class="inline-flex h-4 w-4 items-center justify-center" [innerHTML]="item.leftSvg"></span>
+          <pdm-icon
+            *ngIf="shouldShowLeftIcon(item)"
+            [name]="item.icon || ''"
+            [size]="16"
+            [decorative]="true"
+          ></pdm-icon>
         </span>
         <span class="min-w-0 flex-1 truncate">{{ item.label }}</span>
+        <span *ngIf="item.rightSvg" class="inline-flex h-4 w-4 shrink-0 items-center justify-center" [innerHTML]="item.rightSvg"></span>
+        <pdm-icon
+          *ngIf="shouldShowRightIcon(item)"
+          [name]="item.icon || ''"
+          [size]="16"
+          [decorative]="true"
+          className="shrink-0"
+        ></pdm-icon>
         <span *ngIf="item.shortcut" class="text-xs text-muted-foreground">{{ item.shortcut }}</span>
         <span *ngIf="item.showChevron" class="text-sm text-muted-foreground">›</span>
       </button>
