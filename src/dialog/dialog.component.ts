@@ -45,6 +45,26 @@ export class PdmDialogFooterDirective {}
           display: block;
         }
       `,
+		`
+        /*
+         * Custom maxWidth support.
+         *
+         * Tailwind JIT cannot emit dynamically-interpolated arbitrary max-width
+         * classes, so a runtime maxWidth would be silently dropped and the static
+         * sm:max-w-* size class would win. Instead the consumer value is exposed
+         * as the --pdm-dialog-max-width custom property on the panel and applied
+         * from this static, component-scoped media query, which mirrors Tailwind's
+         * default sm breakpoint (640px). The .pdm-dialog-max-width marker is added
+         * only when a maxWidth is set, so an empty maxWidth preserves the default
+         * size behavior. Component-scoped specificity (0,2,0) beats the Tailwind
+         * sm:max-w-* utility (0,1,0), so the custom value wins at sm+.
+         */
+        @media (min-width: 640px) {
+          .pdm-dialog-max-width {
+            max-width: var(--pdm-dialog-max-width);
+          }
+        }
+      `,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -108,6 +128,16 @@ export class PdmDialogComponent {
 		if (this.closeOnBackdrop) {
 			this.close();
 		}
+	}
+
+	/**
+	 * Whether a custom `maxWidth` is configured. Drives the template's
+	 * `--pdm-dialog-max-width` custom-property binding and `.pdm-dialog-max-width`
+	 * marker class (see component styles). Intentionally kept out of
+	 * `panelClassName` so it is not processed by `tailwind-merge`.
+	 */
+	get hasMaxWidth(): boolean {
+		return !!this.maxWidth;
 	}
 
 	get panelClassName(): string {
@@ -184,9 +214,7 @@ export class PdmDialogComponent {
 			"shadow-lg",
 			"overflow-hidden",
 		];
-		const maxWidthClass = this.maxWidth ? `sm:max-w-[${this.maxWidth}]` : "";
-
-		return cn(...base, ...sizeClasses, maxWidthClass, this.className);
+		return cn(...base, ...sizeClasses, this.className);
 	}
 
 	get bodyWrapperClassName(): string {

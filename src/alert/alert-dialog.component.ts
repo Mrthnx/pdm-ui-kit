@@ -21,6 +21,24 @@ type PdmAlertDialogSize =
 @Component({
 	selector: "pdm-alert-dialog",
 	templateUrl: "./alert-dialog.component.html",
+	styles: [
+		`
+        /*
+         * Custom maxWidth support. See PdmDialogComponent for the full rationale.
+         * The consumer value is exposed as the --pdm-alert-dialog-max-width custom
+         * property on the panel and applied from this static, component-scoped media
+         * query mirroring Tailwind's default sm breakpoint (640px). The marker class
+         * is added only when a maxWidth is set, so an empty maxWidth preserves the
+         * default size behavior. Component-scoped specificity (0,2,0) beats the
+         * Tailwind sm:max-w-* utility (0,1,0), so the custom value wins at sm+.
+         */
+        @media (min-width: 640px) {
+          .pdm-alert-dialog-max-width {
+            max-width: var(--pdm-alert-dialog-max-width);
+          }
+        }
+      `,
+	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PdmAlertDialogComponent {
@@ -52,6 +70,17 @@ export class PdmAlertDialogComponent {
 	 */
 	private get isControlled(): boolean {
 		return this.openChange.observed;
+	}
+
+	/**
+	 * Whether a custom `maxWidth` is configured. Drives the template's
+	 * `--pdm-alert-dialog-max-width` custom-property binding and
+	 * `.pdm-alert-dialog-max-width` marker class (see component styles).
+	 * Intentionally kept out of `panelClassName` so it is not processed by
+	 * `tailwind-merge`.
+	 */
+	get hasMaxWidth(): boolean {
+		return !!this.maxWidth;
 	}
 
 	get panelClassName(): string {
@@ -166,14 +195,11 @@ export class PdmAlertDialogComponent {
 	}
 
 	private buildPanelClasses(sizeClasses: string[]): string {
-		const maxWidthClass = this.maxWidth ? `sm:max-w-[${this.maxWidth}]` : "";
-
 		return cn(
 			"relative",
 			Z_INDEX.modal,
 			"flex flex-col border border-solid border-border bg-background text-foreground shadow-lg overflow-hidden",
 			...sizeClasses,
-			maxWidthClass,
 			this.className,
 		);
 	}
