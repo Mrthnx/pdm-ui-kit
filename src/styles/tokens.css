@@ -70,6 +70,14 @@
   
   /* Ring - Anillos de focus/accessibility */
   --ring: 221.2 83.2% 53.3%;
+
+  /* Switch - track/thumb con contraste explícito */
+  --switch-track-unchecked: var(--input);
+  --switch-track-border: var(--border);
+  --switch-track-checked: var(--primary);
+  --switch-thumb: var(--background);
+  --switch-thumb-checked: var(--background);
+  --switch-disabled-opacity: 0.5;
   
   /* ============================================
    * RADIO DE BORDES
@@ -127,6 +135,15 @@
   --border: 217.2 32.6% 17.5%;
   --input: 217.2 32.6% 17.5%;
   --ring: 224.3 76.3% 48%;
+
+  /* Switch - el track unchecked necesita más luz que --input para no perderse
+   * sobre fondos oscuros, y disabled no debe bajar al 50% porque desaparece. */
+  --switch-track-unchecked: 217.2 32.6% 30%;
+  --switch-track-border: 217.2 32.6% 42%;
+  --switch-track-checked: var(--primary);
+  --switch-thumb: 210 40% 98%;
+  --switch-thumb-checked: 210 40% 98%;
+  --switch-disabled-opacity: 0.72;
 }
 
 /**
