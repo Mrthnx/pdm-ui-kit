@@ -74,6 +74,23 @@ export interface PdmDataTableColumn<T = any> {
 }
 
 /**
+ * Sort state of the data-table.
+ *
+ * Used to control the table from the host application (external/controlled
+ * mode), typically combined with `paginationMode="server"`.
+ */
+export interface PdmDataTableSortState<T = any> {
+  /**
+   * Column that is currently sorted
+   */
+  column: PdmDataTableColumn<T>;
+  /**
+   * Current sort direction
+   */
+  direction: 'asc' | 'desc';
+}
+
+/**
  * Data-table genérico con paginación, filtrado y selección
  * 
  * NUEVO: Ahora es genérico y configurable via columnas
@@ -187,6 +204,39 @@ export class PdmDataTableComponent<T = any> {
    */
   @Input() filterFn?: (row: T, query: string) => boolean;
 
+  /**
+   * Pagination strategy.
+   *
+   * - `client` (default): the component filters, sorts and paginates the
+   *   `rows` input internally.
+   * - `server`: the host application owns filtering, sorting and pagination.
+   *   The component renders `rows` exactly as received and only emits
+   *   `queryChange`, `pageChange` and `columnSort` events.
+   */
+  @Input() paginationMode: 'client' | 'server' = 'client';
+
+  /**
+   * Total amount of rows available on the server.
+   *
+   * Used to compute `totalPages` and the footer count in `server` mode.
+   * Falls back to `rows.length` when not provided.
+   */
+  @Input() totalRows?: number;
+
+  /**
+   * External (controlled) sort state.
+   *
+   * When provided it is the source of truth for the current sort, otherwise
+   * the internal sort state is used.
+   */
+  @Input() sortState?: PdmDataTableSortState<T>;
+
+  /**
+   * If is true, the table renders a loading state (skeleton rows) and
+   * exposes `aria-busy="true"`.
+   */
+  @Input() loading = false;
+
   @Output() queryChange = new EventEmitter<string>();
   @Output() rowAction = new EventEmitter<T>();
   @Output() pageChange = new EventEmitter<number>();
@@ -197,6 +247,11 @@ export class PdmDataTableComponent<T = any> {
   selectedRows = new Set<T>();
   sortColumn?: PdmDataTableColumn<T>;
   sortDirection: 'asc' | 'desc' = 'asc';
+
+  /**
+   * Cache for the skeleton rows rendered while loading.
+   */
+  private loadingRowIndexesCache?: number[];
 
   /**
    * Backward compatibility: si no hay columnas definidas, inferir del primer row
@@ -233,7 +288,17 @@ export class PdmDataTableComponent<T = any> {
     return map[key] || key.charAt(0).toUpperCase() + key.slice(1);
   }
 
+  /**
+   * Rows matching the current query.
+   *
+   * In `server` mode the filtering is owned by the host application, so the
+   * rows are returned untouched.
+   */
   get filteredRows(): T[] {
+    if (this.paginationMode === 'server') {
+      return this.rows;
+    }
+
     const q = this.query.trim().toLowerCase();
     if (!q) return this.rows;
     
@@ -249,13 +314,82 @@ export class PdmDataTableComponent<T = any> {
     });
   }
 
+  /**
+   * Rows rendered by the table.
+   *
+   * In `server` mode the pagination is owned by the host application, so the
+   * rows are returned untouched.
+   */
   get pagedRows(): T[] {
+    if (this.paginationMode === 'server') {
+      return this.rows;
+    }
+
     const start = (this.page - 1) * this.pageSize;
     return this.filteredRows.slice(start, start + this.pageSize);
   }
 
   get totalPages(): number {
+    if (this.paginationMode === 'server') {
+      return Math.max(1, Math.ceil(this.totalRowCount / this.pageSize));
+    }
+
     return Math.max(1, Math.ceil(this.filteredRows.length / this.pageSize));
+  }
+
+  /**
+   * Total amount of rows known by the table.
+   * In `server` mode it is `totalRows`, otherwise it is the amount of
+   * received rows.
+   */
+  get totalRowCount(): number {
+    return this.totalRows ?? this.rows.length;
+  }
+
+  /**
+   * Column that is currently sorted.
+   * The external `sortState` wins over the internal state when provided.
+   */
+  get effectiveSortColumn(): PdmDataTableColumn<T> | undefined {
+    return this.sortState ? this.sortState.column : this.sortColumn;
+  }
+
+  /**
+   * Current sort direction.
+   * The external `sortState` wins over the internal state when provided.
+   */
+  get effectiveSortDirection(): 'asc' | 'desc' {
+    return this.sortState ? this.sortState.direction : this.sortDirection;
+  }
+
+  /**
+   * Value of the `aria-sort` attribute for a column header.
+   * Returns `null` for non sortable columns so the attribute is not rendered.
+   */
+  getAriaSort(column: PdmDataTableColumn<T>): 'ascending' | 'descending' | 'none' | null {
+    if (!column.sortable) {
+      return null;
+    }
+
+    const activeColumn = this.effectiveSortColumn;
+    if (!activeColumn || activeColumn.key !== column.key) {
+      return 'none';
+    }
+
+    return this.effectiveSortDirection === 'asc' ? 'ascending' : 'descending';
+  }
+
+  /**
+   * Skeleton rows rendered while `loading` is true.
+   */
+  get loadingRowIndexes(): number[] {
+    const count = Math.max(1, Math.min(this.pageSize, 5));
+
+    if (!this.loadingRowIndexesCache || this.loadingRowIndexesCache.length !== count) {
+      this.loadingRowIndexesCache = Array.from({ length: count }, (_, index) => index);
+    }
+
+    return this.loadingRowIndexesCache;
   }
 
   get selectedCount(): number {
@@ -309,15 +443,18 @@ export class PdmDataTableComponent<T = any> {
 
   onSort(column: PdmDataTableColumn<T>): void {
     if (!column.sortable) return;
-    
-    if (this.sortColumn === column) {
-      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
-    } else {
-      this.sortColumn = column;
-      this.sortDirection = 'asc';
-    }
-    
-    this.columnSort.emit({ column, direction: this.sortDirection });
+
+    const activeColumn = this.effectiveSortColumn;
+    const activeDirection = this.effectiveSortDirection;
+
+    const direction: 'asc' | 'desc' = activeColumn && activeColumn.key === column.key
+      ? (activeDirection === 'asc' ? 'desc' : 'asc')
+      : 'asc';
+
+    this.sortColumn = column;
+    this.sortDirection = direction;
+
+    this.columnSort.emit({ column, direction });
   }
 
   getCellValue(row: T, column: PdmDataTableColumn<T>): any {
