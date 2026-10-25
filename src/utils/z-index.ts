@@ -10,13 +10,19 @@
  * 6. modalBackdrop (z-40) - Backdrop de modals ( mismo nivel que drawer)
  * 7. modal (z-50) - Dialogs, alert-dialogs
  * 8. popover (z-[70]) - Tooltips, dropdowns DENTRO de modals
- * 9. toast (z-[100]) - Notificaciones que deben estar sobre TODO
- * 10. loadingOverlay (z-[200]) - Loading overlays del consumidor, por encima de los toasts
+ * 9. loadingBlocker (z-[80]) - Loader global de requests del consumidor: cubre
+ *    modals y popovers, pero NUNCA tapa una notificación
+ * 10. toast (z-[100]) - Notificaciones que deben estar sobre TODO
+ * 11. loadingOverlay (z-[200]) - Loader full-cover explícito, por encima de los toasts
  *
  * REGLA CRÍTICA:
  * - Componentes overlay (select options, dropdown menu, tooltip) SIEMPRE z-[70] o mayor
  * - Esto permite que funcionen DENTRO de modals (z-50)
  * - Backdrop de modal debe ser z-40 para estar DEBAJO del contenido del modal (z-50)
+ * - REGLA DE NOTIFICACIONES: la escala del kit NUNCA tapa un toast con un loader
+ *   propio. Para un loader global de requests usar `loadingBlocker` (z-[80]).
+ *   `loadingOverlay` (z-[200]) es el único opt-in que cubre también los toasts
+ *   (pantalla de "la app se está actualizando"): usarlo solo con esa intención.
  * - El consumidor NO debe definir su propia escala (modal 500 / popover 600 /
  *   tooltip 700 / loading 9500): usar estos tokens (Z_INDEX, Z_INDEX_VALUE,
  *   pdmZIndex o el preset PDM_TAILWIND_PRESET) evita conflictos de stacking.
@@ -71,15 +77,24 @@ export const Z_INDEX = {
 	popover: "z-[70]",
 
 	/**
+	 * Loading blocker - Loader global de requests del consumidor
+	 * Cubre modals (z-50) y popovers (z-70) pero NUNCA tapa un toast (z-[100]).
+	 * Es el token recomendado para un loader de request de la app.
+	 */
+	loadingBlocker: "z-[80]",
+
+	/**
 	 * Toast - Notificaciones globales
 	 * Debe estar sobre TODO
 	 */
 	toast: "z-[100]",
 
 	/**
-	 * Loading overlay - Loading overlays del consumidor
-	 * Debe estar por encima de los toasts (z-[100]) para que una request
-	 * pendiente nunca quede oculta detrás de una notificación
+	 * Loading overlay - Loader full-cover explícito del consumidor
+	 * ÚNICO token de la escala que tapa los toasts (z-[100]): usarlo solo para
+	 * una pantalla que deba bloquear también las notificaciones (por ejemplo
+	 * "la app se está actualizando"). Para un loader de request usar
+	 * `loadingBlocker` (z-[80]).
 	 */
 	loadingOverlay: "z-[200]",
 } as const;
@@ -104,6 +119,7 @@ export const Z_INDEX_VALUE: Readonly<Record<ZIndexToken, number>> = {
 	modalBackdrop: 40,
 	modal: 50,
 	popover: 70,
+	loadingBlocker: 80,
 	toast: 100,
 	loadingOverlay: 200,
 };
@@ -159,7 +175,7 @@ export interface PdmTailwindPreset {
  *
  * Las utilidades generadas son `z-base`, `z-dropdown`, `z-sticky`,
  * `z-drawer-backdrop`, `z-drawer`, `z-modal-backdrop`, `z-modal`, `z-popover`,
- * `z-toast` y `z-loading-overlay`.
+ * `z-loading-blocker`, `z-toast` y `z-loading-overlay`.
  */
 export const PDM_TAILWIND_PRESET: PdmTailwindPreset = {
 	theme: {
@@ -173,6 +189,7 @@ export const PDM_TAILWIND_PRESET: PdmTailwindPreset = {
 				"modal-backdrop": 40,
 				modal: 50,
 				popover: 70,
+				"loading-blocker": 80,
 				toast: 100,
 				"loading-overlay": 200,
 			},

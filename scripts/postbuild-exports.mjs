@@ -138,6 +138,7 @@ const preset = {
 				"modal-backdrop": zIndexValues.modalBackdrop,
 				modal: zIndexValues.modal,
 				popover: zIndexValues.popover,
+				"loading-blocker": zIndexValues.loadingBlocker,
 				toast: zIndexValues.toast,
 				"loading-overlay": zIndexValues.loadingOverlay,
 			},

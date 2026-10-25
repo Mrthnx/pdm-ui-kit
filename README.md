@@ -622,12 +622,12 @@ import { Z_INDEX, Z_INDEX_VALUE, pdmZIndex, PDM_TAILWIND_PRESET } from 'pdm-ui-k
 
 Z_INDEX.modal;          // 'z-50'
 Z_INDEX_VALUE.modal;    // 50
-pdmZIndex('loadingOverlay'); // 200
+pdmZIndex('loadingBlocker'); // 80
 ```
 
-Tokens disponibles: `base` (0), `dropdown` (10), `sticky` (20), `drawerBackdrop` (30), `drawer` (40), `modalBackdrop` (40), `modal` (50), `popover` (70), `toast` (100), `loadingOverlay` (200).
+Tokens disponibles: `base` (0), `dropdown` (10), `sticky` (20), `drawerBackdrop` (30), `drawer` (40), `modalBackdrop` (40), `modal` (50), `popover` (70), `loadingBlocker` (80), `toast` (100), `loadingOverlay` (200).
 
-Para generarlos como utilidades Tailwind (`z-modal`, `z-popover`, `z-toast`, `z-loading-overlay`, ...) agregá el preset en tu `tailwind.config.js` y **eliminá tu escala propia**:
+Para generarlos como utilidades Tailwind (`z-modal`, `z-popover`, `z-toast`, `z-loading-blocker`, `z-loading-overlay`, ...) agregá el preset en tu `tailwind.config.js` y **eliminá tu escala propia**:
 
 ```js
 // tailwind.config.js
@@ -644,7 +644,9 @@ module.exports = {
 
 > `pdm-ui-kit/tailwind-preset` es un archivo standalone (CommonJS + ESM) sin dependencias: funciona en configs CommonJS y ESM. Con una config ESM también podés hacer `import { PDM_TAILWIND_PRESET } from 'pdm-ui-kit'`.
 
-> Un loading overlay del consumidor debe usar `loadingOverlay` (200) en lugar de un valor propio como 9500.
+> Un loader global de requests debe usar `loadingBlocker` (80) en lugar de un valor propio como 9500.
+
+> **Regla de notificaciones**: la escala del kit nunca tapa un toast con un loader propio. `loadingBlocker` (80) cubre modals (50) y popovers (70) y deja las notificaciones (100) visibles — es el token recomendado para el loader de una request. `loadingOverlay` (200) es el único opt-in que tapa también los toasts: reservalo para una pantalla que deba bloquear las notificaciones (por ejemplo "la app se está actualizando").
 
 #### Movimiento reducido
 
