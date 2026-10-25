@@ -2,6 +2,14 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 export type PdmChartType = 'area' | 'bar' | 'line' | 'pie' | 'radar' | 'radial' | 'tooltips';
 
+/**
+ * Formats a numeric data point into the string rendered by the chart.
+ *
+ * @param value the raw numeric value of the data point
+ * @param index the zero-based index of the data point
+ */
+export type PdmChartValueFormatter = (value: number, index: number) => string;
+
 @Component({
   selector: 'pdm-chart',
   templateUrl: './chart.component.html',
@@ -36,6 +44,58 @@ export class PdmChartComponent {
   @Input() tooltipHint = '';
   @Input() radarMetricPrefix = 'Metric';
   @Input() emptyLabel = 'No data available';
+
+  /**
+   * Optional CSS color per data point (e.g. `['#dc2626', '#eab308', '#16a34a']`).
+   *
+   * Applied to bar chart bars and pie chart segments (including the legend swatches).
+   * When a color is not provided the chart keeps its default palette.
+   */
+  @Input() colors?: string[];
+
+  /**
+   * Optional formatter for the numeric values rendered by the chart.
+   *
+   * When provided, bar charts render a value row above the labels row, radar charts
+   * format the metric list values and radial charts format the center percentage.
+   */
+  @Input() valueFormatter?: PdmChartValueFormatter;
+
+  /**
+   * Resolves the CSS background color for a bar chart data point.
+   *
+   * Returns `null` when no color was provided for the given index so the default
+   * `bg-primary` class keeps applying.
+   */
+  barColor(index: number): string | null {
+    const colors = this.colors;
+
+    if (!colors || !colors.length) {
+      return null;
+    }
+
+    return colors[index] ?? null;
+  }
+
+  /**
+   * Formats a numeric value with the configured `valueFormatter`.
+   *
+   * Falls back to the raw value as a string when no formatter is set.
+   */
+  formatValue(value: number, index: number): string {
+    const formatter = this.valueFormatter;
+
+    return formatter ? formatter(value, index) : String(value);
+  }
+
+  /**
+   * Center value of a radial chart, formatted with `valueFormatter` when set.
+   */
+  get radialDisplayValue(): string {
+    const formatter = this.valueFormatter;
+
+    return formatter ? formatter(this.radialValue, 0) : `${this.radialValue}%`;
+  }
 
   get normalizedBars(): number[] {
     if (!this.bars.length) {
@@ -91,11 +151,13 @@ export class PdmChartComponent {
     }
 
     let offset = 0;
-    const colors = ['hsl(var(--chart-1))', 'hsl(var(--chart-2))', 'hsl(var(--chart-3))', 'hsl(var(--chart-4))'];
+    const fallbackColors = ['hsl(var(--chart-1))', 'hsl(var(--chart-2))', 'hsl(var(--chart-3))', 'hsl(var(--chart-4))'];
+    const providedColors = this.colors;
     return this.pie.map((value, index) => {
       const size = (Math.max(value, 0) / total) * 100;
+      const provided = providedColors?.[index];
       const segment = {
-        color: colors[index % colors.length],
+        color: provided || fallbackColors[index % fallbackColors.length],
         size,
         offset,
         label: this.pieLabels[index] ?? `Series ${index + 1}`
