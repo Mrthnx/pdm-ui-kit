@@ -13,6 +13,10 @@
  * - Bordes: border, input, ring
  * - Radio: radius
  * - Charts: --chart-1 a --chart-4
+ *
+ * REDUCED MOTION:
+ * - El kit respeta `prefers-reduced-motion: reduce`. Ver la sección
+ *   "REDUCED MOTION" al final de este archivo.
  */
 
 :root {
@@ -206,7 +210,28 @@
  *         sm: 'calc(var(--radius) - 4px)'
  *       }
  *     }
- *   },
- *   plugins: [require('tailwindcss-animate')]
+ *   }
  * }
+ *
+ * NOTAS:
+ * - El kit NO requiere plugins de Tailwind. Las animaciones de entrada las
+ *   define el propio kit (ver `pdm-tooltip-panel` en src/tooltip).
+ * - Tailwind 3.4 trae las variantes `motion-reduce:` y `motion-safe:` integradas,
+ *   asi que no hace falta instalar `tailwindcss-animate`.
  */
+
+/* ============================================
+ * REDUCED MOTION
+ * ============================================
+ * El kit respeta la preferencia `prefers-reduced-motion: reduce`:
+ *
+ * - Las superficies animadas del kit usan la variante `motion-reduce:` de
+ *   Tailwind (sidebar, accordion, skeleton, spinner, progress, data-table),
+ *   que Tailwind 3.4 trae integrada y no requiere plugins.
+ * - El tooltip usa keyframes propios del kit y desactiva su animacion de
+ *   entrada dentro de `@media (prefers-reduced-motion: reduce)`.
+ *
+ * No se aplica un reset global a proposito: este stylesheet se importa en
+ * aplicaciones que tienen sus propias animaciones y el kit no debe
+ * sobrescribir las decisiones de animacion del consumidor.
+ * ============================================ */

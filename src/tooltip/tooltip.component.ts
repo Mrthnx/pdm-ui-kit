@@ -19,7 +19,38 @@ import {
 @Component({
 	selector: "pdm-tooltip",
 	templateUrl: "./tooltip.component.html",
-	styles: [":host { display: inline-flex; }"],
+	styles: [
+		":host { display: inline-flex; }",
+		`
+		/* Kit-owned entrance animation.
+		 * The kit ships its own keyframes so consumers do not need the
+		 * tailwindcss-animate plugin for the tooltip to animate. */
+		@keyframes pdm-tooltip-enter {
+			from {
+				opacity: 0;
+				transform: scale(0.96) translateY(-2px);
+			}
+			to {
+				opacity: 1;
+				transform: scale(1) translateY(0);
+			}
+		}
+
+		.pdm-tooltip-panel {
+			transform-origin: center;
+			animation: pdm-tooltip-enter 140ms cubic-bezier(0.16, 1, 0.3, 1);
+		}
+
+		/* Reduced motion: the tooltip must appear instantly, without the
+		 * fade/scale entrance. See also the kit-wide reduced-motion block
+		 * in src/styles/tokens.css. */
+		@media (prefers-reduced-motion: reduce) {
+			.pdm-tooltip-panel {
+				animation: none !important;
+			}
+		}
+		`,
+	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PdmTooltipComponent implements OnDestroy {

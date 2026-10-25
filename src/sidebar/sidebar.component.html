@@ -10,7 +10,7 @@
   <!-- Drawer -->
   <aside
     [ngClass]="[
-      'fixed inset-y-0 left-0 z-50 h-full w-64 transform border-r border-border bg-background transition-transform duration-300 lg:relative lg:z-auto lg:translate-x-0',
+      'fixed inset-y-0 left-0 z-50 h-full w-64 transform border-r border-border bg-background transition-transform duration-300 motion-reduce:transition-none lg:relative lg:z-auto lg:translate-x-0',
       open ? 'translate-x-0' : '-translate-x-full',
       className
     ]"
