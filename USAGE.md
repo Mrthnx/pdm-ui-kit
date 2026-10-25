@@ -78,7 +78,7 @@ export class MyFeatureModule {}
 | `pdm-ui-kit/toggle`                       | `PdmToggleModule`, `PdmToggleComponent`, `PdmToggleGroupComponent`             |
 | `pdm-ui-kit/tooltip`                      | `PdmTooltipModule`, `PdmTooltipComponent`                                      |
 | `pdm-ui-kit/overlay`                      | `PdmOutsideClickModule`, `PdmOutsideClickDirective`, utilidades overlay        |
-| `pdm-ui-kit/virtual-table`                | `PdmVirtualTableModule`, `PdmVirtualTableComponent` (tabla virtualizada)      |
+| `pdm-ui-kit/virtual-table`                | `PdmVirtualTableModule`, `PdmVirtualTableComponent` (tabla virtualizada), `PdmVirtualTableSemanticComponent` (tabla virtualizada con `<table>` real) |
 | `pdm-ui-kit/utils`                        | utilidades: `responsive`, `Z_INDEX`, `cn`, `PdmControlValueAccessor` (base class) |
 
 ---

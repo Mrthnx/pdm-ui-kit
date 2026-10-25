@@ -171,6 +171,13 @@ Si preferís importar los tokens desde el paquete:
 
 ---
 
+## ✨ What's New in v1.11.0
+
+- 🧱 **`pdm-virtual-table-semantic`** — tabla virtualizada que renderiza un `<table>` real (`<thead>`/`<tbody>`, `<th scope="col">`) en vez de `div` con roles ARIA; conserva la semántica nativa para lectores de pantalla y el header sticky
+- ♿ **`scope="col"` en los headers de `pdm-data-table`** y en las celdas de header de `pdm-table variant="interactive"` (los offsets sticky los pone el kit)
+
+> v1.11.0 es **aditivo**: no hay cambios breaking. `pdm-virtual-table` sigue igual; la variante con semántica de tabla es un componente nuevo.
+
 ## ✨ What's New in v1.10.0
 
 - 🧩 **`ControlValueAccessor` en los controles de formulario** — `pdm-input`, `pdm-textarea`, `pdm-checkbox`, `pdm-switch`, `pdm-select` y `pdm-native-select` se bindean directo a `[formControl]` / `[formControlName]` / `[(ngModel)]`
@@ -303,6 +310,8 @@ activeTab = 'general';
 </pdm-table>
 ```
 
+> `pdm-table variant="interactive"` deja el header **sticky** y los offsets los pone el kit (`position: sticky; top: 0` sobre el `<thead>` y sobre las celdas `<th>`). Lo único que el kit no puede imponer es el **fondo** de esas celdas: si tu stylesheet sobrescribe el background de `thead th`, asegurate de que sea opaco, o las filas se transparentarán al pasar por debajo del header.
+
 #### Data Table (genérico)
 
 ```ts
@@ -403,6 +412,29 @@ Para cientos o miles de filas, `pdm-virtual-table` renderiza sólo las filas vis
 - Requiere `@angular/cdk` en las dependencias del proyecto consumidor.
 - El header queda fijo fuera del viewport; el cuerpo se virtualiza.
 - `rowHeight` debe coincidir con el alto real de la fila.
+- **El componente es un panel de alto fijo**: el contenedor de scroll necesita un alto explícito (`height`, en px por defecto `400`). Es una decisión de producto del consumidor, no un detalle de implementación.
+
+#### Virtual Table con semántica de tabla nativa
+
+`pdm-virtual-table-semantic` virtualiza igual que `pdm-virtual-table` (misma API de inputs/outputs y mismo modelo de columnas) pero renderiza una `<table>` real: `<thead>` con `<th scope="col">`, `<tbody>` con `<tr>`/`<td>` de verdad, y header sticky contra su propio contenedor de scroll.
+
+```html
+<pdm-virtual-table-semantic
+  [columns]="columns"
+  [rows]="users"
+  [rowHeight]="44"
+  [height]="'60vh'"
+  [caption]="'Users'"
+  (selectionChange)="onSelect($event)">
+</pdm-virtual-table-semantic>
+```
+
+- Mismos inputs que `pdm-virtual-table` (`columns`, `rows`, `rowHeight`, `height`, `selectable`, `showActions`, `emptyLabel`) más `caption` (un `<caption>` real) y `className`.
+- `height` acepta píxeles (`400`) o cualquier longitud CSS (`'60vh'`, `'100%'`): sigue siendo un panel con alto explícito.
+- `cellTemplate` sigue funcionando, así que las celdas con badges, menús de acciones o row-hover propio no se reescriben.
+- La tabla expone `aria-rowcount` y cada fila renderizada expone `aria-rowindex`, para que el lector de pantalla sepa cuántas filas hay en total aunque el DOM sólo tenga la ventana visible.
+- **Por qué no usa `@angular/cdk/scrolling`**: el viewport del CDK proyecta el contenido dentro de `.cdk-virtual-scroll-content-wrapper`, un wrapper posicionado de forma absoluta que se transforma en cada scroll; un `<thead position: sticky>` dentro de ese wrapper no se pega contra el scrollport. Para que el header sticky funcione **y** la tabla siga siendo un único elemento `<table>`, esta variante tiene su propio contenedor de scroll (`overflow: auto`) y su propia ventana de render.
+- Import: `import { PdmVirtualTableSemanticComponent } from 'pdm-ui-kit/virtual-table';`
 
 #### Draggable Table
 
@@ -711,7 +743,7 @@ Incluye componentes como:
 - `pdm-tabs`, `pdm-table`, `pdm-data-table`, `pdm-draggable-table`
 - `pdm-chart`, `pdm-tooltip`, `pdm-popover`, `pdm-dropdown-menu`
 - `pdm-sidebar`, `pdm-sheet`, `pdm-drawer`, `pdm-calendar`
-- `pdm-virtual-table` (tabla virtualizada), `pdm-sonner` (toasts)
+- `pdm-virtual-table` (tabla virtualizada), `pdm-virtual-table-semantic` (tabla virtualizada con `<table>` real), `pdm-sonner` (toasts)
 
 Y más, todos exportados desde `PdmUiKitModule`.
 
@@ -721,6 +753,11 @@ Y más, todos exportados desde `PdmUiKitModule`.
 - **[API Reference](./docs/API.md)** — Documentación completa de todos los componentes (próximamente)
 
 ## Changelog
+
+### v1.11.0
+- ✨ `pdm-virtual-table-semantic`: tabla virtualizada con `<table>` real (`<th scope="col">`, `<tbody>`, `aria-rowcount`/`aria-rowindex`) y header sticky
+- ♿ `pdm-data-table`: `scope="col"` en los headers renderizados por el kit
+- ♿ `pdm-table variant="interactive"`: offsets sticky en las celdas de header
 
 ### v1.10.0
 - ✨ `pdm-input`, `pdm-textarea`, `pdm-checkbox`, `pdm-switch`, `pdm-select`, `pdm-native-select`: implementan `ControlValueAccessor` (`[formControl]`, `[formControlName]`, `[(ngModel)]`)
