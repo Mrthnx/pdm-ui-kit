@@ -46,6 +46,7 @@ import { PdmSwitchModule } from './switch/switch.module';
 import { PdmTabsModule } from './tabs/tabs.module';
 import { PdmToggleModule } from './toggle/toggle.module';
 import { PdmTooltipModule } from './tooltip/tooltip.module';
+import { PdmVirtualTableModule } from './virtual-table/virtual-table.module';
 import { PdmOutsideClickModule } from './overlay/pdm-outside-click.module';
 
 const MODULES = [
@@ -96,6 +97,7 @@ const MODULES = [
   PdmTabsModule,
   PdmToggleModule,
   PdmTooltipModule,
+  PdmVirtualTableModule,
   PdmOutsideClickModule,
 ];
 

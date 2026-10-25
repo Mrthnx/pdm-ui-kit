@@ -1,4 +1,4 @@
-<section [ngClass]="['flex w-full flex-col', className]">
+<section [ngClass]="['flex w-full flex-col', className]" [attr.aria-busy]="loading ? 'true' : null">
   <!-- Toolbar: Filtro + Selector de columnas -->
   <div
     *ngIf="showFilter || showColumnSelector"
@@ -41,6 +41,7 @@
     variant="data"
     [responsiveStrategy]="responsiveStrategy"
     [fullBleed]="false"
+    [attr.aria-busy]="loading ? 'true' : null"
   >
     <thead>
       <tr>
@@ -58,6 +59,7 @@
           *ngFor="let column of effectiveColumns"
           [ngClass]="getHeaderClass(column)"
           [ngStyle]="getColumnStyle(column)"
+          [attr.aria-sort]="getAriaSort(column)"
         >
           <!-- Header sortable -->
           <button
@@ -148,8 +150,24 @@
         </td>
       </tr>
 
+      <!-- Skeleton rows while loading -->
+      <ng-container *ngIf="loading">
+        <tr *ngFor="let skeleton of loadingRowIndexes">
+          <td
+            [attr.colspan]="
+              effectiveColumns.length +
+              (selectable ? 1 : 0) +
+              (showActions ? 1 : 0)
+            "
+            class="px-3 py-2"
+          >
+            <div class="h-4 w-full animate-pulse motion-reduce:animate-none rounded bg-muted"></div>
+          </td>
+        </tr>
+      </ng-container>
+
       <!-- Fila vacía -->
-      <tr *ngIf="pagedRows.length === 0">
+      <tr *ngIf="pagedRows.length === 0 && !loading">
         <td
           [attr.colspan]="
             effectiveColumns.length +
@@ -173,7 +191,7 @@
       *ngIf="selectable"
       class="m-0 flex-1 pr-2 text-sm text-muted-foreground whitespace-nowrap"
     >
-      {{ selectedCount }} of {{ rows.length }} {{ rowsSelectedLabel }}
+      {{ selectedCount }} of {{ totalRowCount }} {{ rowsSelectedLabel }}
     </p>
 
     <div *ngIf="showPagination" class="flex items-center gap-2 ml-auto">

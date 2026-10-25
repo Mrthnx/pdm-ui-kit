@@ -54,6 +54,14 @@ export class PdmTableComponent {
 	@Input() className = "";
 
 	/**
+	 * Optional caption for the table.
+	 *
+	 * When non-empty it is rendered as a real <caption> element inside the
+	 * <table>, so assistive technologies announce it as the table name.
+	 */
+	@Input() caption = "";
+
+	/**
 	 * Si es true, aplica padding negativo en mobile para scroll edge-to-edge
 	 * Útil cuando la tabla está dentro de un container con padding
 	 */
@@ -78,7 +86,12 @@ export class PdmTableComponent {
 	}
 
 	get tableClasses(): string[] {
-		const baseClasses = ["w-full", "caption-bottom", "text-sm"];
+		// A visible caption is placed on top of the table instead of the bottom.
+		const baseClasses = [
+			"w-full",
+			this.caption ? "caption-top" : "caption-bottom",
+			"text-sm",
+		];
 		const variantClasses = this.getVariantTableClasses();
 		const cellClasses = this.getCellClasses();
 

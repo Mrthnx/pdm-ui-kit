@@ -1,5 +1,8 @@
 <div [ngClass]="wrapperClasses" [attr.data-slot]="variant === 'interactive' ? 'table-container' : null">
   <table #tableElement [ngClass]="tableClasses" [attr.data-slot]="variant === 'interactive' ? 'table' : null">
+    <caption *ngIf="caption" class="px-2 py-2 text-left text-sm text-muted-foreground">
+      {{ caption }}
+    </caption>
     <ng-content></ng-content>
   </table>
 </div>

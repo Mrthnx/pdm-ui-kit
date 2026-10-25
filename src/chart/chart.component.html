@@ -27,8 +27,11 @@
           <div class="absolute left-0 right-0 top-1/2 border-t border-border opacity-50"></div>
           <div class="absolute left-0 right-0 top-3/4 border-t border-border opacity-50"></div>
           <div class="absolute inset-x-0 bottom-0 flex h-48 items-end gap-0.5 px-0.5">
-            <div *ngFor="let bar of normalizedBars" class="w-1.5 rounded-sm bg-primary" [style.height.px]="bar"></div>
+            <div *ngFor="let bar of normalizedBars; index as i" class="w-1.5 rounded-sm bg-primary" [style.height.px]="bar" [style.background]="barColor(i)"></div>
           </div>
+        </div>
+        <div *ngIf="valueFormatter" class="flex h-4 w-full items-center justify-between gap-2">
+          <span *ngFor="let bar of bars; index as i" class="truncate text-xs font-medium">{{ formatValue(bar, i) }}</span>
         </div>
         <div *ngIf="labels.length" class="flex h-4 w-full items-center justify-between gap-2">
           <span *ngFor="let label of labels" class="truncate text-xs text-muted-foreground">{{ label }}</span>
@@ -95,7 +98,7 @@
         <div class="grid flex-1 gap-2">
           <div *ngFor="let item of radar; index as i" class="flex items-center justify-between rounded-md border border-solid border-border px-3 py-2 text-sm">
             <span class="text-muted-foreground">{{ radarMetricPrefix }} {{ i + 1 }}</span>
-            <span class="font-medium">{{ item }}</span>
+            <span class="font-medium">{{ formatValue(item, i) }}</span>
           </div>
         </div>
       </div>
@@ -117,7 +120,7 @@
             ></circle>
           </svg>
           <div class="absolute text-center">
-            <div class="text-2xl font-semibold">{{ radialValue }}%</div>
+            <div class="text-2xl font-semibold">{{ radialDisplayValue }}</div>
             <div class="text-xs text-muted-foreground">{{ radialLabel }}</div>
           </div>
         </div>

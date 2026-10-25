@@ -3,6 +3,7 @@ import {
 	Component,
 	EventEmitter,
 	Input,
+	OnDestroy,
 	Output,
 } from "@angular/core";
 
@@ -16,7 +17,7 @@ export type PdmInputIconPosition = "left" | "right";
 	styles: [":host { display: block; }"],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PdmInputComponent {
+export class PdmInputComponent implements OnDestroy {
 	@Input() id = "";
 	@Input() type = "text";
 	@Input() value = "";
@@ -35,8 +36,23 @@ export class PdmInputComponent {
 	@Input() helperText = "";
 	@Input() errorText = "";
 
+	/**
+	 * Debounce (in milliseconds) applied to `valueChange`.
+	 *
+	 * - `0` (default): `valueChange` is emitted synchronously on every input.
+	 * - `> 0`: `valueChange` is emitted once the user stops typing for that many
+	 *   milliseconds. Only the last keystroke is emitted.
+	 *
+	 * @example
+	 * <pdm-input [debounceMs]="700" (valueChange)="onSearch($event)"></pdm-input>
+	 */
+	@Input() debounceMs = 0;
+
 	@Output() valueChange = new EventEmitter<string>();
 	@Output() blurred = new EventEmitter<FocusEvent>();
+
+	/** Pending debounced emission handle (null when nothing is scheduled). */
+	private pendingValue: ReturnType<typeof setTimeout> | null = null;
 
 	constructor() {
 		if (this.required && this.disabled) {
@@ -45,7 +61,28 @@ export class PdmInputComponent {
 	}
 
 	onInput(event: Event): void {
-		this.valueChange.emit((event.target as HTMLInputElement).value);
+		const value = (event.target as HTMLInputElement).value;
+
+		if (this.debounceMs <= 0) {
+			this.valueChange.emit(value);
+			return;
+		}
+
+		if (this.pendingValue !== null) {
+			clearTimeout(this.pendingValue);
+		}
+
+		this.pendingValue = setTimeout(() => {
+			this.pendingValue = null;
+			this.valueChange.emit(value);
+		}, this.debounceMs);
+	}
+
+	ngOnDestroy(): void {
+		if (this.pendingValue !== null) {
+			clearTimeout(this.pendingValue);
+			this.pendingValue = null;
+		}
 	}
 
 	onBlur(event: FocusEvent): void {

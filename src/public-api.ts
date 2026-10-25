@@ -115,6 +115,9 @@ export * from "./input/textarea.component";
 export * from "./toggle/toggle.component";
 export * from "./toggle/toggle-group.component";
 export * from "./tooltip/tooltip.component";
+export * from "./virtual-table/virtual-table.component";
+export * from "./virtual-table/virtual-table.module";
+export * from "./data-table/sort-header.directive";
 
 // Test harnesses for unit testing
 export * from "./testing";

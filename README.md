@@ -153,10 +153,11 @@ module.exports = {
         sm: 'calc(var(--radius) - 4px)'
       }
     }
-  },
-  plugins: [require('tailwindcss-animate')]
+  }
 };
 ```
+
+> El kit **no** necesita plugins de Tailwind: las animaciones de entrada las define el propio kit. No instales `tailwindcss-animate` para el kit.
 
 ### 4) Opcional: Importar tokens directamente
 
@@ -169,6 +170,20 @@ Si preferís importar los tokens desde el paquete:
 > **Nota:** Esta opción aún requiere la configuración de Tailwind content.
 
 ---
+
+## ✨ What's New in v1.9.0
+
+- 🖥️ **`pdm-data-table` en modo servidor** — `paginationMode="server"`, `totalRows`, `sortState`, `loading`; la tabla deja de filtrar/ordenar/paginar en el cliente
+- ⚡ **`pdm-virtual-table`** — tabla virtualizada con `@angular/cdk/scrolling` para cientos/miles de filas
+- ⏱️ **`pdm-input` con `debounceMs`** — emite `valueChange` con debounce configurable (0 = comportamiento actual)
+- 🎨 **`pdm-chart` con `colors` y `valueFormatter`** — color por datapoint y formato de valores
+- ♿ **Soporte `prefers-reduced-motion`** — el kit respeta la preferencia de movimiento reducido
+- 🎞️ **Keyframes propios** — el kit ya no depende de `tailwindcss-animate`
+- 🧩 **`pdm-sonner` con lista de toasts** — `[toasts]` renderiza un stack dismissible
+- ♿ **`pdm-table` con `caption` y `aria-sort`** — nuevo `pdmSortHeader` directive
+- 🪜 **Escala de z-index como tokens Tailwind** — `Z_INDEX_VALUE`, `pdmZIndex()` y `PDM_TAILWIND_PRESET`
+
+> v1.9.0 es **aditivo**: no hay cambios breaking. Todos los inputs nuevos son opcionales.
 
 ## ✨ What's New in v0.3.0
 
@@ -315,6 +330,73 @@ users: User[] = [
 </pdm-data-table>
 ```
 
+#### Data Table (modo servidor)
+
+Cuando la paginación, el filtrado y el ordenamiento viven en el backend, poné la tabla en modo `server`: el componente deja de filtrar/ordenar/paginar en el cliente y sólo emite eventos.
+
+```html
+<pdm-data-table
+  paginationMode="server"
+  [columns]="columns"
+  [rows]="currentPageRows"
+  [totalRows]="totalRows"
+  [sortState]="sortState"
+  [loading]="loading"
+  [page]="page"
+  [pageSize]="pageSize"
+  (queryChange)="onQuery($event)"
+  (pageChange)="onPage($event)"
+  (columnSort)="onSort($event)">
+</pdm-data-table>
+```
+
+```ts
+sortState: PdmDataTableSortState<User> = {
+  column: this.columns[0],
+  direction: 'asc'
+};
+
+onQuery(query: string): void {
+  this.page = 1;
+  this.reload({ query });
+}
+
+onPage(page: number): void {
+  this.page = page;
+  this.reload();
+}
+
+onSort(event: { column: PdmDataTableColumn<User>; direction: 'asc' | 'desc' }): void {
+  this.sortState = { column: event.column, direction: event.direction };
+  this.page = 1;
+  this.reload();
+}
+```
+
+- `paginationMode`: `'client'` (default, comportamiento actual) o `'server'`.
+- `totalRows`: total de filas del backend; define `totalPages` y el contador del footer. Sin este input se usa `rows.length`.
+- `sortState`: estado de ordenamiento controlado por el host. Sin este input se usa el estado interno del componente.
+- `loading`: renderiza un estado de carga (skeleton) y expone `aria-busy="true"`.
+- `queryChange`, `pageChange` y `columnSort` son los únicos canales hacia el backend en modo servidor.
+
+#### Virtual Table
+
+Para cientos o miles de filas, `pdm-virtual-table` renderiza sólo las filas visibles usando `@angular/cdk/scrolling`. Comparte el tipo de columna con `pdm-data-table`.
+
+```html
+<pdm-virtual-table
+  [columns]="columns"
+  [rows]="users"
+  [rowHeight]="44"
+  [height]="520"
+  (selectionChange)="onSelect($event)">
+</pdm-virtual-table>
+```
+
+- Requiere `@angular/cdk` en las dependencias del proyecto consumidor.
+- El header queda fijo fuera del viewport; el cuerpo se virtualiza.
+- `rowHeight` debe coincidir con el alto real de la fila.
+
 #### Draggable Table
 
 ```html
@@ -409,6 +491,30 @@ Si necesitas un asset exportado desde Figma MCP:
 </pdm-icon>
 ```
 
+#### Toasts (pdm-sonner)
+
+`pdm-sonner` renderiza un toast individual (comportamiento original) o una lista de toasts:
+
+```html
+<!-- Toast individual -->
+<pdm-sonner title="Guardado" description="Los cambios ya están aplicados" tone="success"></pdm-sonner>
+
+<!-- Lista de toasts -->
+<pdm-sonner [toasts]="toasts" (toastDismissed)="removeToast($event)"></pdm-sonner>
+```
+
+```ts
+toasts: PdmToastItem[] = [
+  { id: 1, title: 'Guardado', tone: 'success' },
+  { id: 2, title: 'Error de red', description: 'Reintentá en unos segundos', tone: 'error' }
+];
+```
+
+- `toasts`: lista de items (`title`, `description`, `tone`, `id`, `duration`). Sin este input (o con array vacío) se mantiene el toast individual.
+- `toastDismissed`: emite el item descartado; el host decide cuándo quitarlo del array.
+- `duration` se acepta por simetría de API pero el kit **no** descarta toasts automáticamente.
+- `dismissed` sigue existiendo para el modo individual.
+
 #### Chart
 
 ```html
@@ -430,6 +536,70 @@ Tipos soportados en `pdm-chart`:
 - `radar`
 - `radial`
 - `tooltips`
+
+#### Chart (colores por datapoint y formato de valores)
+
+```html
+<pdm-chart
+  type="bar"
+  [bars]="[12, 8, 20]"
+  [labels]="['RED', 'YELLOW', 'GREEN']"
+  [colors]="['#dc2626', '#eab308', '#16a34a']"
+  [valueFormatter]="formatValue">
+</pdm-chart>
+```
+
+```ts
+formatValue = (value: number, index: number): string => `${value} ms`;
+```
+
+- `colors`: un color CSS por datapoint. Se aplica a las barras (chart `bar`) y a los segmentos y su leyenda (chart `pie`). Sin este input se usa la paleta por defecto.
+- `valueFormatter`: formatea los valores numéricos que renderiza el chart (fila de valores en `bar`, métricas en `radar`, valor central en `radial`).
+
+#### Input (debounce)
+
+```html
+<pdm-input [debounceMs]="700" (valueChange)="onSearch($event)"></pdm-input>
+```
+
+- `debounceMs`: `0` (default) emite `valueChange` de forma síncrona en cada input; con `> 0` emite sólo el último valor cuando el usuario deja de escribir.
+
+#### Z-index tokens
+
+El kit expone su escala de z-index como tokens compartidos para que el proyecto consumidor no defina una escala en conflicto.
+
+```ts
+import { Z_INDEX, Z_INDEX_VALUE, pdmZIndex, PDM_TAILWIND_PRESET } from 'pdm-ui-kit';
+
+Z_INDEX.modal;          // 'z-50'
+Z_INDEX_VALUE.modal;    // 50
+pdmZIndex('loadingOverlay'); // 200
+```
+
+Tokens disponibles: `base` (0), `dropdown` (10), `sticky` (20), `drawerBackdrop` (30), `drawer` (40), `modalBackdrop` (40), `modal` (50), `popover` (70), `toast` (100), `loadingOverlay` (200).
+
+Para generarlos como utilidades Tailwind (`z-modal`, `z-popover`, `z-toast`, `z-loading-overlay`, ...) agregá el preset en tu `tailwind.config.js` y **eliminá tu escala propia**:
+
+```js
+// tailwind.config.js
+const { PDM_TAILWIND_PRESET } = require('pdm-ui-kit/tailwind-preset');
+
+module.exports = {
+  presets: [PDM_TAILWIND_PRESET],
+  content: [
+    './src/**/*.{html,ts}',
+    'node_modules/pdm-ui-kit/**/*.{ts,html}'
+  ]
+};
+```
+
+> `pdm-ui-kit/tailwind-preset` es un archivo standalone (CommonJS + ESM) sin dependencias: funciona en configs CommonJS y ESM. Con una config ESM también podés hacer `import { PDM_TAILWIND_PRESET } from 'pdm-ui-kit'`.
+
+> Un loading overlay del consumidor debe usar `loadingOverlay` (200) en lugar de un valor propio como 9500.
+
+#### Movimiento reducido
+
+El kit respeta `prefers-reduced-motion: reduce`: las animaciones de entrada y los movimientos (tooltips, sidebar, etc.) se desactivan cuando el usuario pide movimiento reducido. No requiere configuración adicional; alcanzá con importar los estilos del kit (`@import 'pdm-ui-kit/styles';`).
 
 ## Responsive Design
 
@@ -490,6 +660,7 @@ Incluye componentes como:
 - `pdm-tabs`, `pdm-table`, `pdm-data-table`, `pdm-draggable-table`
 - `pdm-chart`, `pdm-tooltip`, `pdm-popover`, `pdm-dropdown-menu`
 - `pdm-sidebar`, `pdm-sheet`, `pdm-drawer`, `pdm-calendar`
+- `pdm-virtual-table` (tabla virtualizada), `pdm-sonner` (toasts)
 
 Y más, todos exportados desde `PdmUiKitModule`.
 
@@ -499,6 +670,18 @@ Y más, todos exportados desde `PdmUiKitModule`.
 - **[API Reference](./docs/API.md)** — Documentación completa de todos los componentes (próximamente)
 
 ## Changelog
+
+### v1.9.0
+- ✨ `pdm-data-table`: modo servidor (`paginationMode`, `totalRows`, `sortState`, `loading`)
+- ✨ `pdm-virtual-table`: tabla virtualizada con `@angular/cdk/scrolling`
+- ✨ `pdm-input`: input `debounceMs`
+- ✨ `pdm-chart`: inputs `colors` y `valueFormatter`
+- ✨ `pdm-sonner`: modo lista con `[toasts]` y output `toastDismissed`
+- ✨ `pdm-table`: input `caption` + directive `pdmSortHeader` (`aria-sort`)
+- ✨ Escala de z-index exportada como tokens Tailwind (`Z_INDEX_VALUE`, `pdmZIndex`, `PDM_TAILWIND_PRESET`)
+- ♿ Soporte de `prefers-reduced-motion` en el kit
+- 🎞️ Keyframes propios: el kit ya no requiere `tailwindcss-animate`
+- 📖 Documentación de adopción para consumidores
 
 ### v0.2.0 (2024)
 - ✨ Sistema de responsive utilities centralizado

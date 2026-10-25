@@ -11,11 +11,15 @@
  * 7. modal (z-50) - Dialogs, alert-dialogs
  * 8. popover (z-[70]) - Tooltips, dropdowns DENTRO de modals
  * 9. toast (z-[100]) - Notificaciones que deben estar sobre TODO
+ * 10. loadingOverlay (z-[200]) - Loading overlays del consumidor, por encima de los toasts
  *
  * REGLA CRÍTICA:
  * - Componentes overlay (select options, dropdown menu, tooltip) SIEMPRE z-[70] o mayor
  * - Esto permite que funcionen DENTRO de modals (z-50)
  * - Backdrop de modal debe ser z-40 para estar DEBAJO del contenido del modal (z-50)
+ * - El consumidor NO debe definir su propia escala (modal 500 / popover 600 /
+ *   tooltip 700 / loading 9500): usar estos tokens (Z_INDEX, Z_INDEX_VALUE,
+ *   pdmZIndex o el preset PDM_TAILWIND_PRESET) evita conflictos de stacking.
  */
 
 export const Z_INDEX = {
@@ -71,6 +75,109 @@ export const Z_INDEX = {
 	 * Debe estar sobre TODO
 	 */
 	toast: "z-[100]",
+
+	/**
+	 * Loading overlay - Loading overlays del consumidor
+	 * Debe estar por encima de los toasts (z-[100]) para que una request
+	 * pendiente nunca quede oculta detrás de una notificación
+	 */
+	loadingOverlay: "z-[200]",
+} as const;
+
+/**
+ * Nombres de token disponibles en la escala de z-index
+ */
+export type ZIndexToken = keyof typeof Z_INDEX;
+
+/**
+ * Valor numérico de cada token de la escala de z-index.
+ *
+ * Útil para estilos inline (`[style.zIndex]`) y para consumidores que no
+ * usan Tailwind. El tipo garantiza una entrada numérica por token.
+ */
+export const Z_INDEX_VALUE: Readonly<Record<ZIndexToken, number>> = {
+	base: 0,
+	dropdown: 10,
+	sticky: 20,
+	drawerBackdrop: 30,
+	drawer: 40,
+	modalBackdrop: 40,
+	modal: 50,
+	popover: 70,
+	toast: 100,
+	loadingOverlay: 200,
+};
+
+/**
+ * Devuelve el valor numérico de z-index de un token.
+ *
+ * ```ts
+ * overlay.style.zIndex = String(pdmZIndex("modal")); // "50"
+ * ```
+ */
+export function pdmZIndex(token: ZIndexToken): number {
+	return Z_INDEX_VALUE[token];
+}
+
+/**
+ * Mapa `theme.extend.zIndex` expuesto por el kit.
+ *
+ * El index signature es permisivo a propósito para que el preset siga siendo
+ * asignable al tipo `Config` de Tailwind (que modela los valores de z-index
+ * como strings aunque el runtime acepta números).
+ */
+export interface PdmTailwindZIndexExtend {
+	readonly [token: string]: any;
+}
+
+/**
+ * Forma del preset de Tailwind exportado por el kit.
+ */
+export interface PdmTailwindPreset {
+	readonly theme: {
+		readonly extend: {
+			readonly zIndex: PdmTailwindZIndexExtend;
+		};
+	};
+}
+
+/**
+ * Preset de Tailwind que expone la escala de z-index del kit como tokens
+ * compartidos.
+ *
+ * Se consume desde el `tailwind.config.js` del consumidor:
+ *
+ * ```js
+ * // tailwind.config.js
+ * const { PDM_TAILWIND_PRESET } = require("pdm-ui-kit/tailwind-preset");
+ *
+ * module.exports = {
+ *   presets: [PDM_TAILWIND_PRESET],
+ *   // ...
+ * };
+ * ```
+ *
+ * Las utilidades generadas son `z-base`, `z-dropdown`, `z-sticky`,
+ * `z-drawer-backdrop`, `z-drawer`, `z-modal-backdrop`, `z-modal`, `z-popover`,
+ * `z-toast` y `z-loading-overlay`.
+ */
+export const PDM_TAILWIND_PRESET: PdmTailwindPreset = {
+	theme: {
+		extend: {
+			zIndex: {
+				base: 0,
+				dropdown: 10,
+				sticky: 20,
+				"drawer-backdrop": 30,
+				drawer: 40,
+				"modal-backdrop": 40,
+				modal: 50,
+				popover: 70,
+				toast: 100,
+				"loading-overlay": 200,
+			},
+		},
+	},
 } as const;
 
 /**
