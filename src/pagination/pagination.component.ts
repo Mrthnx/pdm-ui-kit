@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import type { PdmNativeSelectOption } from 'pdm-ui-kit/src/native-select';
+import type { PdmSelectComponent } from 'pdm-ui-kit/src/select';
 
 @Component({
   selector: 'pdm-pagination',
@@ -17,6 +18,9 @@ export class PdmPaginationComponent {
 
   @Output() pageChange = new EventEmitter<number>();
   @Output() rowsPerPageChange = new EventEmitter<number>();
+
+  /** Rows-per-page select, used to re-assert the authoritative value. */
+  @ViewChild('rowsPerPageSelect') private rowsPerPageSelect?: PdmSelectComponent;
 
   get rowsPerPageSelectOptions(): PdmNativeSelectOption[] {
     return this.rowsPerPageOptions.map((value) => ({
@@ -85,9 +89,28 @@ export class PdmPaginationComponent {
   onRowsPerPageChangeValue(value: string): void {
     const next = Number(value);
     if (!Number.isFinite(next) || next <= 0 || next === this.rowsPerPage) {
+      this.restoreRowsPerPageValue();
       return;
     }
 
     this.rowsPerPageChange.emit(next);
+
+    // The host owns `rowsPerPage`: when it does not apply the new value, the
+    // control must keep showing the page size the pagination is really using.
+    if (String(this.rowsPerPage) !== String(next)) {
+      this.restoreRowsPerPageValue();
+    }
+  }
+
+  /**
+   * Writes the authoritative rows-per-page value back into the select.
+   *
+   * `pdm-select` keeps its internal value in sync with the user's pick (the
+   * ControlValueAccessor contract: Angular Forms never writes the model value
+   * back into the view), so a host that ignores `rowsPerPageChange` would leave
+   * the control displaying a page size the pagination is not using.
+   */
+  private restoreRowsPerPageValue(): void {
+    this.rowsPerPageSelect?.writeValue(this.rowsPerPageValue);
   }
 }

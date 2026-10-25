@@ -9,6 +9,7 @@
     >{{ label }}</label
   >
   <textarea
+    #textareaEl
     [id]="id"
     [rows]="rows"
     [value]="value"
@@ -22,6 +23,7 @@
       textareaClassName,
     ]"
     (input)="onInput($event)"
+    (blur)="onBlur($event)"
   ></textarea>
   <p *ngIf="!invalid && helperText" class="m-0 text-sm text-muted-foreground">
     {{ helperText }}
