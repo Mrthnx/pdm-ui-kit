@@ -30,11 +30,18 @@ export abstract class PdmControlValueAccessor<T = unknown>
 	/** Change detector used to refresh the view when the model writes into it. */
 	protected readonly formCdr = inject(ChangeDetectorRef);
 
-	/** Registered by Angular Forms: propagates user changes to the model. */
-	protected onChange: (value: T) => void = () => undefined;
+	/**
+	 * Registered by Angular Forms: propagates user changes to the model.
+	 *
+	 * Named `onChangeFn`/`onTouchedFn` (and not `onChange`/`onTouched`) on
+	 * purpose: several kit components already expose a public `onChange`
+	 * method for the native DOM `change` event, and a base-class field with
+	 * the same name would collide with it.
+	 */
+	protected onChangeFn: (value: T) => void = () => undefined;
 
 	/** Registered by Angular Forms: propagates the "touched" state to the model. */
-	protected onTouched: () => void = () => undefined;
+	protected onTouchedFn: () => void = () => undefined;
 
 	/** Writes a model value into the component. Never emits back to the model. */
 	writeValue(value: T | null): void {
@@ -44,12 +51,12 @@ export abstract class PdmControlValueAccessor<T = unknown>
 
 	/** Registers the callback that propagates user changes to the model. */
 	registerOnChange(fn: (value: T) => void): void {
-		this.onChange = fn;
+		this.onChangeFn = fn;
 	}
 
 	/** Registers the callback that propagates the touched state to the model. */
 	registerOnTouched(fn: () => void): void {
-		this.onTouched = fn;
+		this.onTouchedFn = fn;
 	}
 
 	/** Applies the disabled state coming from the model. */
@@ -60,12 +67,12 @@ export abstract class PdmControlValueAccessor<T = unknown>
 
 	/** Propagates a user-originated value change to the form model. */
 	protected notifyValueChange(value: T): void {
-		this.onChange(value);
+		this.onChangeFn(value);
 	}
 
 	/** Propagates the touched state (usually on blur) to the form model. */
 	protected notifyTouched(): void {
-		this.onTouched();
+		this.onTouchedFn();
 	}
 
 	/** Writes the model value into the component state (and into the DOM). */
