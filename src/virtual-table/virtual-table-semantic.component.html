@@ -1,0 +1,157 @@
+<!--
+  The component owns its own scroll container (`overflow: auto`) and windows
+  the rows itself. The `<thead>` is sticky against that container and paints
+  an opaque background, so the rows scrolling underneath are not visible
+  through it.
+-->
+<section
+  [ngClass]="['flex w-full flex-col rounded-md border border-solid border-border bg-background', className]"
+>
+  <div #scrollContainer class="w-full overflow-auto" [style.height]="containerHeight">
+    <table
+      class="w-full table-auto border-separate border-spacing-0 text-sm text-foreground"
+      [attr.aria-rowcount]="rows.length + 1"
+    >
+      <caption
+        *ngIf="caption"
+        class="caption-top px-2 py-2 text-left text-sm text-muted-foreground"
+      >
+        {{ caption }}
+      </caption>
+
+      <thead class="sticky top-0 z-10 bg-background">
+        <tr class="bg-background">
+          <!-- Selection column -->
+          <th
+            *ngIf="selectable"
+            scope="col"
+            [ngStyle]="utilityColumnStyle"
+            class="border-b border-solid border-border px-2 py-2 text-left font-medium align-middle"
+          >
+            <input
+              type="checkbox"
+              aria-label="Select all rows"
+              (change)="onToggleAll($event)"
+              class="h-4 w-4 box-border rounded-sm border border-solid border-input accent-primary"
+            />
+          </th>
+
+          <!-- Dynamic columns -->
+          <th
+            *ngFor="let column of columns"
+            scope="col"
+            [ngClass]="getHeaderClass(column)"
+            [ngStyle]="getColumnStyle(column)"
+            class="border-b border-solid border-border bg-background"
+          >
+            {{ column.label }}
+          </th>
+
+          <!-- Actions column -->
+          <th
+            *ngIf="showActions"
+            scope="col"
+            [ngStyle]="utilityColumnStyle"
+            class="border-b border-solid border-border px-2 py-2 text-left font-medium align-middle"
+          >
+            <span class="sr-only">Actions</span>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <!-- Top spacer: keeps the scroll height of the real rows -->
+        <tr
+          *ngIf="topSpacerHeight > 0"
+          aria-hidden="true"
+          [style.height.px]="topSpacerHeight"
+        >
+          <td
+            [attr.colspan]="totalColumns"
+            class="border-0 p-0"
+            [style.height.px]="topSpacerHeight"
+          ></td>
+        </tr>
+
+        <!-- Only the visible window of rows lives in the DOM -->
+        <tr
+          *ngFor="let row of visibleRows; trackBy: trackByRenderedRow; let rowIndex = index"
+          class="border-b border-solid border-border transition-colors hover:bg-muted/50"
+          [attr.aria-rowindex]="startIndex + rowIndex + 2"
+        >
+          <!-- Selection cell -->
+          <td *ngIf="selectable" [ngStyle]="utilityColumnStyle" class="px-2 py-2 align-middle">
+            <input
+              type="checkbox"
+              [checked]="isSelected(row, startIndex + rowIndex)"
+              (change)="onToggleRow(row, startIndex + rowIndex, $event)"
+              class="h-4 w-4 box-border rounded-sm border border-solid border-input accent-primary"
+            />
+          </td>
+
+          <!-- Dynamic cells -->
+          <td *ngFor="let column of columns" [ngClass]="getCellClass(column)">
+            <!-- Custom template when provided -->
+            <ng-container *ngIf="column.cellTemplate; else defaultCell">
+              <ng-container
+                *ngTemplateOutlet="
+                  column.cellTemplate;
+                  context: { $implicit: row, value: rawValue(row, column) }
+                "
+              ></ng-container>
+            </ng-container>
+
+            <!-- Default rendering -->
+            <ng-template #defaultCell>
+              {{ getCellValue(row, column) }}
+            </ng-template>
+          </td>
+
+          <!-- Actions cell -->
+          <td *ngIf="showActions" [ngStyle]="utilityColumnStyle" class="px-2 py-2 align-middle">
+            <button
+              type="button"
+              aria-label="Actions"
+              class="inline-flex h-8 w-8 appearance-none box-border items-center justify-center border-0 bg-transparent p-0 hover:text-foreground"
+              (click)="onAction(row)"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                class="h-4 w-4"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="6" cy="12" r="1.5" fill="currentColor"></circle>
+                <circle cx="12" cy="12" r="1.5" fill="currentColor"></circle>
+                <circle cx="18" cy="12" r="1.5" fill="currentColor"></circle>
+              </svg>
+            </button>
+          </td>
+        </tr>
+
+        <!-- Bottom spacer: keeps the scroll height of the real rows -->
+        <tr
+          *ngIf="bottomSpacerHeight > 0"
+          aria-hidden="true"
+          [style.height.px]="bottomSpacerHeight"
+        >
+          <td
+            [attr.colspan]="totalColumns"
+            class="border-0 p-0"
+            [style.height.px]="bottomSpacerHeight"
+          ></td>
+        </tr>
+
+        <!-- Empty state -->
+        <tr *ngIf="rows.length === 0">
+          <td
+            [attr.colspan]="totalColumns"
+            class="px-3 py-6 text-center text-sm text-muted-foreground"
+          >
+            {{ emptyLabel }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
