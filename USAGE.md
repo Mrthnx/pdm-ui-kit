@@ -46,7 +46,7 @@ export class MyFeatureModule {}
 | `pdm-ui-kit/combobox`                     | `PdmComboboxModule`, `PdmComboboxComponent`                                    |
 | `pdm-ui-kit/command`                      | `PdmCommandModule`, `PdmCommandComponent`                                      |
 | `pdm-ui-kit/context-menu`                 | `PdmContextMenuModule`, `PdmContextMenuComponent`                              |
-| `pdm-ui-kit/data-table`                   | `PdmDataTableModule`, `PdmDataTableComponent`, `PdmDraggableTableComponent`, `PdmTableComponent` |
+| `pdm-ui-kit/data-table`                   | `PdmDataTableModule`, `PdmDataTableComponent`, `PdmDraggableTableComponent`, `PdmTableComponent`, `PdmSortHeaderDirective` |
 | `pdm-ui-kit/dialog`                       | `PdmDialogModule`, `PdmDialogComponent` — supports `maxWidth` and reliable `className` overrides |
 | `pdm-ui-kit/drawer`                       | `PdmDrawerModule`, `PdmDrawerComponent`, `PdmSheetComponent`                   |
 | `pdm-ui-kit/dropdown-menu`                | `PdmDropdownMenuModule`, `PdmDropdownMenuComponent`                            |
@@ -78,6 +78,7 @@ export class MyFeatureModule {}
 | `pdm-ui-kit/toggle`                       | `PdmToggleModule`, `PdmToggleComponent`, `PdmToggleGroupComponent`             |
 | `pdm-ui-kit/tooltip`                      | `PdmTooltipModule`, `PdmTooltipComponent`                                      |
 | `pdm-ui-kit/overlay`                      | `PdmOutsideClickModule`, `PdmOutsideClickDirective`, utilidades overlay        |
+| `pdm-ui-kit/virtual-table`                | `PdmVirtualTableModule`, `PdmVirtualTableComponent` (tabla virtualizada)      |
 
 ---
 
