@@ -171,6 +171,12 @@ Si preferís importar los tokens desde el paquete:
 
 ---
 
+## ✨ What's New in v1.10.0
+
+- 🧩 **`ControlValueAccessor` en los controles de formulario** — `pdm-input`, `pdm-textarea`, `pdm-checkbox`, `pdm-switch`, `pdm-select` y `pdm-native-select` se bindean directo a `[formControl]` / `[formControlName]` / `[(ngModel)]`
+
+> v1.10.0 es **aditivo**: no hay cambios breaking. Agrega la dependencia peer `@angular/forms` (`>=15.0.0`), que ya viene en todo proyecto generado por Angular CLI.
+
 ## ✨ What's New in v1.9.0
 
 - 🖥️ **`pdm-data-table` en modo servidor** — `paginationMode="server"`, `totalRows`, `sortState`, `loading`; la tabla deja de filtrar/ordenar/paginar en el cliente
@@ -209,6 +215,7 @@ Este kit está **basado en el Figma de shadcn/ui** y mantiene una estructura de 
 ## Compatibilidad
 
 - Angular: 15, 16, 17
+- Peer dependencies: `@angular/cdk`, `@angular/common`, `@angular/core`, `@angular/forms`, `@angular/platform-browser` (`>=15.0.0`)
 - Arquitectura: NgModules (no standalone)
 - Estilos: Tailwind CSS v3 + variables CSS del proyecto consumidor
 
@@ -564,6 +571,47 @@ formatValue = (value: number, index: number): string => `${value} ms`;
 
 - `debounceMs`: `0` (default) emite `valueChange` de forma síncrona en cada input; con `> 0` emite sólo el último valor cuando el usuario deja de escribir.
 
+#### Formularios reactivos (`[formControl]`)
+
+Desde v1.10.0 los controles de formulario del kit implementan `ControlValueAccessor`, así que se bindean directo a un control de Angular Forms:
+
+```html
+<pdm-input      [formControl]="nameCtrl"></pdm-input>
+<pdm-textarea   [formControl]="notesCtrl"></pdm-textarea>
+<pdm-checkbox   [formControl]="acceptCtrl"></pdm-checkbox>
+<pdm-switch     [formControl]="notifyCtrl"></pdm-switch>
+<pdm-select     [formControl]="countryCtrl" [options]="countries"></pdm-select>
+<pdm-native-select [formControl]="cityCtrl" [options]="cities"></pdm-native-select>
+```
+
+También funcionan con `[formControlName]` (dentro de un `FormGroup`) y con `[(ngModel)]`.
+
+```ts
+export class ProfileFormComponent {
+  readonly nameCtrl = new FormControl('', { nonNullable: true, validators: [Validators.required] });
+  readonly acceptCtrl = new FormControl(false, { nonNullable: true });
+}
+```
+
+Comportamiento:
+
+- **Valor**: el control escribe el valor en el componente y el componente escribe el valor de vuelta en el control cuando el usuario interactúa con él. El output existente (`valueChange` / `checkedChange`) sigue emitiendo igual que antes.
+- **Tocado**: el control se marca como *touched* al salir el foco del campo (blur).
+- **Deshabilitado**: `control.disable()` / `control.enable()` mapea al input `disabled` del componente.
+- **`debounceMs`**: con `debounceMs > 0` el control recibe el valor con el mismo debounce que el output `valueChange` (la primera vez que se bindea un control de formulario, usá `debounceMs: 0`).
+
+Estado de validación: el kit no agrega validadores propios — los validadores del control siguen siendo la única fuente de verdad. El estado visual de error se sigue expresando con los inputs `invalid` / `errorText`:
+
+```html
+<pdm-input
+  [formControl]="nameCtrl"
+  [invalid]="nameCtrl.invalid && nameCtrl.touched"
+  [errorText]="nameCtrl.hasError('required') ? 'El nombre es obligatorio' : ''"
+></pdm-input>
+```
+
+> Requisito: el proyecto consumidor debe tener `@angular/forms` instalado (`>=15.0.0`). Los proyectos generados por Angular CLI ya lo incluyen.
+
 #### Z-index tokens
 
 El kit expone su escala de z-index como tokens compartidos para que el proyecto consumidor no defina una escala en conflicto.
@@ -670,6 +718,12 @@ Y más, todos exportados desde `PdmUiKitModule`.
 - **[API Reference](./docs/API.md)** — Documentación completa de todos los componentes (próximamente)
 
 ## Changelog
+
+### v1.10.0
+- ✨ `pdm-input`, `pdm-textarea`, `pdm-checkbox`, `pdm-switch`, `pdm-select`, `pdm-native-select`: implementan `ControlValueAccessor` (`[formControl]`, `[formControlName]`, `[(ngModel)]`)
+- ✨ Estado `touched` en blur y estado `disabled` desde el control de formulario
+- 📦 Nueva peer dependency `@angular/forms` (`>=15.0.0`)
+- 📖 Documentación de uso con formularios reactivos
 
 ### v1.9.0
 - ✨ `pdm-data-table`: modo servidor (`paginationMode`, `totalRows`, `sortState`, `loading`)

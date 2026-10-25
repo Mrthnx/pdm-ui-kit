@@ -79,6 +79,7 @@ export class MyFeatureModule {}
 | `pdm-ui-kit/tooltip`                      | `PdmTooltipModule`, `PdmTooltipComponent`                                      |
 | `pdm-ui-kit/overlay`                      | `PdmOutsideClickModule`, `PdmOutsideClickDirective`, utilidades overlay        |
 | `pdm-ui-kit/virtual-table`                | `PdmVirtualTableModule`, `PdmVirtualTableComponent` (tabla virtualizada)      |
+| `pdm-ui-kit/utils`                        | utilidades: `responsive`, `Z_INDEX`, `cn`, `PdmControlValueAccessor` (base class) |
 
 ---
 
@@ -107,6 +108,59 @@ import type { PdmIconName }       from 'pdm-ui-kit/icon';
 // Directiva outside-click standalone
 import { PdmOutsideClickModule } from 'pdm-ui-kit/overlay';
 ```
+
+---
+
+## Formularios reactivos
+
+Desde v1.10.0 los controles de formulario del kit implementan `ControlValueAccessor`, así que se bindean directo a un `FormControl` / `FormControlName` / `ngModel`:
+
+```ts
+import { Component } from '@angular/core';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-profile',
+  template: `
+    <pdm-input
+      [formControl]="nameCtrl"
+      [invalid]="nameCtrl.invalid && nameCtrl.touched"
+      [errorText]="nameCtrl.hasError('required') ? 'El nombre es obligatorio' : ''"
+    ></pdm-input>
+
+    <pdm-checkbox [formControl]="acceptCtrl"></pdm-checkbox>
+    <pdm-switch [formControl]="notifyCtrl"></pdm-switch>
+    <pdm-select [formControl]="countryCtrl" [options]="countries"></pdm-select>
+  `,
+  imports: [ReactiveFormsModule, PdmInputModule, PdmCheckboxModule, PdmSwitchModule, PdmSelectModule],
+})
+export class ProfileComponent {
+  readonly nameCtrl = new FormControl('', { nonNullable: true, validators: [Validators.required] });
+  readonly acceptCtrl = new FormControl(false, { nonNullable: true });
+  readonly notifyCtrl = new FormControl(true, { nonNullable: true });
+  readonly countryCtrl = new FormControl('CO', { nonNullable: true });
+}
+```
+
+Notas:
+
+- El control marca `touched` en el blur del campo y su estado `disabled` se refleja en el input `disabled` del componente.
+- El kit **no** agrega validadores: los validadores del control son la única fuente de verdad. El estado visual de error se expresa con los inputs `invalid` / `errorText`.
+- `pdm-input` con `debounceMs > 0` entrega al control el valor con el mismo debounce que el output `valueChange`.
+- Requisito: `@angular/forms` (`>=15.0.0`) debe estar instalado en el proyecto consumidor (ya viene en todo proyecto generado por Angular CLI).
+
+Para extender el mismo comportamiento a un control propio del kit, extendé la base class pública:
+
+```ts
+import { PdmControlValueAccessor } from 'pdm-ui-kit/utils';
+
+export class PdmMyFieldComponent extends PdmControlValueAccessor<string> {
+  protected applyValue(value: string | null): void { this.value = value ?? ''; }
+  protected applyDisabled(isDisabled: boolean): void { this.disabled = isDisabled; }
+}
+```
+
+y registralo como `NG_VALUE_ACCESSOR` con `useExisting: forwardRef(() => PdmMyFieldComponent), multi: true`.
 
 ---
 
