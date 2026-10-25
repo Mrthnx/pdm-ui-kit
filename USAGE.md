@@ -147,6 +147,7 @@ Notas:
 - El control marca `touched` en el blur del campo y su estado `disabled` se refleja en el input `disabled` del componente.
 - El kit **no** agrega validadores: los validadores del control son la única fuente de verdad. El estado visual de error se expresa con los inputs `invalid` / `errorText`.
 - `pdm-input` con `debounceMs > 0` entrega al control el valor con el mismo debounce que el output `valueChange`.
+- `pdm-checkbox`, `pdm-switch` y `pdm-select` mantienen su `checked` / `value` interno sincronizado con la interacción del usuario (lo exige el contrato de `ControlValueAccessor`): un consumidor que bindee `[checked]` / `[value]` de una sola vía e ignore el output verá ahora el estado visual seguir la interacción.
 - Requisito: `@angular/forms` (`>=15.0.0`) debe estar instalado en el proyecto consumidor (ya viene en todo proyecto generado por Angular CLI).
 
 Para extender el mismo comportamiento a un control propio del kit, extendé la base class pública:

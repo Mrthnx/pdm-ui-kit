@@ -599,6 +599,7 @@ Comportamiento:
 - **Tocado**: el control se marca como *touched* al salir el foco del campo (blur).
 - **Deshabilitado**: `control.disable()` / `control.enable()` mapea al input `disabled` del componente.
 - **`debounceMs`**: con `debounceMs > 0` el control recibe el valor con el mismo debounce que el output `valueChange` (la primera vez que se bindea un control de formulario, usá `debounceMs: 0`).
+- **Estado interno**: `pdm-checkbox`, `pdm-switch` y `pdm-select` mantienen su `checked` / `value` interno sincronizado con la interacción del usuario — es lo que exige el contrato de `ControlValueAccessor` (Angular Forms no vuelve a escribir el valor del modelo dentro de la vista). Un consumidor que bindee `[checked]` / `[value]` de una sola vía e ignore el output va a ver ahora el estado visual seguir la interacción del usuario.
 
 Estado de validación: el kit no agrega validadores propios — los validadores del control siguen siendo la única fuente de verdad. El estado visual de error se sigue expresando con los inputs `invalid` / `errorText`:
 
