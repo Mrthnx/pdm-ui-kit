@@ -163,6 +163,8 @@ export class PdmMyFieldComponent extends PdmControlValueAccessor<string> {
 
 y registralo como `NG_VALUE_ACCESSOR` con `useExisting: forwardRef(() => PdmMyFieldComponent), multi: true`.
 
+La base resuelve el `ChangeDetectorRef` con `inject()`, así que la clase que la extiende tiene que instanciarse en un contexto de inyección (un componente, una directiva o una factory): no se puede extender desde una clase plana creada con `new` — por ejemplo desde un `AbstractControl` del lado del modelo. Es API pública: dentro de la major `1.x` no se renombran ni se eliminan sus miembros; una minor puede agregar miembros `protected` nuevos.
+
 ---
 
 ## Ejemplo real: página de formulario

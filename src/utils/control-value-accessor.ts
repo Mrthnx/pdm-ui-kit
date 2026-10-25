@@ -23,6 +23,15 @@ import { ControlValueAccessor } from "@angular/forms";
  * - The DOM value must always converge to the model value, including after a
  *   form reset: when the user typed into the field the model value did not
  *   change, so a value binding alone would not rewrite the DOM.
+ *
+ * Scope of the base class:
+ *
+ * - It resolves the `ChangeDetectorRef` with `inject()`, so the class that
+ *   extends it must be instantiated in an injection context (an Angular
+ *   component, a directive or a factory). It cannot be extended from a plain
+ *   class created with `new` (for example a model-side `AbstractControl`).
+ * - It is public API: within the `1.x` major its members are never renamed or
+ *   removed, and a minor release may add new `protected` members.
  */
 export abstract class PdmControlValueAccessor<T = unknown>
 	implements ControlValueAccessor
