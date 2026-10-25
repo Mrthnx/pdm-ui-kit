@@ -7,6 +7,7 @@ import {
 	DoCheck,
 	ElementRef,
 	EventEmitter,
+	forwardRef,
 	HostListener,
 	Input,
 	OnDestroy,
@@ -17,11 +18,12 @@ import {
 } from "@angular/core";
 import { Overlay, OverlayRef } from "@angular/cdk/overlay";
 import { TemplatePortal } from "@angular/cdk/portal";
+import { NG_VALUE_ACCESSOR } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { PdmSelectOptionDirective } from "./select-option.directive";
 import { PdmOverlayOptions } from "pdm-ui-kit/src/overlay";
 import { createFlexiblePositionStrategy } from "pdm-ui-kit/src/overlay";
-import { Z_INDEX } from "pdm-ui-kit/src/utils";
+import { PdmControlValueAccessor, Z_INDEX } from "pdm-ui-kit/src/utils";
 
 export interface PdmSelectOption {
 	label: string;
@@ -34,8 +36,18 @@ export interface PdmSelectOption {
 	templateUrl: "./select.component.html",
 	styles: [":host { display: block; }"],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	providers: [
+		{
+			provide: NG_VALUE_ACCESSOR,
+			useExisting: forwardRef(() => PdmSelectComponent),
+			multi: true,
+		},
+	],
 })
-export class PdmSelectComponent implements AfterContentInit, DoCheck, OnDestroy {
+export class PdmSelectComponent
+	extends PdmControlValueAccessor<string>
+	implements AfterContentInit, DoCheck, OnDestroy
+{
 	@Input() id = "";
 	@Input() value = "";
 	@Input()
@@ -82,7 +94,9 @@ export class PdmSelectComponent implements AfterContentInit, DoCheck, OnDestroy 
 		private readonly cdr: ChangeDetectorRef,
 		private readonly overlay: Overlay,
 		private readonly viewContainerRef: ViewContainerRef,
-	) {}
+	) {
+		super();
+	}
 
 	ngAfterContentInit(): void {
 		this.syncProjectedOptions();
@@ -135,13 +149,32 @@ export class PdmSelectComponent implements AfterContentInit, DoCheck, OnDestroy 
 	}
 
 	onChange(event: Event): void {
-		this.valueChange.emit((event.target as HTMLSelectElement).value);
+		const next = (event.target as HTMLSelectElement).value;
+		this.value = next;
+		this.valueChange.emit(this.value);
+		this.notifyValueChange(this.value);
 	}
 
 	selectOption(option: PdmSelectOption): void {
 		if (option.disabled) return;
-		this.valueChange.emit(option.value);
+		this.value = option.value;
+		this.valueChange.emit(this.value);
+		this.notifyValueChange(this.value);
 		this.closePanel();
+	}
+
+	onBlur(): void {
+		this.notifyTouched();
+	}
+
+	/** Writes the model value into the component without emitting back to the model. */
+	protected applyValue(value: string | null): void {
+		this.value = value ?? "";
+	}
+
+	/** Applies the model disabled state to the component. */
+	protected applyDisabled(isDisabled: boolean): void {
+		this.disabled = isDisabled;
 	}
 
 	trackByOptionValue = (index: number, option: PdmSelectOption): string => {
