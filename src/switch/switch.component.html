@@ -13,6 +13,7 @@
     [disabled]="disabled"
     [ngClass]="rootClasses"
     (click)="onToggle()"
+    (blur)="onBlur()"
   >
     <span
       [attr.data-state]="checked ? 'checked' : 'unchecked'"

@@ -3,10 +3,14 @@ import {
 	ChangeDetectorRef,
 	Component,
 	EventEmitter,
+	forwardRef,
 	inject,
 	Input,
 	Output,
 } from "@angular/core";
+import { NG_VALUE_ACCESSOR } from "@angular/forms";
+
+import { PdmControlValueAccessor } from "pdm-ui-kit/src/utils";
 
 export type PdmSwitchSize = "default" | "sm";
 
@@ -42,8 +46,15 @@ export type PdmSwitchSize = "default" | "sm";
 		`,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	providers: [
+		{
+			provide: NG_VALUE_ACCESSOR,
+			useExisting: forwardRef(() => PdmSwitchComponent),
+			multi: true,
+		},
+	],
 })
-export class PdmSwitchComponent {
+export class PdmSwitchComponent extends PdmControlValueAccessor<boolean> {
 	private readonly cdr = inject(ChangeDetectorRef);
 
 	@Input() id = "";
@@ -76,6 +87,21 @@ export class PdmSwitchComponent {
 		const next = !this.checked;
 		this.checked = next;
 		this.checkedChange.emit(next);
+		this.notifyValueChange(next);
 		this.cdr.markForCheck();
+	}
+
+	onBlur(): void {
+		this.notifyTouched();
+	}
+
+	/** Writes the model value into the component without emitting back to the model. */
+	protected applyValue(value: boolean | null): void {
+		this.checked = !!value;
+	}
+
+	/** Applies the model disabled state to the component. */
+	protected applyDisabled(isDisabled: boolean): void {
+		this.disabled = isDisabled;
 	}
 }
