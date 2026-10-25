@@ -160,6 +160,12 @@ export class PdmTableComponent {
 				"[&_thead]:top-0",
 				"[&_thead]:z-10",
 				"[&_thead]:bg-muted/70",
+				// Cell level sticky offsets: the kit owns the offsets so the
+				// header keeps sticking even when the consumer overrides the
+				// thead styles. The background stays with the consumer.
+				"[&_th]:sticky",
+				"[&_th]:top-0",
+				"[&_th]:z-10",
 				"[&_thead_tr]:border-b",
 				"[&_thead_tr]:border-border",
 				"[&_th]:h-12",

@@ -46,9 +46,14 @@
     <thead>
       <tr>
         <!-- Columna de selección -->
-        <th *ngIf="selectable" class="w-10 px-2 py-2 text-left font-medium">
+        <th
+          *ngIf="selectable"
+          scope="col"
+          class="w-10 px-2 py-2 text-left font-medium"
+        >
           <input
             type="checkbox"
+            aria-label="Select all rows"
             (change)="onToggleAll($event)"
             class="h-4 w-4 box-border rounded-sm border border-solid border-input accent-primary"
           />
@@ -57,6 +62,7 @@
         <!-- Columnas dinámicas -->
         <th
           *ngFor="let column of effectiveColumns"
+          scope="col"
           [ngClass]="getHeaderClass(column)"
           [ngStyle]="getColumnStyle(column)"
           [attr.aria-sort]="getAriaSort(column)"
@@ -90,7 +96,9 @@
         </th>
 
         <!-- Columna de acciones -->
-        <th *ngIf="showActions" class="w-10 px-2 py-2"></th>
+        <th *ngIf="showActions" scope="col" class="w-10 px-2 py-2">
+          <span class="sr-only">Actions</span>
+        </th>
       </tr>
     </thead>
 
