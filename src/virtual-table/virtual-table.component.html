@@ -1,0 +1,129 @@
+<section
+  [ngClass]="['flex w-full flex-col rounded-md border border-solid border-border bg-background', className]"
+>
+  <!-- Header rendered outside of the scrolling viewport so it stays visible -->
+  <div
+    role="rowgroup"
+    class="flex w-full items-center border-b border-solid border-border bg-background"
+  >
+    <!-- Selection column -->
+    <div
+      *ngIf="selectable"
+      role="columnheader"
+      [ngStyle]="utilityColumnStyle"
+      class="flex h-10 items-center px-2 py-2"
+    >
+      <input
+        type="checkbox"
+        aria-label="Select all rows"
+        (change)="onToggleAll($event)"
+        class="h-4 w-4 box-border rounded-sm border border-solid border-input accent-primary"
+      />
+    </div>
+
+    <!-- Dynamic columns -->
+    <div
+      *ngFor="let column of columns"
+      role="columnheader"
+      [ngClass]="getHeaderClass(column)"
+      [ngStyle]="getColumnStyle(column)"
+    >
+      {{ column.label }}
+    </div>
+
+    <!-- Actions column -->
+    <div
+      *ngIf="showActions"
+      role="columnheader"
+      [ngStyle]="utilityColumnStyle"
+      class="flex h-10 items-center px-2 py-2"
+    ></div>
+  </div>
+
+  <!-- Body: only the visible window of rows lives in the DOM -->
+  <cdk-virtual-scroll-viewport
+    role="rowgroup"
+    [itemSize]="rowHeight"
+    [style.height.px]="height"
+    class="w-full overflow-auto"
+  >
+    <div
+      *cdkVirtualFor="let row of rows; trackBy: trackByRow; let rowIndex = index"
+      role="row"
+      [style.height.px]="rowHeight"
+      class="flex w-full items-center border-b border-solid border-border"
+    >
+      <!-- Selection cell -->
+      <div
+        *ngIf="selectable"
+        role="cell"
+        [ngStyle]="utilityColumnStyle"
+        class="flex h-full items-center px-2 py-2"
+      >
+        <input
+          type="checkbox"
+          [checked]="isSelected(row, rowIndex)"
+          (change)="onToggleRow(row, rowIndex, $event)"
+          class="h-4 w-4 box-border rounded-sm border border-solid border-input accent-primary"
+        />
+      </div>
+
+      <!-- Dynamic cells -->
+      <div
+        *ngFor="let column of columns"
+        role="cell"
+        [ngClass]="getCellClass(column)"
+        [ngStyle]="getColumnStyle(column)"
+        class="flex h-full items-center overflow-hidden"
+      >
+        <!-- Custom template when provided -->
+        <ng-container *ngIf="column.cellTemplate; else defaultCell">
+          <ng-container
+            *ngTemplateOutlet="
+              column.cellTemplate;
+              context: { $implicit: row, value: rawValue(row, column) }
+            "
+          ></ng-container>
+        </ng-container>
+
+        <!-- Default rendering -->
+        <ng-template #defaultCell>
+          {{ getCellValue(row, column) }}
+        </ng-template>
+      </div>
+
+      <!-- Actions cell -->
+      <div
+        *ngIf="showActions"
+        role="cell"
+        [ngStyle]="utilityColumnStyle"
+        class="flex h-full items-center px-2 py-2"
+      >
+        <button
+          type="button"
+          class="inline-flex h-8 w-8 appearance-none box-border items-center justify-center border-0 bg-transparent p-0 hover:text-foreground"
+          (click)="onAction(row)"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            class="h-4 w-4"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="6" cy="12" r="1.5" fill="currentColor"></circle>
+            <circle cx="12" cy="12" r="1.5" fill="currentColor"></circle>
+            <circle cx="18" cy="12" r="1.5" fill="currentColor"></circle>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Empty state -->
+    <div
+      *ngIf="rows.length === 0"
+      class="px-3 py-6 text-center text-sm text-muted-foreground"
+    >
+      {{ emptyLabel }}
+    </div>
+  </cdk-virtual-scroll-viewport>
+</section>
