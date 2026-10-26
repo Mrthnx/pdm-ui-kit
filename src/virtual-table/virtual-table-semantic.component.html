@@ -96,7 +96,11 @@
               <ng-container
                 *ngTemplateOutlet="
                   column.cellTemplate;
-                  context: { $implicit: row, value: rawValue(row, column) }
+                  context: {
+                    $implicit: row,
+                    value: rawValue(row, column),
+                    index: startIndex + rowIndex
+                  }
                 "
               ></ng-container>
             </ng-container>

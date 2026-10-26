@@ -431,7 +431,7 @@ Para cientos o miles de filas, `pdm-virtual-table` renderiza sólo las filas vis
 
 - Mismos inputs que `pdm-virtual-table` (`columns`, `rows`, `rowHeight`, `height`, `selectable`, `showActions`, `emptyLabel`) más `caption` (un `<caption>` real) y `className`.
 - `height` acepta píxeles (`400`) o cualquier longitud CSS (`'60vh'`, `'100%'`): sigue siendo un panel con alto explícito.
-- `cellTemplate` sigue funcionando, así que las celdas con badges, menús de acciones o row-hover propio no se reescriben.
+- `cellTemplate` sigue funcionando, así que las celdas con badges, menús de acciones o row-hover propio no se reescriben. En esta variante el contexto incluye `$implicit` (la fila), `value` (el valor sin renderizar) e `index` (índice base 0 de la fila dentro de `rows`, estable durante la virtualización).
 - La tabla expone `aria-rowcount` y cada fila renderizada expone `aria-rowindex`, para que el lector de pantalla sepa cuántas filas hay en total aunque el DOM sólo tenga la ventana visible.
 - **Por qué no usa `@angular/cdk/scrolling`**: el viewport del CDK proyecta el contenido dentro de `.cdk-virtual-scroll-content-wrapper`, un wrapper posicionado de forma absoluta que se transforma en cada scroll; un `<thead position: sticky>` dentro de ese wrapper no se pega contra el scrollport. Para que el header sticky funcione **y** la tabla siga siendo un único elemento `<table>`, esta variante tiene su propio contenedor de scroll (`overflow: auto`) y su propia ventana de render.
 - Import: `import { PdmVirtualTableSemanticComponent } from 'pdm-ui-kit/virtual-table';`
