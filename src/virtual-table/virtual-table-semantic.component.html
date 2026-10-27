@@ -44,7 +44,13 @@
             [ngStyle]="getColumnStyle(column)"
             class="border-b border-solid border-border bg-background"
           >
-            {{ column.label }}
+            <ng-container *ngIf="column.headerTemplate; else defaultHeader">
+              <ng-container
+                *ngTemplateOutlet="column.headerTemplate; context: { $implicit: column }"
+              ></ng-container>
+            </ng-container>
+
+            <ng-template #defaultHeader>{{ column.label }}</ng-template>
           </th>
 
           <!-- Actions column -->

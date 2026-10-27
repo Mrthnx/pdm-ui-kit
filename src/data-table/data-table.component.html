@@ -67,9 +67,16 @@
           [ngStyle]="getColumnStyle(column)"
           [attr.aria-sort]="getAriaSort(column)"
         >
+          <!-- Header con template propio -->
+          <ng-container *ngIf="column.headerTemplate">
+            <ng-container
+              *ngTemplateOutlet="column.headerTemplate; context: { $implicit: column }"
+            ></ng-container>
+          </ng-container>
+
           <!-- Header sortable -->
           <button
-            *ngIf="column.sortable"
+            *ngIf="!column.headerTemplate && column.sortable"
             type="button"
             (click)="onSort(column)"
             class="inline-flex appearance-none box-border items-center gap-1 rounded-sm border-0 bg-transparent px-3 py-2 text-sm hover:underline"
@@ -92,7 +99,7 @@
           </button>
 
           <!-- Header no sortable -->
-          <span *ngIf="!column.sortable">{{ column.label }}</span>
+          <span *ngIf="!column.headerTemplate && !column.sortable">{{ column.label }}</span>
         </th>
 
         <!-- Columna de acciones -->

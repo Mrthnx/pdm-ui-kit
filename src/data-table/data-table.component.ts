@@ -71,6 +71,17 @@ export interface PdmDataTableColumn<T = any> {
    * CSS classes adicionales para el header de esta columna
    */
   headerClass?: string;
+
+  /**
+   * Template personalizado para el header de esta columna.
+   * Tiene prioridad sobre `label`.
+   *
+   * Existe para las tablas cuyo encabezado es un enlace: en la tabla de
+   * frecuencias de fallo cada columna lleva a un listado distinto, y ese
+   * enlace vive en el `<th>`. Con solo `label` el encabezado sería texto
+   * plano y la navegación se perdería al migrar a la tabla virtual.
+   */
+  headerTemplate?: TemplateRef<{ $implicit: T }>;
 }
 
 /**
